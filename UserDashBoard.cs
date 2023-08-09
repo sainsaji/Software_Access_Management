@@ -106,7 +106,7 @@ namespace File_Acess_Management
                         {
                             Console.WriteLine("User Name Fetched:");
                             Console.WriteLine(String.Format("{0}", reader["USER_NAME"]));
-                            userName = reader["USER_USER"].ToString();
+                            userName = reader["USER_NAME"].ToString();
                         }
                     }
                     return userName;
