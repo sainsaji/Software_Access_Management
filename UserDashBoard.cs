@@ -91,7 +91,6 @@ namespace File_Acess_Management
                 if (con.State == ConnectionState.Open)
                 {
                     Console.WriteLine("DB Connection Established");
-
                 }
                 if (requiredData == "userName")
                 {
@@ -272,6 +271,7 @@ namespace File_Acess_Management
                         adapter.Fill(dataTable);
                         BindingSource bindingSource = new BindingSource();
                         bindingSource.DataSource = dataTable;
+
                         requestTableGridView.DataSource = bindingSource;
 
                     }
