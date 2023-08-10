@@ -271,7 +271,6 @@ namespace File_Acess_Management
                         adapter.Fill(dataTable);
                         BindingSource bindingSource = new BindingSource();
                         bindingSource.DataSource = dataTable;
-
                         requestTableGridView.DataSource = bindingSource;
 
                     }
@@ -307,6 +306,7 @@ namespace File_Acess_Management
             {
                 var row = (item as DataRowView).Row;
                 string softwareName = row["SOFTWARE_NAME"].ToString();
+
                 int softwareID = int.Parse(row["SOFTWARE_ID"].ToString());
                 Console.WriteLine("User Selected s/w ID: " + softwareID);
                 Console.WriteLine("User Selected s/w Name: " + softwareName);
