@@ -1,4 +1,5 @@
-﻿using System;
+﻿using File_Acess_Management.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +15,7 @@ namespace File_Acess_Management
 
     public partial class UserDashBoard : Form
     {
-
+        public int userId = 5;
         public UserDashBoard()
         {
             InitializeComponent();
@@ -74,8 +75,7 @@ namespace File_Acess_Management
             string managerName = GetData("userManager");
             nameTxtBox.Text = userName;
             nameTxtBox.ReadOnly = true;
-            depTxtBox.Text = departmentName;
-            depTxtBox.ReadOnly = true;
+
             repManagerTxtBox.Text = managerName;
             repManagerTxtBox.ReadOnly = true;
             Console.WriteLine("Loading Available Software List");
@@ -86,7 +86,8 @@ namespace File_Acess_Management
         {
             try
             {
-                SqlConnection con = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Smith.Cd\\Downloads\\fileAccessMgmtDB.mdf;Integrated Security=True;Connect Timeout=30");
+                
+                SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
                 con.Open();
                 if (con.State == ConnectionState.Open)
                 {
@@ -96,52 +97,43 @@ namespace File_Acess_Management
                 {
                     string userName = "";
                     Console.WriteLine("Fetching UserName");
-                    string selectQuery = "SELECT USER_NAME FROM USER_TABLE WHERE USER_ID=@id";
+                    string selectQuery = "SELECT user_name FROM users WHERE id=@id";
                     SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
-                    sqlCommand.Parameters.AddWithValue("@id", 1);
+                    sqlCommand.Parameters.AddWithValue("@id", userId);
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             Console.WriteLine("User Name Fetched:");
-                            Console.WriteLine(String.Format("{0}", reader["USER_NAME"]));
-                            userName = reader["USER_NAME"].ToString();
+                            Console.WriteLine(String.Format("{0}", reader["user_name"]));
+                            userName = reader["user_name"].ToString();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Reader Failed");
                         }
                     }
                     return userName;
-                }
-                else if (requiredData == "userDepartment")
-                {
-                    string deptName = "";
-                    Console.WriteLine("Fetching UserDepartment");
-                    string selectQuery = "SELECT USER_DEPARTMENT FROM USER_TABLE WHERE USER_ID=@id";
-                    SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
-                    sqlCommand.Parameters.AddWithValue("@id", 1);
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            Console.WriteLine("DEPARTMENT Name Fetched:");
-                            Console.WriteLine(String.Format("{0}", reader["USER_DEPARTMENT"]));
-                            deptName = reader["USER_DEPARTMENT"].ToString();
-                        }
-                    }
-                    return deptName;
                 }
                 else
                 {
                     string userManager = "";
                     Console.WriteLine("Fetching UserManager");
-                    string selectQuery = "SELECT MANAGER_ID FROM USER_TABLE WHERE USER_ID=@id";
+                    string selectQuery = "SELECT manager_id FROM managerAssigned WHERE users_id=@id";
                     SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
-                    sqlCommand.Parameters.AddWithValue("@id", 1);
+                    sqlCommand.Parameters.AddWithValue("@id", userId);
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         if (reader.Read())
                         {
+                            string managerName = fetchManagerName(reader["manager_id"]);
                             Console.WriteLine("User Manager Fetched:");
-                            Console.WriteLine(String.Format("{0}", reader["MANAGER_ID"]));
-                            userManager = reader["MANAGER_ID"].ToString();
+                            Console.WriteLine(String.Format("{0}", managerName));
+                            userManager = managerName;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Reader Failed");
                         }
                     }
                     return userManager;
@@ -157,11 +149,43 @@ namespace File_Acess_Management
 
         }
 
+        private string fetchManagerName(object id)
+        {
+            Console.WriteLine("From FetchManagerName");
+            Console.WriteLine("ManagerID:" + id.ToString());
+            SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
+            string managerName = "";
+            con.Open();
+            if (con.State == ConnectionState.Open)
+            {
+                Console.WriteLine("DB Connection Established");
+            }
+            Console.WriteLine("Fetching Manager Name");
+            string selectQuery = "SELECT user_name FROM users WHERE id=@id";
+            SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
+            sqlCommand.Parameters.AddWithValue("@id", id);
+            using (SqlDataReader reader = sqlCommand.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    Console.WriteLine("User Name Fetched:");
+                    Console.WriteLine(String.Format("{0}", reader["user_name"]));
+                    managerName = reader["user_name"].ToString();
+                }
+                else
+                {
+                    Console.WriteLine("Reader Failed");
+                }
+            }
+            return managerName;
+
+        }
+
         private void loadSoftwareList()
         {
             var table = new DataTable();
 
-            var connection = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Smith.Cd\\Downloads\\fileAccessMgmtDB.mdf;Integrated Security=True;Connect Timeout=30";
+            var connection = Properties.Settings.Default.connection;
 
             using (var con = new SqlConnection { ConnectionString = connection })
             {
@@ -186,7 +210,7 @@ namespace File_Acess_Management
 
                     try
                     {
-                        string selectQuery = "SELECT * FROM SOFTWARE_TABLE";
+                        string selectQuery = "SELECT * FROM SOFTWARE";
                         SqlDataAdapter adapter = new SqlDataAdapter(selectQuery, con);
                         DataSet dataSet = new DataSet();
                         adapter.Fill(dataSet);
@@ -240,7 +264,7 @@ namespace File_Acess_Management
         {
             var table = new DataTable();
 
-            var connection = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Smith.Cd\\Downloads\\fileAccessMgmtDB.mdf;Integrated Security=True;Connect Timeout=30";
+            var connection = Properties.Settings.Default.connection;
 
             using (var con = new SqlConnection { ConnectionString = connection })
             {
@@ -265,13 +289,26 @@ namespace File_Acess_Management
 
                     try
                     {
-                        string selectQuery = "SELECT * FROM REQUEST_TABLE";
-                        SqlDataAdapter adapter = new SqlDataAdapter(selectQuery, con);
-                        DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable);
-                        BindingSource bindingSource = new BindingSource();
-                        bindingSource.DataSource = dataTable;
-                        requestTableGridView.DataSource = bindingSource;
+
+                        Console.WriteLine("Fetching Previous Requests");
+                        string selectQuery = "SELECT REQUEST_ID,APPROVAL_ID,SOFTWARE_REQUEST_ID FROM REQUEST_TABLE WHERE USER_ID=@id";
+                        SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
+                        sqlCommand.Parameters.AddWithValue("@id", 1);
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            int count = 1;
+                            while (reader.Read())
+                            {
+                                count += 1;
+                                Console.WriteLine(String.Format("Request ID:#{0} Fetched:", count));
+                                Console.WriteLine(String.Format("Request ID:{0}", reader["REQUEST_ID"]));
+                                Console.WriteLine(String.Format("APPROVAL ID:{0}", reader["APPROVAL_ID"]));
+                                Console.WriteLine(String.Format("SOFTWARE_REQUEST_ID:{0}", reader["SOFTWARE_REQUEST_ID"]));
+                            }
+                        }
+
+
+
 
                     }
                     catch (SqlException ex)
@@ -305,9 +342,9 @@ namespace File_Acess_Management
             foreach (var item in softwareChkdLstBx.CheckedItems)
             {
                 var row = (item as DataRowView).Row;
-                string softwareName = row["SOFTWARE_NAME"].ToString();
+                string softwareName = row["soft_name"].ToString();
 
-                int softwareID = int.Parse(row["SOFTWARE_ID"].ToString());
+                int softwareID = int.Parse(row["soft_id"].ToString());
                 Console.WriteLine("User Selected s/w ID: " + softwareID);
                 Console.WriteLine("User Selected s/w Name: " + softwareName);
                 softwareIdList.Add(softwareID);
@@ -329,7 +366,7 @@ namespace File_Acess_Management
         {
             try
             {
-                SqlConnection con = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Smith.Cd\\Downloads\\fileAccessMgmtDB.mdf;Integrated Security=True;Connect Timeout=30");
+                SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
                 con.Open();
                 if (con.State == ConnectionState.Open)
                 {
@@ -342,7 +379,7 @@ namespace File_Acess_Management
                     SqlCommand sqcmd = new SqlCommand("insert into REQUEST_LIST_TABLE(SOFTWARE_ID) values('" + softwareIdList.First() + "') ", con);
                     Console.WriteLine("Added Item to Request List with ID:" + softwareIdList.First());
                     Console.WriteLine("Creating Request Row in SQL");
-                    SqlCommand RequestSQLcmd = new SqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_ID,SOFTWARE_REQUEST_ID) values('" + 1 + "','" + 1 + "','" + softwareIdList.First() + "') ", con);
+                    SqlCommand RequestSQLcmd = new SqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS) values('" + 1 + "','" + 1 + "','" + softwareIdList.First() + "') ", con);
                     Console.WriteLine("Removing from Local List:");
 
                     softwareIdList.RemoveAt(0);

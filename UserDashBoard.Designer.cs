@@ -48,7 +48,6 @@
             this.requestRightPanel = new System.Windows.Forms.Panel();
             this.alertsLabel = new System.Windows.Forms.Label();
             this.requestStatusPanel = new System.Windows.Forms.Panel();
-            this.requestTableGridView = new System.Windows.Forms.DataGridView();
             this.addBtn = new System.Windows.Forms.Button();
             this.softwareChkdLstBx = new System.Windows.Forms.CheckedListBox();
             this.selectedSoftwareListBox = new System.Windows.Forms.ListBox();
@@ -59,8 +58,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.repManagerTxtBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.depTxtBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.nameTxtBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -78,8 +75,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).BeginInit();
             this.panel2.SuspendLayout();
             this.requestRightPanel.SuspendLayout();
-            this.requestStatusPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.requestTableGridView)).BeginInit();
             this.panel7.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -288,8 +283,6 @@
             this.requestRightPanel.Controls.Add(this.label4);
             this.requestRightPanel.Controls.Add(this.repManagerTxtBox);
             this.requestRightPanel.Controls.Add(this.label3);
-            this.requestRightPanel.Controls.Add(this.depTxtBox);
-            this.requestRightPanel.Controls.Add(this.label2);
             this.requestRightPanel.Controls.Add(this.nameTxtBox);
             this.requestRightPanel.Controls.Add(this.label1);
             this.requestRightPanel.Location = new System.Drawing.Point(9, 59);
@@ -310,25 +303,11 @@
             // requestStatusPanel
             // 
             this.requestStatusPanel.BackColor = System.Drawing.Color.SeaShell;
-            this.requestStatusPanel.Controls.Add(this.requestTableGridView);
-            this.requestStatusPanel.Location = new System.Drawing.Point(1, 0);
+            this.requestStatusPanel.Location = new System.Drawing.Point(7, 3);
             this.requestStatusPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.requestStatusPanel.Name = "requestStatusPanel";
             this.requestStatusPanel.Size = new System.Drawing.Size(581, 383);
             this.requestStatusPanel.TabIndex = 14;
-            // 
-            // requestTableGridView
-            // 
-            this.requestTableGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.requestTableGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.requestTableGridView.Location = new System.Drawing.Point(0, 134);
-            this.requestTableGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.requestTableGridView.Name = "requestTableGridView";
-            this.requestTableGridView.RowHeadersWidth = 51;
-            this.requestTableGridView.RowTemplate.Height = 24;
-            this.requestTableGridView.Size = new System.Drawing.Size(581, 249);
-            this.requestTableGridView.TabIndex = 0;
-            this.requestTableGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.requestTableGridView_CellContentClick);
             // 
             // addBtn
             // 
@@ -344,7 +323,7 @@
             // softwareChkdLstBx
             // 
             this.softwareChkdLstBx.FormattingEnabled = true;
-            this.softwareChkdLstBx.Location = new System.Drawing.Point(15, 190);
+            this.softwareChkdLstBx.Location = new System.Drawing.Point(15, 139);
             this.softwareChkdLstBx.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.softwareChkdLstBx.Name = "softwareChkdLstBx";
             this.softwareChkdLstBx.Size = new System.Drawing.Size(241, 89);
@@ -405,7 +384,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(15, 162);
+            this.label4.Location = new System.Drawing.Point(15, 111);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(187, 16);
             this.label4.TabIndex = 7;
@@ -413,7 +392,7 @@
             // 
             // repManagerTxtBox
             // 
-            this.repManagerTxtBox.Location = new System.Drawing.Point(15, 137);
+            this.repManagerTxtBox.Location = new System.Drawing.Point(15, 86);
             this.repManagerTxtBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.repManagerTxtBox.Name = "repManagerTxtBox";
             this.repManagerTxtBox.Size = new System.Drawing.Size(241, 22);
@@ -423,29 +402,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(15, 114);
+            this.label3.Location = new System.Drawing.Point(15, 63);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(126, 16);
             this.label3.TabIndex = 5;
             this.label3.Text = "Reporting Manager:";
-            // 
-            // depTxtBox
-            // 
-            this.depTxtBox.Location = new System.Drawing.Point(15, 89);
-            this.depTxtBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.depTxtBox.Name = "depTxtBox";
-            this.depTxtBox.Size = new System.Drawing.Size(241, 22);
-            this.depTxtBox.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(15, 66);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 16);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Department:";
             // 
             // nameTxtBox
             // 
@@ -515,8 +476,6 @@
             this.panel2.ResumeLayout(false);
             this.requestRightPanel.ResumeLayout(false);
             this.requestRightPanel.PerformLayout();
-            this.requestStatusPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.requestTableGridView)).EndInit();
             this.panel7.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -547,8 +506,6 @@
         private System.Windows.Forms.Panel requestRightPanel;
         private System.Windows.Forms.TextBox repManagerTxtBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox depTxtBox;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox nameTxtBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel7;
@@ -558,7 +515,6 @@
         private System.Windows.Forms.Button proceedBtn;
         private System.Windows.Forms.ListBox selectedSoftwareListBox;
         private System.Windows.Forms.Panel requestStatusPanel;
-        private System.Windows.Forms.DataGridView requestTableGridView;
         private System.Windows.Forms.CheckedListBox softwareChkdLstBx;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Label alertsLabel;
