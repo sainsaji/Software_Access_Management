@@ -300,13 +300,17 @@ namespace File_Acess_Management
 
         }
 
+        List<int> softwareIdList = new List<int>();
         private void addBtn_Click(object sender, EventArgs e)
         {
             foreach (var item in softwareChkdLstBx.CheckedItems)
             {
                 var row = (item as DataRowView).Row;
                 string softwareName = row["SOFTWARE_NAME"].ToString();
-                Console.WriteLine("User Selected: " + softwareName);
+                int softwareID = int.Parse(row["SOFTWARE_ID"].ToString());
+                Console.WriteLine("User Selected s/w ID: " + softwareID);
+                Console.WriteLine("User Selected s/w Name: " + softwareName);
+                softwareIdList.Add(softwareID);
                 if (!selectedSoftwareListBox.Items.Contains(softwareName))
                 {
                     alertsLabel.Text = "Added Softwares";
@@ -331,18 +335,30 @@ namespace File_Acess_Management
                 {
                     Console.WriteLine("DB Connection Established");
                 }
-
+                Console.WriteLine("Software ID List:" + softwareIdList);
                 foreach (var item in selectedSoftwareListBox.Items)
                 {
-                    Console.WriteLine("requesting software:" + item.ToString());
-                    SqlCommand sqcmd = new SqlCommand("insert into REQUEST_LIST_TABLE(REQUEST_ID,SOFTWARE_ID) values('" + 1 + "','" + 1 + "') ", con);
+                    Console.WriteLine("Requesting software:" + item.ToString());
+                    SqlCommand sqcmd = new SqlCommand("insert into REQUEST_LIST_TABLE(SOFTWARE_ID) values('" + softwareIdList.First() + "') ", con);
+                    Console.WriteLine("Added Item to Request List with ID:" + softwareIdList.First());
+                    Console.WriteLine("Creating Request Row in SQL");
+                    SqlCommand RequestSQLcmd = new SqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_ID,SOFTWARE_REQUEST_ID) values('" + 1 + "','" + 1 + "','" + softwareIdList.First() + "') ", con);
+                    Console.WriteLine("Removing from Local List:");
+
+                    softwareIdList.RemoveAt(0);
                     int rowsAffected = sqcmd.ExecuteNonQuery();
-                    Console.WriteLine("Rows Affected:" + rowsAffected.ToString());
+                    Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffected.ToString());
+                    int rowsAffectedReq = RequestSQLcmd.ExecuteNonQuery();
+                    Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffectedReq.ToString());
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+
             }
 
         }
