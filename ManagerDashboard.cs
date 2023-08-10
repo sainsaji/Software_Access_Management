@@ -35,7 +35,7 @@ namespace File_Acess_Management
             {
                 connection.Open();
 
-                string query = "SELECT u.user_name, r.role_name as role, u.name, u.email, u.phone_number, u.address FROM users AS u INNER JOIN roles AS r ON u.role_id = r.id WHERE r.role_name!='Admin';";
+                string query = "SELECT u.user_name, r.role_name as role, u.name, u.email, u.phone_number, u.address FROM users AS u INNER JOIN roles AS r ON u.role_id = r.role_id WHERE r.role_name!='Admin';";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -57,7 +57,7 @@ namespace File_Acess_Management
             {
                 connection.Open();
 
-                string query = "SELECT id, role_name FROM roles where role_name!='Admin'";
+                string query = "SELECT role_id, role_name FROM roles where role_name!='Admin'";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -65,7 +65,7 @@ namespace File_Acess_Management
                     {
                         while (reader.Read())
                         {
-                            int roleId = reader.GetInt32("id");
+                            int roleId = reader.GetInt32("role_id");
                             string roleName = reader.GetString("role_name");
                             roleComboBox.Items.Add(new Role(roleId, roleName));
                         }

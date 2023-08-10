@@ -362,5 +362,10 @@ namespace File_Acess_Management
             }
 
         }
+
+        private void informationPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
