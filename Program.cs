@@ -6,7 +6,6 @@ using System.Windows.Forms;
 
 namespace File_Acess_Management
 {
-
     internal static class Program
     {
         /// <summary>
@@ -17,7 +16,7 @@ namespace File_Acess_Management
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UserDashBoard());
+            Application.Run(new UserLogin());
         }
     }
 }
