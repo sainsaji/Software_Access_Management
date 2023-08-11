@@ -62,6 +62,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabTitleLbl = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.leftPanel.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -75,8 +76,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).BeginInit();
             this.panel2.SuspendLayout();
             this.requestRightPanel.SuspendLayout();
+            this.requestStatusPanel.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -303,7 +306,8 @@
             // requestStatusPanel
             // 
             this.requestStatusPanel.BackColor = System.Drawing.Color.SeaShell;
-            this.requestStatusPanel.Location = new System.Drawing.Point(7, 3);
+            this.requestStatusPanel.Controls.Add(this.dataGridView1);
+            this.requestStatusPanel.Location = new System.Drawing.Point(3, 3);
             this.requestStatusPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.requestStatusPanel.Name = "requestStatusPanel";
             this.requestStatusPanel.Size = new System.Drawing.Size(581, 383);
@@ -447,6 +451,16 @@
             this.tabTitleLbl.TabIndex = 0;
             this.tabTitleLbl.Text = "Tab Title Here";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(4, 47);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(571, 333);
+            this.dataGridView1.TabIndex = 1;
+            // 
             // UserDashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -476,9 +490,11 @@
             this.panel2.ResumeLayout(false);
             this.requestRightPanel.ResumeLayout(false);
             this.requestRightPanel.PerformLayout();
+            this.requestStatusPanel.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -518,6 +534,7 @@
         private System.Windows.Forms.CheckedListBox softwareChkdLstBx;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Label alertsLabel;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using File_Acess_Management.Models;
+using Org.BouncyCastle.Bcpg;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +18,7 @@ namespace File_Acess_Management
     public partial class UserDashBoard : Form
     {
         public int userId = 5;
+        private List<RequestList> requestList = new List<RequestList>();
         public UserDashBoard()
         {
             InitializeComponent();
@@ -75,7 +78,6 @@ namespace File_Acess_Management
             string managerName = GetData("userManager");
             nameTxtBox.Text = userName;
             nameTxtBox.ReadOnly = true;
-
             repManagerTxtBox.Text = managerName;
             repManagerTxtBox.ReadOnly = true;
             Console.WriteLine("Loading Available Software List");
@@ -86,7 +88,7 @@ namespace File_Acess_Management
         {
             try
             {
-                
+
                 SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
                 con.Open();
                 if (con.State == ConnectionState.Open)
@@ -291,20 +293,40 @@ namespace File_Acess_Management
                     {
 
                         Console.WriteLine("Fetching Previous Requests");
-                        string selectQuery = "SELECT REQUEST_ID,APPROVAL_ID,SOFTWARE_REQUEST_ID FROM REQUEST_TABLE WHERE USER_ID=@id";
+                        string selectQuery = "SELECT REQUEST_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS,REQUEST_LIST_ID FROM REQUEST_TABLE WHERE USER_ID=@id";
                         SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
-                        sqlCommand.Parameters.AddWithValue("@id", 1);
+                        sqlCommand.Parameters.AddWithValue("@id", userId);
                         using (SqlDataReader reader = sqlCommand.ExecuteReader())
                         {
                             int count = 1;
-                            while (reader.Read())
+                            try
                             {
-                                count += 1;
-                                Console.WriteLine(String.Format("Request ID:#{0} Fetched:", count));
-                                Console.WriteLine(String.Format("Request ID:{0}", reader["REQUEST_ID"]));
-                                Console.WriteLine(String.Format("APPROVAL ID:{0}", reader["APPROVAL_ID"]));
-                                Console.WriteLine(String.Format("SOFTWARE_REQUEST_ID:{0}", reader["SOFTWARE_REQUEST_ID"]));
+                                while (reader.Read())
+                                {
+                                    count += 1;
+                                    int requestId = int.Parse(reader["REQUEST_ID"].ToString());
+                                    string appName = FetchAppName(userId, requestId);
+                                    string manApproval = reader["APPROVAL_MANAGER"].ToString();
+                                    string admApproval = reader["APPROVAL_ADMIN"].ToString();
+                                    string status = reader["REQ_STATUS"].ToString();
+                                    Console.WriteLine(String.Format("Request ID:#{0} Fetched:", count));
+                                    Console.WriteLine(String.Format("Request ID:{0}", requestId));
+                                    Console.WriteLine(String.Format("APPROVAL ID:{0}", manApproval));
+                                    Console.WriteLine(String.Format("APPROVAL ID:{0}", admApproval));
+                                    Console.WriteLine(String.Format("APPROVAL ID:{0}", status));
+                                    Console.WriteLine(String.Format("SOFTWARE_REQUEST_ID:{0}", reader["REQUEST_LIST_ID"]));
+                                    requestList.Add(new RequestList { requestId = requestId, appName = appName, manApproval = manApproval, admApproval = admApproval, status = status });
+                                    BindingSource binding = new BindingSource();
+                                    binding.DataSource = requestList;
+                                    dataGridView1.DataSource = binding;
+
+                                }
                             }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.ToString());
+                            }
+
                         }
 
 
@@ -317,6 +339,41 @@ namespace File_Acess_Management
                     }
 
                 }
+            }
+        }
+
+        private string FetchAppName(int userId, int requestId)
+        {
+            string appName = "ERR";
+            Console.WriteLine("Fetching App Name");
+            try
+            {
+                SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
+                con.Open();
+                string selectQuery = "SELECT SOFT_NAME FROM SOFTWARE INNER JOIN REQUEST_LIST_TABLE ON REQUEST_LIST_TABLE.SOFTWARE_ID = SOFTWARE.SOFT_ID   WHERE REQUEST_LIST_TABLE.USER_ID = @id";
+                if (con.State == ConnectionState.Open)
+                {
+                    Console.WriteLine("DB Connection Established");
+                    SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
+                    sqlCommand.Parameters.AddWithValue("@id", userId);
+                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+                            Console.WriteLine(String.Format("Fetching Request ID"));
+                            Console.WriteLine(String.Format("Request ID:{0}", reader["SOFT_NAME"]));
+                            appName = reader["SOFT_NAME"].ToString();
+                        }
+
+                    }
+                }
+                return appName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return appName;
             }
         }
 
@@ -376,28 +433,69 @@ namespace File_Acess_Management
                 foreach (var item in selectedSoftwareListBox.Items)
                 {
                     Console.WriteLine("Requesting software:" + item.ToString());
-                    SqlCommand sqcmd = new SqlCommand("insert into REQUEST_LIST_TABLE(SOFTWARE_ID) values('" + softwareIdList.First() + "') ", con);
+                    SqlCommand setRequestList = new SqlCommand("insert into REQUEST_LIST_TABLE(SOFTWARE_ID,USER_ID) values('" + softwareIdList.First() + "','" + userId + "') ", con);
                     Console.WriteLine("Added Item to Request List with ID:" + softwareIdList.First());
                     Console.WriteLine("Creating Request Row in SQL");
-                    SqlCommand RequestSQLcmd = new SqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS) values('" + 1 + "','" + 1 + "','" + softwareIdList.First() + "') ", con);
-                    Console.WriteLine("Removing from Local List:");
-
-                    softwareIdList.RemoveAt(0);
-                    int rowsAffected = sqcmd.ExecuteNonQuery();
+                    int rowsAffected = setRequestList.ExecuteNonQuery();
                     Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffected.ToString());
+                    int requestListId = getSoftwareListId();
+                    Console.WriteLine("Recieved Request ID:" + requestListId);
+                    string pending = "Pending";
+                    SqlCommand RequestSQLcmd = new SqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS,REQUEST_LIST_ID) values('" + userId + "','" + pending + "','" + pending + "','" + pending + "','" + requestListId + "') ", con);
+
                     int rowsAffectedReq = RequestSQLcmd.ExecuteNonQuery();
                     Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffectedReq.ToString());
+                    Console.WriteLine("Removing from Local List:");
+                    softwareIdList.RemoveAt(0);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("From Proceed Button:" + ex.Message);
             }
             finally
             {
 
             }
 
+        }
+
+        private int getSoftwareListId()
+        {
+            Console.WriteLine("Fetching Request List IDs:");
+            int reqId = -1;
+            try
+            {
+                SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
+                con.Open();
+                string selectQuery = "SELECT REQ_ID FROM request_list_table WHERE user_id = @id AND req_id = (SELECT MAX(req_id) FROM request_list_table)";
+                if (con.State == ConnectionState.Open)
+                {
+                    Console.WriteLine("DB Connection Established");
+                    SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
+                    sqlCommand.Parameters.AddWithValue("@id", userId);
+                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    {
+
+                        if (reader.Read())
+                        {
+                            Console.WriteLine(String.Format("Fetching Request ID"));
+                            Console.WriteLine(String.Format("Request ID:{0}", reader["REQ_ID"]));
+                            reqId = int.Parse(reader["REQ_ID"].ToString());
+                        }
+                        else
+                        {
+                            Console.WriteLine("Reader Failed");
+                        }
+                    }
+                }
+                return reqId;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("From getSoftwareListID:" + ex.Message);
+                return -1;
+            }
         }
     }
 }
