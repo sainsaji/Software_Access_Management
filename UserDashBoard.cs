@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Acess_Management
@@ -451,7 +454,11 @@ namespace File_Acess_Management
                     SqlCommand setRequestList = new SqlCommand("insert into REQUEST_LIST_TABLE(SOFTWARE_ID,USER_ID) values('" + softwareIdList.First() + "','" + userId + "') ", con);
                     Console.WriteLine("Added Item to Request List with ID:" + softwareIdList.First());
                     Console.WriteLine("Creating Request Row in SQL");
-                    int rowsAffected = setRequestList.ExecuteNonQuery();
+                    SqlCommand sqcmd = new SqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_ID,SOFTWARE_REQUEST_ID) values('" + 1 + "','" + 1 + "','" + softwareIdList.First() + "') ", con);
+                    Console.WriteLine("Removing from Local List:");
+
+                    softwareIdList.RemoveAt(0);
+                    int rowsAffected = sqcmd.ExecuteNonQuery();
                     Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffected.ToString());
                     int requestListId = getSoftwareListId();
                     Console.WriteLine("Received Request ID:" + requestListId);

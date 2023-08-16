@@ -226,6 +226,7 @@
             this.informationPanel.Size = new System.Drawing.Size(200, 49);
             this.informationPanel.TabIndex = 0;
             this.informationPanel.Click += new System.EventHandler(this.informationPanel_Click);
+
             // 
             // userInfoLbl
             // 
