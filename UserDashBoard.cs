@@ -1,15 +1,9 @@
-﻿using File_Acess_Management.Models;
-using Org.BouncyCastle.Bcpg;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Management;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Acess_Management
@@ -218,9 +212,16 @@ namespace File_Acess_Management
                         adapter.Fill(dataSet);
                         BindingSource bindingSource = new BindingSource();
                         bindingSource.DataSource = dataSet;
-                        softwareChkdLstBx.DisplayMember = "SOFTWARE_NAME";
-                        softwareChkdLstBx.ValueMember = "SOFTWARE_NAME";
+                        DataTable dataTable = dataSet.Tables[0];
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            Console.WriteLine("soft_name: " + row["soft_name"]);
+                        }
                         softwareChkdLstBx.DataSource = dataSet.Tables[0];
+                        softwareChkdLstBx.DisplayMember = "soft_name";
+                        softwareChkdLstBx.ValueMember = "soft_name";
+
+                        softwareChkdLstBx.Refresh();
                     }
                     catch (SqlException ex)
                     {
@@ -304,7 +305,7 @@ namespace File_Acess_Management
                                 while (reader.Read())
                                 {
                                     count += 1;
-                                    int requestId = int.Parse(reader["REQUEST_ID"].ToString());
+                                    int requestId = int.Parse(reader["REQUEST_LIST_ID"].ToString());
                                     string appName = FetchAppName(userId, requestId);
                                     string manApproval = reader["APPROVAL_MANAGER"].ToString();
                                     string admApproval = reader["APPROVAL_ADMIN"].ToString();
@@ -320,11 +321,16 @@ namespace File_Acess_Management
                                     binding.DataSource = requestList;
                                     dataGridView1.DataSource = binding;
 
+
                                 }
                             }
                             catch (Exception ex)
                             {
                                 Console.WriteLine(ex.ToString());
+                            }
+                            finally
+                            {
+                                con.Close();
                             }
 
                         }
@@ -350,20 +356,27 @@ namespace File_Acess_Management
             {
                 SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
                 con.Open();
-                string selectQuery = "SELECT SOFT_NAME FROM SOFTWARE INNER JOIN REQUEST_LIST_TABLE ON REQUEST_LIST_TABLE.SOFTWARE_ID = SOFTWARE.SOFT_ID   WHERE REQUEST_LIST_TABLE.USER_ID = @id";
+                string selectQuery = "SELECT SOFT_NAME FROM SOFTWARE S INNER JOIN REQUEST_LIST_TABLE R ON S.SOFT_ID = R.SOFTWARE_ID   WHERE R.USER_ID = @id and R.REQ_ID = @requestID";
                 if (con.State == ConnectionState.Open)
                 {
                     Console.WriteLine("DB Connection Established");
+                    Console.WriteLine("Fetching RequestID:" + requestId);
                     SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
                     sqlCommand.Parameters.AddWithValue("@id", userId);
+                    sqlCommand.Parameters.AddWithValue("@requestID", requestId);
+                    //Console.WriteLine("Getting types:" + requestId.GetType() + userId.GetType());
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
 
-                        while (reader.Read())
+                        if (reader.Read())
                         {
                             Console.WriteLine(String.Format("Fetching Request ID"));
-                            Console.WriteLine(String.Format("Request ID:{0}", reader["SOFT_NAME"]));
+                            Console.WriteLine(String.Format("Request App:{0}", reader["SOFT_NAME"]));
                             appName = reader["SOFT_NAME"].ToString();
+                        }
+                        else
+                        {
+                            Console.WriteLine(String.Format("Reader Failed"));
                         }
 
                     }
@@ -442,7 +455,6 @@ namespace File_Acess_Management
                     Console.WriteLine("Recieved Request ID:" + requestListId);
                     string pending = "Pending";
                     SqlCommand RequestSQLcmd = new SqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS,REQUEST_LIST_ID) values('" + userId + "','" + pending + "','" + pending + "','" + pending + "','" + requestListId + "') ", con);
-
                     int rowsAffectedReq = RequestSQLcmd.ExecuteNonQuery();
                     Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffectedReq.ToString());
                     Console.WriteLine("Removing from Local List:");
