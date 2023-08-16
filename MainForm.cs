@@ -57,5 +57,12 @@ namespace File_Acess_Management
         {
 
         }
+
+        private void logOutBtn_Click(object sender, EventArgs e)
+        {
+            UserLogin userLogin = new UserLogin();
+            userLogin.Show();
+            this.Close();
+        }
     }
 }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using File_Acess_Management.Models;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,11 +15,15 @@ namespace File_Acess_Management
 
     public partial class UserDashBoard : Form
     {
-        public int userId = 5;
+        public int userId;
         private List<RequestList> requestList = new List<RequestList>();
-        public UserDashBoard()
+        User user;
+
+        public UserDashBoard(User user)
         {
             InitializeComponent();
+            this.user = user;
+            this.userId = user.Id;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -86,9 +91,9 @@ namespace File_Acess_Management
             try
             {
 
-                SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
-                con.Open();
-                if (con.State == ConnectionState.Open)
+                MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString);
+                connection.Open();
+                if (connection.State == ConnectionState.Open)
                 {
                     Console.WriteLine("DB Connection Established");
                 }
@@ -97,9 +102,9 @@ namespace File_Acess_Management
                     string userName = "";
                     Console.WriteLine("Fetching UserName");
                     string selectQuery = "SELECT user_name FROM users WHERE id=@id";
-                    SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
-                    sqlCommand.Parameters.AddWithValue("@id", userId);
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    MySqlCommand MySqlCommand = new MySqlCommand(selectQuery, connection);
+                    MySqlCommand.Parameters.AddWithValue("@id", userId);
+                    using (MySqlDataReader reader = MySqlCommand.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -119,9 +124,9 @@ namespace File_Acess_Management
                     string userManager = "";
                     Console.WriteLine("Fetching UserManager");
                     string selectQuery = "SELECT manager_id FROM managerAssigned WHERE users_id=@id";
-                    SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
-                    sqlCommand.Parameters.AddWithValue("@id", userId);
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    MySqlCommand MySqlCommand = new MySqlCommand(selectQuery, connection);
+                    MySqlCommand.Parameters.AddWithValue("@id", userId);
+                    using (MySqlDataReader reader = MySqlCommand.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -152,18 +157,18 @@ namespace File_Acess_Management
         {
             Console.WriteLine("From FetchManagerName");
             Console.WriteLine("ManagerID:" + id.ToString());
-            SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
+            MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString);
             string managerName = "";
-            con.Open();
-            if (con.State == ConnectionState.Open)
+            connection.Open();
+            if (connection.State == ConnectionState.Open)
             {
                 Console.WriteLine("DB Connection Established");
             }
             Console.WriteLine("Fetching Manager Name");
             string selectQuery = "SELECT user_name FROM users WHERE id=@id";
-            SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
-            sqlCommand.Parameters.AddWithValue("@id", id);
-            using (SqlDataReader reader = sqlCommand.ExecuteReader())
+            MySqlCommand MySqlCommand = new MySqlCommand(selectQuery, connection);
+            MySqlCommand.Parameters.AddWithValue("@id", id);
+            using (MySqlDataReader reader = MySqlCommand.ExecuteReader())
             {
                 if (reader.Read())
                 {
@@ -184,11 +189,11 @@ namespace File_Acess_Management
         {
             var table = new DataTable();
 
-            var connection = Properties.Settings.Default.connection;
+            var connection = ConnectionHelper.ConnectionString;
 
-            using (var con = new SqlConnection { ConnectionString = connection })
+            using (var con = new MySqlConnection { ConnectionString = connection })
             {
-                using (var command = new SqlCommand { Connection = con })
+                using (var command = new MySqlCommand { Connection = con })
                 {
 
                     if (con.State == ConnectionState.Open)
@@ -210,7 +215,7 @@ namespace File_Acess_Management
                     try
                     {
                         string selectQuery = "SELECT * FROM SOFTWARE";
-                        SqlDataAdapter adapter = new SqlDataAdapter(selectQuery, con);
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(selectQuery, connection);
                         DataSet dataSet = new DataSet();
                         adapter.Fill(dataSet);
                         BindingSource bindingSource = new BindingSource();
@@ -226,7 +231,7 @@ namespace File_Acess_Management
 
                         softwareChkdLstBx.Refresh();
                     }
-                    catch (SqlException ex)
+                    catch (MySqlException ex)
                     {
                         MessageBox.Show(ex.Message + " sql query error.");
 
@@ -271,11 +276,11 @@ namespace File_Acess_Management
         {
             var table = new DataTable();
 
-            var connection = Properties.Settings.Default.connection;
+            var connection = ConnectionHelper.ConnectionString;
 
-            using (var con = new SqlConnection { ConnectionString = connection })
+            using (var con = new MySqlConnection { ConnectionString = connection })
             {
-                using (var command = new SqlCommand { Connection = con })
+                using (var command = new MySqlCommand { Connection = con })
                 {
 
                     if (con.State == ConnectionState.Open)
@@ -299,10 +304,10 @@ namespace File_Acess_Management
 
                         Console.WriteLine("Fetching Previous Requests");
                         string selectQuery = "SELECT REQUEST_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS,REQUEST_LIST_ID FROM REQUEST_TABLE WHERE USER_ID=@id";
-                        SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
-                        sqlCommand.Parameters.AddWithValue("@id", userId);
+                        MySqlCommand MySqlCommand = new MySqlCommand(selectQuery, con);
+                        MySqlCommand.Parameters.AddWithValue("@id", userId);
                         dataGridView1.Rows.Clear();
-                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        using (MySqlDataReader reader = MySqlCommand.ExecuteReader())
                         {
                             int count = 1;
                             try
@@ -344,7 +349,7 @@ namespace File_Acess_Management
 
 
                     }
-                    catch (SqlException ex)
+                    catch (MySqlException ex)
                     {
                         MessageBox.Show(ex.Message + " sql query error.");
                     }
@@ -359,18 +364,18 @@ namespace File_Acess_Management
             Console.WriteLine("Fetching App Name");
             try
             {
-                SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
-                con.Open();
+                MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString);
+                connection.Open();
                 string selectQuery = "SELECT SOFT_NAME FROM SOFTWARE S INNER JOIN REQUEST_LIST_TABLE R ON S.SOFT_ID = R.SOFTWARE_ID   WHERE R.USER_ID = @id and R.REQ_ID = @requestID";
-                if (con.State == ConnectionState.Open)
+                if (connection.State == ConnectionState.Open)
                 {
                     Console.WriteLine("DB Connection Established");
                     Console.WriteLine("Fetching RequestID:" + requestId);
-                    SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
-                    sqlCommand.Parameters.AddWithValue("@id", userId);
-                    sqlCommand.Parameters.AddWithValue("@requestID", requestId);
+                    MySqlCommand MySqlCommand = new MySqlCommand(selectQuery, connection);
+                    MySqlCommand.Parameters.AddWithValue("@id", userId);
+                    MySqlCommand.Parameters.AddWithValue("@requestID", requestId);
                     //Console.WriteLine("Getting types:" + requestId.GetType() + userId.GetType());
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    using (MySqlDataReader reader = MySqlCommand.ExecuteReader())
                     {
 
                         if (reader.Read())
@@ -390,7 +395,7 @@ namespace File_Acess_Management
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Errorrrrr"+ex.ToString());
                 return appName;
             }
         }
@@ -441,9 +446,9 @@ namespace File_Acess_Management
         {
             try
             {
-                SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
-                con.Open();
-                if (con.State == ConnectionState.Open)
+                MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString);
+                connection.Open();
+                if (connection.State == ConnectionState.Open)
                 {
                     Console.WriteLine("DB Connection Established");
                 }
@@ -451,10 +456,10 @@ namespace File_Acess_Management
                 foreach (var item in selectedSoftwareListBox.Items)
                 {
                     Console.WriteLine("Requesting software:" + item.ToString());
-                    SqlCommand setRequestList = new SqlCommand("insert into REQUEST_LIST_TABLE(SOFTWARE_ID,USER_ID) values('" + softwareIdList.First() + "','" + userId + "') ", con);
+                    MySqlCommand setRequestList = new MySqlCommand("insert into REQUEST_LIST_TABLE(SOFTWARE_ID,USER_ID) values('" + softwareIdList.First() + "','" + userId + "') ", connection);
                     Console.WriteLine("Added Item to Request List with ID:" + softwareIdList.First());
                     Console.WriteLine("Creating Request Row in SQL");
-                    SqlCommand sqcmd = new SqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_ID,SOFTWARE_REQUEST_ID) values('" + 1 + "','" + 1 + "','" + softwareIdList.First() + "') ", con);
+                    MySqlCommand sqcmd = new MySqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_ID,SOFTWARE_REQUEST_ID) values('" + 1 + "','" + 1 + "','" + softwareIdList.First() + "') ", connection);
                     Console.WriteLine("Removing from Local List:");
 
                     softwareIdList.RemoveAt(0);
@@ -463,7 +468,7 @@ namespace File_Acess_Management
                     int requestListId = getSoftwareListId();
                     Console.WriteLine("Received Request ID:" + requestListId);
                     string pending = "Pending";
-                    SqlCommand RequestSQLcmd = new SqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS,REQUEST_LIST_ID) values('" + userId + "','" + pending + "','" + pending + "','" + pending + "','" + requestListId + "') ", con);
+                    MySqlCommand RequestSQLcmd = new MySqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS,REQUEST_LIST_ID) values('" + userId + "','" + pending + "','" + pending + "','" + pending + "','" + requestListId + "') ", connection);
                     int rowsAffectedReq = RequestSQLcmd.ExecuteNonQuery();
                     Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffectedReq.ToString());
                     Console.WriteLine("Removing from Local List:");
@@ -488,15 +493,15 @@ namespace File_Acess_Management
             int reqId = -1;
             try
             {
-                SqlConnection con = new SqlConnection(Properties.Settings.Default.connection);
+                MySqlConnection con = new MySqlConnection(ConnectionHelper.ConnectionString);
                 con.Open();
                 string selectQuery = "SELECT REQ_ID FROM request_list_table WHERE user_id = @id AND req_id = (SELECT MAX(req_id) FROM request_list_table)";
                 if (con.State == ConnectionState.Open)
                 {
                     Console.WriteLine("DB Connection Established");
-                    SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
-                    sqlCommand.Parameters.AddWithValue("@id", userId);
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    MySqlCommand MySqlCommand = new MySqlCommand(selectQuery, con);
+                    MySqlCommand.Parameters.AddWithValue("@id", userId);
+                    using (MySqlDataReader reader = MySqlCommand.ExecuteReader())
                     {
 
                         if (reader.Read())
@@ -518,6 +523,25 @@ namespace File_Acess_Management
                 Console.WriteLine("From getSoftwareListID:" + ex.Message);
                 return -1;
             }
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+
+        private void logout(object sender, MouseEventArgs e)
+        {
+            UserLogin logout = new UserLogin();
+            logout.Show();
+            this.Close();
+        }
+
+        private void logout(object sender, EventArgs e)
+        {
+            UserLogin logout = new UserLogin();
+            logout.Show();
+            this.Close();
         }
     }
 }

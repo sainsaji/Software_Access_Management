@@ -45,15 +45,15 @@ namespace File_Acess_Management
                 {
                     MessageBox.Show("Login successful as User!");
                     // Proceed to user dashboard or functionality
-                    //UserDashBoard userDashBoard = new UserDashBoard(user);
-                    //userDashBoard.Show();
-                    //this.Hide();
+                    UserDashBoard userDashBoard = new UserDashBoard(user);
+                    userDashBoard.Show();
+                    this.Hide();
                 }
                 else if (RoleName == "Admin")
                 {
                     //MessageBox.Show("Login successful as Admin!");
-                    ManagerDashboard manager  =new ManagerDashboard();
-                    manager.Show();
+                    MainForm admin  =new MainForm();
+                    admin.Show();
                     this.Hide();
                 }
                 else

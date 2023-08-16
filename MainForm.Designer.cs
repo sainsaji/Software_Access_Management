@@ -29,16 +29,18 @@
         private void InitializeComponent()
         {
             this.navigationPanel = new System.Windows.Forms.Panel();
-            this.DashboardBtn = new System.Windows.Forms.Button();
-            this.usersMngBtn = new System.Windows.Forms.Button();
-            this.userManagerBtn = new System.Windows.Forms.Button();
             this.softwareMngBtn = new System.Windows.Forms.Button();
+            this.userManagerBtn = new System.Windows.Forms.Button();
+            this.usersMngBtn = new System.Windows.Forms.Button();
+            this.DashboardBtn = new System.Windows.Forms.Button();
             this.panelContainer = new System.Windows.Forms.Panel();
+            this.logOutBtn = new System.Windows.Forms.Button();
             this.navigationPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // navigationPanel
             // 
+            this.navigationPanel.Controls.Add(this.logOutBtn);
             this.navigationPanel.Controls.Add(this.softwareMngBtn);
             this.navigationPanel.Controls.Add(this.userManagerBtn);
             this.navigationPanel.Controls.Add(this.usersMngBtn);
@@ -48,36 +50,6 @@
             this.navigationPanel.Name = "navigationPanel";
             this.navigationPanel.Size = new System.Drawing.Size(189, 766);
             this.navigationPanel.TabIndex = 0;
-            // 
-            // DashboardBtn
-            // 
-            this.DashboardBtn.Location = new System.Drawing.Point(0, 0);
-            this.DashboardBtn.Name = "DashboardBtn";
-            this.DashboardBtn.Size = new System.Drawing.Size(189, 53);
-            this.DashboardBtn.TabIndex = 0;
-            this.DashboardBtn.Text = "Dashboard";
-            this.DashboardBtn.UseVisualStyleBackColor = true;
-            this.DashboardBtn.Click += new System.EventHandler(this.DashboardBtn_Click);
-            // 
-            // usersMngBtn
-            // 
-            this.usersMngBtn.Location = new System.Drawing.Point(0, 59);
-            this.usersMngBtn.Name = "usersMngBtn";
-            this.usersMngBtn.Size = new System.Drawing.Size(189, 53);
-            this.usersMngBtn.TabIndex = 1;
-            this.usersMngBtn.Text = "Users Management";
-            this.usersMngBtn.UseVisualStyleBackColor = true;
-            this.usersMngBtn.Click += new System.EventHandler(this.usersMngBtn_Click);
-            // 
-            // userManagerBtn
-            // 
-            this.userManagerBtn.Location = new System.Drawing.Point(0, 118);
-            this.userManagerBtn.Name = "userManagerBtn";
-            this.userManagerBtn.Size = new System.Drawing.Size(189, 53);
-            this.userManagerBtn.TabIndex = 2;
-            this.userManagerBtn.Text = "Manager - User";
-            this.userManagerBtn.UseVisualStyleBackColor = true;
-            this.userManagerBtn.Click += new System.EventHandler(this.userManagerBtn_Click);
             // 
             // softwareMngBtn
             // 
@@ -89,12 +61,52 @@
             this.softwareMngBtn.UseVisualStyleBackColor = true;
             this.softwareMngBtn.Click += new System.EventHandler(this.softwareMngBtn_Click);
             // 
+            // userManagerBtn
+            // 
+            this.userManagerBtn.Location = new System.Drawing.Point(0, 118);
+            this.userManagerBtn.Name = "userManagerBtn";
+            this.userManagerBtn.Size = new System.Drawing.Size(189, 53);
+            this.userManagerBtn.TabIndex = 2;
+            this.userManagerBtn.Text = "Manager - User";
+            this.userManagerBtn.UseVisualStyleBackColor = true;
+            this.userManagerBtn.Click += new System.EventHandler(this.userManagerBtn_Click);
+            // 
+            // usersMngBtn
+            // 
+            this.usersMngBtn.Location = new System.Drawing.Point(0, 59);
+            this.usersMngBtn.Name = "usersMngBtn";
+            this.usersMngBtn.Size = new System.Drawing.Size(189, 53);
+            this.usersMngBtn.TabIndex = 1;
+            this.usersMngBtn.Text = "Users Management";
+            this.usersMngBtn.UseVisualStyleBackColor = true;
+            this.usersMngBtn.Click += new System.EventHandler(this.usersMngBtn_Click);
+            // 
+            // DashboardBtn
+            // 
+            this.DashboardBtn.Location = new System.Drawing.Point(0, 0);
+            this.DashboardBtn.Name = "DashboardBtn";
+            this.DashboardBtn.Size = new System.Drawing.Size(189, 53);
+            this.DashboardBtn.TabIndex = 0;
+            this.DashboardBtn.Text = "Dashboard";
+            this.DashboardBtn.UseVisualStyleBackColor = true;
+            this.DashboardBtn.Click += new System.EventHandler(this.DashboardBtn_Click);
+            // 
             // panelContainer
             // 
             this.panelContainer.Location = new System.Drawing.Point(209, 23);
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(1183, 766);
             this.panelContainer.TabIndex = 1;
+            // 
+            // logOutBtn
+            // 
+            this.logOutBtn.Location = new System.Drawing.Point(0, 710);
+            this.logOutBtn.Name = "logOutBtn";
+            this.logOutBtn.Size = new System.Drawing.Size(189, 53);
+            this.logOutBtn.TabIndex = 4;
+            this.logOutBtn.Text = "Logout";
+            this.logOutBtn.UseVisualStyleBackColor = true;
+            this.logOutBtn.Click += new System.EventHandler(this.logOutBtn_Click);
             // 
             // MainForm
             // 
@@ -121,5 +133,6 @@
         private System.Windows.Forms.Button softwareMngBtn;
         private System.Windows.Forms.Button userManagerBtn;
         private System.Windows.Forms.Panel panelContainer;
+        private System.Windows.Forms.Button logOutBtn;
     }
 }
