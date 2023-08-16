@@ -89,6 +89,7 @@
             this.Controls.Add(this.userNameLabel);
             this.Name = "UserLogin";
             this.Text = "UserLogin";
+            this.Load += new System.EventHandler(this.UserLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

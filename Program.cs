@@ -16,7 +16,7 @@ namespace File_Acess_Management
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ManagerDashboard());
+            Application.Run(new MainForm());
         }
     }
 }

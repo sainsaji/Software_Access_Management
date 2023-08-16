@@ -9,12 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace File_Acess_Management
 {
     public partial class ManagerDashboard : Form
     {
+        bool check = false;
         public ManagerDashboard()
         {
             InitializeComponent();
@@ -22,11 +27,45 @@ namespace File_Acess_Management
 
         private void ManagerDashboard_Load(object sender, EventArgs e)
         {
-
-            studentRecordDataGridView.AllowUserToAddRows = false;
-            studentRecordDataGridView.ReadOnly = true;
+            deleteButton.Enabled = false;
+            updateButton.Enabled = false;
+            userRecordDataGridView.AllowUserToAddRows = false;
+            userRecordDataGridView.ReadOnly = true;
+            // Attach the SelectionChanged event handler to the DataGridView
+            userRecordDataGridView.SelectionChanged += userRecordDataGridView_SelectionChanged;
             PopulateRoleComboBox();
             GetUsersRecord();
+        }
+
+        private void userRecordDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            // This event is triggered when the selection in DataGridView changes
+            if (userRecordDataGridView.SelectedRows.Count > 0)
+            {
+                check= true;
+                userNameText.Enabled = false;
+                passwordText.Enabled = false;
+                deleteButton.Enabled = true;
+                updateButton.Enabled = true;
+                DataGridViewRow selectedRow = userRecordDataGridView.SelectedRows[0];
+
+                // Assuming you have TextBox controls for updating data
+                userNameText.Text = selectedRow.Cells["user_name"].Value.ToString();
+                emailText.Text = selectedRow.Cells["email"].Value.ToString();
+                nameText.Text = selectedRow.Cells["name"].Value.ToString();
+                phoneNumberText.Text = selectedRow.Cells["phone_number"].Value.ToString();
+                addressText.Text = selectedRow.Cells["address"].Value.ToString();
+
+                // Set the selected role in the ComboBox
+                string role_name = selectedRow.Cells["role"].Value.ToString();
+                // using linq expression here especially FirstOrDefault
+                // FirstOrDefault(...) finds the first item that matches the specified condition. In this case, it's looking for an item with a RoleId equal to the roleId variable.
+                Role roleItem = roleComboBox.Items.OfType<Role>().FirstOrDefault(item => item.RoleName == role_name);
+                if (roleItem != null)
+                {
+                    roleComboBox.SelectedItem = roleItem;
+                }
+            }
         }
 
         private void GetUsersRecord()
@@ -45,8 +84,14 @@ namespace File_Acess_Management
                         dt.Load (reader);
                         connection.Close ();
                     }
-                    studentRecordDataGridView.DataSource = dt;
+                    userRecordDataGridView.DataSource = dt;
                     //studentRecordDataGridView.Columns["Password"].Visible = false;
+                    userRecordDataGridView.Columns["user_name"].HeaderText = "User Name";
+                    userRecordDataGridView.Columns["role"].HeaderText = "Role";
+                    userRecordDataGridView.Columns["name"].HeaderText = "Full Name";
+                    userRecordDataGridView.Columns["email"].HeaderText = "Email";
+                    userRecordDataGridView.Columns["phone_number"].HeaderText = "Phone Number";
+                    userRecordDataGridView.Columns["address"].HeaderText = "Address";
                 }
             }
         }
@@ -82,13 +127,30 @@ namespace File_Acess_Management
             string password = passwordText.Text;
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
             Role selectedRole = (Role)roleComboBox.SelectedItem;
-            int roleId = selectedRole.RoleId;
             string name = nameText.Text;
             string email = emailText.Text;
             string phno = phoneNumberText.Text;
             string address = addressText.Text;
+            bool check=false;
 
-            if (username == null && password == null && name == null && email == null && phno == null && address == null)
+            using(MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+            {
+                connection.Open();
+                string query = "Select * from users where user_name=@Username";
+                using(MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", username);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            check=true;
+                        }
+                    }
+                }
+            }
+
+            if (username == "" && password == "" && name == "" && email == "" && phno == "" && address == "")
             {
                 MessageBox.Show("Please don't submit blank fields");
                 return;
@@ -98,12 +160,18 @@ namespace File_Acess_Management
                 MessageBox.Show("Please select a role");
                 return;
             }
+            else if (check == true)
+            {
+                MessageBox.Show("Select a unique username");
+                return;
+            }
 
             using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
             {
+                int roleId = selectedRole.RoleId;
                 connection.Open();
 
-                string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address) VALUES (0,@Username, @Password, @RoleId, @Name, @Email, @PhoneNumber, @Address)";
+                string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (0,@Username, @Password, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -114,6 +182,7 @@ namespace File_Acess_Management
                     command.Parameters.AddWithValue("@Email", email);
                     command.Parameters.AddWithValue("@PhoneNumber", phno);
                     command.Parameters.AddWithValue("@Address", address);
+                    command.Parameters.AddWithValue("@Assigned", "false");
 
                     int rowsAffected = command.ExecuteNonQuery(); ;
                     if (rowsAffected > 0)
@@ -133,6 +202,11 @@ namespace File_Acess_Management
         }
         private void ClearFormFields()
         {
+            deleteButton.Enabled = false;
+            updateButton.Enabled = false;
+            userNameText.Enabled = true;
+            passwordText.Enabled = true;
+            userRecordDataGridView.ClearSelection();
             // Clear the form fields
             userNameText.Text = "";
             passwordText.Text = "";
@@ -142,5 +216,102 @@ namespace File_Acess_Management
             phoneNumberText.Text = "";
             addressText.Text = "";
         }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            string username = userNameText.Text;
+            string password = passwordText.Text;
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            Role selectedRole = (Role)roleComboBox.SelectedItem;
+            string name = nameText.Text;
+            string email = emailText.Text;
+            string phno = phoneNumberText.Text;
+            string address = addressText.Text;
+            if (username == "" && password == "" && name == "" && email == "" && phno == "" && address == "")
+            {
+                MessageBox.Show("Please don't submit blank fields");
+                return;
+            }
+            else if (selectedRole == null)
+            {
+                MessageBox.Show("Please select a role");
+                return;
+            }
+
+            using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+            {
+                int roleId = selectedRole.RoleId;
+                connection.Open();
+
+                string query = "UPDATE users SET role_id = @RoleId, name = @Name, email = @Email, phone_number = @PhoneNumber, address = @Address WHERE user_name = @Username;";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", username);
+                    command.Parameters.AddWithValue("@RoleId", roleId);
+                    command.Parameters.AddWithValue("@Name", name);
+                    command.Parameters.AddWithValue("@Email", email);
+                    command.Parameters.AddWithValue("@PhoneNumber", phno);
+                    command.Parameters.AddWithValue("@Address", address);
+
+                    int rowsAffected = command.ExecuteNonQuery(); ;
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("User updated successfully.");
+                        GetUsersRecord();
+                        ClearFormFields();
+                        updateButton.Enabled = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error updating user.");
+                    }
+                }
+
+                connection.Close();
+            }
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            ClearFormFields ();
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+                if (check == true)
+            {
+                string username = userNameText.Text;
+                using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+                {
+                    connection.Open();
+
+                    string query = "Delete from users where user_name=@Username";
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Username", username);
+
+                        int rowsAffected = command.ExecuteNonQuery(); ;
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("User deleted successfully.");
+                            GetUsersRecord();
+                            ClearFormFields();
+                            check = false;
+                            deleteButton.Enabled = false;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error deleting user.");
+                        }
+                    }
+
+                    connection.Close();
+                }
+                }
+
+        }
+
+        }
     }
-}

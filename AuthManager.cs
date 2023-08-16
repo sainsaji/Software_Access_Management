@@ -17,7 +17,7 @@ namespace File_Acess_Management
             {
                 connection.Open();
 
-                string query = "SELECT * FROM users WHERE username = @username";
+                string query = "SELECT * FROM users WHERE user_name = @username";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -51,7 +51,7 @@ namespace File_Acess_Management
             {
                 connection.Open();
 
-                string query = "SELECT * FROM users WHERE username = @username";
+                string query = "SELECT * FROM users WHERE user_name = @username";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -64,7 +64,7 @@ namespace File_Acess_Management
                             return new User
                             {
                                 Id = Convert.ToInt32(reader["id"]),
-                                Username = reader["username"].ToString(),
+                                Username = reader["user_name"].ToString(),
                                 RoleId = Convert.ToInt32(reader["role_id"])
                             };
                         }
@@ -81,7 +81,7 @@ namespace File_Acess_Management
             {
                 connection.Open();
 
-                string query = "SELECT name FROM roles WHERE id = @roleId";
+                string query = "SELECT role_name FROM roles WHERE role_id = @roleId";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -91,7 +91,7 @@ namespace File_Acess_Management
                     {
                         if (reader.Read())
                         {
-                            string userRole = reader["name"].ToString();
+                            string userRole = reader["role_name"].ToString();
                             return (userRole);
                         }
                     }
