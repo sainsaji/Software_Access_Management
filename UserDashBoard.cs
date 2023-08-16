@@ -43,6 +43,7 @@ namespace File_Acess_Management
             informationPanel.BackColor = Color.Aqua;
             statusPanel.BackColor = Color.White;
             tabTitleLbl.Text = "User Information";
+            alertsLabel.Visible = false;
         }
 
         private void informationPanel_Click(object sender, EventArgs e)
@@ -252,6 +253,7 @@ namespace File_Acess_Management
         private void statusClickAction()
         {
             Console.WriteLine("Status Clicked");
+            alertsLabel.Visible = false;
             requestStatusPanel.Visible = true;
             requestRightPanel.Visible = true;
             requestPanel.BackColor = Color.White;
