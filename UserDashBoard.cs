@@ -68,7 +68,6 @@ namespace File_Acess_Management
             tabTitleLbl.Text = "Raise Request";
             Console.WriteLine("Auto Filling Data");
             string userName = GetData("userName");
-            string departmentName = GetData("userDepartment");
             string managerName = GetData("userManager");
             nameTxtBox.Text = userName;
             nameTxtBox.ReadOnly = true;
@@ -138,7 +137,7 @@ namespace File_Acess_Management
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception Occured");
+                Console.WriteLine("Exception Occurred");
                 Console.WriteLine(ex.Message);
                 return "ERROR";
             }
@@ -297,6 +296,7 @@ namespace File_Acess_Management
                         string selectQuery = "SELECT REQUEST_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS,REQUEST_LIST_ID FROM REQUEST_TABLE WHERE USER_ID=@id";
                         SqlCommand sqlCommand = new SqlCommand(selectQuery, con);
                         sqlCommand.Parameters.AddWithValue("@id", userId);
+                        dataGridView1.Rows.Clear();
                         using (SqlDataReader reader = sqlCommand.ExecuteReader())
                         {
                             int count = 1;
@@ -420,7 +420,7 @@ namespace File_Acess_Management
                 softwareIdList.Add(softwareID);
                 if (!selectedSoftwareListBox.Items.Contains(softwareName))
                 {
-                    alertsLabel.Text = "Added Softwares";
+                    alertsLabel.Text = "Added Software";
                     selectedSoftwareListBox.Items.Add(softwareName);
                 }
                 else
@@ -452,7 +452,7 @@ namespace File_Acess_Management
                     int rowsAffected = setRequestList.ExecuteNonQuery();
                     Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffected.ToString());
                     int requestListId = getSoftwareListId();
-                    Console.WriteLine("Recieved Request ID:" + requestListId);
+                    Console.WriteLine("Received Request ID:" + requestListId);
                     string pending = "Pending";
                     SqlCommand RequestSQLcmd = new SqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS,REQUEST_LIST_ID) values('" + userId + "','" + pending + "','" + pending + "','" + pending + "','" + requestListId + "') ", con);
                     int rowsAffectedReq = RequestSQLcmd.ExecuteNonQuery();
@@ -467,7 +467,8 @@ namespace File_Acess_Management
             }
             finally
             {
-
+                softwareIdList.Clear();
+                selectedSoftwareListBox.Items.Clear();
             }
 
         }

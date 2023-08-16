@@ -90,7 +90,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 450);
+            this.panel1.Size = new System.Drawing.Size(200, 513);
             this.panel1.TabIndex = 0;
             // 
             // leftPanel
@@ -104,7 +104,7 @@
             this.leftPanel.Location = new System.Drawing.Point(0, 50);
             this.leftPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(200, 400);
+            this.leftPanel.Size = new System.Drawing.Size(200, 463);
             this.leftPanel.TabIndex = 1;
             // 
             // panel4
@@ -112,7 +112,7 @@
             this.panel4.Controls.Add(this.logOutLbl);
             this.panel4.Controls.Add(this.pictureBox3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 350);
+            this.panel4.Location = new System.Drawing.Point(0, 413);
             this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 50);
@@ -271,7 +271,7 @@
             this.panel2.Location = new System.Drawing.Point(200, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(600, 450);
+            this.panel2.Size = new System.Drawing.Size(758, 513);
             this.panel2.TabIndex = 1;
             // 
             // requestRightPanel
@@ -291,7 +291,7 @@
             this.requestRightPanel.Location = new System.Drawing.Point(9, 59);
             this.requestRightPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.requestRightPanel.Name = "requestRightPanel";
-            this.requestRightPanel.Size = new System.Drawing.Size(581, 386);
+            this.requestRightPanel.Size = new System.Drawing.Size(737, 454);
             this.requestRightPanel.TabIndex = 1;
             // 
             // alertsLabel
@@ -305,12 +305,13 @@
             // 
             // requestStatusPanel
             // 
+            this.requestStatusPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.requestStatusPanel.BackColor = System.Drawing.Color.SeaShell;
             this.requestStatusPanel.Controls.Add(this.dataGridView1);
-            this.requestStatusPanel.Location = new System.Drawing.Point(3, 3);
+            this.requestStatusPanel.Location = new System.Drawing.Point(3, 2);
             this.requestStatusPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.requestStatusPanel.Name = "requestStatusPanel";
-            this.requestStatusPanel.Size = new System.Drawing.Size(581, 383);
+            this.requestStatusPanel.Size = new System.Drawing.Size(731, 443);
             this.requestStatusPanel.TabIndex = 14;
             // 
             // addBtn
@@ -438,7 +439,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(600, 53);
+            this.panel3.Size = new System.Drawing.Size(758, 53);
             this.panel3.TabIndex = 0;
             // 
             // tabTitleLbl
@@ -453,19 +454,20 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 47);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(571, 333);
+            this.dataGridView1.Size = new System.Drawing.Size(713, 437);
             this.dataGridView1.TabIndex = 1;
             // 
             // UserDashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(958, 513);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
