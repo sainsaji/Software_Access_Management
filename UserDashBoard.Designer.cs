@@ -90,7 +90,7 @@
             this.panel1.Controls.Add(this.logoPicBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(150, 366);
             this.panel1.TabIndex = 0;
@@ -104,7 +104,7 @@
             this.leftPanel.Controls.Add(this.informationPanel);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 41);
-            this.leftPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.leftPanel.Margin = new System.Windows.Forms.Padding(2);
             this.leftPanel.Name = "leftPanel";
             this.leftPanel.Size = new System.Drawing.Size(150, 325);
             this.leftPanel.TabIndex = 1;
@@ -115,7 +115,7 @@
             this.panel4.Controls.Add(this.pictureBox3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 284);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(150, 41);
             this.panel4.TabIndex = 1;
@@ -135,7 +135,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Location = new System.Drawing.Point(8, 6);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(37, 31);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -149,7 +149,7 @@
             this.statusPanel.Controls.Add(this.reqIcoClick);
             this.statusPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.statusPanel.Location = new System.Drawing.Point(0, 80);
-            this.statusPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.statusPanel.Margin = new System.Windows.Forms.Padding(2);
             this.statusPanel.Name = "statusPanel";
             this.statusPanel.Size = new System.Drawing.Size(150, 40);
             this.statusPanel.TabIndex = 2;
@@ -171,7 +171,7 @@
             // reqIcoClick
             // 
             this.reqIcoClick.Location = new System.Drawing.Point(2, 6);
-            this.reqIcoClick.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.reqIcoClick.Margin = new System.Windows.Forms.Padding(2);
             this.reqIcoClick.Name = "reqIcoClick";
             this.reqIcoClick.Size = new System.Drawing.Size(37, 24);
             this.reqIcoClick.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -186,7 +186,7 @@
             this.requestPanel.Controls.Add(this.pictureBox2);
             this.requestPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.requestPanel.Location = new System.Drawing.Point(0, 40);
-            this.requestPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.requestPanel.Margin = new System.Windows.Forms.Padding(2);
             this.requestPanel.Name = "requestPanel";
             this.requestPanel.Size = new System.Drawing.Size(150, 40);
             this.requestPanel.TabIndex = 1;
@@ -209,7 +209,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Location = new System.Drawing.Point(2, 6);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(37, 24);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -223,11 +223,12 @@
             this.informationPanel.Controls.Add(this.pictureBox1);
             this.informationPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.informationPanel.Location = new System.Drawing.Point(0, 0);
-            this.informationPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.informationPanel.Margin = new System.Windows.Forms.Padding(2);
             this.informationPanel.Name = "informationPanel";
             this.informationPanel.Size = new System.Drawing.Size(150, 40);
             this.informationPanel.TabIndex = 0;
             this.informationPanel.Click += new System.EventHandler(this.informationPanel_Click);
+            this.informationPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.informationPanel_Paint);
             // 
             // userInfoLbl
             // 
@@ -246,7 +247,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(2, 6);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(37, 24);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -257,7 +258,7 @@
             // 
             this.logoPicBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.logoPicBox.Location = new System.Drawing.Point(0, 0);
-            this.logoPicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.logoPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.logoPicBox.Name = "logoPicBox";
             this.logoPicBox.Size = new System.Drawing.Size(150, 41);
             this.logoPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -271,7 +272,7 @@
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(150, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(450, 366);
             this.panel2.TabIndex = 1;
@@ -293,7 +294,7 @@
             this.requestRightPanel.Controls.Add(this.nameTxtBox);
             this.requestRightPanel.Controls.Add(this.label1);
             this.requestRightPanel.Location = new System.Drawing.Point(7, 48);
-            this.requestRightPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.requestRightPanel.Margin = new System.Windows.Forms.Padding(2);
             this.requestRightPanel.Name = "requestRightPanel";
             this.requestRightPanel.Size = new System.Drawing.Size(436, 314);
             this.requestRightPanel.TabIndex = 1;
@@ -313,7 +314,7 @@
             this.requestStatusPanel.BackColor = System.Drawing.Color.SeaShell;
             this.requestStatusPanel.Controls.Add(this.requestTableGridView);
             this.requestStatusPanel.Location = new System.Drawing.Point(1, 0);
-            this.requestStatusPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.requestStatusPanel.Margin = new System.Windows.Forms.Padding(2);
             this.requestStatusPanel.Name = "requestStatusPanel";
             this.requestStatusPanel.Size = new System.Drawing.Size(436, 311);
             this.requestStatusPanel.TabIndex = 14;
@@ -323,7 +324,7 @@
             this.requestTableGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.requestTableGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.requestTableGridView.Location = new System.Drawing.Point(0, 109);
-            this.requestTableGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.requestTableGridView.Margin = new System.Windows.Forms.Padding(2);
             this.requestTableGridView.Name = "requestTableGridView";
             this.requestTableGridView.RowHeadersWidth = 51;
             this.requestTableGridView.RowTemplate.Height = 24;
@@ -334,7 +335,7 @@
             // addBtn
             // 
             this.addBtn.Location = new System.Drawing.Point(70, 245);
-            this.addBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addBtn.Margin = new System.Windows.Forms.Padding(2);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(56, 19);
             this.addBtn.TabIndex = 14;
@@ -346,7 +347,7 @@
             // 
             this.softwareChkdLstBx.FormattingEnabled = true;
             this.softwareChkdLstBx.Location = new System.Drawing.Point(11, 154);
-            this.softwareChkdLstBx.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.softwareChkdLstBx.Margin = new System.Windows.Forms.Padding(2);
             this.softwareChkdLstBx.Name = "softwareChkdLstBx";
             this.softwareChkdLstBx.Size = new System.Drawing.Size(182, 79);
             this.softwareChkdLstBx.TabIndex = 15;
@@ -355,7 +356,7 @@
             // 
             this.selectedSoftwareListBox.FormattingEnabled = true;
             this.selectedSoftwareListBox.Location = new System.Drawing.Point(216, 32);
-            this.selectedSoftwareListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.selectedSoftwareListBox.Margin = new System.Windows.Forms.Padding(2);
             this.selectedSoftwareListBox.Name = "selectedSoftwareListBox";
             this.selectedSoftwareListBox.Size = new System.Drawing.Size(207, 212);
             this.selectedSoftwareListBox.TabIndex = 13;
@@ -365,7 +366,7 @@
             this.panel7.Controls.Add(this.cancelBtn);
             this.panel7.Controls.Add(this.proceedBtn);
             this.panel7.Location = new System.Drawing.Point(216, 275);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(208, 32);
             this.panel7.TabIndex = 11;
@@ -373,7 +374,7 @@
             // cancelBtn
             // 
             this.cancelBtn.Location = new System.Drawing.Point(2, 7);
-            this.cancelBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelBtn.Margin = new System.Windows.Forms.Padding(2);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(56, 19);
             this.cancelBtn.TabIndex = 13;
@@ -383,7 +384,7 @@
             // proceedBtn
             // 
             this.proceedBtn.Location = new System.Drawing.Point(150, 7);
-            this.proceedBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.proceedBtn.Margin = new System.Windows.Forms.Padding(2);
             this.proceedBtn.Name = "proceedBtn";
             this.proceedBtn.Size = new System.Drawing.Size(56, 19);
             this.proceedBtn.TabIndex = 12;
@@ -416,7 +417,7 @@
             // repManagerTxtBox
             // 
             this.repManagerTxtBox.Location = new System.Drawing.Point(11, 111);
-            this.repManagerTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.repManagerTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.repManagerTxtBox.Name = "repManagerTxtBox";
             this.repManagerTxtBox.Size = new System.Drawing.Size(182, 20);
             this.repManagerTxtBox.TabIndex = 4;
@@ -435,7 +436,7 @@
             // depTxtBox
             // 
             this.depTxtBox.Location = new System.Drawing.Point(11, 72);
-            this.depTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.depTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.depTxtBox.Name = "depTxtBox";
             this.depTxtBox.Size = new System.Drawing.Size(182, 20);
             this.depTxtBox.TabIndex = 2;
@@ -454,7 +455,7 @@
             // nameTxtBox
             // 
             this.nameTxtBox.Location = new System.Drawing.Point(11, 32);
-            this.nameTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nameTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.nameTxtBox.Name = "nameTxtBox";
             this.nameTxtBox.Size = new System.Drawing.Size(182, 20);
             this.nameTxtBox.TabIndex = 0;
@@ -476,7 +477,7 @@
             this.panel3.Controls.Add(this.tabTitleLbl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(450, 43);
             this.panel3.TabIndex = 0;
@@ -499,7 +500,7 @@
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "UserDashBoard";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

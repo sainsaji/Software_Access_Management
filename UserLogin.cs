@@ -35,18 +35,26 @@ namespace File_Acess_Management
                 Console.WriteLine(RoleName);
                 if (RoleName=="Manager")
                 {
-                    MessageBox.Show("Login successful as Manager!");
-                    // Proceed to admin dashboard or functionality
+                    //MessageBox.Show("Login successful as Manager!");
+                    SubManagers subManagers = new SubManagers(user);
+                    subManagers.Show();
+                    this.Hide();
+                    
                 }
                 else if (RoleName == "User")
                 {
                     MessageBox.Show("Login successful as User!");
                     // Proceed to user dashboard or functionality
+                    //UserDashBoard userDashBoard = new UserDashBoard(user);
+                    //userDashBoard.Show();
+                    //this.Hide();
                 }
-                else if (RoleName == "ITHead")
+                else if (RoleName == "Admin")
                 {
-                    MessageBox.Show("Login successful as ITHead!");
-                    // Proceed to user dashboard or functionality
+                    //MessageBox.Show("Login successful as Admin!");
+                    ManagerDashboard manager  =new ManagerDashboard();
+                    manager.Show();
+                    this.Hide();
                 }
                 else
                 {
@@ -60,7 +68,10 @@ namespace File_Acess_Management
                 MessageBox.Show("Invalid username or password.");
             }
         }
-        
+        private void UserLogin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
