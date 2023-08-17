@@ -38,40 +38,45 @@
             // userNameLabel
             // 
             this.userNameLabel.AutoSize = true;
-            this.userNameLabel.Location = new System.Drawing.Point(205, 137);
+            this.userNameLabel.Location = new System.Drawing.Point(376, 253);
+            this.userNameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(60, 13);
+            this.userNameLabel.Size = new System.Drawing.Size(105, 24);
             this.userNameLabel.TabIndex = 0;
             this.userNameLabel.Text = "User Name";
             // 
             // userNameText
             // 
-            this.userNameText.Location = new System.Drawing.Point(325, 134);
+            this.userNameText.Location = new System.Drawing.Point(596, 247);
+            this.userNameText.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.userNameText.Name = "userNameText";
-            this.userNameText.Size = new System.Drawing.Size(208, 20);
+            this.userNameText.Size = new System.Drawing.Size(378, 29);
             this.userNameText.TabIndex = 1;
             // 
             // userPasswordText
             // 
-            this.userPasswordText.Location = new System.Drawing.Point(325, 187);
+            this.userPasswordText.Location = new System.Drawing.Point(596, 345);
+            this.userPasswordText.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.userPasswordText.Name = "userPasswordText";
-            this.userPasswordText.Size = new System.Drawing.Size(208, 20);
+            this.userPasswordText.Size = new System.Drawing.Size(378, 29);
             this.userPasswordText.TabIndex = 3;
             // 
             // userPasswordLabel
             // 
             this.userPasswordLabel.AutoSize = true;
-            this.userPasswordLabel.Location = new System.Drawing.Point(205, 190);
+            this.userPasswordLabel.Location = new System.Drawing.Point(376, 351);
+            this.userPasswordLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.userPasswordLabel.Name = "userPasswordLabel";
-            this.userPasswordLabel.Size = new System.Drawing.Size(53, 13);
+            this.userPasswordLabel.Size = new System.Drawing.Size(92, 24);
             this.userPasswordLabel.TabIndex = 2;
             this.userPasswordLabel.Text = "Password";
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(325, 245);
+            this.loginButton.Location = new System.Drawing.Point(596, 452);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(75, 23);
+            this.loginButton.Size = new System.Drawing.Size(138, 42);
             this.loginButton.TabIndex = 4;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
@@ -79,14 +84,16 @@
             // 
             // UserLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1467, 831);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.userPasswordText);
             this.Controls.Add(this.userPasswordLabel);
             this.Controls.Add(this.userNameText);
             this.Controls.Add(this.userNameLabel);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "UserLogin";
             this.Text = "UserLogin";
             this.Load += new System.EventHandler(this.UserLogin_Load);
