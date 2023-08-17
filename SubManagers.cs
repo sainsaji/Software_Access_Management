@@ -38,8 +38,11 @@ namespace File_Acess_Management
 
         private void reqStatusLbl_Click(object sender, EventArgs e)
         {
+            requestGridView.Visible = false;
+            userListBx.Visible = true;
             tabTitleLbl.Text = "User List";
             loadUserList(user.Id);
+
         }
 
         private void loadUserList(int id)
@@ -112,6 +115,7 @@ namespace File_Acess_Management
         private void requestLbl_Click(object sender, EventArgs e)
         {
             requestGridView.Visible = true;
+            userListBx.Visible = false;
             loadIncomingRequest(user.Id);
 
         }
@@ -189,7 +193,7 @@ namespace File_Acess_Management
         {
             DataGridViewButtonColumn col = new DataGridViewButtonColumn();
             col.UseColumnTextForButtonValue = true;
-            col.Text = "Approve";
+            col.Text = "Approve/Deny";
             col.Name = "Action";
             requestGridView.Columns.Add(col);
         }
@@ -202,17 +206,25 @@ namespace File_Acess_Management
 
                 object requestIdValue = row.Cells["request_id"].Value;
 
-                if (requestIdValue != null)
+                try
                 {
-                    // Print the request_id to the console
-                    Console.WriteLine("Clicked Approve for request_id: " + requestIdValue.ToString());
+                    if (requestIdValue != null)
+                    {
+                        // Print the request_id to the console
+                        Console.WriteLine("Clicked Approve for request_id: " + requestIdValue.ToString());
 
-                    // Update manager approval in the database
-                    int requestId = int.Parse(requestIdValue.ToString());
-                    updateManagerRequestApproval(requestId);
+                        // Update manager approval in the database
+                        int requestId = int.Parse(requestIdValue.ToString());
+                        updateManagerRequestApproval(requestId);
 
 
 
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
             }
         }
@@ -224,12 +236,14 @@ namespace File_Acess_Management
             using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
             {
                 connection.Open();
-                string updateQuery = "update request_table set approval_manager = 'approved' where request_id=@id ";
+                string updateQuery = "UPDATE request_table SET approval_manager = CASE " +
+                             "WHEN approval_manager = 'approved' THEN 'denied' " +
+                             "ELSE 'approved' END " +
+                             "WHERE request_id = @id";
                 using (MySqlCommand command = new MySqlCommand(updateQuery, connection))
                 {
                     command.Parameters.AddWithValue("@id", id);
                     int rowsAffected = command.ExecuteNonQuery();
-
                     Console.WriteLine("Rows affected: " + rowsAffected);
                     Console.WriteLine("Update Complete /n Refreshing ");
                     loadIncomingRequest(user.Id);
