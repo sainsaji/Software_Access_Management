@@ -152,10 +152,16 @@
             // 
             // userRecordDataGridView
             // 
+            this.userRecordDataGridView.AllowUserToAddRows = false;
+            this.userRecordDataGridView.AllowUserToDeleteRows = false;
+            this.userRecordDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.userRecordDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.userRecordDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.userRecordDataGridView.Location = new System.Drawing.Point(69, 331);
             this.userRecordDataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.userRecordDataGridView.MultiSelect = false;
             this.userRecordDataGridView.Name = "userRecordDataGridView";
+            this.userRecordDataGridView.ReadOnly = true;
             this.userRecordDataGridView.Size = new System.Drawing.Size(1058, 343);
             this.userRecordDataGridView.TabIndex = 16;
             // 

@@ -35,6 +35,10 @@
             this.selectManagerForNotAssigned = new System.Windows.Forms.ComboBox();
             this.notAssignedManagerDataGridView = new System.Windows.Forms.DataGridView();
             this.notAssignedManagers = new System.Windows.Forms.Label();
+            this.assignManagerBtn = new System.Windows.Forms.Button();
+            this.updateAssignedBtn = new System.Windows.Forms.Button();
+            this.deleteAssignedBtn = new System.Windows.Forms.Button();
+            this.resetBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.assignedManagerDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notAssignedManagerDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -63,9 +67,15 @@
             // 
             // assignedManagerDataGridView
             // 
+            this.assignedManagerDataGridView.AllowUserToAddRows = false;
+            this.assignedManagerDataGridView.AllowUserToDeleteRows = false;
+            this.assignedManagerDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.assignedManagerDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.assignedManagerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.assignedManagerDataGridView.Location = new System.Drawing.Point(57, 175);
+            this.assignedManagerDataGridView.MultiSelect = false;
             this.assignedManagerDataGridView.Name = "assignedManagerDataGridView";
+            this.assignedManagerDataGridView.ReadOnly = true;
             this.assignedManagerDataGridView.Size = new System.Drawing.Size(1096, 254);
             this.assignedManagerDataGridView.TabIndex = 2;
             // 
@@ -87,9 +97,15 @@
             // 
             // notAssignedManagerDataGridView
             // 
+            this.notAssignedManagerDataGridView.AllowUserToAddRows = false;
+            this.notAssignedManagerDataGridView.AllowUserToDeleteRows = false;
+            this.notAssignedManagerDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.notAssignedManagerDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.notAssignedManagerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.notAssignedManagerDataGridView.Location = new System.Drawing.Point(57, 507);
+            this.notAssignedManagerDataGridView.MultiSelect = false;
             this.notAssignedManagerDataGridView.Name = "notAssignedManagerDataGridView";
+            this.notAssignedManagerDataGridView.ReadOnly = true;
             this.notAssignedManagerDataGridView.Size = new System.Drawing.Size(1096, 254);
             this.notAssignedManagerDataGridView.TabIndex = 5;
             // 
@@ -104,11 +120,55 @@
             this.notAssignedManagers.TabIndex = 4;
             this.notAssignedManagers.Text = "Not Assigned Users";
             // 
+            // assignManagerBtn
+            // 
+            this.assignManagerBtn.Location = new System.Drawing.Point(333, 459);
+            this.assignManagerBtn.Name = "assignManagerBtn";
+            this.assignManagerBtn.Size = new System.Drawing.Size(106, 42);
+            this.assignManagerBtn.TabIndex = 7;
+            this.assignManagerBtn.Text = "Assign";
+            this.assignManagerBtn.UseVisualStyleBackColor = true;
+            this.assignManagerBtn.Click += new System.EventHandler(this.assignManagerBtn_Click);
+            // 
+            // updateAssignedBtn
+            // 
+            this.updateAssignedBtn.Location = new System.Drawing.Point(333, 127);
+            this.updateAssignedBtn.Name = "updateAssignedBtn";
+            this.updateAssignedBtn.Size = new System.Drawing.Size(106, 42);
+            this.updateAssignedBtn.TabIndex = 8;
+            this.updateAssignedBtn.Text = "Update";
+            this.updateAssignedBtn.UseVisualStyleBackColor = true;
+            this.updateAssignedBtn.Click += new System.EventHandler(this.updateAssignedBtn_Click);
+            // 
+            // deleteAssignedBtn
+            // 
+            this.deleteAssignedBtn.Location = new System.Drawing.Point(447, 127);
+            this.deleteAssignedBtn.Name = "deleteAssignedBtn";
+            this.deleteAssignedBtn.Size = new System.Drawing.Size(106, 42);
+            this.deleteAssignedBtn.TabIndex = 9;
+            this.deleteAssignedBtn.Text = "Delete";
+            this.deleteAssignedBtn.UseVisualStyleBackColor = true;
+            this.deleteAssignedBtn.Click += new System.EventHandler(this.deleteAssignedBtn_Click);
+            // 
+            // resetBtn
+            // 
+            this.resetBtn.Location = new System.Drawing.Point(1047, 127);
+            this.resetBtn.Name = "resetBtn";
+            this.resetBtn.Size = new System.Drawing.Size(106, 42);
+            this.resetBtn.TabIndex = 10;
+            this.resetBtn.Text = "Reset";
+            this.resetBtn.UseVisualStyleBackColor = true;
+            this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
+            // 
             // userAssignedForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 783);
+            this.Controls.Add(this.resetBtn);
+            this.Controls.Add(this.deleteAssignedBtn);
+            this.Controls.Add(this.updateAssignedBtn);
+            this.Controls.Add(this.assignManagerBtn);
             this.Controls.Add(this.selectManagerForNotAssigned);
             this.Controls.Add(this.notAssignedManagerDataGridView);
             this.Controls.Add(this.notAssignedManagers);
@@ -137,5 +197,9 @@
         private System.Windows.Forms.ComboBox selectManagerForNotAssigned;
         private System.Windows.Forms.DataGridView notAssignedManagerDataGridView;
         private System.Windows.Forms.Label notAssignedManagers;
+        private System.Windows.Forms.Button assignManagerBtn;
+        private System.Windows.Forms.Button updateAssignedBtn;
+        private System.Windows.Forms.Button deleteAssignedBtn;
+        private System.Windows.Forms.Button resetBtn;
     }
 }

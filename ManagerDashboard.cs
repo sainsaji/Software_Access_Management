@@ -29,8 +29,7 @@ namespace File_Acess_Management
         {
             deleteButton.Enabled = false;
             updateButton.Enabled = false;
-            userRecordDataGridView.AllowUserToAddRows = false;
-            userRecordDataGridView.ReadOnly = true;
+            
             // Attach the SelectionChanged event handler to the DataGridView
             userRecordDataGridView.SelectionChanged += userRecordDataGridView_SelectionChanged;
             PopulateRoleComboBox();
@@ -182,7 +181,7 @@ namespace File_Acess_Management
                     command.Parameters.AddWithValue("@Email", email);
                     command.Parameters.AddWithValue("@PhoneNumber", phno);
                     command.Parameters.AddWithValue("@Address", address);
-                    command.Parameters.AddWithValue("@Assigned", "false");
+                    command.Parameters.AddWithValue("@Assigned", false);
 
                     int rowsAffected = command.ExecuteNonQuery(); ;
                     if (rowsAffected > 0)
