@@ -48,6 +48,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.userListBx = new System.Windows.Forms.ListBox();
+            this.mySqlDataAdapter1 = new MySql.Data.MySqlClient.MySqlDataAdapter();
+            this.requestGridView = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.leftPanel.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -61,6 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.requestGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // tabTitleLbl
@@ -261,6 +264,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel2.Controls.Add(this.requestGridView);
             this.panel2.Controls.Add(this.userListBx);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -278,6 +282,25 @@
             this.userListBx.Name = "userListBx";
             this.userListBx.Size = new System.Drawing.Size(290, 372);
             this.userListBx.TabIndex = 1;
+            // 
+            // mySqlDataAdapter1
+            // 
+            this.mySqlDataAdapter1.DeleteCommand = null;
+            this.mySqlDataAdapter1.InsertCommand = null;
+            this.mySqlDataAdapter1.SelectCommand = null;
+            this.mySqlDataAdapter1.UpdateCommand = null;
+            // 
+            // requestGridView
+            // 
+            this.requestGridView.AllowUserToOrderColumns = true;
+            this.requestGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.requestGridView.Location = new System.Drawing.Point(266, 94);
+            this.requestGridView.Name = "requestGridView";
+            this.requestGridView.RowHeadersWidth = 51;
+            this.requestGridView.RowTemplate.Height = 24;
+            this.requestGridView.Size = new System.Drawing.Size(696, 372);
+            this.requestGridView.TabIndex = 2;
+            this.requestGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.requestGridView_CellClick);
             // 
             // SubManagers
             // 
@@ -308,6 +331,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.requestGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -333,5 +357,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ListBox userListBx;
+        private System.Windows.Forms.DataGridView requestGridView;
+        private MySql.Data.MySqlClient.MySqlDataAdapter mySqlDataAdapter1;
     }
 }

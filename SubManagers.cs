@@ -19,6 +19,7 @@ namespace File_Acess_Management
         public SubManagers(User user)
         {
             InitializeComponent();
+            setButtonAction();
             this.user = user;
         }
 
@@ -26,6 +27,8 @@ namespace File_Acess_Management
         {
             Console.WriteLine("Manager DB Loaded /n User ID:" + user.Id);
             userListBx.Visible = false;
+            requestGridView.Visible = false;
+
         }
 
         private void displayName_Click(object sender, EventArgs e)
@@ -108,12 +111,131 @@ namespace File_Acess_Management
 
         private void requestLbl_Click(object sender, EventArgs e)
         {
-            loadIncomingRequest();
+            requestGridView.Visible = true;
+            loadIncomingRequest(user.Id);
+
         }
 
-        private void loadIncomingRequest()
+
+
+        private void loadIncomingRequest(int id)
         {
-            throw new NotImplementedException();
+
+            {
+                userListBx.Visible = false;
+
+                {
+                    var table = new DataTable();
+
+                    var connection = ConnectionHelper.ConnectionString;
+
+                    using (var con = new MySqlConnection { ConnectionString = connection })
+                    {
+                        using (var command = new MySqlCommand { Connection = con })
+                        {
+
+                            if (con.State == ConnectionState.Open)
+                            {
+                                con.Close();
+                            }
+
+                            con.Open();
+                            if (con.State == ConnectionState.Open)
+                            {
+                                Console.WriteLine("DB Connection Established");
+                            }
+                            else
+                            {
+                                Console.WriteLine("DB Connection Failed");
+                            }
+
+
+                            try
+                            {
+                                int managerId = user.Id;
+
+                                string selectQuery = "SELECT\r\n    u.user_name,\r\n    s.soft_name AS software_name,\r\n    rt.approval_manager, rt.request_id\r\nFROM\r\n    users u\r\nJOIN\r\n    managerAssigned ma ON u.id = ma.users_id\r\nJOIN\r\n    request_list_table rlt ON u.id = rlt.user_id\r\nJOIN\r\n    software s ON rlt.software_id = s.soft_id\r\nJOIN\r\n    request_table rt ON rlt.req_id = rt.request_list_id\r\nWHERE\r\n    ma.manager_id = @id;";
+                                using (MySqlCommand selectCommand = new MySqlCommand(selectQuery, con))
+                                {
+                                    selectCommand.Parameters.AddWithValue("@id", managerId);
+
+                                    MySqlDataAdapter adapter = new MySqlDataAdapter(selectCommand);
+                                    DataSet dataSet = new DataSet();
+                                    adapter.Fill(dataSet);
+
+                                    BindingSource bindingSource = new BindingSource();
+                                    bindingSource.DataSource = dataSet.Tables[0];
+
+                                    requestGridView.DataSource = bindingSource;
+
+
+                                    requestGridView.Refresh();
+                                }
+                            }
+                            catch (MySqlException ex)
+                            {
+                                MessageBox.Show(ex.Message + " sql query error.");
+
+                            }
+
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private void setButtonAction()
+        {
+            DataGridViewButtonColumn col = new DataGridViewButtonColumn();
+            col.UseColumnTextForButtonValue = true;
+            col.Text = "Approve";
+            col.Name = "Action";
+            requestGridView.Columns.Add(col);
+        }
+
+        private void requestGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == requestGridView.Columns["Action"].Index)
+            {
+                DataGridViewRow row = requestGridView.Rows[e.RowIndex];
+
+                object requestIdValue = row.Cells["request_id"].Value;
+
+                if (requestIdValue != null)
+                {
+                    // Print the request_id to the console
+                    Console.WriteLine("Clicked Approve for request_id: " + requestIdValue.ToString());
+
+                    // Update manager approval in the database
+                    int requestId = int.Parse(requestIdValue.ToString());
+                    updateManagerRequestApproval(requestId);
+
+
+
+                }
+            }
+        }
+
+
+
+        private void updateManagerRequestApproval(int id)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+            {
+                connection.Open();
+                string updateQuery = "update request_table set approval_manager = 'approved' where request_id=@id ";
+                using (MySqlCommand command = new MySqlCommand(updateQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id);
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    Console.WriteLine("Rows affected: " + rowsAffected);
+                    Console.WriteLine("Update Complete /n Refreshing ");
+                    loadIncomingRequest(user.Id);
+                    requestGridView.Refresh();
+                }
+            }
         }
     }
 }
