@@ -251,5 +251,26 @@ namespace File_Acess_Management
                 }
             }
         }
+
+        private void logout(object sender, EventArgs e)
+        {
+            UserLogin userLogin = new UserLogin();
+            userLogin.Show();
+            this.Close();
+        }
+
+        private void logOutLbl_Click(object sender, EventArgs e)
+        {
+            UserLogin userLogin = new UserLogin();
+            userLogin.Show();
+            this.Close();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            UserLogin userLogin = new UserLogin();
+            userLogin.Show();
+            this.Close();
+        }
     }
 }
