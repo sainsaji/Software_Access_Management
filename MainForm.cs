@@ -55,7 +55,7 @@ namespace File_Acess_Management
 
         private void softwareMngBtn_Click(object sender, EventArgs e)
         {
-
+            ShowForm(new Software());
         }
 
         private void logOutBtn_Click(object sender, EventArgs e)
