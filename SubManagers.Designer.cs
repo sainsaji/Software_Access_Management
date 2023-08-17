@@ -112,7 +112,7 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(150, 41);
             this.panel4.TabIndex = 1;
-            this.panel4.Click += new System.EventHandler(this.logout);
+            this.panel4.Click += new System.EventHandler(this.logOut);
             // 
             // logOutLbl
             // 
@@ -125,7 +125,7 @@
             this.logOutLbl.Size = new System.Drawing.Size(52, 17);
             this.logOutLbl.TabIndex = 4;
             this.logOutLbl.Text = "Logout";
-            this.logOutLbl.Click += new System.EventHandler(this.logOutLbl_Click);
+            this.logOutLbl.Click += new System.EventHandler(this.logOut);
             // 
             // pictureBox3
             // 
@@ -137,7 +137,7 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 3;
             this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            this.pictureBox3.Click += new System.EventHandler(this.logOut);
             // 
             // statusPanel
             // 
