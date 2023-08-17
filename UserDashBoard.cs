@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -395,7 +396,7 @@ namespace File_Acess_Management
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Errorrrrr"+ex.ToString());
+                MessageBox.Show("Errorrrrr" + ex.ToString());
                 return appName;
             }
         }
@@ -459,14 +460,10 @@ namespace File_Acess_Management
                     MySqlCommand setRequestList = new MySqlCommand("insert into REQUEST_LIST_TABLE(SOFTWARE_ID,USER_ID) values('" + softwareIdList.First() + "','" + userId + "') ", connection);
                     Console.WriteLine("Added Item to Request List with ID:" + softwareIdList.First());
                     Console.WriteLine("Creating Request Row in SQL");
-                    MySqlCommand sqcmd = new MySqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_ID,SOFTWARE_REQUEST_ID) values('" + 1 + "','" + 1 + "','" + softwareIdList.First() + "') ", connection);
-                    Console.WriteLine("Removing from Local List:");
-
-                    softwareIdList.RemoveAt(0);
-                    int rowsAffected = sqcmd.ExecuteNonQuery();
+                    int rowsAffected = setRequestList.ExecuteNonQuery();
                     Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffected.ToString());
                     int requestListId = getSoftwareListId();
-                    Console.WriteLine("Received Request ID:" + requestListId);
+                    Console.WriteLine("Recieved Request ID:" + requestListId);
                     string pending = "Pending";
                     MySqlCommand RequestSQLcmd = new MySqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS,REQUEST_LIST_ID) values('" + userId + "','" + pending + "','" + pending + "','" + pending + "','" + requestListId + "') ", connection);
                     int rowsAffectedReq = RequestSQLcmd.ExecuteNonQuery();
@@ -527,7 +524,7 @@ namespace File_Acess_Management
 
         private void panel4_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
 
         private void logout(object sender, MouseEventArgs e)
