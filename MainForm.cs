@@ -20,6 +20,11 @@ namespace File_Acess_Management
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            DashboardBtn.BackColor = Color.Aqua;
+            userManagerBtn.BackColor = Color.White;
+            usersMngBtn.BackColor = Color.White;
+            softwareMngBtn.BackColor = Color.White;
+            ShowForm(new AdminRequests());
 
         }
         private void ShowForm(Form formToShow)
@@ -71,6 +76,7 @@ namespace File_Acess_Management
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.Aqua;
+            ShowForm(new Software());
         }
 
 

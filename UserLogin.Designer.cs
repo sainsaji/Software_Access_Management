@@ -48,27 +48,28 @@
             this.userNameLabel.AutoSize = true;
             this.userNameLabel.BackColor = System.Drawing.Color.Transparent;
             this.userNameLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.userNameLabel.Location = new System.Drawing.Point(82, 210);
-            this.userNameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.userNameLabel.Location = new System.Drawing.Point(67, 175);
+            this.userNameLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(144, 40);
+            this.userNameLabel.Size = new System.Drawing.Size(105, 24);
             this.userNameLabel.TabIndex = 0;
             this.userNameLabel.Text = "User Name";
             // 
             // userNameText
             // 
-            this.userNameText.Location = new System.Drawing.Point(238, 210);
-            this.userNameText.Margin = new System.Windows.Forms.Padding(6);
+            this.userNameText.Location = new System.Drawing.Point(195, 175);
+            this.userNameText.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.userNameText.Name = "userNameText";
-            this.userNameText.Size = new System.Drawing.Size(231, 42);
+            this.userNameText.Size = new System.Drawing.Size(190, 28);
             this.userNameText.TabIndex = 1;
             // 
             // userPasswordText
             // 
-            this.userPasswordText.Location = new System.Drawing.Point(238, 308);
-            this.userPasswordText.Margin = new System.Windows.Forms.Padding(6);
+            this.userPasswordText.Location = new System.Drawing.Point(195, 257);
+            this.userPasswordText.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.userPasswordText.Name = "userPasswordText";
-            this.userPasswordText.Size = new System.Drawing.Size(231, 42);
+            this.userPasswordText.PasswordChar = '*';
+            this.userPasswordText.Size = new System.Drawing.Size(190, 28);
             this.userPasswordText.TabIndex = 3;
             // 
             // userPasswordLabel
@@ -76,20 +77,20 @@
             this.userPasswordLabel.AutoSize = true;
             this.userPasswordLabel.BackColor = System.Drawing.Color.Transparent;
             this.userPasswordLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.userPasswordLabel.Location = new System.Drawing.Point(97, 308);
-            this.userPasswordLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.userPasswordLabel.Location = new System.Drawing.Point(79, 257);
+            this.userPasswordLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.userPasswordLabel.Name = "userPasswordLabel";
-            this.userPasswordLabel.Size = new System.Drawing.Size(129, 40);
+            this.userPasswordLabel.Size = new System.Drawing.Size(92, 24);
             this.userPasswordLabel.TabIndex = 2;
             this.userPasswordLabel.Text = "Password";
             // 
             // loginButton
             // 
             this.loginButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.loginButton.Location = new System.Drawing.Point(331, 427);
-            this.loginButton.Margin = new System.Windows.Forms.Padding(6);
+            this.loginButton.Location = new System.Drawing.Point(271, 356);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(138, 42);
+            this.loginButton.Size = new System.Drawing.Size(113, 35);
             this.loginButton.TabIndex = 4;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
@@ -105,10 +106,11 @@
             this.panel1.Controls.Add(this.userPasswordText);
             this.panel1.Controls.Add(this.userNameLabel);
             this.panel1.Controls.Add(this.userPasswordLabel);
-            this.panel1.Font = new System.Drawing.Font("Poppins", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(574, 41);
+            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.Location = new System.Drawing.Point(470, 34);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(527, 527);
+            this.panel1.Size = new System.Drawing.Size(431, 439);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -116,9 +118,10 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(196, 30);
+            this.pictureBox1.Location = new System.Drawing.Point(160, 25);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(156, 135);
+            this.pictureBox1.Size = new System.Drawing.Size(128, 112);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
@@ -128,9 +131,10 @@
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(31, 110);
+            this.panel2.Location = new System.Drawing.Point(25, 92);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(537, 341);
+            this.panel2.Size = new System.Drawing.Size(439, 284);
             this.panel2.TabIndex = 6;
             // 
             // label1
@@ -138,23 +142,24 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.LightGray;
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(88, 121);
+            this.label1.Location = new System.Drawing.Point(72, 101);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(337, 29);
+            this.label1.Size = new System.Drawing.Size(227, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Software Access Management";
             // 
             // UserLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1130, 608);
+            this.ClientSize = new System.Drawing.Size(925, 507);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "UserLogin";
             this.Text = "UserLogin";
             this.Load += new System.EventHandler(this.UserLogin_Load);

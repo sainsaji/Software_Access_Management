@@ -21,6 +21,7 @@ namespace File_Acess_Management
             InitializeComponent();
             setButtonAction();
             this.user = user;
+            
         }
 
         private void SubManagers_Load(object sender, EventArgs e)
@@ -28,6 +29,7 @@ namespace File_Acess_Management
             Console.WriteLine("Manager DB Loaded /n User ID:" + user.Id);
             userListBx.Visible = false;
             requestGridView.Visible = false;
+            assignedLbl.Visible = false;
 
         }
 
@@ -39,15 +41,19 @@ namespace File_Acess_Management
         private void reqStatusLbl_Click(object sender, EventArgs e)
         {
             requestGridView.Visible = false;
+            assignedLbl.Visible = true;
             userListBx.Visible = true;
             tabTitleLbl.Text = "User List";
             loadUserList(user.Id);
+            
 
         }
 
         private void loadUserList(int id)
         {
             userListBx.Visible = true;
+            
+            tabTitleLbl.Text = "User List";
 
             {
                 var table = new DataTable();
@@ -117,6 +123,7 @@ namespace File_Acess_Management
             requestGridView.Visible = true;
             userListBx.Visible = false;
             loadIncomingRequest(user.Id);
+            tabTitleLbl.Text = "Request List";
 
         }
 
@@ -261,6 +268,16 @@ namespace File_Acess_Management
             UserLogin userLogin = new UserLogin();
             userLogin.Show();
             this.Close();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void statusPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

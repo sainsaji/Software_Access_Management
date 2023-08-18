@@ -104,6 +104,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminRequests.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminRequests.Designer.cs">
+      <DependentUpon>AdminRequests.cs</DependentUpon>
+    </Compile>
     <Compile Include="AuthManager.cs" />
     <Compile Include="ConnectionHelper.cs" />
     <Compile Include="MainForm.cs">
@@ -154,6 +160,9 @@
     <Compile Include="UserLogin.Designer.cs">
       <DependentUpon>UserLogin.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminRequests.resx">
+      <DependentUpon>AdminRequests.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

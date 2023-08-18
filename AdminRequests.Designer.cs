@@ -41,9 +41,9 @@
             this.panel3.Controls.Add(this.tabTitleLbl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(800, 53);
+            this.panel3.Size = new System.Drawing.Size(1199, 43);
             this.panel3.TabIndex = 1;
             // 
             // tabTitleLbl
@@ -52,10 +52,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabTitleLbl.AutoSize = true;
-            this.tabTitleLbl.Font = new System.Drawing.Font("Poppins", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabTitleLbl.Location = new System.Drawing.Point(348, 3);
+            this.tabTitleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabTitleLbl.Location = new System.Drawing.Point(517, 9);
+            this.tabTitleLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.tabTitleLbl.Name = "tabTitleLbl";
-            this.tabTitleLbl.Size = new System.Drawing.Size(216, 50);
+            this.tabTitleLbl.Size = new System.Drawing.Size(161, 26);
             this.tabTitleLbl.TabIndex = 0;
             this.tabTitleLbl.Text = "Tab Title Here";
             // 
@@ -65,21 +66,23 @@
             this.adminRequestsDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.adminRequestsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.adminRequestsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.adminRequestsDataGridView.Location = new System.Drawing.Point(0, 53);
+            this.adminRequestsDataGridView.Location = new System.Drawing.Point(0, 43);
+            this.adminRequestsDataGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.adminRequestsDataGridView.Name = "adminRequestsDataGridView";
             this.adminRequestsDataGridView.RowHeadersWidth = 51;
             this.adminRequestsDataGridView.RowTemplate.Height = 24;
-            this.adminRequestsDataGridView.Size = new System.Drawing.Size(800, 397);
+            this.adminRequestsDataGridView.Size = new System.Drawing.Size(1199, 647);
             this.adminRequestsDataGridView.TabIndex = 2;
             this.adminRequestsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.adminRequestsDataGridView_CellClick);
             // 
             // AdminRequests
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1199, 690);
             this.Controls.Add(this.adminRequestsDataGridView);
             this.Controls.Add(this.panel3);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AdminRequests";
             this.Text = "AdminRequests";
             this.panel3.ResumeLayout(false);

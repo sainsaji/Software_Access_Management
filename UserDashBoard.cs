@@ -30,11 +30,11 @@ namespace File_Acess_Management
         private void Form1_Load(object sender, EventArgs e)
         {
             requestPanel.BackColor = Color.White;
-            informationPanel.BackColor = Color.Aqua;
             statusPanel.BackColor = Color.White;
             tabTitleLbl.Text = "User Information";
             requestRightPanel.Visible = false;
             requestStatusPanel.Visible = false;
+            requestClickAction();
         }
 
 
@@ -49,7 +49,7 @@ namespace File_Acess_Management
             requestRightPanel.Visible = false;
             requestStatusPanel.Visible = false;
             requestPanel.BackColor = Color.White;
-            informationPanel.BackColor = Color.Aqua;
+            
             statusPanel.BackColor = Color.White;
             tabTitleLbl.Text = "User Information";
             alertsLabel.Visible = false;
@@ -73,7 +73,7 @@ namespace File_Acess_Management
             requestStatusPanel.Visible = false;
             Console.WriteLine("Request Form Loaded");
             requestPanel.BackColor = Color.Aqua;
-            informationPanel.BackColor = Color.White;
+            
             statusPanel.BackColor = Color.White;
             tabTitleLbl.Text = "Raise Request";
             Console.WriteLine("Auto Filling Data");
@@ -266,7 +266,7 @@ namespace File_Acess_Management
             requestStatusPanel.Visible = true;
             requestRightPanel.Visible = true;
             requestPanel.BackColor = Color.White;
-            informationPanel.BackColor = Color.White;
+            
             statusPanel.BackColor = Color.Aqua;
             tabTitleLbl.Text = "Request Status";
             Console.WriteLine("Loading Status Data");

@@ -38,14 +38,17 @@
             this.deleteButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.softwareListDataGridView)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // softwareListLbl
             // 
             this.softwareListLbl.AutoSize = true;
+            this.softwareListLbl.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.softwareListLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.softwareListLbl.Location = new System.Drawing.Point(471, 52);
+            this.softwareListLbl.Location = new System.Drawing.Point(456, 9);
             this.softwareListLbl.Name = "softwareListLbl";
             this.softwareListLbl.Size = new System.Drawing.Size(143, 24);
             this.softwareListLbl.TabIndex = 0;
@@ -138,11 +141,22 @@
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel2.Controls.Add(this.softwareListLbl);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1200, 49);
+            this.panel2.TabIndex = 27;
+            // 
             // Software
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 692);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.deleteButton);
@@ -152,13 +166,14 @@
             this.Controls.Add(this.softwareIdText);
             this.Controls.Add(this.softwareIdlabel);
             this.Controls.Add(this.softwareListDataGridView);
-            this.Controls.Add(this.softwareListLbl);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Software";
             this.Text = "Software";
             this.Load += new System.EventHandler(this.Software_Load);
             ((System.ComponentModel.ISupportInitialize)(this.softwareListDataGridView)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,5 +191,6 @@
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Panel panel2;
     }
 }

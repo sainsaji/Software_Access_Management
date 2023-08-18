@@ -179,5 +179,10 @@ namespace File_Acess_Management
                 }
             }
         }
+
+        private void managerUser_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -61,7 +61,7 @@
             this.userNameText.Location = new System.Drawing.Point(215, 77);
             this.userNameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userNameText.Name = "userNameText";
-            this.userNameText.Size = new System.Drawing.Size(235, 30);
+            this.userNameText.Size = new System.Drawing.Size(235, 26);
             this.userNameText.TabIndex = 3;
             // 
             // userNameLabel
@@ -71,7 +71,7 @@
             this.userNameLabel.Location = new System.Drawing.Point(35, 82);
             this.userNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(110, 25);
+            this.userNameLabel.Size = new System.Drawing.Size(89, 20);
             this.userNameLabel.TabIndex = 2;
             this.userNameLabel.Text = "User Name";
             // 
@@ -81,7 +81,7 @@
             this.passwordText.Location = new System.Drawing.Point(215, 118);
             this.passwordText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.passwordText.Name = "passwordText";
-            this.passwordText.Size = new System.Drawing.Size(235, 30);
+            this.passwordText.Size = new System.Drawing.Size(235, 26);
             this.passwordText.TabIndex = 5;
             // 
             // passwordLabel
@@ -91,7 +91,7 @@
             this.passwordLabel.Location = new System.Drawing.Point(35, 123);
             this.passwordLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(98, 25);
+            this.passwordLabel.Size = new System.Drawing.Size(78, 20);
             this.passwordLabel.TabIndex = 4;
             this.passwordLabel.Text = "Password";
             // 
@@ -101,7 +101,7 @@
             this.emailText.Location = new System.Drawing.Point(661, 7);
             this.emailText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.emailText.Name = "emailText";
-            this.emailText.Size = new System.Drawing.Size(232, 30);
+            this.emailText.Size = new System.Drawing.Size(232, 26);
             this.emailText.TabIndex = 7;
             // 
             // emailLabel
@@ -111,7 +111,7 @@
             this.emailLabel.Location = new System.Drawing.Point(481, 12);
             this.emailLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.emailLabel.Name = "emailLabel";
-            this.emailLabel.Size = new System.Drawing.Size(60, 25);
+            this.emailLabel.Size = new System.Drawing.Size(48, 20);
             this.emailLabel.TabIndex = 6;
             this.emailLabel.Text = "Email";
             // 
@@ -121,7 +121,7 @@
             this.phoneNumberText.Location = new System.Drawing.Point(661, 48);
             this.phoneNumberText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.phoneNumberText.Name = "phoneNumberText";
-            this.phoneNumberText.Size = new System.Drawing.Size(232, 30);
+            this.phoneNumberText.Size = new System.Drawing.Size(232, 26);
             this.phoneNumberText.TabIndex = 9;
             // 
             // phoneNumberLabel
@@ -131,7 +131,7 @@
             this.phoneNumberLabel.Location = new System.Drawing.Point(481, 53);
             this.phoneNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.phoneNumberLabel.Name = "phoneNumberLabel";
-            this.phoneNumberLabel.Size = new System.Drawing.Size(143, 25);
+            this.phoneNumberLabel.Size = new System.Drawing.Size(115, 20);
             this.phoneNumberLabel.TabIndex = 8;
             this.phoneNumberLabel.Text = "Phone Number";
             // 
@@ -141,7 +141,7 @@
             this.addressText.Location = new System.Drawing.Point(661, 92);
             this.addressText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addressText.Name = "addressText";
-            this.addressText.Size = new System.Drawing.Size(232, 30);
+            this.addressText.Size = new System.Drawing.Size(232, 26);
             this.addressText.TabIndex = 11;
             // 
             // addressLabel
@@ -151,7 +151,7 @@
             this.addressLabel.Location = new System.Drawing.Point(481, 97);
             this.addressLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.addressLabel.Name = "addressLabel";
-            this.addressLabel.Size = new System.Drawing.Size(85, 25);
+            this.addressLabel.Size = new System.Drawing.Size(68, 20);
             this.addressLabel.TabIndex = 10;
             this.addressLabel.Text = "Address";
             // 
@@ -162,13 +162,13 @@
             this.userRecordDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.userRecordDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.userRecordDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.userRecordDataGridView.Location = new System.Drawing.Point(17, 235);
+            this.userRecordDataGridView.Location = new System.Drawing.Point(4, 235);
             this.userRecordDataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userRecordDataGridView.MultiSelect = false;
             this.userRecordDataGridView.Name = "userRecordDataGridView";
             this.userRecordDataGridView.ReadOnly = true;
             this.userRecordDataGridView.RowHeadersWidth = 51;
-            this.userRecordDataGridView.Size = new System.Drawing.Size(878, 157);
+            this.userRecordDataGridView.Size = new System.Drawing.Size(1168, 347);
             this.userRecordDataGridView.TabIndex = 16;
             // 
             // addUserButton
@@ -189,7 +189,7 @@
             this.nameText.Location = new System.Drawing.Point(215, 206);
             this.nameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nameText.Name = "nameText";
-            this.nameText.Size = new System.Drawing.Size(235, 30);
+            this.nameText.Size = new System.Drawing.Size(235, 26);
             this.nameText.TabIndex = 19;
             // 
             // nameLabel
@@ -199,7 +199,7 @@
             this.nameLabel.Location = new System.Drawing.Point(35, 211);
             this.nameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(64, 25);
+            this.nameLabel.Size = new System.Drawing.Size(51, 20);
             this.nameLabel.TabIndex = 18;
             this.nameLabel.Text = "Name";
             // 
@@ -246,7 +246,7 @@
             this.roleLabel.Location = new System.Drawing.Point(35, 166);
             this.roleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.roleLabel.Name = "roleLabel";
-            this.roleLabel.Size = new System.Drawing.Size(108, 25);
+            this.roleLabel.Size = new System.Drawing.Size(88, 20);
             this.roleLabel.TabIndex = 23;
             this.roleLabel.Text = "Role Name";
             // 
@@ -256,7 +256,7 @@
             this.roleComboBox.Location = new System.Drawing.Point(215, 162);
             this.roleComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.roleComboBox.Name = "roleComboBox";
-            this.roleComboBox.Size = new System.Drawing.Size(235, 33);
+            this.roleComboBox.Size = new System.Drawing.Size(235, 28);
             this.roleComboBox.TabIndex = 24;
             // 
             // panel1
@@ -270,7 +270,7 @@
             this.panel1.Controls.Add(this.addressText);
             this.panel1.Location = new System.Drawing.Point(12, 70);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(922, 408);
+            this.panel1.Size = new System.Drawing.Size(1181, 587);
             this.panel1.TabIndex = 25;
             // 
             // managerUser
@@ -282,7 +282,7 @@
             this.managerUser.Location = new System.Drawing.Point(440, 8);
             this.managerUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.managerUser.Name = "managerUser";
-            this.managerUser.Size = new System.Drawing.Size(236, 31);
+            this.managerUser.Size = new System.Drawing.Size(188, 25);
             this.managerUser.TabIndex = 0;
             this.managerUser.Text = "User Management";
             // 
@@ -292,14 +292,14 @@
             this.panel2.Controls.Add(this.managerUser);
             this.panel2.Location = new System.Drawing.Point(3, 1);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1093, 49);
+            this.panel2.Size = new System.Drawing.Size(1190, 49);
             this.panel2.TabIndex = 26;
             // 
             // ManagerDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1097, 582);
+            this.ClientSize = new System.Drawing.Size(1197, 660);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.roleComboBox);
             this.Controls.Add(this.roleLabel);

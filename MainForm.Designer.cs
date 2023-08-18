@@ -43,7 +43,7 @@
             // 
             this.panelContainer.Location = new System.Drawing.Point(209, 23);
             this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(991, 453);
+            this.panelContainer.Size = new System.Drawing.Size(1357, 833);
             this.panelContainer.TabIndex = 1;
             // 
             // DashboardBtn
@@ -98,7 +98,7 @@
             // 
             this.logOutBtn.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.logOutBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.logOutBtn.Location = new System.Drawing.Point(0, 400);
+            this.logOutBtn.Location = new System.Drawing.Point(0, 780);
             this.logOutBtn.Name = "logOutBtn";
             this.logOutBtn.Size = new System.Drawing.Size(189, 53);
             this.logOutBtn.TabIndex = 4;
@@ -117,15 +117,15 @@
             this.navigationPanel.Location = new System.Drawing.Point(13, 23);
             this.navigationPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.navigationPanel.Name = "navigationPanel";
-            this.navigationPanel.Size = new System.Drawing.Size(189, 453);
+            this.navigationPanel.Size = new System.Drawing.Size(189, 833);
             this.navigationPanel.TabIndex = 0;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1212, 527);
+            this.ClientSize = new System.Drawing.Size(1578, 865);
             this.Controls.Add(this.panelContainer);
             this.Controls.Add(this.navigationPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

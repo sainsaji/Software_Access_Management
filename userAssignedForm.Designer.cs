@@ -54,7 +54,7 @@
             this.managerUser.Location = new System.Drawing.Point(440, 8);
             this.managerUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.managerUser.Name = "managerUser";
-            this.managerUser.Size = new System.Drawing.Size(334, 31);
+            this.managerUser.Size = new System.Drawing.Size(266, 25);
             this.managerUser.TabIndex = 0;
             this.managerUser.Text = "Manager User Assignment";
             // 
@@ -65,7 +65,7 @@
             this.userAssigned.Location = new System.Drawing.Point(53, 54);
             this.userAssigned.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userAssigned.Name = "userAssigned";
-            this.userAssigned.Size = new System.Drawing.Size(182, 29);
+            this.userAssigned.Size = new System.Drawing.Size(142, 24);
             this.userAssigned.TabIndex = 1;
             this.userAssigned.Text = "Assigned Users";
             // 
@@ -81,7 +81,7 @@
             this.assignedManagerDataGridView.Name = "assignedManagerDataGridView";
             this.assignedManagerDataGridView.ReadOnly = true;
             this.assignedManagerDataGridView.RowHeadersWidth = 51;
-            this.assignedManagerDataGridView.Size = new System.Drawing.Size(813, 122);
+            this.assignedManagerDataGridView.Size = new System.Drawing.Size(1131, 281);
             this.assignedManagerDataGridView.TabIndex = 2;
             // 
             // selectManager
@@ -89,15 +89,15 @@
             this.selectManager.FormattingEnabled = true;
             this.selectManager.Location = new System.Drawing.Point(57, 88);
             this.selectManager.Name = "selectManager";
-            this.selectManager.Size = new System.Drawing.Size(250, 33);
+            this.selectManager.Size = new System.Drawing.Size(250, 28);
             this.selectManager.TabIndex = 3;
             // 
             // selectManagerForNotAssigned
             // 
             this.selectManagerForNotAssigned.FormattingEnabled = true;
-            this.selectManagerForNotAssigned.Location = new System.Drawing.Point(57, 280);
+            this.selectManagerForNotAssigned.Location = new System.Drawing.Point(57, 440);
             this.selectManagerForNotAssigned.Name = "selectManagerForNotAssigned";
-            this.selectManagerForNotAssigned.Size = new System.Drawing.Size(250, 33);
+            this.selectManagerForNotAssigned.Size = new System.Drawing.Size(250, 28);
             this.selectManagerForNotAssigned.TabIndex = 6;
             // 
             // notAssignedManagerDataGridView
@@ -107,28 +107,28 @@
             this.notAssignedManagerDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.notAssignedManagerDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.notAssignedManagerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.notAssignedManagerDataGridView.Location = new System.Drawing.Point(57, 317);
+            this.notAssignedManagerDataGridView.Location = new System.Drawing.Point(57, 477);
             this.notAssignedManagerDataGridView.MultiSelect = false;
             this.notAssignedManagerDataGridView.Name = "notAssignedManagerDataGridView";
             this.notAssignedManagerDataGridView.ReadOnly = true;
             this.notAssignedManagerDataGridView.RowHeadersWidth = 51;
-            this.notAssignedManagerDataGridView.Size = new System.Drawing.Size(813, 107);
+            this.notAssignedManagerDataGridView.Size = new System.Drawing.Size(1131, 294);
             this.notAssignedManagerDataGridView.TabIndex = 5;
             // 
             // notAssignedManagers
             // 
             this.notAssignedManagers.AutoSize = true;
             this.notAssignedManagers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notAssignedManagers.Location = new System.Drawing.Point(53, 246);
+            this.notAssignedManagers.Location = new System.Drawing.Point(53, 406);
             this.notAssignedManagers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.notAssignedManagers.Name = "notAssignedManagers";
-            this.notAssignedManagers.Size = new System.Drawing.Size(226, 29);
+            this.notAssignedManagers.Size = new System.Drawing.Size(176, 24);
             this.notAssignedManagers.TabIndex = 4;
             this.notAssignedManagers.Text = "Not Assigned Users";
             // 
             // assignManagerBtn
             // 
-            this.assignManagerBtn.Location = new System.Drawing.Point(333, 269);
+            this.assignManagerBtn.Location = new System.Drawing.Point(333, 429);
             this.assignManagerBtn.Name = "assignManagerBtn";
             this.assignManagerBtn.Size = new System.Drawing.Size(106, 42);
             this.assignManagerBtn.TabIndex = 7;
@@ -158,7 +158,7 @@
             // 
             // resetBtn
             // 
-            this.resetBtn.Location = new System.Drawing.Point(764, 74);
+            this.resetBtn.Location = new System.Drawing.Point(1082, 74);
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(106, 42);
             this.resetBtn.TabIndex = 10;
@@ -177,7 +177,7 @@
             // 
             // userAssignedForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 783);
             this.Controls.Add(this.resetBtn);
