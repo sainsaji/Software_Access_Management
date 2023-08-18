@@ -39,24 +39,40 @@ namespace File_Acess_Management
 
         private void DashboardBtn_Click(object sender, EventArgs e)
         {
-
+            DashboardBtn.BackColor = Color.Aqua;
+            userManagerBtn.BackColor = Color.White;
+            usersMngBtn.BackColor = Color.White;
+            softwareMngBtn.BackColor = Color.White;
+            ShowForm(new AdminRequests());
         }
 
         private void usersMngBtn_Click(object sender, EventArgs e)
         {
+            DashboardBtn.BackColor = Color.White;
+            userManagerBtn.BackColor = Color.White;
+            usersMngBtn.BackColor = Color.Aqua;
+            softwareMngBtn.BackColor = Color.White;
             ShowForm(new ManagerDashboard());
 
         }
 
         private void userManagerBtn_Click(object sender, EventArgs e)
         {
+            DashboardBtn.BackColor = Color.White;
+            userManagerBtn.BackColor = Color.Aqua;
+            usersMngBtn.BackColor = Color.White;
+            softwareMngBtn.BackColor = Color.White;
             ShowForm(new userAssignedForm());
         }
 
         private void softwareMngBtn_Click(object sender, EventArgs e)
         {
-            ShowForm(new Software());
+            DashboardBtn.BackColor = Color.White;
+            userManagerBtn.BackColor = Color.White;
+            usersMngBtn.BackColor = Color.White;
+            softwareMngBtn.BackColor = Color.Aqua;
         }
+
 
         private void logOutBtn_Click(object sender, EventArgs e)
         {
