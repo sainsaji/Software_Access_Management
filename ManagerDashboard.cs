@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -165,39 +166,67 @@ namespace File_Acess_Management
                 return;
             }
 
-            using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+            try
             {
-                int roleId = selectedRole.RoleId;
-                connection.Open();
-
-                string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (0,@Username, @Password, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (MailMessage mm = new MailMessage())
                 {
-                    command.Parameters.AddWithValue("@Username", username);
-                    command.Parameters.AddWithValue("@Password", hashedPassword);
-                    command.Parameters.AddWithValue("@RoleId", roleId);
-                    command.Parameters.AddWithValue("@Name", name);
-                    command.Parameters.AddWithValue("@Email", email);
-                    command.Parameters.AddWithValue("@PhoneNumber", phno);
-                    command.Parameters.AddWithValue("@Address", address);
-                    command.Parameters.AddWithValue("@Assigned", false);
+                    using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
+                    {
+                        mm.From = new MailAddress("resumework2022@gmail.com");
+                        mm.To.Add(email);
+                        mm.Subject = "Credentials to the App";
+                        mm.Body = "Hi There, \n" +
+                            "\nWelcome to Software Access management System\n" +
+                            "\n Username: "+username+
+                            "\n Password: "+password;
+                        sc.Port = 587;
+                        sc.Credentials = new System.Net.NetworkCredential("resumework2022@gmail.com", "uqdbenfkuzuhvwfl");
+                        sc.EnableSsl = true;
+                        sc.Send(mm);
+                        MessageBox.Show("Email has been sent.");
+                        using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+                        {
+                            int roleId = selectedRole.RoleId;
+                            connection.Open();
 
-                    int rowsAffected = command.ExecuteNonQuery(); ;
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("User added successfully.");
-                        GetUsersRecord(); 
-                        ClearFormFields(); 
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error adding user.");
+                            string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (0,@Username, @Password, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
+
+                            using (MySqlCommand command = new MySqlCommand(query, connection))
+                            {
+                                command.Parameters.AddWithValue("@Username", username);
+                                command.Parameters.AddWithValue("@Password", hashedPassword);
+                                command.Parameters.AddWithValue("@RoleId", roleId);
+                                command.Parameters.AddWithValue("@Name", name);
+                                command.Parameters.AddWithValue("@Email", email);
+                                command.Parameters.AddWithValue("@PhoneNumber", phno);
+                                command.Parameters.AddWithValue("@Address", address);
+                                command.Parameters.AddWithValue("@Assigned", false);
+
+                                int rowsAffected = command.ExecuteNonQuery(); ;
+                                if (rowsAffected > 0)
+                                {
+                                    MessageBox.Show("User added successfully.");
+                                    GetUsersRecord();
+                                    ClearFormFields();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Error adding user.");
+                                }
+                            }
+
+                            connection.Close();
+                        }
                     }
                 }
-
-                connection.Close();
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show("error in mail, enter correct email address" + ex);
+            }
+            
+
+            
         }
         private void ClearFormFields()
         {
