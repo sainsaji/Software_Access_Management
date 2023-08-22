@@ -204,60 +204,45 @@ namespace File_Acess_Management
 
 
 
-        private void userInfoLbl_Click(object sender, EventArgs e)
-        {
-            managerInformationPanel.BackColor = Color.LightBlue;
-            incomingRequestPanel.BackColor = Color.White;
-            userListPanel.BackColor = Color.White;
-            tabTitleLbl.Text = "Manager Information";
-            AddUserControl(managerInformationUserControl);
-        }
-
-
-        private void reqStatusLbl_Click(object sender, EventArgs e)
+        private void TabPanelClicked(Panel panel, UserControl userControl, string tabTitle)
         {
             managerInformationPanel.BackColor = Color.White;
             incomingRequestPanel.BackColor = Color.White;
-            userListPanel.BackColor = Color.LightBlue;
-            tabTitleLbl.Text = "User List";
-            AddUserControl(userListUC);
+            userListPanel.BackColor = Color.White;
+            panel.BackColor = Color.LightBlue;
+            tabTitleLbl.Text = tabTitle;
+            AddUserControl(userControl);
+        }
+
+        private void userInfoLbl_Click(object sender, EventArgs e)
+        {
+            TabPanelClicked(managerInformationPanel, managerInformationUserControl, "Manager Information");
+        }
+
+        private void reqStatusLbl_Click(object sender, EventArgs e)
+        {
+            TabPanelClicked(userListPanel, userListUC, "User List");
         }
 
         private void requestLbl_Click(object sender, EventArgs e)
         {
-            managerInformationPanel.BackColor = Color.White;
-            incomingRequestPanel.BackColor = Color.LightBlue;
-            userListPanel.BackColor = Color.White;
-            tabTitleLbl.Text = "Request List";
-            AddUserControl(managerIncomingRequestUserControl);
-
+            TabPanelClicked(incomingRequestPanel, managerIncomingRequestUserControl, "Request List");
         }
 
         private void managerInformationIcon_Click(object sender, EventArgs e)
         {
-            managerInformationPanel.BackColor = Color.LightBlue;
-            incomingRequestPanel.BackColor = Color.White;
-            userListPanel.BackColor = Color.White;
-            tabTitleLbl.Text = "Manager Information";
-            AddUserControl(managerInformationUserControl);
+            TabPanelClicked(managerInformationPanel, managerInformationUserControl, "Manager Information");
         }
 
         private void incomingURIcon_Click(object sender, EventArgs e)
         {
-            managerInformationPanel.BackColor = Color.White;
-            incomingRequestPanel.BackColor = Color.LightBlue;
-            userListPanel.BackColor = Color.White;
-            tabTitleLbl.Text = "Request List";
-            AddUserControl(managerIncomingRequestUserControl);
+            TabPanelClicked(incomingRequestPanel, managerIncomingRequestUserControl, "Request List");
         }
 
         private void userListIcon_Click(object sender, EventArgs e)
         {
-            managerInformationPanel.BackColor = Color.White;
-            incomingRequestPanel.BackColor = Color.White;
-            userListPanel.BackColor = Color.LightBlue;
-            tabTitleLbl.Text = "User List";
-            AddUserControl(userListUC);
+            TabPanelClicked(userListPanel, userListUC, "User List");
         }
+
     }
 }
