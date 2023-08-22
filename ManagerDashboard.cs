@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -30,11 +31,17 @@ namespace File_Acess_Management
         {
             deleteButton.Enabled = false;
             updateButton.Enabled = false;
-            
+
             // Attach the SelectionChanged event handler to the DataGridView
             userRecordDataGridView.SelectionChanged += userRecordDataGridView_SelectionChanged;
             PopulateRoleComboBox();
             GetUsersRecord();
+            tickPicBox.Visible = false;
+            namePicBox.Visible = false;
+            passPicBox.Visible = false;
+            emailPicBox.Visible = false;
+            phonePicBox.Visible = false;
+            addressPicBox.Visible = false;
         }
 
         private void userRecordDataGridView_SelectionChanged(object sender, EventArgs e)
@@ -42,7 +49,7 @@ namespace File_Acess_Management
             // This event is triggered when the selection in DataGridView changes
             if (userRecordDataGridView.SelectedRows.Count > 0)
             {
-                check= true;
+                check = true;
                 userNameText.Enabled = false;
                 passwordText.Enabled = false;
                 deleteButton.Enabled = true;
@@ -78,11 +85,11 @@ namespace File_Acess_Management
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    DataTable dt= new DataTable();
+                    DataTable dt = new DataTable();
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        dt.Load (reader);
-                        connection.Close ();
+                        dt.Load(reader);
+                        connection.Close();
                     }
                     userRecordDataGridView.DataSource = dt;
                     //studentRecordDataGridView.Columns["Password"].Visible = false;
@@ -131,20 +138,20 @@ namespace File_Acess_Management
             string email = emailText.Text;
             string phno = phoneNumberText.Text;
             string address = addressText.Text;
-            bool check=false;
+            bool check = false;
 
-            using(MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
             {
                 connection.Open();
                 string query = "Select * from users where user_name=@Username";
-                using(MySqlCommand command = new MySqlCommand(query, connection))
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Username", username);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            check=true;
+                            check = true;
                         }
                     }
                 }
@@ -202,18 +209,18 @@ namespace File_Acess_Management
                                 command.Parameters.AddWithValue("@Address", address);
                                 command.Parameters.AddWithValue("@Assigned", false);
 
-                                int rowsAffected = command.ExecuteNonQuery(); ;
-                                if (rowsAffected > 0)
-                                {
-                                    MessageBox.Show("User added successfully.");
-                                    GetUsersRecord();
-                                    ClearFormFields();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Error adding user.");
-                                }
-                            }
+                    int rowsAffected = command.ExecuteNonQuery(); ;
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("User added successfully.");
+                        GetUsersRecord();
+                        ClearFormFields();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error adding user.");
+                    }
+                }
 
                             connection.Close();
                         }
@@ -234,6 +241,12 @@ namespace File_Acess_Management
             updateButton.Enabled = false;
             userNameText.Enabled = true;
             passwordText.Enabled = true;
+            tickPicBox.Visible = false;
+            passPicBox.Visible = false;
+            namePicBox.Visible = false;
+            emailPicBox.Visible = false;
+            phonePicBox.Visible = false;
+            addressPicBox.Visible = false;
             userRecordDataGridView.ClearSelection();
             // Clear the form fields
             userNameText.Text = "";
@@ -302,12 +315,12 @@ namespace File_Acess_Management
 
         private void resetButton_Click(object sender, EventArgs e)
         {
-            ClearFormFields ();
+            ClearFormFields();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-                if (check == true)
+            if (check == true)
             {
                 string username = userNameText.Text;
                 using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
@@ -337,9 +350,210 @@ namespace File_Acess_Management
 
                     connection.Close();
                 }
-                }
+            }
 
         }
 
+        private void userNameText_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void userNameText_Leave(object sender, EventArgs e)
+        {
+            string field = "user_name";
+            bool valid = validateText(userNameText.Text, field);
+            Console.WriteLine("Username validity is: " + valid);
+        }
+
+        private bool validateText(string fieldText, string field)
+        {
+            string userNamePattern = @"^[a-zA-Z0-9_]{3,20}$";
+            string namePattern = @"^[a-zA-Z\s.]+$";
+            string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$";
+            string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            string phonePattern = @"^\d{10}$";
+
+            bool isValid = false;
+
+            switch (field)
+            {
+                case "user_name":
+                    isValid = Regex.IsMatch(fieldText, userNamePattern);
+                    if (isValid)
+                    {
+                        // Perform duplication check
+                        using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+                        {
+                            try
+                            {
+                                connection.Open();
+                                string query = "SELECT user_name FROM users WHERE user_name = @fieldvalue";
+                                using (MySqlCommand command = new MySqlCommand(query, connection))
+                                {
+                                    command.Parameters.AddWithValue("@fieldvalue", fieldText);
+
+                                    using (MySqlDataReader reader = command.ExecuteReader())
+                                    {
+                                        if (reader.Read())
+                                        {
+                                            Console.WriteLine("Already Exists in DB");
+                                            userNameErrorProvider.SetError(userNameText, "Already Exists in DB");
+                                            tickPicBox.Visible = false;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Username is available");
+                                            userNameErrorProvider.SetError(userNameText, "");
+                                            tickPicBox.Visible = true;
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("An error occurred: " + ex.Message);
+                            }
+                        }
+                    }
+                    break;
+
+                case "name":
+                    isValid = Regex.IsMatch(fieldText, namePattern);
+                    if (isValid)
+                    {
+                        namePicBox.Visible = true;
+                        nameErrorProvider.SetError(nameText, "");
+                    }
+                    else
+                    {
+                        namePicBox.Visible = false;
+                        nameErrorProvider.SetError(nameText, "Invalid Name");
+                    }
+                    break;
+
+                case "password":
+                    isValid = Regex.IsMatch(fieldText, passwordPattern);
+                    if (isValid)
+                    {
+                        passPicBox.Visible = true;
+                        passErrorProvider.SetError(passwordText, "");
+                    }
+                    else
+                    {
+                        passErrorProvider.SetError(passwordText, "Invalid Password");
+                        passPicBox.Visible = false;
+
+                    }
+                    break;
+
+                case "email":
+                    isValid = Regex.IsMatch(fieldText, emailPattern);
+                    if (isValid)
+                    {
+                        using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+                        {
+                            try
+                            {
+                                connection.Open();
+                                string query = "SELECT email FROM users WHERE email = @fieldvalue";
+                                using (MySqlCommand command = new MySqlCommand(query, connection))
+                                {
+                                    command.Parameters.AddWithValue("@fieldvalue", fieldText);
+
+                                    using (MySqlDataReader reader = command.ExecuteReader())
+                                    {
+                                        if (reader.Read())
+                                        {
+                                            Console.WriteLine("Already Exists in DB");
+                                            emailErrorProvider.SetError(emailText, "Email Already Exists in DB");
+                                            emailPicBox.Visible = false;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Email is available");
+                                            emailErrorProvider.SetError(emailText, "");
+                                            emailPicBox.Visible = true;
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("An error occurred: " + ex.Message);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        emailErrorProvider.SetError(emailText, "Invalid Email");
+                    }
+                    break;
+
+                case "phone_number":
+                    isValid = Regex.IsMatch(fieldText, phonePattern);
+                    if (isValid)
+                    {
+                        phonePicBox.Visible = true;
+                        phoneErrorProvider.SetError(nameText, "");
+                    }
+                    else
+                    {
+                        phonePicBox.Visible = false;
+                        phoneErrorProvider.SetError(nameText, "Invalid Phone Number");
+                    }
+                    break;
+                case "address":
+                    isValid = Regex.IsMatch(fieldText, namePattern);
+                    if (isValid)
+                    {
+                        addressPicBox.Visible = true;
+                        addressErrorProvider.SetError(nameText, "");
+                    }
+                    else
+                    {
+                        addressPicBox.Visible = false;
+                        addressErrorProvider.SetError(nameText, "Invalid Address Given");
+                    }
+                    break;
+            }
+
+            return isValid;
+        }
+
+        private void nameText_Leave(object sender, EventArgs e)
+        {
+            string field = "name";
+            bool valid = validateText(nameText.Text, field);
+            Console.WriteLine("Name validity is: " + valid);
+        }
+
+        private void passwordText_Leave(object sender, EventArgs e)
+        {
+            string field = "password";
+            bool valid = validateText(passwordText.Text, field);
+            Console.WriteLine(field + " validity is: " + valid);
+        }
+
+        private void emailText_Leave(object sender, EventArgs e)
+        {
+            string field = "email";
+            bool valid = validateText(emailText.Text, field);
+            Console.WriteLine(field + " validity is: " + valid);
+        }
+
+        private void phoneNumberText_Leave(object sender, EventArgs e)
+        {
+            string field = "phone_number";
+            bool valid = validateText(phoneNumberText.Text, field);
+            Console.WriteLine(field + " validity is: " + valid);
+        }
+
+        private void addressText_Leave(object sender, EventArgs e)
+        {
+            string field = "address";
+            bool valid = validateText(addressText.Text, field);
+            Console.WriteLine(field + " validity is: " + valid);
         }
     }
+}
