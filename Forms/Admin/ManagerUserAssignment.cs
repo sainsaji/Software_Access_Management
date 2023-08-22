@@ -17,12 +17,12 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace File_Acess_Management
 {
-    public partial class userAssignedForm : Form
+    public partial class ManagerUserAssignment : Form
     {
         int selectedUserId, selectedUserId2, selectedManagerId;
         bool ck=false;
         bool ck2=false;
-        public userAssignedForm()
+        public ManagerUserAssignment()
         {
             InitializeComponent();
         }

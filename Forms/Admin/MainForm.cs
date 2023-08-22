@@ -57,7 +57,7 @@ namespace File_Acess_Management
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.Aqua;
             softwareMngBtn.BackColor = Color.White;
-            ShowForm(new ManagerDashboard());
+            ShowForm(new UserManagement());
 
         }
 
@@ -67,7 +67,7 @@ namespace File_Acess_Management
             userManagerBtn.BackColor = Color.Aqua;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
-            ShowForm(new userAssignedForm());
+            ShowForm(new ManagerUserAssignment());
         }
 
         private void softwareMngBtn_Click(object sender, EventArgs e)

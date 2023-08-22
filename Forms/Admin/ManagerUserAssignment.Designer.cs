@@ -1,6 +1,6 @@
 ﻿namespace File_Acess_Management
 {
-    partial class userAssignedForm
+    partial class ManagerUserAssignment
     {
         /// <summary>
         /// Required designer variable.

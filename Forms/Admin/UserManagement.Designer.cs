@@ -1,6 +1,6 @@
 ﻿namespace File_Acess_Management
 {
-    partial class ManagerDashboard
+    partial class UserManagement
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManagerDashboard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserManagement));
             this.userNameText = new System.Windows.Forms.TextBox();
             this.userNameLabel = new System.Windows.Forms.Label();
             this.passwordText = new System.Windows.Forms.TextBox();
@@ -50,35 +50,35 @@
             this.roleLabel = new System.Windows.Forms.Label();
             this.roleComboBox = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.addressPicBox = new System.Windows.Forms.PictureBox();
+            this.phonePicBox = new System.Windows.Forms.PictureBox();
+            this.emailPicBox = new System.Windows.Forms.PictureBox();
+            this.namePicBox = new System.Windows.Forms.PictureBox();
+            this.passPicBox = new System.Windows.Forms.PictureBox();
+            this.tickPicBox = new System.Windows.Forms.PictureBox();
             this.managerUser = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.userNameErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.tickPicBox = new System.Windows.Forms.PictureBox();
             this.passErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.passPicBox = new System.Windows.Forms.PictureBox();
             this.nameErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.namePicBox = new System.Windows.Forms.PictureBox();
             this.emailErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.phoneErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.addressErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.emailPicBox = new System.Windows.Forms.PictureBox();
-            this.phonePicBox = new System.Windows.Forms.PictureBox();
-            this.addressPicBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.userRecordDataGridView)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.addressPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.phonePicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emailPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.namePicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.passPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tickPicBox)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userNameErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tickPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.passErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.passPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nameErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.namePicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emailErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.phoneErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emailPicBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.phonePicBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.addressPicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // userNameText
@@ -87,7 +87,7 @@
             this.userNameText.Location = new System.Drawing.Point(215, 77);
             this.userNameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userNameText.Name = "userNameText";
-            this.userNameText.Size = new System.Drawing.Size(235, 30);
+            this.userNameText.Size = new System.Drawing.Size(235, 26);
             this.userNameText.TabIndex = 3;
             this.userNameText.TextChanged += new System.EventHandler(this.userNameText_TextChanged);
             this.userNameText.Leave += new System.EventHandler(this.userNameText_Leave);
@@ -99,7 +99,7 @@
             this.userNameLabel.Location = new System.Drawing.Point(35, 82);
             this.userNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(110, 25);
+            this.userNameLabel.Size = new System.Drawing.Size(89, 20);
             this.userNameLabel.TabIndex = 2;
             this.userNameLabel.Text = "User Name";
             // 
@@ -109,7 +109,7 @@
             this.passwordText.Location = new System.Drawing.Point(215, 118);
             this.passwordText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.passwordText.Name = "passwordText";
-            this.passwordText.Size = new System.Drawing.Size(235, 30);
+            this.passwordText.Size = new System.Drawing.Size(235, 26);
             this.passwordText.TabIndex = 5;
             this.passwordText.Leave += new System.EventHandler(this.passwordText_Leave);
             // 
@@ -120,7 +120,7 @@
             this.passwordLabel.Location = new System.Drawing.Point(35, 123);
             this.passwordLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(98, 25);
+            this.passwordLabel.Size = new System.Drawing.Size(78, 20);
             this.passwordLabel.TabIndex = 4;
             this.passwordLabel.Text = "Password";
             // 
@@ -130,7 +130,7 @@
             this.emailText.Location = new System.Drawing.Point(743, 5);
             this.emailText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.emailText.Name = "emailText";
-            this.emailText.Size = new System.Drawing.Size(232, 30);
+            this.emailText.Size = new System.Drawing.Size(232, 26);
             this.emailText.TabIndex = 7;
             this.emailText.Leave += new System.EventHandler(this.emailText_Leave);
             // 
@@ -141,7 +141,7 @@
             this.emailLabel.Location = new System.Drawing.Point(563, 10);
             this.emailLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.emailLabel.Name = "emailLabel";
-            this.emailLabel.Size = new System.Drawing.Size(60, 25);
+            this.emailLabel.Size = new System.Drawing.Size(48, 20);
             this.emailLabel.TabIndex = 6;
             this.emailLabel.Text = "Email";
             // 
@@ -151,7 +151,7 @@
             this.phoneNumberText.Location = new System.Drawing.Point(743, 46);
             this.phoneNumberText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.phoneNumberText.Name = "phoneNumberText";
-            this.phoneNumberText.Size = new System.Drawing.Size(232, 30);
+            this.phoneNumberText.Size = new System.Drawing.Size(232, 26);
             this.phoneNumberText.TabIndex = 9;
             this.phoneNumberText.Leave += new System.EventHandler(this.phoneNumberText_Leave);
             // 
@@ -162,7 +162,7 @@
             this.phoneNumberLabel.Location = new System.Drawing.Point(563, 51);
             this.phoneNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.phoneNumberLabel.Name = "phoneNumberLabel";
-            this.phoneNumberLabel.Size = new System.Drawing.Size(143, 25);
+            this.phoneNumberLabel.Size = new System.Drawing.Size(115, 20);
             this.phoneNumberLabel.TabIndex = 8;
             this.phoneNumberLabel.Text = "Phone Number";
             // 
@@ -172,7 +172,7 @@
             this.addressText.Location = new System.Drawing.Point(743, 90);
             this.addressText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addressText.Name = "addressText";
-            this.addressText.Size = new System.Drawing.Size(232, 30);
+            this.addressText.Size = new System.Drawing.Size(232, 26);
             this.addressText.TabIndex = 11;
             this.addressText.Leave += new System.EventHandler(this.addressText_Leave);
             // 
@@ -183,7 +183,7 @@
             this.addressLabel.Location = new System.Drawing.Point(563, 95);
             this.addressLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.addressLabel.Name = "addressLabel";
-            this.addressLabel.Size = new System.Drawing.Size(85, 25);
+            this.addressLabel.Size = new System.Drawing.Size(68, 20);
             this.addressLabel.TabIndex = 10;
             this.addressLabel.Text = "Address";
             // 
@@ -221,7 +221,7 @@
             this.nameText.Location = new System.Drawing.Point(215, 206);
             this.nameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nameText.Name = "nameText";
-            this.nameText.Size = new System.Drawing.Size(235, 30);
+            this.nameText.Size = new System.Drawing.Size(235, 26);
             this.nameText.TabIndex = 19;
             this.nameText.Leave += new System.EventHandler(this.nameText_Leave);
             // 
@@ -232,7 +232,7 @@
             this.nameLabel.Location = new System.Drawing.Point(35, 211);
             this.nameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(64, 25);
+            this.nameLabel.Size = new System.Drawing.Size(51, 20);
             this.nameLabel.TabIndex = 18;
             this.nameLabel.Text = "Name";
             // 
@@ -279,7 +279,7 @@
             this.roleLabel.Location = new System.Drawing.Point(35, 166);
             this.roleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.roleLabel.Name = "roleLabel";
-            this.roleLabel.Size = new System.Drawing.Size(108, 25);
+            this.roleLabel.Size = new System.Drawing.Size(88, 20);
             this.roleLabel.TabIndex = 23;
             this.roleLabel.Text = "Role Name";
             // 
@@ -289,7 +289,7 @@
             this.roleComboBox.Location = new System.Drawing.Point(215, 162);
             this.roleComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.roleComboBox.Name = "roleComboBox";
-            this.roleComboBox.Size = new System.Drawing.Size(235, 33);
+            this.roleComboBox.Size = new System.Drawing.Size(235, 28);
             this.roleComboBox.TabIndex = 24;
             // 
             // panel1
@@ -312,6 +312,66 @@
             this.panel1.Size = new System.Drawing.Size(1181, 587);
             this.panel1.TabIndex = 25;
             // 
+            // addressPicBox
+            // 
+            this.addressPicBox.Image = ((System.Drawing.Image)(resources.GetObject("addressPicBox.Image")));
+            this.addressPicBox.Location = new System.Drawing.Point(982, 90);
+            this.addressPicBox.Name = "addressPicBox";
+            this.addressPicBox.Size = new System.Drawing.Size(34, 28);
+            this.addressPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.addressPicBox.TabIndex = 22;
+            this.addressPicBox.TabStop = false;
+            // 
+            // phonePicBox
+            // 
+            this.phonePicBox.Image = ((System.Drawing.Image)(resources.GetObject("phonePicBox.Image")));
+            this.phonePicBox.Location = new System.Drawing.Point(982, 46);
+            this.phonePicBox.Name = "phonePicBox";
+            this.phonePicBox.Size = new System.Drawing.Size(34, 28);
+            this.phonePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.phonePicBox.TabIndex = 21;
+            this.phonePicBox.TabStop = false;
+            // 
+            // emailPicBox
+            // 
+            this.emailPicBox.Image = ((System.Drawing.Image)(resources.GetObject("emailPicBox.Image")));
+            this.emailPicBox.Location = new System.Drawing.Point(982, 5);
+            this.emailPicBox.Name = "emailPicBox";
+            this.emailPicBox.Size = new System.Drawing.Size(34, 28);
+            this.emailPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.emailPicBox.TabIndex = 20;
+            this.emailPicBox.TabStop = false;
+            // 
+            // namePicBox
+            // 
+            this.namePicBox.Image = ((System.Drawing.Image)(resources.GetObject("namePicBox.Image")));
+            this.namePicBox.Location = new System.Drawing.Point(445, 136);
+            this.namePicBox.Name = "namePicBox";
+            this.namePicBox.Size = new System.Drawing.Size(34, 28);
+            this.namePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.namePicBox.TabIndex = 19;
+            this.namePicBox.TabStop = false;
+            // 
+            // passPicBox
+            // 
+            this.passPicBox.Image = ((System.Drawing.Image)(resources.GetObject("passPicBox.Image")));
+            this.passPicBox.Location = new System.Drawing.Point(445, 48);
+            this.passPicBox.Name = "passPicBox";
+            this.passPicBox.Size = new System.Drawing.Size(34, 28);
+            this.passPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.passPicBox.TabIndex = 18;
+            this.passPicBox.TabStop = false;
+            // 
+            // tickPicBox
+            // 
+            this.tickPicBox.Image = ((System.Drawing.Image)(resources.GetObject("tickPicBox.Image")));
+            this.tickPicBox.Location = new System.Drawing.Point(445, 7);
+            this.tickPicBox.Name = "tickPicBox";
+            this.tickPicBox.Size = new System.Drawing.Size(34, 28);
+            this.tickPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.tickPicBox.TabIndex = 17;
+            this.tickPicBox.TabStop = false;
+            // 
             // managerUser
             // 
             this.managerUser.AutoSize = true;
@@ -321,7 +381,7 @@
             this.managerUser.Location = new System.Drawing.Point(440, 8);
             this.managerUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.managerUser.Name = "managerUser";
-            this.managerUser.Size = new System.Drawing.Size(236, 31);
+            this.managerUser.Size = new System.Drawing.Size(188, 25);
             this.managerUser.TabIndex = 0;
             this.managerUser.Text = "User Management";
             // 
@@ -338,43 +398,13 @@
             // 
             this.userNameErrorProvider.ContainerControl = this;
             // 
-            // tickPicBox
-            // 
-            this.tickPicBox.Image = ((System.Drawing.Image)(resources.GetObject("tickPicBox.Image")));
-            this.tickPicBox.Location = new System.Drawing.Point(445, 7);
-            this.tickPicBox.Name = "tickPicBox";
-            this.tickPicBox.Size = new System.Drawing.Size(34, 28);
-            this.tickPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.tickPicBox.TabIndex = 17;
-            this.tickPicBox.TabStop = false;
-            // 
             // passErrorProvider
             // 
             this.passErrorProvider.ContainerControl = this;
             // 
-            // passPicBox
-            // 
-            this.passPicBox.Image = ((System.Drawing.Image)(resources.GetObject("passPicBox.Image")));
-            this.passPicBox.Location = new System.Drawing.Point(445, 48);
-            this.passPicBox.Name = "passPicBox";
-            this.passPicBox.Size = new System.Drawing.Size(34, 28);
-            this.passPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.passPicBox.TabIndex = 18;
-            this.passPicBox.TabStop = false;
-            // 
             // nameErrorProvider
             // 
             this.nameErrorProvider.ContainerControl = this;
-            // 
-            // namePicBox
-            // 
-            this.namePicBox.Image = ((System.Drawing.Image)(resources.GetObject("namePicBox.Image")));
-            this.namePicBox.Location = new System.Drawing.Point(445, 136);
-            this.namePicBox.Name = "namePicBox";
-            this.namePicBox.Size = new System.Drawing.Size(34, 28);
-            this.namePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.namePicBox.TabIndex = 19;
-            this.namePicBox.TabStop = false;
             // 
             // emailErrorProvider
             // 
@@ -388,39 +418,9 @@
             // 
             this.addressErrorProvider.ContainerControl = this;
             // 
-            // emailPicBox
+            // UserManagement
             // 
-            this.emailPicBox.Image = ((System.Drawing.Image)(resources.GetObject("emailPicBox.Image")));
-            this.emailPicBox.Location = new System.Drawing.Point(982, 5);
-            this.emailPicBox.Name = "emailPicBox";
-            this.emailPicBox.Size = new System.Drawing.Size(34, 28);
-            this.emailPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.emailPicBox.TabIndex = 20;
-            this.emailPicBox.TabStop = false;
-            // 
-            // phonePicBox
-            // 
-            this.phonePicBox.Image = ((System.Drawing.Image)(resources.GetObject("phonePicBox.Image")));
-            this.phonePicBox.Location = new System.Drawing.Point(982, 46);
-            this.phonePicBox.Name = "phonePicBox";
-            this.phonePicBox.Size = new System.Drawing.Size(34, 28);
-            this.phonePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.phonePicBox.TabIndex = 21;
-            this.phonePicBox.TabStop = false;
-            // 
-            // addressPicBox
-            // 
-            this.addressPicBox.Image = ((System.Drawing.Image)(resources.GetObject("addressPicBox.Image")));
-            this.addressPicBox.Location = new System.Drawing.Point(982, 90);
-            this.addressPicBox.Name = "addressPicBox";
-            this.addressPicBox.Size = new System.Drawing.Size(34, 28);
-            this.addressPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.addressPicBox.TabIndex = 22;
-            this.addressPicBox.TabStop = false;
-            // 
-            // ManagerDashboard
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1197, 660);
             this.Controls.Add(this.panel2);
@@ -439,26 +439,26 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "ManagerDashboard";
-            this.Text = "ManagerDashboard";
+            this.Name = "UserManagement";
+            this.Text = "User Management";
             this.Load += new System.EventHandler(this.ManagerDashboard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.userRecordDataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.addressPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.phonePicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emailPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.namePicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.passPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tickPicBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userNameErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tickPicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.passErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.passPicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nameErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.namePicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emailErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.phoneErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emailPicBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.phonePicBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.addressPicBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

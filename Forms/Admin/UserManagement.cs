@@ -19,10 +19,10 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace File_Acess_Management
 {
-    public partial class ManagerDashboard : Form
+    public partial class UserManagement : Form
     {
         bool check = false;
-        public ManagerDashboard()
+        public UserManagement()
         {
             InitializeComponent();
         }
