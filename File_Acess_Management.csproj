@@ -110,6 +110,24 @@
     <Compile Include="Forms\Admin\RaisedRequests.Designer.cs">
       <DependentUpon>RaisedRequests.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerIncomingRequestUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerIncomingRequestUserControl.Designer.cs">
+      <DependentUpon>ManagerIncomingRequestUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerInformationUserConrol.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerInformationUserConrol.Designer.cs">
+      <DependentUpon>ManagerInformationUserConrol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerUserListUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerUserListUserControl.Designer.cs">
+      <DependentUpon>ManagerUserListUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\AuthManager.cs" />
     <Compile Include="Data\ConnectionHelper.cs" />
     <Compile Include="Forms\Admin\AdminDashboard.cs">
@@ -168,6 +186,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\UserManagement.resx">
       <DependentUpon>UserManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Manager\ManagerUserControls\ManagerIncomingRequestUserControl.resx">
+      <DependentUpon>ManagerIncomingRequestUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Manager\ManagerUserControls\ManagerInformationUserConrol.resx">
+      <DependentUpon>ManagerInformationUserConrol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Manager\ManagerUserControls\ManagerUserListUserControl.resx">
+      <DependentUpon>ManagerUserListUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
