@@ -1,6 +1,6 @@
 ﻿namespace File_Acess_Management
 {
-    partial class ManagerForm
+    partial class ManagerDashboard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManagerForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManagerDashboard));
             this.tabTitleLbl = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.leftPanel = new System.Windows.Forms.Panel();
@@ -47,10 +47,10 @@
             this.logoPicBox = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.assignedLbl = new System.Windows.Forms.Label();
             this.requestGridView = new System.Windows.Forms.DataGridView();
             this.userListBx = new System.Windows.Forms.ListBox();
             this.mySqlDataAdapter1 = new MySql.Data.MySqlClient.MySqlDataAdapter();
-            this.assignedLbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.leftPanel.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -267,6 +267,17 @@
             this.panel2.Size = new System.Drawing.Size(1120, 657);
             this.panel2.TabIndex = 3;
             // 
+            // assignedLbl
+            // 
+            this.assignedLbl.AutoSize = true;
+            this.assignedLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.assignedLbl.Location = new System.Drawing.Point(278, 89);
+            this.assignedLbl.Name = "assignedLbl";
+            this.assignedLbl.Size = new System.Drawing.Size(121, 20);
+            this.assignedLbl.TabIndex = 1;
+            this.assignedLbl.Text = "Assigned Users";
+            this.assignedLbl.Click += new System.EventHandler(this.label1_Click);
+            // 
             // requestGridView
             // 
             this.requestGridView.AllowUserToAddRows = false;
@@ -299,18 +310,7 @@
             this.mySqlDataAdapter1.SelectCommand = null;
             this.mySqlDataAdapter1.UpdateCommand = null;
             // 
-            // assignedLbl
-            // 
-            this.assignedLbl.AutoSize = true;
-            this.assignedLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.assignedLbl.Location = new System.Drawing.Point(278, 89);
-            this.assignedLbl.Name = "assignedLbl";
-            this.assignedLbl.Size = new System.Drawing.Size(121, 20);
-            this.assignedLbl.TabIndex = 1;
-            this.assignedLbl.Text = "Assigned Users";
-            this.assignedLbl.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // SubManagers
+            // ManagerDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -319,8 +319,8 @@
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "SubManagers";
-            this.Text = "SubManagers";
+            this.Name = "ManagerDashboard";
+            this.Text = "Manager Dashboard";
             this.Load += new System.EventHandler(this.SubManagers_Load);
             this.panel1.ResumeLayout(false);
             this.leftPanel.ResumeLayout(false);

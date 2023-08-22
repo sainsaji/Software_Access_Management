@@ -1,6 +1,6 @@
 ﻿namespace File_Acess_Management
 {
-    partial class AdminRequests
+    partial class RaisedRequests
     {
         /// <summary>
         /// Required designer variable.
@@ -41,7 +41,7 @@
             this.panel3.Controls.Add(this.tabTitleLbl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1199, 43);
             this.panel3.TabIndex = 1;
@@ -67,7 +67,7 @@
             this.adminRequestsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.adminRequestsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.adminRequestsDataGridView.Location = new System.Drawing.Point(0, 43);
-            this.adminRequestsDataGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.adminRequestsDataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.adminRequestsDataGridView.Name = "adminRequestsDataGridView";
             this.adminRequestsDataGridView.RowHeadersWidth = 51;
             this.adminRequestsDataGridView.RowTemplate.Height = 24;
@@ -75,16 +75,16 @@
             this.adminRequestsDataGridView.TabIndex = 2;
             this.adminRequestsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.adminRequestsDataGridView_CellClick);
             // 
-            // AdminRequests
+            // RaisedRequests
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1199, 690);
             this.Controls.Add(this.adminRequestsDataGridView);
             this.Controls.Add(this.panel3);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "AdminRequests";
-            this.Text = "AdminRequests";
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "RaisedRequests";
+            this.Text = "Raised Requests";
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.adminRequestsDataGridView)).EndInit();

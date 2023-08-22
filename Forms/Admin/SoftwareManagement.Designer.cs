@@ -1,6 +1,6 @@
 ﻿namespace File_Acess_Management
 {
-    partial class Software
+    partial class SoftwareManagement
     {
         /// <summary>
         /// Required designer variable.
@@ -151,7 +151,7 @@
             this.panel2.Size = new System.Drawing.Size(1200, 49);
             this.panel2.TabIndex = 27;
             // 
-            // Software
+            // SoftwareManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -168,8 +168,8 @@
             this.Controls.Add(this.softwareListDataGridView);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Software";
-            this.Text = "Software";
+            this.Name = "SoftwareManagement";
+            this.Text = "Software Management";
             this.Load += new System.EventHandler(this.Software_Load);
             ((System.ComponentModel.ISupportInitialize)(this.softwareListDataGridView)).EndInit();
             this.panel2.ResumeLayout(false);

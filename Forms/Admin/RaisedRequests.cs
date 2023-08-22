@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace File_Acess_Management
 {
-    public partial class AdminRequests : Form
+    public partial class RaisedRequests : Form
     {
-        public AdminRequests()
+        public RaisedRequests()
         {
             InitializeComponent();
             tabTitleLbl.Text = "Current Requests";

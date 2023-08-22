@@ -1,6 +1,6 @@
 ﻿namespace File_Acess_Management
 {
-    partial class MainForm
+    partial class AdminDashboard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminDashboard));
             this.panelContainer = new System.Windows.Forms.Panel();
             this.DashboardBtn = new System.Windows.Forms.Button();
             this.usersMngBtn = new System.Windows.Forms.Button();
@@ -120,7 +120,7 @@
             this.navigationPanel.Size = new System.Drawing.Size(189, 833);
             this.navigationPanel.TabIndex = 0;
             // 
-            // MainForm
+            // AdminDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -130,8 +130,8 @@
             this.Controls.Add(this.navigationPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Name = "AdminDashboard";
+            this.Text = "Admin Dashboard";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.navigationPanel.ResumeLayout(false);
             this.ResumeLayout(false);

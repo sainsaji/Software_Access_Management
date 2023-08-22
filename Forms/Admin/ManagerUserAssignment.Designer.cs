@@ -175,7 +175,7 @@
             this.panel1.Size = new System.Drawing.Size(1199, 49);
             this.panel1.TabIndex = 11;
             // 
-            // userAssignedForm
+            // ManagerUserAssignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -193,8 +193,8 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "userAssignedForm";
-            this.Text = "userAssignedForm";
+            this.Name = "ManagerUserAssignment";
+            this.Text = "Manager User Assignment";
             this.Load += new System.EventHandler(this.userAssignedForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.assignedManagerDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notAssignedManagerDataGridView)).EndInit();

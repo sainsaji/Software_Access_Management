@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace File_Acess_Management
 {
-    public partial class Software : Form
+    public partial class SoftwareManagement : Form
     {
         bool ck;
         int software_id=0;
-        public Software()
+        public SoftwareManagement()
         {
             InitializeComponent();
         }

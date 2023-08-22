@@ -13,10 +13,10 @@ using System.Windows.Forms;
 
 namespace File_Acess_Management
 {
-    public partial class ManagerForm : Form
+    public partial class ManagerDashboard : Form
     {
         User user;
-        public ManagerForm(User user)
+        public ManagerDashboard(User user)
         {
             InitializeComponent();
             setButtonAction();

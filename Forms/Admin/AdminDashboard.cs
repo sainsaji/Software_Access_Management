@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace File_Acess_Management
 {
-    public partial class MainForm : Form
+    public partial class AdminDashboard : Form
     {
         private Form currentForm; // Store the currently displayed form
-        public MainForm()
+        public AdminDashboard()
         {
             InitializeComponent();
         }
@@ -24,7 +24,7 @@ namespace File_Acess_Management
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
-            ShowForm(new AdminRequests());
+            ShowForm(new RaisedRequests());
 
         }
         private void ShowForm(Form formToShow)
@@ -48,7 +48,7 @@ namespace File_Acess_Management
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
-            ShowForm(new AdminRequests());
+            ShowForm(new RaisedRequests());
         }
 
         private void usersMngBtn_Click(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace File_Acess_Management
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.Aqua;
-            ShowForm(new Software());
+            ShowForm(new SoftwareManagement());
         }
 
 

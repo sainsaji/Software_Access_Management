@@ -14,13 +14,13 @@ using System.Windows.Forms;
 namespace File_Acess_Management
 {
 
-    public partial class UserDashBoard : Form
+    public partial class UserDashboard : Form
     {
         public int userId;
         private List<RequestList> requestList = new List<RequestList>();
         User user;
 
-        public UserDashBoard(User user)
+        public UserDashboard(User user)
         {
             InitializeComponent();
             this.user = user;
