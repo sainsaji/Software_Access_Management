@@ -184,8 +184,8 @@ namespace File_Acess_Management
                         mm.Subject = "Credentials to the App";
                         mm.Body = "Hi There, \n" +
                             "\nWelcome to Software Access management System\n" +
-                            "\n Username: "+username+
-                            "\n Password: "+password;
+                            "\n Username: " + username +
+                            "\n Password: " + password;
                         sc.Port = 587;
                         sc.Credentials = new System.Net.NetworkCredential("resumework2022@gmail.com", "uqdbenfkuzuhvwfl");
                         sc.EnableSsl = true;
@@ -209,31 +209,31 @@ namespace File_Acess_Management
                                 command.Parameters.AddWithValue("@Address", address);
                                 command.Parameters.AddWithValue("@Assigned", false);
 
-                    int rowsAffected = command.ExecuteNonQuery(); ;
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("User added successfully.");
-                        GetUsersRecord();
-                        ClearFormFields();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error adding user.");
-                    }
-                }
+                                int rowsAffected = command.ExecuteNonQuery(); ;
+                                if (rowsAffected > 0)
+                                {
+                                    MessageBox.Show("User added successfully.");
+                                    GetUsersRecord();
+                                    ClearFormFields();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Error adding user.");
+                                }
+                            }
 
                             connection.Close();
                         }
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("error in mail, enter correct email address" + ex);
             }
-            
 
-            
+
+
         }
         private void ClearFormFields()
         {

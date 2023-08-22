@@ -87,7 +87,7 @@
             this.userNameText.Location = new System.Drawing.Point(215, 77);
             this.userNameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userNameText.Name = "userNameText";
-            this.userNameText.Size = new System.Drawing.Size(235, 26);
+            this.userNameText.Size = new System.Drawing.Size(235, 30);
             this.userNameText.TabIndex = 3;
             this.userNameText.TextChanged += new System.EventHandler(this.userNameText_TextChanged);
             this.userNameText.Leave += new System.EventHandler(this.userNameText_Leave);
@@ -99,7 +99,7 @@
             this.userNameLabel.Location = new System.Drawing.Point(35, 82);
             this.userNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(89, 20);
+            this.userNameLabel.Size = new System.Drawing.Size(110, 25);
             this.userNameLabel.TabIndex = 2;
             this.userNameLabel.Text = "User Name";
             // 
@@ -109,7 +109,7 @@
             this.passwordText.Location = new System.Drawing.Point(215, 118);
             this.passwordText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.passwordText.Name = "passwordText";
-            this.passwordText.Size = new System.Drawing.Size(235, 26);
+            this.passwordText.Size = new System.Drawing.Size(235, 30);
             this.passwordText.TabIndex = 5;
             this.passwordText.Leave += new System.EventHandler(this.passwordText_Leave);
             // 
@@ -120,7 +120,7 @@
             this.passwordLabel.Location = new System.Drawing.Point(35, 123);
             this.passwordLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(78, 20);
+            this.passwordLabel.Size = new System.Drawing.Size(98, 25);
             this.passwordLabel.TabIndex = 4;
             this.passwordLabel.Text = "Password";
             // 
@@ -130,7 +130,7 @@
             this.emailText.Location = new System.Drawing.Point(743, 5);
             this.emailText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.emailText.Name = "emailText";
-            this.emailText.Size = new System.Drawing.Size(232, 26);
+            this.emailText.Size = new System.Drawing.Size(232, 30);
             this.emailText.TabIndex = 7;
             this.emailText.Leave += new System.EventHandler(this.emailText_Leave);
             // 
@@ -141,7 +141,7 @@
             this.emailLabel.Location = new System.Drawing.Point(563, 10);
             this.emailLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.emailLabel.Name = "emailLabel";
-            this.emailLabel.Size = new System.Drawing.Size(48, 20);
+            this.emailLabel.Size = new System.Drawing.Size(60, 25);
             this.emailLabel.TabIndex = 6;
             this.emailLabel.Text = "Email";
             // 
@@ -151,7 +151,7 @@
             this.phoneNumberText.Location = new System.Drawing.Point(743, 46);
             this.phoneNumberText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.phoneNumberText.Name = "phoneNumberText";
-            this.phoneNumberText.Size = new System.Drawing.Size(232, 26);
+            this.phoneNumberText.Size = new System.Drawing.Size(232, 30);
             this.phoneNumberText.TabIndex = 9;
             this.phoneNumberText.Leave += new System.EventHandler(this.phoneNumberText_Leave);
             // 
@@ -162,7 +162,7 @@
             this.phoneNumberLabel.Location = new System.Drawing.Point(563, 51);
             this.phoneNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.phoneNumberLabel.Name = "phoneNumberLabel";
-            this.phoneNumberLabel.Size = new System.Drawing.Size(115, 20);
+            this.phoneNumberLabel.Size = new System.Drawing.Size(143, 25);
             this.phoneNumberLabel.TabIndex = 8;
             this.phoneNumberLabel.Text = "Phone Number";
             // 
@@ -172,7 +172,7 @@
             this.addressText.Location = new System.Drawing.Point(743, 90);
             this.addressText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addressText.Name = "addressText";
-            this.addressText.Size = new System.Drawing.Size(232, 26);
+            this.addressText.Size = new System.Drawing.Size(232, 30);
             this.addressText.TabIndex = 11;
             this.addressText.Leave += new System.EventHandler(this.addressText_Leave);
             // 
@@ -183,7 +183,7 @@
             this.addressLabel.Location = new System.Drawing.Point(563, 95);
             this.addressLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.addressLabel.Name = "addressLabel";
-            this.addressLabel.Size = new System.Drawing.Size(68, 20);
+            this.addressLabel.Size = new System.Drawing.Size(85, 25);
             this.addressLabel.TabIndex = 10;
             this.addressLabel.Text = "Address";
             // 
@@ -221,7 +221,7 @@
             this.nameText.Location = new System.Drawing.Point(215, 206);
             this.nameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nameText.Name = "nameText";
-            this.nameText.Size = new System.Drawing.Size(235, 26);
+            this.nameText.Size = new System.Drawing.Size(235, 30);
             this.nameText.TabIndex = 19;
             this.nameText.Leave += new System.EventHandler(this.nameText_Leave);
             // 
@@ -232,7 +232,7 @@
             this.nameLabel.Location = new System.Drawing.Point(35, 211);
             this.nameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(51, 20);
+            this.nameLabel.Size = new System.Drawing.Size(64, 25);
             this.nameLabel.TabIndex = 18;
             this.nameLabel.Text = "Name";
             // 
@@ -279,7 +279,7 @@
             this.roleLabel.Location = new System.Drawing.Point(35, 166);
             this.roleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.roleLabel.Name = "roleLabel";
-            this.roleLabel.Size = new System.Drawing.Size(88, 20);
+            this.roleLabel.Size = new System.Drawing.Size(108, 25);
             this.roleLabel.TabIndex = 23;
             this.roleLabel.Text = "Role Name";
             // 
@@ -289,7 +289,7 @@
             this.roleComboBox.Location = new System.Drawing.Point(215, 162);
             this.roleComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.roleComboBox.Name = "roleComboBox";
-            this.roleComboBox.Size = new System.Drawing.Size(235, 28);
+            this.roleComboBox.Size = new System.Drawing.Size(235, 33);
             this.roleComboBox.TabIndex = 24;
             // 
             // panel1
@@ -307,7 +307,7 @@
             this.panel1.Controls.Add(this.phoneNumberText);
             this.panel1.Controls.Add(this.addressLabel);
             this.panel1.Controls.Add(this.addressText);
-            this.panel1.Location = new System.Drawing.Point(12, 70);
+            this.panel1.Location = new System.Drawing.Point(12, 77);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1181, 587);
             this.panel1.TabIndex = 25;
@@ -381,7 +381,7 @@
             this.managerUser.Location = new System.Drawing.Point(440, 8);
             this.managerUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.managerUser.Name = "managerUser";
-            this.managerUser.Size = new System.Drawing.Size(188, 25);
+            this.managerUser.Size = new System.Drawing.Size(236, 31);
             this.managerUser.TabIndex = 0;
             this.managerUser.Text = "User Management";
             // 
@@ -420,7 +420,7 @@
             // 
             // UserManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1197, 660);
             this.Controls.Add(this.panel2);

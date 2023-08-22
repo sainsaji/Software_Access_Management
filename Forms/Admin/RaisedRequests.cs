@@ -17,7 +17,7 @@ namespace File_Acess_Management
         public RaisedRequests()
         {
             InitializeComponent();
-            tabTitleLbl.Text = "Current Requests";
+
             setButtonAction();
             loadAdminRequests();
 

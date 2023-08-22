@@ -104,6 +104,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminManagerUserAssignmentUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminManagerUserAssignmentUserControl.Designer.cs">
+      <DependentUpon>AdminManagerUserAssignmentUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminRaisedRequestsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminRaisedRequestsUserControl.Designer.cs">
+      <DependentUpon>AdminRaisedRequestsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminSoftwareManagementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminSoftwareManagementUserControl.Designer.cs">
+      <DependentUpon>AdminSoftwareManagementUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminUserManagementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminUserManagementUserControl.Designer.cs">
+      <DependentUpon>AdminUserManagementUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Admin\RaisedRequests.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +202,18 @@
     <Compile Include="Forms\Shared\UserLogin.Designer.cs">
       <DependentUpon>UserLogin.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminManagerUserAssignmentUserControl.resx">
+      <DependentUpon>AdminManagerUserAssignmentUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminRaisedRequestsUserControl.resx">
+      <DependentUpon>AdminRaisedRequestsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminSoftwareManagementUserControl.resx">
+      <DependentUpon>AdminSoftwareManagementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminUserManagementUserControl.resx">
+      <DependentUpon>AdminUserManagementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\RaisedRequests.resx">
       <DependentUpon>RaisedRequests.cs</DependentUpon>
     </EmbeddedResource>
