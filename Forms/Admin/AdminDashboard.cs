@@ -1,4 +1,8 @@
-﻿using System;
+﻿using File_Acess_Management.Data;
+using File_Acess_Management.Data.Repository;
+using File_Acess_Management.Data.Repository.IRepository;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +16,14 @@ namespace File_Acess_Management
 {
     public partial class AdminDashboard : Form
     {
-        private Form currentForm; // Store the currently displayed form
-        public AdminDashboard()
+        private Form currentForm;// Store the currently displayed form
+        //private readonly IUserManagement _userManagement;
+        //private readonly IDatabaseConnectionProvider databaseConnectionProvider;
+        //private readonly ICommandFactory commandFactory;
+        private readonly ServiceProvider _serviceProvider;
+        public AdminDashboard(ServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             InitializeComponent();
         }
 
@@ -53,11 +62,13 @@ namespace File_Acess_Management
 
         private void usersMngBtn_Click(object sender, EventArgs e)
         {
+
             DashboardBtn.BackColor = Color.White;
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.Aqua;
             softwareMngBtn.BackColor = Color.White;
-            ShowForm(new UserManagement());
+            
+            ShowForm(new UserManagement(_serviceProvider));
 
         }
 
@@ -82,7 +93,7 @@ namespace File_Acess_Management
 
         private void logOutBtn_Click(object sender, EventArgs e)
         {
-            UserLogin userLogin = new UserLogin();
+            UserLogin userLogin = new UserLogin(_serviceProvider);
             userLogin.Show();
             this.Close();
         }

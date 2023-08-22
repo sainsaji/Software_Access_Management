@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BCrypt.Net;
 using File_Acess_Management.Models;
+using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 
 namespace File_Acess_Management
@@ -17,8 +18,10 @@ namespace File_Acess_Management
     public partial class UserLogin : Form
     {
         private const string ConnectionString = "Server=localhost;Database=fms;User=root;Password=root;";
-        public UserLogin()
+        private readonly ServiceProvider _serviceProvider;
+        public UserLogin(ServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             InitializeComponent();
         }
 
@@ -36,7 +39,7 @@ namespace File_Acess_Management
                 if (RoleName=="Manager")
                 {
                     //MessageBox.Show("Login successful as Manager!");
-                    ManagerDashboard subManagers = new ManagerDashboard(user);
+                    ManagerDashboard subManagers = new ManagerDashboard(user, _serviceProvider);
                     subManagers.Show();
                     this.Hide();
                     
@@ -45,14 +48,14 @@ namespace File_Acess_Management
                 {
                     //MessageBox.Show("Login successful as User!");
                     // Proceed to user dashboard or functionality
-                    UserDashboard userDashBoard = new UserDashboard(user);
+                    UserDashboard userDashBoard = new UserDashboard(user, _serviceProvider);
                     userDashBoard.Show();
                     this.Hide();
                 }
                 else if (RoleName == "Admin")
                 {
                     //MessageBox.Show("Login successful as Admin!");
-                    AdminDashboard admin  =new AdminDashboard();
+                    AdminDashboard admin  =new AdminDashboard(_serviceProvider);
                     admin.Show();
                     this.Hide();
                 }

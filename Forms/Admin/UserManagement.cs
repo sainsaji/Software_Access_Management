@@ -1,4 +1,7 @@
-﻿using File_Acess_Management.Models;
+﻿using File_Acess_Management.Data.Repository;
+using File_Acess_Management.Data.Repository.IRepository;
+using File_Acess_Management.Models;
+using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -22,10 +25,16 @@ namespace File_Acess_Management
     public partial class UserManagement : Form
     {
         bool check = false;
-        public UserManagement()
+        UserManagementRepository repository;
+        private readonly IUserManagementRepository _userManagement;
+        private readonly ServiceProvider _serviceProvider;
+        public UserManagement(ServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
+            _userManagement = _serviceProvider.GetRequiredService<IUserManagementRepository>();
             InitializeComponent();
         }
+
 
         private void ManagerDashboard_Load(object sender, EventArgs e)
         {
@@ -127,42 +136,46 @@ namespace File_Acess_Management
                 connection.Close();
             }
         }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void addUserButton_Click(object sender, EventArgs e)
         {
-            string username = userNameText.Text;
+            Users users = new Users();
+            users.Username= userNameText.Text;
             string password = passwordText.Text;
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-            Role selectedRole = (Role)roleComboBox.SelectedItem;
-            string name = nameText.Text;
-            string email = emailText.Text;
-            string phno = phoneNumberText.Text;
-            string address = addressText.Text;
+            users.HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            users.SelectedRole= (Role)roleComboBox.SelectedItem;
+            users.Name = nameText.Text;
+            users.Email = emailText.Text;
+            users.PhoneNumber = phoneNumberText.Text;
+            users.Address = addressText.Text;
             bool check = false;
+            Console.WriteLine(userNameText.Text);
 
-            using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
-            {
-                connection.Open();
-                string query = "Select * from users where user_name=@Username";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Username", username);
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            check = true;
-                        }
-                    }
-                }
-            }
+            check = _userManagement.CheckUser(userNameText.Text);
 
-            if (username == "" && password == "" && name == "" && email == "" && phno == "" && address == "")
+            if (users.Username == "" && password == "" && users.Name == "" && users.Email == "" && users.PhoneNumber == "" && users.Address == "")
             {
                 MessageBox.Show("Please don't submit blank fields");
                 return;
             }
-            else if (selectedRole == null)
+            else if (users.SelectedRole == null)
             {
                 MessageBox.Show("Please select a role");
                 return;
@@ -180,50 +193,29 @@ namespace File_Acess_Management
                     using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
                     {
                         mm.From = new MailAddress("resumework2022@gmail.com");
-                        mm.To.Add(email);
+                        mm.To.Add(users.Email);
                         mm.Subject = "Credentials to the App";
                         mm.Body = "Hi There, \n" +
                             "\nWelcome to Software Access management System\n" +
-                            "\n Username: "+username+
+                            "\n Username: "+ users.Username +
                             "\n Password: "+password;
                         sc.Port = 587;
                         sc.Credentials = new System.Net.NetworkCredential("resumework2022@gmail.com", "uqdbenfkuzuhvwfl");
                         sc.EnableSsl = true;
                         sc.Send(mm);
                         MessageBox.Show("Email has been sent.");
-                        using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+                        int rowsAffected = _userManagement.InsertUser(users);
+                        if (rowsAffected > 0)
                         {
-                            int roleId = selectedRole.RoleId;
-                            connection.Open();
-
-                            string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (0,@Username, @Password, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
-
-                            using (MySqlCommand command = new MySqlCommand(query, connection))
-                            {
-                                command.Parameters.AddWithValue("@Username", username);
-                                command.Parameters.AddWithValue("@Password", hashedPassword);
-                                command.Parameters.AddWithValue("@RoleId", roleId);
-                                command.Parameters.AddWithValue("@Name", name);
-                                command.Parameters.AddWithValue("@Email", email);
-                                command.Parameters.AddWithValue("@PhoneNumber", phno);
-                                command.Parameters.AddWithValue("@Address", address);
-                                command.Parameters.AddWithValue("@Assigned", false);
-
-                    int rowsAffected = command.ExecuteNonQuery(); ;
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("User added successfully.");
-                        GetUsersRecord();
-                        ClearFormFields();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error adding user.");
-                    }
-                }
-
-                            connection.Close();
+                            MessageBox.Show("User added successfully.");
+                            GetUsersRecord();
+                            ClearFormFields();
                         }
+                        else
+                        {
+                            MessageBox.Show("Error adding user.");
+                        }
+
                     }
                 }
             }
@@ -232,6 +224,17 @@ namespace File_Acess_Management
                 MessageBox.Show("error in mail, enter correct email address" + ex);
             }
             
+
+
+
+
+
+
+
+
+
+
+
 
             
         }

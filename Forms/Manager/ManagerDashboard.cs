@@ -1,4 +1,5 @@
 ﻿using File_Acess_Management.Models;
+using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,11 @@ namespace File_Acess_Management
     public partial class ManagerDashboard : Form
     {
         User user;
-        public ManagerDashboard(User user)
+        private readonly ServiceProvider _serviceProvider;
+
+        public ManagerDashboard(User user, ServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             InitializeComponent();
             setButtonAction();
             this.user = user;
@@ -265,7 +269,7 @@ namespace File_Acess_Management
 
         private void logOut(object sender, EventArgs e)
         {
-            UserLogin userLogin = new UserLogin();
+            UserLogin userLogin = new UserLogin(_serviceProvider);
             userLogin.Show();
             this.Close();
         }

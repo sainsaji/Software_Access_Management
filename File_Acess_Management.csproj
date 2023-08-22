@@ -54,8 +54,14 @@
     <Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
       <HintPath>packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.DependencyInjection.7.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.DependencyInjection.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=8.1.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.8.1.0\lib\net462\MySql.Data.dll</HintPath>
@@ -104,14 +110,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Connection\ConnectionHelper.cs" />
+    <Compile Include="Data\Connection\ICommandFactory.cs" />
+    <Compile Include="Data\Connection\IDatabaseConnectionProvider.cs" />
+    <Compile Include="Data\Repository\IRepository\IUserManagementRepository.cs" />
+    <Compile Include="Data\Repository\UserManagementRepository.cs" />
     <Compile Include="Forms\Admin\RaisedRequests.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Admin\RaisedRequests.Designer.cs">
       <DependentUpon>RaisedRequests.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Users.cs" />
     <Compile Include="Services\AuthManager.cs" />
-    <Compile Include="Data\ConnectionHelper.cs" />
     <Compile Include="Forms\Admin\AdminDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
