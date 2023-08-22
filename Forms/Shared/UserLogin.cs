@@ -36,7 +36,7 @@ namespace File_Acess_Management
                 if (RoleName=="Manager")
                 {
                     //MessageBox.Show("Login successful as Manager!");
-                    SubManagers subManagers = new SubManagers(user);
+                    ManagerForm subManagers = new ManagerForm(user);
                     subManagers.Show();
                     this.Hide();
                     
