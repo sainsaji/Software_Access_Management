@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using File_Acess_Management.Data;
+using File_Acess_Management.Data.Repository;
+using File_Acess_Management.Data.Repository.IRepository;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Acess_Management
@@ -16,7 +18,16 @@ namespace File_Acess_Management
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UserLogin());
+
+            var services = new ServiceCollection();
+            services.AddSingleton<IDatabaseConnectionProvider, ConnectionHelper>();
+            services.AddSingleton<ICommandFactory, ConnectionHelper>();
+            services.AddScoped<IUserManagementRepository, UserManagementRepository>();
+
+            ServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            Application.Run(new UserLogin(serviceProvider));
+            //Application.Run();
         }
     }
 }

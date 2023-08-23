@@ -1,5 +1,9 @@
 ﻿using File_Acess_Management.Forms.Admin.AdminUserControls;
 using File_Acess_Management.Forms.Admin.ManagerUserControls;
+using File_Acess_Management.Data;
+using File_Acess_Management.Data.Repository;
+using File_Acess_Management.Data.Repository.IRepository;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,17 +18,21 @@ namespace File_Acess_Management
 {
     public partial class AdminDashboard : Form
     {
+        public readonly ServiceProvider _serviceProvider;
+        AdminUserManagementUserControl adminUserManagementUCl;
+        public AdminDashboard(ServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+            adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider);
+            InitializeComponent();
+        }
         private Form currentForm;
-        AdminUserManagementUserControl adminUserManagementUCl = new AdminUserManagementUserControl();
+        //AdminUserManagementUserControl adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider);
         AdminRaisedRequestsUserControl raisedRequestsUC = new AdminRaisedRequestsUserControl();
         AdminSoftwareManagementUserControl softwareUC = new AdminSoftwareManagementUserControl();
         AdminManagerUserAssignmentUserControl managerUC = new AdminManagerUserAssignmentUserControl();
 
-
-        public AdminDashboard()
-        {
-            InitializeComponent();
-        }
+        
 
         private void AddUserControl(UserControl userControl)
         {
@@ -40,7 +48,6 @@ namespace File_Acess_Management
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
-            ShowForm(new RaisedRequests());
             AddUserControl(raisedRequestsUC);
 
         }
@@ -66,7 +73,6 @@ namespace File_Acess_Management
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
             tabTitleLbl.Text = "Incoming Requests";
-            ShowForm(new RaisedRequests());
             AddUserControl(raisedRequestsUC);
         }
 
@@ -77,7 +83,6 @@ namespace File_Acess_Management
             usersMngBtn.BackColor = Color.Aqua;
             softwareMngBtn.BackColor = Color.White;
             tabTitleLbl.Text = "User Management";
-            ShowForm(new UserManagement());
             AddUserControl(adminUserManagementUCl);
 
         }
@@ -89,7 +94,6 @@ namespace File_Acess_Management
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
             tabTitleLbl.Text = "Manager - User Assignment";
-            ShowForm(new ManagerUserAssignment());
             AddUserControl(managerUC);
         }
 
@@ -100,14 +104,13 @@ namespace File_Acess_Management
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.Aqua;
             tabTitleLbl.Text = "Software Management";
-            ShowForm(new SoftwareManagement());
             AddUserControl(softwareUC);
         }
 
 
         private void logOutBtn_Click(object sender, EventArgs e)
         {
-            UserLogin userLogin = new UserLogin();
+            UserLogin userLogin = new UserLogin(_serviceProvider);
             userLogin.Show();
             this.Close();
         }
