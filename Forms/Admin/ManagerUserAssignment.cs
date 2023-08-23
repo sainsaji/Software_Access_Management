@@ -20,8 +20,8 @@ namespace File_Acess_Management
     public partial class ManagerUserAssignment : Form
     {
         int selectedUserId, selectedUserId2, selectedManagerId;
-        bool ck=false;
-        bool ck2=false;
+        bool ck = false;
+        bool ck2 = false;
         public ManagerUserAssignment()
         {
             InitializeComponent();
@@ -159,8 +159,8 @@ namespace File_Acess_Management
         private void assignManagerBtn_Click(object sender, EventArgs e)
         {
             manager selectedMan = (manager)selectManagerForNotAssigned.SelectedItem;
-            
-            if (ck == true && selectedUserId!=0 && selectedMan!=null)
+
+            if (ck == true && selectedUserId != 0 && selectedMan != null)
             {
                 int selectedId = selectedMan.Id;
                 using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
@@ -168,7 +168,7 @@ namespace File_Acess_Management
                     connection.Open();
 
                     string query = "Insert into managerassigned values (null,@managerId,@userId)";
-                    
+
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@managerId", selectedId);
@@ -184,7 +184,7 @@ namespace File_Acess_Management
                                 command2.Parameters.AddWithValue("@user", selectedUserId);
 
                                 int rowsAffected2 = command2.ExecuteNonQuery(); ;
-                                if (rowsAffected2> 0)
+                                if (rowsAffected2 > 0)
                                 {
                                     MessageBox.Show("User assigned successfully.");
                                     ck = false;
@@ -219,7 +219,7 @@ namespace File_Acess_Management
             selectManager.SelectedIndex = -1;
             selectedUserId = 0;
             selectedUserId2 = 0;
-            selectedManagerId=0;
+            selectedManagerId = 0;
 
         }
 
@@ -230,7 +230,7 @@ namespace File_Acess_Management
 
         private void deleteAssignedBtn_Click(object sender, EventArgs e)
         {
-            if (ck2 == true && selectedUserId2 != 0 && selectedManagerId!=0)
+            if (ck2 == true && selectedUserId2 != 0 && selectedManagerId != 0)
             {
                 using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
                 {
@@ -293,7 +293,7 @@ namespace File_Acess_Management
                         command.Parameters.AddWithValue("@userId", selectedUserId2);
 
 
-                        int rowsAffected = command.ExecuteNonQuery(); 
+                        int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Successfully updated the manager.");
