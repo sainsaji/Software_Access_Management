@@ -24,7 +24,7 @@ namespace File_Acess_Management
         UserRaiseRequestUserControl raiseRequestUserControl = new UserRaiseRequestUserControl();
         UserRequestStatusUserControl userRequestStatusUserControl = new UserRequestStatusUserControl();
 
-        public UserDashboard(User user)
+
 
 
         private readonly ServiceProvider _serviceProvider;
