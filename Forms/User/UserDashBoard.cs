@@ -1,4 +1,5 @@
 ﻿using File_Acess_Management.Models;
+using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,10 @@ namespace File_Acess_Management
         public int userId;
         private List<RequestList> requestList = new List<RequestList>();
         User user;
-
-        public UserDashboard(User user)
+        private readonly ServiceProvider _serviceProvider;
+        public UserDashboard(User user, ServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             InitializeComponent();
             this.user = user;
             this.userId = user.Id;
@@ -529,14 +531,14 @@ namespace File_Acess_Management
 
         private void logout(object sender, MouseEventArgs e)
         {
-            UserLogin logout = new UserLogin();
+            UserLogin logout = new UserLogin(_serviceProvider);
             logout.Show();
             this.Close();
         }
 
         private void logout(object sender, EventArgs e)
         {
-            UserLogin logout = new UserLogin();
+            UserLogin logout = new UserLogin(_serviceProvider);
             logout.Show();
             this.Close();
         }

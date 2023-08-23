@@ -1,5 +1,6 @@
 ﻿using File_Acess_Management.Forms.Manager.ManagerUserControls;
 using File_Acess_Management.Models;
+using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -22,15 +23,17 @@ namespace File_Acess_Management
         ManagerUserListUserControl userListUC = new ManagerUserListUserControl();
         ManagerInformationUserConrol managerInformationUserControl = new ManagerInformationUserConrol();
         ManagerIncomingRequestUserControl managerIncomingRequestUserControl = new ManagerIncomingRequestUserControl();
-        public ManagerDashboard(User user)
+        private readonly ServiceProvider _serviceProvider;
+        public ManagerDashboard(User user, ServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             InitializeComponent();
             setButtonAction();
             this.user = user;
             userListUC.Id = user.Id;
             Console.WriteLine("Setting Manager ID: " + user.Id);
             managerIncomingRequestUserControl.Id = user.Id;
-
+            _serviceProvider = serviceProvider;
         }
 
         private void AddUserControl(UserControl userControl)
@@ -195,7 +198,7 @@ namespace File_Acess_Management
 
         private void logOut(object sender, EventArgs e)
         {
-            UserLogin userLogin = new UserLogin();
+            UserLogin userLogin = new UserLogin(_serviceProvider);
             userLogin.Show();
             this.Close();
         }
