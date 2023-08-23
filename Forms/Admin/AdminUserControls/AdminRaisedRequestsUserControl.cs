@@ -1,5 +1,4 @@
-﻿using File_Acess_Management.Models;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,17 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace File_Acess_Management
+namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 {
-    public partial class RaisedRequests : Form
+    public partial class AdminRaisedRequestsUserControl : UserControl
     {
-        public RaisedRequests()
+        public AdminRaisedRequestsUserControl()
         {
             InitializeComponent();
-
             setButtonAction();
             loadAdminRequests();
-
         }
         private void setButtonAction()
         {
@@ -139,33 +136,36 @@ namespace File_Acess_Management
         {
 
             {
-                if (e.RowIndex >= 0 && e.ColumnIndex == adminRequestsDataGridView.Columns["Action"].Index)
+
                 {
-                    Console.WriteLine("Action button clicked");
-                    DataGridViewRow row = adminRequestsDataGridView.Rows[e.RowIndex];
-
-                    object requestIdValue = row.Cells["request_id"].Value;
-
-                    try
+                    if (e.RowIndex >= 0 && e.ColumnIndex == adminRequestsDataGridView.Columns["Action"].Index)
                     {
-                        if (requestIdValue != null)
-                        {
-                            // Print the request_id to the console
-                            Console.WriteLine("Clicked Approve for request_id: " + requestIdValue.ToString());
+                        Console.WriteLine("Action button clicked");
+                        DataGridViewRow row = adminRequestsDataGridView.Rows[e.RowIndex];
 
-                            // Update admin approval in the database
-                            int requestId = int.Parse(requestIdValue.ToString());
-                            updateAdminRequestApproval(requestId);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Request ID value null");
-                        }
+                        object requestIdValue = row.Cells["request_id"].Value;
 
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
+                        try
+                        {
+                            if (requestIdValue != null)
+                            {
+                                // Print the request_id to the console
+                                Console.WriteLine("Clicked Approve for request_id: " + requestIdValue.ToString());
+
+                                // Update admin approval in the database
+                                int requestId = int.Parse(requestIdValue.ToString());
+                                updateAdminRequestApproval(requestId);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Request ID value null");
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                     }
                 }
             }

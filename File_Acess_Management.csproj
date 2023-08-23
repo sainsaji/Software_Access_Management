@@ -104,11 +104,53 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminManagerUserAssignmentUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminManagerUserAssignmentUserControl.Designer.cs">
+      <DependentUpon>AdminManagerUserAssignmentUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminRaisedRequestsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminRaisedRequestsUserControl.Designer.cs">
+      <DependentUpon>AdminRaisedRequestsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminSoftwareManagementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminSoftwareManagementUserControl.Designer.cs">
+      <DependentUpon>AdminSoftwareManagementUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminUserManagementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminUserManagementUserControl.Designer.cs">
+      <DependentUpon>AdminUserManagementUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Admin\RaisedRequests.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Admin\RaisedRequests.Designer.cs">
       <DependentUpon>RaisedRequests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerIncomingRequestUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerIncomingRequestUserControl.Designer.cs">
+      <DependentUpon>ManagerIncomingRequestUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerInformationUserConrol.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerInformationUserConrol.Designer.cs">
+      <DependentUpon>ManagerInformationUserConrol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerUserListUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Manager\ManagerUserControls\ManagerUserListUserControl.Designer.cs">
+      <DependentUpon>ManagerUserListUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\AuthManager.cs" />
     <Compile Include="Data\ConnectionHelper.cs" />
@@ -160,6 +202,18 @@
     <Compile Include="Forms\Shared\UserLogin.Designer.cs">
       <DependentUpon>UserLogin.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminManagerUserAssignmentUserControl.resx">
+      <DependentUpon>AdminManagerUserAssignmentUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminRaisedRequestsUserControl.resx">
+      <DependentUpon>AdminRaisedRequestsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminSoftwareManagementUserControl.resx">
+      <DependentUpon>AdminSoftwareManagementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminUserManagementUserControl.resx">
+      <DependentUpon>AdminUserManagementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\RaisedRequests.resx">
       <DependentUpon>RaisedRequests.cs</DependentUpon>
     </EmbeddedResource>
@@ -168,6 +222,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\UserManagement.resx">
       <DependentUpon>UserManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Manager\ManagerUserControls\ManagerIncomingRequestUserControl.resx">
+      <DependentUpon>ManagerIncomingRequestUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Manager\ManagerUserControls\ManagerInformationUserConrol.resx">
+      <DependentUpon>ManagerInformationUserConrol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Manager\ManagerUserControls\ManagerUserListUserControl.resx">
+      <DependentUpon>ManagerUserListUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

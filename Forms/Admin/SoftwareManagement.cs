@@ -14,7 +14,7 @@ namespace File_Acess_Management
     public partial class SoftwareManagement : Form
     {
         bool ck;
-        int software_id=0;
+        int software_id = 0;
         public SoftwareManagement()
         {
             InitializeComponent();
@@ -23,7 +23,7 @@ namespace File_Acess_Management
         {
             GetSoftwareRecords();
             softwareListDataGridView.SelectionChanged += SoftwareListDataGridView_SelectionChanged;
-            ck=false;
+            ck = false;
         }
 
         private void SoftwareListDataGridView_SelectionChanged(object sender, EventArgs e)
@@ -31,7 +31,7 @@ namespace File_Acess_Management
             if (softwareListDataGridView.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = softwareListDataGridView.SelectedRows[0];
-                software_id =Convert.ToInt32(selectedRow.Cells["soft_id"].Value);
+                software_id = Convert.ToInt32(selectedRow.Cells["soft_id"].Value);
                 softwareNametext.Text = selectedRow.Cells["soft_name"].Value.ToString();
                 ck = true;
                 addButton.Enabled = false;
@@ -64,12 +64,12 @@ namespace File_Acess_Management
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            string software_name= softwareNametext.Text;
+            string software_name = softwareNametext.Text;
             if (ck == true)
             {
                 MessageBox.Show("You can't add the same record agian");
             }
-            else if(software_name == "")
+            else if (software_name == "")
             {
                 MessageBox.Show("Enter the software name");
             }
@@ -84,8 +84,8 @@ namespace File_Acess_Management
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@softwareName", software_name);
-                        int rowsEffected=command.ExecuteNonQuery();
-                        if(rowsEffected > 0)
+                        int rowsEffected = command.ExecuteNonQuery();
+                        if (rowsEffected > 0)
                         {
                             MessageBox.Show("Software added successfully.");
                             GetSoftwareRecords();
@@ -153,7 +153,7 @@ namespace File_Acess_Management
         {
             if (ck == true)
             {
-                
+
                 if (software_id == 0)
                 {
                     MessageBox.Show("Some Error Occured");

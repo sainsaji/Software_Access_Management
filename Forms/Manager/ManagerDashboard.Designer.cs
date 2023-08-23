@@ -35,18 +35,19 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.logOutLbl = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.statusPanel = new System.Windows.Forms.Panel();
+            this.userListPanel = new System.Windows.Forms.Panel();
             this.reqStatusLbl = new System.Windows.Forms.Label();
-            this.reqIcoClick = new System.Windows.Forms.PictureBox();
-            this.requestPanel = new System.Windows.Forms.Panel();
+            this.userListIcon = new System.Windows.Forms.PictureBox();
+            this.incomingRequestPanel = new System.Windows.Forms.Panel();
             this.requestLbl = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.informationPanel = new System.Windows.Forms.Panel();
-            this.userInfoLbl = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.incomingURIcon = new System.Windows.Forms.PictureBox();
+            this.managerInformationPanel = new System.Windows.Forms.Panel();
+            this.managerInfoLabel = new System.Windows.Forms.Label();
+            this.managerInformationIcon = new System.Windows.Forms.PictureBox();
             this.logoPicBox = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.contentPanelManager = new System.Windows.Forms.Panel();
             this.assignedLbl = new System.Windows.Forms.Label();
             this.requestGridView = new System.Windows.Forms.DataGridView();
             this.userListBx = new System.Windows.Forms.ListBox();
@@ -55,12 +56,12 @@
             this.leftPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.statusPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.reqIcoClick)).BeginInit();
-            this.requestPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.informationPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.userListPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userListIcon)).BeginInit();
+            this.incomingRequestPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.incomingURIcon)).BeginInit();
+            this.managerInformationPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.managerInformationIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -71,9 +72,9 @@
             // 
             this.tabTitleLbl.AutoSize = true;
             this.tabTitleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabTitleLbl.Location = new System.Drawing.Point(612, 24);
+            this.tabTitleLbl.Location = new System.Drawing.Point(492, 19);
             this.tabTitleLbl.Name = "tabTitleLbl";
-            this.tabTitleLbl.Size = new System.Drawing.Size(108, 20);
+            this.tabTitleLbl.Size = new System.Drawing.Size(136, 25);
             this.tabTitleLbl.TabIndex = 0;
             this.tabTitleLbl.Text = "Tab Title Here";
             // 
@@ -91,9 +92,9 @@
             // 
             this.leftPanel.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.leftPanel.Controls.Add(this.panel4);
-            this.leftPanel.Controls.Add(this.statusPanel);
-            this.leftPanel.Controls.Add(this.requestPanel);
-            this.leftPanel.Controls.Add(this.informationPanel);
+            this.leftPanel.Controls.Add(this.userListPanel);
+            this.leftPanel.Controls.Add(this.incomingRequestPanel);
+            this.leftPanel.Controls.Add(this.managerInformationPanel);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 63);
             this.leftPanel.Name = "leftPanel";
@@ -116,9 +117,9 @@
             this.logOutLbl.AutoSize = true;
             this.logOutLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logOutLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.logOutLbl.Location = new System.Drawing.Point(72, 14);
+            this.logOutLbl.Location = new System.Drawing.Point(74, 21);
             this.logOutLbl.Name = "logOutLbl";
-            this.logOutLbl.Size = new System.Drawing.Size(52, 17);
+            this.logOutLbl.Size = new System.Drawing.Size(60, 20);
             this.logOutLbl.TabIndex = 4;
             this.logOutLbl.Text = "Logout";
             this.logOutLbl.Click += new System.EventHandler(this.logOut);
@@ -134,104 +135,107 @@
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.logOut);
             // 
-            // statusPanel
+            // userListPanel
             // 
-            this.statusPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.statusPanel.Controls.Add(this.reqStatusLbl);
-            this.statusPanel.Controls.Add(this.reqIcoClick);
-            this.statusPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.statusPanel.Location = new System.Drawing.Point(0, 124);
-            this.statusPanel.Name = "statusPanel";
-            this.statusPanel.Size = new System.Drawing.Size(225, 62);
-            this.statusPanel.TabIndex = 2;
-            this.statusPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.statusPanel_Paint);
+            this.userListPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.userListPanel.Controls.Add(this.reqStatusLbl);
+            this.userListPanel.Controls.Add(this.userListIcon);
+            this.userListPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.userListPanel.Location = new System.Drawing.Point(0, 124);
+            this.userListPanel.Name = "userListPanel";
+            this.userListPanel.Size = new System.Drawing.Size(225, 62);
+            this.userListPanel.TabIndex = 2;
             // 
             // reqStatusLbl
             // 
             this.reqStatusLbl.AutoSize = true;
             this.reqStatusLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reqStatusLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.reqStatusLbl.Location = new System.Drawing.Point(48, 12);
+            this.reqStatusLbl.Location = new System.Drawing.Point(56, 26);
             this.reqStatusLbl.Name = "reqStatusLbl";
-            this.reqStatusLbl.Size = new System.Drawing.Size(64, 17);
+            this.reqStatusLbl.Size = new System.Drawing.Size(78, 20);
             this.reqStatusLbl.TabIndex = 2;
             this.reqStatusLbl.Text = "User List";
             this.reqStatusLbl.Click += new System.EventHandler(this.reqStatusLbl_Click);
             // 
-            // reqIcoClick
+            // userListIcon
             // 
-            this.reqIcoClick.Image = ((System.Drawing.Image)(resources.GetObject("reqIcoClick.Image")));
-            this.reqIcoClick.Location = new System.Drawing.Point(3, 9);
-            this.reqIcoClick.Name = "reqIcoClick";
-            this.reqIcoClick.Size = new System.Drawing.Size(56, 37);
-            this.reqIcoClick.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.reqIcoClick.TabIndex = 2;
-            this.reqIcoClick.TabStop = false;
+            this.userListIcon.Image = ((System.Drawing.Image)(resources.GetObject("userListIcon.Image")));
+            this.userListIcon.Location = new System.Drawing.Point(3, 9);
+            this.userListIcon.Name = "userListIcon";
+            this.userListIcon.Size = new System.Drawing.Size(56, 37);
+            this.userListIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.userListIcon.TabIndex = 2;
+            this.userListIcon.TabStop = false;
+            this.userListIcon.Click += new System.EventHandler(this.userListIcon_Click);
             // 
-            // requestPanel
+            // incomingRequestPanel
             // 
-            this.requestPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.requestPanel.Controls.Add(this.requestLbl);
-            this.requestPanel.Controls.Add(this.pictureBox2);
-            this.requestPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.requestPanel.Location = new System.Drawing.Point(0, 62);
-            this.requestPanel.Name = "requestPanel";
-            this.requestPanel.Size = new System.Drawing.Size(225, 62);
-            this.requestPanel.TabIndex = 1;
+            this.incomingRequestPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.incomingRequestPanel.Controls.Add(this.requestLbl);
+            this.incomingRequestPanel.Controls.Add(this.incomingURIcon);
+            this.incomingRequestPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.incomingRequestPanel.Location = new System.Drawing.Point(0, 62);
+            this.incomingRequestPanel.Name = "incomingRequestPanel";
+            this.incomingRequestPanel.Size = new System.Drawing.Size(225, 62);
+            this.incomingRequestPanel.TabIndex = 1;
             // 
             // requestLbl
             // 
             this.requestLbl.AutoSize = true;
             this.requestLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.requestLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.requestLbl.Location = new System.Drawing.Point(48, 12);
+            this.requestLbl.Location = new System.Drawing.Point(56, 26);
             this.requestLbl.Name = "requestLbl";
-            this.requestLbl.Size = new System.Drawing.Size(121, 17);
+            this.requestLbl.Size = new System.Drawing.Size(143, 20);
             this.requestLbl.TabIndex = 2;
             this.requestLbl.Text = "Incoming Request";
             this.requestLbl.Click += new System.EventHandler(this.requestLbl_Click);
             // 
-            // pictureBox2
+            // incomingURIcon
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(3, 9);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(56, 37);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
+            this.incomingURIcon.Image = ((System.Drawing.Image)(resources.GetObject("incomingURIcon.Image")));
+            this.incomingURIcon.Location = new System.Drawing.Point(3, 9);
+            this.incomingURIcon.Name = "incomingURIcon";
+            this.incomingURIcon.Size = new System.Drawing.Size(56, 37);
+            this.incomingURIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.incomingURIcon.TabIndex = 2;
+            this.incomingURIcon.TabStop = false;
+            this.incomingURIcon.Click += new System.EventHandler(this.incomingURIcon_Click);
             // 
-            // informationPanel
+            // managerInformationPanel
             // 
-            this.informationPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.informationPanel.Controls.Add(this.userInfoLbl);
-            this.informationPanel.Controls.Add(this.pictureBox1);
-            this.informationPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.informationPanel.Location = new System.Drawing.Point(0, 0);
-            this.informationPanel.Name = "informationPanel";
-            this.informationPanel.Size = new System.Drawing.Size(225, 62);
-            this.informationPanel.TabIndex = 0;
+            this.managerInformationPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.managerInformationPanel.Controls.Add(this.managerInfoLabel);
+            this.managerInformationPanel.Controls.Add(this.managerInformationIcon);
+            this.managerInformationPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.managerInformationPanel.Location = new System.Drawing.Point(0, 0);
+            this.managerInformationPanel.Name = "managerInformationPanel";
+            this.managerInformationPanel.Size = new System.Drawing.Size(225, 62);
+            this.managerInformationPanel.TabIndex = 0;
             // 
-            // userInfoLbl
+            // managerInfoLabel
             // 
-            this.userInfoLbl.AutoSize = true;
-            this.userInfoLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.userInfoLbl.Location = new System.Drawing.Point(48, 11);
-            this.userInfoLbl.Name = "userInfoLbl";
-            this.userInfoLbl.Size = new System.Drawing.Size(138, 17);
-            this.userInfoLbl.TabIndex = 0;
-            this.userInfoLbl.Text = "Manager Information";
+            this.managerInfoLabel.AutoSize = true;
+            this.managerInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.managerInfoLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.managerInfoLabel.Location = new System.Drawing.Point(56, 26);
+            this.managerInfoLabel.Name = "managerInfoLabel";
+            this.managerInfoLabel.Size = new System.Drawing.Size(162, 20);
+            this.managerInfoLabel.TabIndex = 0;
+            this.managerInfoLabel.Text = "Manager Information";
+            this.managerInfoLabel.Click += new System.EventHandler(this.userInfoLbl_Click);
             // 
-            // pictureBox1
+            // managerInformationIcon
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(3, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(56, 37);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.managerInformationIcon.Image = ((System.Drawing.Image)(resources.GetObject("managerInformationIcon.Image")));
+            this.managerInformationIcon.Location = new System.Drawing.Point(9, 17);
+            this.managerInformationIcon.Name = "managerInformationIcon";
+            this.managerInformationIcon.Size = new System.Drawing.Size(47, 29);
+            this.managerInformationIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.managerInformationIcon.TabIndex = 1;
+            this.managerInformationIcon.TabStop = false;
+            this.managerInformationIcon.Click += new System.EventHandler(this.managerInformationIcon_Click);
             // 
             // logoPicBox
             // 
@@ -251,12 +255,13 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1120, 66);
+            this.panel3.Size = new System.Drawing.Size(1120, 63);
             this.panel3.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel2.Controls.Add(this.contentPanelManager);
             this.panel2.Controls.Add(this.assignedLbl);
             this.panel2.Controls.Add(this.requestGridView);
             this.panel2.Controls.Add(this.userListBx);
@@ -267,16 +272,24 @@
             this.panel2.Size = new System.Drawing.Size(1120, 657);
             this.panel2.TabIndex = 3;
             // 
+            // contentPanelManager
+            // 
+            this.contentPanelManager.BackColor = System.Drawing.Color.White;
+            this.contentPanelManager.Dock = System.Windows.Forms.DockStyle.Right;
+            this.contentPanelManager.Location = new System.Drawing.Point(224, 63);
+            this.contentPanelManager.Name = "contentPanelManager";
+            this.contentPanelManager.Size = new System.Drawing.Size(896, 594);
+            this.contentPanelManager.TabIndex = 3;
+            // 
             // assignedLbl
             // 
             this.assignedLbl.AutoSize = true;
             this.assignedLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.assignedLbl.Location = new System.Drawing.Point(278, 89);
             this.assignedLbl.Name = "assignedLbl";
-            this.assignedLbl.Size = new System.Drawing.Size(121, 20);
+            this.assignedLbl.Size = new System.Drawing.Size(150, 25);
             this.assignedLbl.TabIndex = 1;
             this.assignedLbl.Text = "Assigned Users";
-            this.assignedLbl.Click += new System.EventHandler(this.label1_Click);
             // 
             // requestGridView
             // 
@@ -297,10 +310,10 @@
             // userListBx
             // 
             this.userListBx.FormattingEnabled = true;
-            this.userListBx.ItemHeight = 20;
+            this.userListBx.ItemHeight = 25;
             this.userListBx.Location = new System.Drawing.Point(282, 117);
             this.userListBx.Name = "userListBx";
-            this.userListBx.Size = new System.Drawing.Size(325, 464);
+            this.userListBx.Size = new System.Drawing.Size(325, 454);
             this.userListBx.TabIndex = 1;
             // 
             // mySqlDataAdapter1
@@ -312,7 +325,7 @@
             // 
             // ManagerDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 657);
             this.Controls.Add(this.panel1);
@@ -327,15 +340,15 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.statusPanel.ResumeLayout(false);
-            this.statusPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.reqIcoClick)).EndInit();
-            this.requestPanel.ResumeLayout(false);
-            this.requestPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.informationPanel.ResumeLayout(false);
-            this.informationPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.userListPanel.ResumeLayout(false);
+            this.userListPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userListIcon)).EndInit();
+            this.incomingRequestPanel.ResumeLayout(false);
+            this.incomingRequestPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.incomingURIcon)).EndInit();
+            this.managerInformationPanel.ResumeLayout(false);
+            this.managerInformationPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.managerInformationIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -354,21 +367,22 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label logOutLbl;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Panel statusPanel;
+        private System.Windows.Forms.Panel userListPanel;
         private System.Windows.Forms.Label reqStatusLbl;
-        private System.Windows.Forms.PictureBox reqIcoClick;
-        private System.Windows.Forms.Panel requestPanel;
+        private System.Windows.Forms.PictureBox userListIcon;
+        private System.Windows.Forms.Panel incomingRequestPanel;
         private System.Windows.Forms.Label requestLbl;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Panel informationPanel;
-        private System.Windows.Forms.Label userInfoLbl;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox incomingURIcon;
+        private System.Windows.Forms.Panel managerInformationPanel;
+        private System.Windows.Forms.Label managerInfoLabel;
+        private System.Windows.Forms.PictureBox managerInformationIcon;
         private System.Windows.Forms.PictureBox logoPicBox;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ListBox userListBx;
         private System.Windows.Forms.DataGridView requestGridView;
         private MySql.Data.MySqlClient.MySqlDataAdapter mySqlDataAdapter1;
         private System.Windows.Forms.Label assignedLbl;
+        private System.Windows.Forms.ListBox userListBx;
+        private System.Windows.Forms.Panel contentPanelManager;
     }
 }
