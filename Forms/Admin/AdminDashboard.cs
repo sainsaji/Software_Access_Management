@@ -1,4 +1,6 @@
-﻿using File_Acess_Management.Data;
+﻿using File_Acess_Management.Forms.Admin.AdminUserControls;
+using File_Acess_Management.Forms.Admin.ManagerUserControls;
+using File_Acess_Management.Data;
 using File_Acess_Management.Data.Repository;
 using File_Acess_Management.Data.Repository.IRepository;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,24 +18,37 @@ namespace File_Acess_Management
 {
     public partial class AdminDashboard : Form
     {
-        private Form currentForm;// Store the currently displayed form
-        //private readonly IUserManagement _userManagement;
-        //private readonly IDatabaseConnectionProvider databaseConnectionProvider;
-        //private readonly ICommandFactory commandFactory;
-        private readonly ServiceProvider _serviceProvider;
+        public readonly ServiceProvider _serviceProvider;
+        AdminUserManagementUserControl adminUserManagementUCl;
         public AdminDashboard(ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider);
             InitializeComponent();
+        }
+        private Form currentForm;
+        //AdminUserManagementUserControl adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider);
+        AdminRaisedRequestsUserControl raisedRequestsUC = new AdminRaisedRequestsUserControl();
+        AdminSoftwareManagementUserControl softwareUC = new AdminSoftwareManagementUserControl();
+        AdminManagerUserAssignmentUserControl managerUC = new AdminManagerUserAssignmentUserControl();
+
+        
+
+        private void AddUserControl(UserControl userControl)
+        {
+            userControl.Dock = DockStyle.Fill;
+            AdminContentPanelManager.Controls.Clear();
+            AdminContentPanelManager.Controls.Add(userControl);
+            userControl.BringToFront();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            DashboardBtn.BackColor = Color.Aqua;
+            IncomingRequestsButton.BackColor = Color.Aqua;
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
-            ShowForm(new RaisedRequests());
+            AddUserControl(raisedRequestsUC);
 
         }
         private void ShowForm(Form formToShow)
@@ -47,47 +62,49 @@ namespace File_Acess_Management
             currentForm.TopLevel = false;
             currentForm.FormBorderStyle = FormBorderStyle.None;
             currentForm.Dock = DockStyle.Fill;
-            panelContainer.Controls.Add(currentForm);
+            AdminContentPanelManager.Controls.Add(currentForm);
             currentForm.Show();
         }
 
         private void DashboardBtn_Click(object sender, EventArgs e)
         {
-            DashboardBtn.BackColor = Color.Aqua;
+            IncomingRequestsButton.BackColor = Color.Aqua;
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
-            ShowForm(new RaisedRequests());
+            tabTitleLbl.Text = "Incoming Requests";
+            AddUserControl(raisedRequestsUC);
         }
 
         private void usersMngBtn_Click(object sender, EventArgs e)
         {
-
-            DashboardBtn.BackColor = Color.White;
+            IncomingRequestsButton.BackColor = Color.White;
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.Aqua;
             softwareMngBtn.BackColor = Color.White;
-            
-            ShowForm(new UserManagement(_serviceProvider));
+            tabTitleLbl.Text = "User Management";
+            AddUserControl(adminUserManagementUCl);
 
         }
 
         private void userManagerBtn_Click(object sender, EventArgs e)
         {
-            DashboardBtn.BackColor = Color.White;
+            IncomingRequestsButton.BackColor = Color.White;
             userManagerBtn.BackColor = Color.Aqua;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
-            ShowForm(new ManagerUserAssignment());
+            tabTitleLbl.Text = "Manager - User Assignment";
+            AddUserControl(managerUC);
         }
 
         private void softwareMngBtn_Click(object sender, EventArgs e)
         {
-            DashboardBtn.BackColor = Color.White;
+            IncomingRequestsButton.BackColor = Color.White;
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.Aqua;
-            ShowForm(new SoftwareManagement());
+            tabTitleLbl.Text = "Software Management";
+            AddUserControl(softwareUC);
         }
 
 

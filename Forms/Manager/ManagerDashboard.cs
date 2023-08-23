@@ -1,4 +1,5 @@
-﻿using File_Acess_Management.Models;
+﻿using File_Acess_Management.Forms.Manager.ManagerUserControls;
+using File_Acess_Management.Models;
 using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using System;
@@ -14,18 +15,33 @@ using System.Windows.Forms;
 
 namespace File_Acess_Management
 {
+
     public partial class ManagerDashboard : Form
     {
-        User user;
-        private readonly ServiceProvider _serviceProvider;
 
+        User user;
+        ManagerUserListUserControl userListUC = new ManagerUserListUserControl();
+        ManagerInformationUserConrol managerInformationUserControl = new ManagerInformationUserConrol();
+        ManagerIncomingRequestUserControl managerIncomingRequestUserControl = new ManagerIncomingRequestUserControl();
+        private readonly ServiceProvider _serviceProvider;
         public ManagerDashboard(User user, ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             InitializeComponent();
             setButtonAction();
             this.user = user;
-            
+            userListUC.Id = user.Id;
+            Console.WriteLine("Setting Manager ID: " + user.Id);
+            managerIncomingRequestUserControl.Id = user.Id;
+            _serviceProvider = serviceProvider;
+        }
+
+        private void AddUserControl(UserControl userControl)
+        {
+            userControl.Dock = DockStyle.Fill;
+            contentPanelManager.Controls.Clear();
+            contentPanelManager.Controls.Add(userControl);
+            userControl.BringToFront();
         }
 
         private void SubManagers_Load(object sender, EventArgs e)
@@ -42,94 +58,7 @@ namespace File_Acess_Management
 
         }
 
-        private void reqStatusLbl_Click(object sender, EventArgs e)
-        {
-            requestGridView.Visible = false;
-            assignedLbl.Visible = true;
-            userListBx.Visible = true;
-            tabTitleLbl.Text = "User List";
-            loadUserList(user.Id);
-            
 
-        }
-
-        private void loadUserList(int id)
-        {
-            userListBx.Visible = true;
-            
-            tabTitleLbl.Text = "User List";
-
-            {
-                var table = new DataTable();
-
-                var connection = ConnectionHelper.ConnectionString;
-
-                using (var con = new MySqlConnection { ConnectionString = connection })
-                {
-                    using (var command = new MySqlCommand { Connection = con })
-                    {
-
-                        if (con.State == ConnectionState.Open)
-                        {
-                            con.Close();
-                        }
-
-                        con.Open();
-                        if (con.State == ConnectionState.Open)
-                        {
-                            Console.WriteLine("DB Connection Established");
-                        }
-                        else
-                        {
-                            Console.WriteLine("DB Connection Failed");
-                        }
-
-
-                        try
-                        {
-                            int managerId = user.Id;
-
-                            string selectQuery = "SELECT name, id FROM users " +
-                                                 "INNER JOIN managerassigned ON managerassigned.users_id = users.id " +
-                                                 "WHERE managerassigned.manager_id = @id";
-                            using (MySqlCommand selectCommand = new MySqlCommand(selectQuery, con))
-                            {
-                                selectCommand.Parameters.AddWithValue("@id", managerId);
-
-                                MySqlDataAdapter adapter = new MySqlDataAdapter(selectCommand);
-                                DataSet dataSet = new DataSet();
-                                adapter.Fill(dataSet);
-
-                                BindingSource bindingSource = new BindingSource();
-                                bindingSource.DataSource = dataSet.Tables[0];
-
-                                userListBx.DataSource = bindingSource;
-                                userListBx.DisplayMember = "name";
-                                userListBx.ValueMember = "id";
-
-                                userListBx.Refresh();
-                            }
-                        }
-                        catch (MySqlException ex)
-                        {
-                            MessageBox.Show(ex.Message + " sql query error.");
-
-                        }
-
-                    }
-                }
-
-            }
-        }
-
-        private void requestLbl_Click(object sender, EventArgs e)
-        {
-            requestGridView.Visible = true;
-            userListBx.Visible = false;
-            loadIncomingRequest(user.Id);
-            tabTitleLbl.Text = "Request List";
-
-        }
 
 
 
@@ -263,9 +192,9 @@ namespace File_Acess_Management
             }
         }
 
-       
 
-        
+
+
 
         private void logOut(object sender, EventArgs e)
         {
@@ -274,14 +203,49 @@ namespace File_Acess_Management
             this.Close();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
+
+
+
+        private void TabPanelClicked(Panel panel, UserControl userControl, string tabTitle)
+        {
+            managerInformationPanel.BackColor = Color.White;
+            incomingRequestPanel.BackColor = Color.White;
+            userListPanel.BackColor = Color.White;
+            panel.BackColor = Color.LightBlue;
+            tabTitleLbl.Text = tabTitle;
+            AddUserControl(userControl);
         }
 
-        private void statusPanel_Paint(object sender, PaintEventArgs e)
+        private void userInfoLbl_Click(object sender, EventArgs e)
         {
-
+            TabPanelClicked(managerInformationPanel, managerInformationUserControl, "Manager Information");
         }
+
+        private void reqStatusLbl_Click(object sender, EventArgs e)
+        {
+            TabPanelClicked(userListPanel, userListUC, "User List");
+        }
+
+        private void requestLbl_Click(object sender, EventArgs e)
+        {
+            TabPanelClicked(incomingRequestPanel, managerIncomingRequestUserControl, "Request List");
+        }
+
+        private void managerInformationIcon_Click(object sender, EventArgs e)
+        {
+            TabPanelClicked(managerInformationPanel, managerInformationUserControl, "Manager Information");
+        }
+
+        private void incomingURIcon_Click(object sender, EventArgs e)
+        {
+            TabPanelClicked(incomingRequestPanel, managerIncomingRequestUserControl, "Request List");
+        }
+
+        private void userListIcon_Click(object sender, EventArgs e)
+        {
+            TabPanelClicked(userListPanel, userListUC, "User List");
+        }
+
     }
 }
