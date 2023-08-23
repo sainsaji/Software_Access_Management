@@ -296,7 +296,10 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                 if (!selectedSoftwareListBox.Items.Contains(softwareName))
                 {
                     alertsLabel.Text = "Added Software";
+                    validIcoPicBox.Visible = true;
+                    alertLabelErrorProvider.SetError(alertsLabel, "");
                     selectedSoftwareListBox.Items.Add(softwareName);
+
                 }
                 else
                 {
@@ -320,23 +323,35 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                         Console.WriteLine("DB Connection Established");
                     }
                     Console.WriteLine("Software ID List:" + softwareIdList);
-                    foreach (var item in selectedSoftwareListBox.Items)
+                    if (softwareIdList.Count > 0)
                     {
-                        Console.WriteLine("Requesting software:" + item.ToString());
-                        MySqlCommand setRequestList = new MySqlCommand("insert into REQUEST_LIST_TABLE(SOFTWARE_ID,USER_ID) values('" + softwareIdList.First() + "','" + Id + "') ", connection);
-                        Console.WriteLine("Added Item to Request List with ID:" + softwareIdList.First());
-                        Console.WriteLine("Creating Request Row in SQL");
-                        int rowsAffected = setRequestList.ExecuteNonQuery();
-                        Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffected.ToString());
-                        int requestListId = getSoftwareListId();
-                        Console.WriteLine("Recieved Request ID:" + requestListId);
-                        string pending = "Pending";
-                        MySqlCommand RequestSQLcmd = new MySqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS,REQUEST_LIST_ID) values('" + Id + "','" + pending + "','" + pending + "','" + pending + "','" + requestListId + "') ", connection);
-                        int rowsAffectedReq = RequestSQLcmd.ExecuteNonQuery();
-                        Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffectedReq.ToString());
-                        Console.WriteLine("Removing from Local List:");
-                        softwareIdList.RemoveAt(0);
+                        foreach (var item in selectedSoftwareListBox.Items)
+                        {
+                            Console.WriteLine("Requesting software:" + item.ToString());
+                            MySqlCommand setRequestList = new MySqlCommand("insert into REQUEST_LIST_TABLE(SOFTWARE_ID,USER_ID) values('" + softwareIdList.First() + "','" + Id + "') ", connection);
+                            Console.WriteLine("Added Item to Request List with ID:" + softwareIdList.First());
+                            Console.WriteLine("Creating Request Row in SQL");
+                            int rowsAffected = setRequestList.ExecuteNonQuery();
+                            Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffected.ToString());
+                            int requestListId = getSoftwareListId();
+                            Console.WriteLine("Recieved Request ID:" + requestListId);
+                            string pending = "Pending";
+                            MySqlCommand RequestSQLcmd = new MySqlCommand("insert into REQUEST_TABLE(USER_ID,APPROVAL_MANAGER,APPROVAL_ADMIN,REQ_STATUS,REQUEST_LIST_ID) values('" + Id + "','" + pending + "','" + pending + "','" + pending + "','" + requestListId + "') ", connection);
+                            int rowsAffectedReq = RequestSQLcmd.ExecuteNonQuery();
+                            Console.WriteLine("Rows Affected for SoftwareList Query:" + rowsAffectedReq.ToString());
+                            Console.WriteLine("Removing from Local List:");
+                            alertsLabel.Text = "Software Request Send";
+                            validIcoPicBox.Visible = true;
+                            softwareIdList.RemoveAt(0);
+                        }
                     }
+                    else
+                    {
+                        Console.WriteLine("No Items to Request");
+                        alertsLabel.Text = "No Items to Request";
+                        alertLabelErrorProvider.SetError(alertsLabel, "No Items Selected to List");
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -346,6 +361,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                 {
                     softwareIdList.Clear();
                     selectedSoftwareListBox.Items.Clear();
+                    validIcoPicBox.Visible = false;
                 }
 
             }
@@ -353,6 +369,8 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
 
         private void UserRaiseRequestUserControl_Load(object sender, EventArgs e)
         {
+            alertsLabel.Text = "";
+            validIcoPicBox.Visible = false;
             if (Id != 0)
             {
                 loadUserInfo();
@@ -362,6 +380,14 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                 MessageBox.Show("Invalid Id Recived");
                 throw new Exception();
             }
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            alertsLabel.Text = "Software List Removed";
+            validIcoPicBox.Visible = false;
+            selectedSoftwareListBox.Items.Clear();
+            softwareIdList.Clear();
         }
     }
 }

@@ -15,7 +15,6 @@ using System.Windows.Forms;
 
 namespace File_Acess_Management
 {
-
     public partial class UserDashboard : Form
     {
         public int userId;
@@ -50,7 +49,7 @@ namespace File_Acess_Management
         {
             requestPanel.BackColor = Color.White;
             statusPanel.BackColor = Color.White;
-            tabTitleLbl.Text = "User Information";
+            tabTitleLbl.Text = "";
 
         }
 
@@ -65,6 +64,7 @@ namespace File_Acess_Management
         {
             //requestClickAction();
             AddUserControl(raiseRequestUserControl);
+            tabTitleLbl.Text = "Send Request";
 
 
         }
@@ -80,12 +80,14 @@ namespace File_Acess_Management
         private void requestPanel_Click(object sender, EventArgs e)
         {
             AddUserControl(raiseRequestUserControl);
+            tabTitleLbl.Text = "Send Request";
         }
 
         private void label1_Click_1(object sender, EventArgs e)
         {
             //statusClickAction();
             AddUserControl(userRequestStatusUserControl);
+            tabTitleLbl.Text = "Request Status";
 
         }
 
@@ -99,6 +101,7 @@ namespace File_Acess_Management
         {
             //statusClickAction();
             AddUserControl(userRequestStatusUserControl);
+            tabTitleLbl.Text = "Request Status";
 
         }
 
@@ -106,6 +109,7 @@ namespace File_Acess_Management
         {
             //statusClickAction();
             AddUserControl(userRequestStatusUserControl);
+            tabTitleLbl.Text = "Request Status";
         }
 
 
@@ -134,6 +138,7 @@ namespace File_Acess_Management
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             AddUserControl(raiseRequestUserControl);
+            tabTitleLbl.Text = "Raise Request";
         }
     }
 }
