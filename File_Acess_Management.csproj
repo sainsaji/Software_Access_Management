@@ -158,6 +158,18 @@
       <DependentUpon>ManagerUserListUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Users.cs" />
+    <Compile Include="Forms\User\UserDashboardUserControls\UserRaiseRequestUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\User\UserDashboardUserControls\UserRaiseRequestUserControl.Designer.cs">
+      <DependentUpon>UserRaiseRequestUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\User\UserDashboardUserControls\UserRequestStatusUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\User\UserDashboardUserControls\UserRequestStatusUserControl.Designer.cs">
+      <DependentUpon>UserRequestStatusUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\AuthManager.cs" />
     <Compile Include="Forms\Admin\AdminDashboard.cs">
       <SubType>Form</SubType>
@@ -212,6 +224,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Manager\ManagerUserControls\ManagerUserListUserControl.resx">
       <DependentUpon>ManagerUserListUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User\UserDashboardUserControls\UserRaiseRequestUserControl.resx">
+      <DependentUpon>UserRaiseRequestUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User\UserDashboardUserControls\UserRequestStatusUserControl.resx">
+      <DependentUpon>UserRequestStatusUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
