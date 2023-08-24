@@ -18,7 +18,7 @@ namespace File_Acess_Management
     public partial class UserDashboard : Form
     {
         public int userId;
-        private List<RequestList> requestList = new List<RequestList>();
+
         private readonly User user;
         UserRaiseRequestUserControl raiseRequestUserControl = new UserRaiseRequestUserControl();
         UserRequestStatusUserControl userRequestStatusUserControl = new UserRequestStatusUserControl();
