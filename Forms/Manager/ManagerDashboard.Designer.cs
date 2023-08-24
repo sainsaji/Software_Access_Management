@@ -74,7 +74,7 @@
             this.tabTitleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabTitleLbl.Location = new System.Drawing.Point(492, 19);
             this.tabTitleLbl.Name = "tabTitleLbl";
-            this.tabTitleLbl.Size = new System.Drawing.Size(136, 25);
+            this.tabTitleLbl.Size = new System.Drawing.Size(108, 20);
             this.tabTitleLbl.TabIndex = 0;
             this.tabTitleLbl.Text = "Tab Title Here";
             // 
@@ -119,7 +119,7 @@
             this.logOutLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.logOutLbl.Location = new System.Drawing.Point(74, 21);
             this.logOutLbl.Name = "logOutLbl";
-            this.logOutLbl.Size = new System.Drawing.Size(60, 20);
+            this.logOutLbl.Size = new System.Drawing.Size(52, 17);
             this.logOutLbl.TabIndex = 4;
             this.logOutLbl.Text = "Logout";
             this.logOutLbl.Click += new System.EventHandler(this.logOut);
@@ -153,7 +153,7 @@
             this.reqStatusLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.reqStatusLbl.Location = new System.Drawing.Point(56, 26);
             this.reqStatusLbl.Name = "reqStatusLbl";
-            this.reqStatusLbl.Size = new System.Drawing.Size(78, 20);
+            this.reqStatusLbl.Size = new System.Drawing.Size(64, 17);
             this.reqStatusLbl.TabIndex = 2;
             this.reqStatusLbl.Text = "User List";
             this.reqStatusLbl.Click += new System.EventHandler(this.reqStatusLbl_Click);
@@ -187,7 +187,7 @@
             this.requestLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.requestLbl.Location = new System.Drawing.Point(56, 26);
             this.requestLbl.Name = "requestLbl";
-            this.requestLbl.Size = new System.Drawing.Size(143, 20);
+            this.requestLbl.Size = new System.Drawing.Size(121, 17);
             this.requestLbl.TabIndex = 2;
             this.requestLbl.Text = "Incoming Request";
             this.requestLbl.Click += new System.EventHandler(this.requestLbl_Click);
@@ -221,7 +221,7 @@
             this.managerInfoLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.managerInfoLabel.Location = new System.Drawing.Point(56, 26);
             this.managerInfoLabel.Name = "managerInfoLabel";
-            this.managerInfoLabel.Size = new System.Drawing.Size(162, 20);
+            this.managerInfoLabel.Size = new System.Drawing.Size(138, 17);
             this.managerInfoLabel.TabIndex = 0;
             this.managerInfoLabel.Text = "Manager Information";
             this.managerInfoLabel.Click += new System.EventHandler(this.userInfoLbl_Click);
@@ -287,7 +287,7 @@
             this.assignedLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.assignedLbl.Location = new System.Drawing.Point(278, 89);
             this.assignedLbl.Name = "assignedLbl";
-            this.assignedLbl.Size = new System.Drawing.Size(150, 25);
+            this.assignedLbl.Size = new System.Drawing.Size(121, 20);
             this.assignedLbl.TabIndex = 1;
             this.assignedLbl.Text = "Assigned Users";
             // 
@@ -310,10 +310,10 @@
             // userListBx
             // 
             this.userListBx.FormattingEnabled = true;
-            this.userListBx.ItemHeight = 25;
+            this.userListBx.ItemHeight = 20;
             this.userListBx.Location = new System.Drawing.Point(282, 117);
             this.userListBx.Name = "userListBx";
-            this.userListBx.Size = new System.Drawing.Size(325, 454);
+            this.userListBx.Size = new System.Drawing.Size(325, 444);
             this.userListBx.TabIndex = 1;
             // 
             // mySqlDataAdapter1
@@ -325,7 +325,7 @@
             // 
             // ManagerDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 657);
             this.Controls.Add(this.panel1);
