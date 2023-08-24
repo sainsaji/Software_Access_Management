@@ -116,8 +116,8 @@ namespace File_Acess_Management
         private void managerIcon_Click(object sender, EventArgs e)
         {
             (User user, string RoleName) = AuthManager.AuthenticateUser("M002", "Manager");
-            UserDashboard userDashBoard = new UserDashboard(user, _serviceProvider);
-            userDashBoard.Show();
+            ManagerDashboard subManagers = new ManagerDashboard(user, _serviceProvider);
+            subManagers.Show();
             this.Hide();
         }
 
