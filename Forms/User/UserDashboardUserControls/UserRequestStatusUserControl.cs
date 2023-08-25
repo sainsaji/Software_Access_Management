@@ -156,6 +156,13 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
         private void UserRequestStatusUserControl_Load(object sender, EventArgs e)
         {
             loadRequestStatusData();
+
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
