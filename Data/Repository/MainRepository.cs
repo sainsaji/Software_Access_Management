@@ -20,9 +20,6 @@ namespace File_Acess_Management.Data.Repository
         ICommandFactory _commandFactory;
         public MainRepository(IDatabaseConnectionProvider connectionProvider, ICommandFactory commandFactory)
         {
-            //_serviceProvider = serviceProvider;
-            //_connectionProvider=_serviceProvider.GetRequiredService<IDatabaseConnectionProvider>();
-            //_commandFactory=_serviceProvider.GetRequiredService<ICommandFactory>();
             _connectionProvider = connectionProvider;
             _commandFactory = commandFactory;
         }
