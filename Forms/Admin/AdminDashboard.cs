@@ -23,7 +23,7 @@ namespace File_Acess_Management
         public AdminDashboard(ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider);
+            adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider.GetRequiredService<IUserManagementRepository>());
             InitializeComponent();
         }
         private Form currentForm;

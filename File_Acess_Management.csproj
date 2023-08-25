@@ -110,6 +110,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Repository\IRepository\IMainRepository.cs" />
+    <Compile Include="Data\Repository\MainRepository.cs" />
     <Compile Include="Forms\Admin\AdminUserControls\AdminManagerUserAssignmentUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
