@@ -331,73 +331,78 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         private void addUserButton_Click_1(object sender, EventArgs e)
         {
 
-                Users users = new Users();
-                users.Username = userNameText.Text;
-                string password = passwordText.Text;
-                users.HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-                users.SelectedRole = (Role)roleComboBox.SelectedItem;
-                users.Name = nameText.Text;
-                users.Email = emailText.Text;
-                users.PhoneNumber = phoneNumberText.Text;
-                users.Address = addressText.Text;
-                bool check = false;
-                Console.WriteLine(userNameText.Text);
+            Users users = new Users();
+            users.Id = 0;
+            users.Username = userNameText.Text;
+            string password = passwordText.Text;
+            users.HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            Role SelectedRole = (Role)roleComboBox.SelectedItem;
+            users.RoleId = SelectedRole.RoleId;
+            users.Name = nameText.Text;
+            users.Email = emailText.Text;
+            users.PhoneNumber = phoneNumberText.Text;
+            users.Address = addressText.Text;
+            users.Assigned = "false";
+            bool check = false;
+            Console.WriteLine(userNameText.Text);
 
-                check = _userManagement.CheckUser(userNameText.Text);
+            check = _userManagement.CheckUser(userNameText.Text);
 
-                if (users.Username == "" && password == "" && users.Name == "" && users.Email == "" && users.PhoneNumber == "" && users.Address == "")
-                {
-                    MessageBox.Show("Please don't submit blank fields");
-                    return;
-                }
-                else if (users.SelectedRole == null)
-                {
-                    MessageBox.Show("Please select a role");
-                    return;
-                }
-                else if (check == true)
-                {
-                    MessageBox.Show("Select a unique username");
-                    return;
-                }
+            if (users.Username == "" && password == "" && users.Name == "" && users.Email == "" && users.PhoneNumber == "" && users.Address == "")
+            {
+                MessageBox.Show("Please don't submit blank fields");
+                return;
+            }
+            else if (SelectedRole == null)
+            {
+                MessageBox.Show("Please select a role");
+                return;
+            }
+            else if (check == true)
+            {
+                MessageBox.Show("Select a unique username");
+                return;
+            }
 
-                try
+            try
+            {
+                using (MailMessage mm = new MailMessage())
                 {
-                    using (MailMessage mm = new MailMessage())
+                    using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
                     {
-                        using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
+                        mm.From = new MailAddress("resumework2022@gmail.com");
+                        mm.To.Add(users.Email);
+                        mm.Subject = "Credentials to the App";
+                        mm.Body = "Hi There, \n" +
+                            "\nWelcome to Software Access management System\n" +
+                            "\n Username: " + users.Username +
+                            "\n Password: " + password;
+                        sc.Port = 587;
+                        sc.Credentials = new System.Net.NetworkCredential("resumework2022@gmail.com", "uqdbenfkuzuhvwfl");
+                        sc.EnableSsl = true;
+                        sc.Send(mm);
+                        MessageBox.Show("Email has been sent.");
+                        //int rowsAffected = _userManagement.InsertUser(users);
+                        string query= "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (@Id,@Username, @HashedPassword, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
+                        int rowsAffected = _userManagement.add(users, query);
+                        if (rowsAffected > 0)
                         {
-                            mm.From = new MailAddress("resumework2022@gmail.com");
-                            mm.To.Add(users.Email);
-                            mm.Subject = "Credentials to the App";
-                            mm.Body = "Hi There, \n" +
-                                "\nWelcome to Software Access management System\n" +
-                                "\n Username: " + users.Username +
-                                "\n Password: " + password;
-                            sc.Port = 587;
-                            sc.Credentials = new System.Net.NetworkCredential("resumework2022@gmail.com", "uqdbenfkuzuhvwfl");
-                            sc.EnableSsl = true;
-                            sc.Send(mm);
-                            MessageBox.Show("Email has been sent.");
-                            int rowsAffected = _userManagement.InsertUser(users);
-                            if (rowsAffected > 0)
-                            {
-                                MessageBox.Show("User added successfully.");
-                                GetUsersRecord();
-                                ClearFormFields();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Error adding user.");
-                            }
-
+                            MessageBox.Show("User added successfully.");
+                            GetUsersRecord();
+                            ClearFormFields();
                         }
+                        else
+                        {
+                            MessageBox.Show("Error adding user.");
+                        }
+
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("error in mail, enter correct email address" + ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error in mail, enter correct email address" + ex);
+            }
 
 
 
