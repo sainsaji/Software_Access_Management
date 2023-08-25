@@ -27,51 +27,60 @@ namespace File_Acess_Management.Data.Repository
         {
             int rowsAffected = 0;
             Type dataType = typeof(T);
-            if (dataType == typeof(Users))
+            //Users user = entity as Users;
+            using (MySqlConnection connection = _connectionProvider.GetConnection())
             {
-                Users user = entity as Users;
-                if (user != null)
+                using (MySqlCommand command = _commandFactory.CreateCommand(query, connection))
                 {
-                    using (MySqlConnection connection = _connectionProvider.GetConnection())
+                    foreach (var property in dataType.GetProperties())
                     {
-
-
-                        using (MySqlCommand command = _commandFactory.CreateCommand(query, connection))
-                        {
-                            foreach (var property in dataType.GetProperties())
-                            {
-                                Console.WriteLine("I am innnnnnnnn");
-                                var propertyName = property.Name;
-                                var propertyValue = property.GetValue(user);
-                                command.Parameters.AddWithValue($"@{propertyName}", propertyValue);
-
-                            }
-                            rowsAffected = command.ExecuteNonQuery();
-                        }
-
+                        Console.WriteLine("I am innnnnnnnn");
+                        var propertyName = property.Name;
+                        var propertyValue = property.GetValue(entity);
+                        command.Parameters.AddWithValue($"@{propertyName}", propertyValue);
 
                     }
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            return rowsAffected;
+        }
+
+        public DataTable getAll(string query)
+        {
+            using (MySqlConnection connection = _connectionProvider.GetConnection())
+            {
+                using (MySqlCommand command = _commandFactory.CreateCommand(query, connection))
+                {
+                    DataTable dt = new DataTable();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                    return dt;
+                }
+            }
+
+        }
+
+        public int remove(T entity, string query)
+        {
+            Type dataType = typeof(T);
+            using (MySqlConnection connection = _connectionProvider.GetConnection())
+            {
+                using (MySqlCommand command = _commandFactory.CreateCommand(query, connection))
+                {
+                    foreach (var property in dataType.GetProperties())
+                    {
+                        var propertyName = property.Name;
+                        var propertyValue = property.GetValue(entity);
+                        command.Parameters.AddWithValue($"@{propertyName}", propertyValue);
+
+                    }
+                    int rowsAffected = command.ExecuteNonQuery();
                     return rowsAffected;
                 }
-                else
-                {
-                    return 0;
-                }
             }
-            else
-            {
-                return 0;
-            }
-        }
-
-        public DataTable getAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int remove(T entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

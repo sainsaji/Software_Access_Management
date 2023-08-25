@@ -21,11 +21,9 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
     {
         bool check = false;
         private readonly IUserManagementRepository _userManagement;
-        public readonly ServiceProvider _serviceProvider;
-        public AdminUserManagementUserControl(ServiceProvider serviceProvider)
+        public AdminUserManagementUserControl(IUserManagementRepository userManagementRepository)
         {
-            _serviceProvider = serviceProvider;
-            _userManagement = _serviceProvider.GetRequiredService<IUserManagementRepository>();
+            _userManagement = userManagementRepository;
             InitializeComponent();
         }
 
@@ -33,8 +31,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         {
             deleteButton.Enabled = false;
             updateButton.Enabled = false;
-
-            // Attach the SelectionChanged event handler to the DataGridView
             userRecordDataGridView.SelectionChanged += userRecordDataGridView_SelectionChanged_1;
             PopulateRoleComboBox();
             GetUsersRecord();
@@ -46,8 +42,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             addressPicBox.Visible = false;
         }
 
-
-
         private void GetUsersRecord()
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
@@ -55,53 +49,29 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 connection.Open();
 
                 string query = "SELECT u.user_name, r.role_name as role, u.name, u.email, u.phone_number, u.address FROM users AS u INNER JOIN roles AS r ON u.role_id = r.role_id WHERE r.role_name!='Admin';";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    DataTable dt = new DataTable();
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        dt.Load(reader);
-                        connection.Close();
-                    }
-                    userRecordDataGridView.DataSource = dt;
-                    //studentRecordDataGridView.Columns["Password"].Visible = false;
-                    userRecordDataGridView.Columns["user_name"].HeaderText = "User Name";
-                    userRecordDataGridView.Columns["role"].HeaderText = "Role";
-                    userRecordDataGridView.Columns["name"].HeaderText = "Full Name";
-                    userRecordDataGridView.Columns["email"].HeaderText = "Email";
-                    userRecordDataGridView.Columns["phone_number"].HeaderText = "Phone Number";
-                    userRecordDataGridView.Columns["address"].HeaderText = "Address";
-                }
+                DataTable dt = _userManagement.getAll(query);
+                userRecordDataGridView.DataSource = dt;
+                //studentRecordDataGridView.Columns["Password"].Visible = false;
+                userRecordDataGridView.Columns["user_name"].HeaderText = "User Name";
+                userRecordDataGridView.Columns["role"].HeaderText = "Role";
+                userRecordDataGridView.Columns["name"].HeaderText = "Full Name";
+                userRecordDataGridView.Columns["email"].HeaderText = "Email";
+                userRecordDataGridView.Columns["phone_number"].HeaderText = "Phone Number";
+                userRecordDataGridView.Columns["address"].HeaderText = "Address";
             }
         }
 
         private void PopulateRoleComboBox()
         {
-            // Assuming you have a ComboBox named roleComboBox
-            using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+            string query = "SELECT role_id, role_name FROM roles where role_name!='Admin'";
+            DataTable dt = _userManagement.getAll(query);
+            foreach (DataRow row in dt.Rows)
             {
-                connection.Open();
-
-                string query = "SELECT role_id, role_name FROM roles where role_name!='Admin'";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            int roleId = reader.GetInt32("role_id");
-                            string roleName = reader.GetString("role_name");
-                            roleComboBox.Items.Add(new Role(roleId, roleName));
-                        }
-                    }
-                }
-
-                connection.Close();
+                int roleId = Convert.ToInt32(row["role_id"]);
+                string roleName = row["role_name"].ToString();
+                roleComboBox.Items.Add(new Role(roleId, roleName));
             }
         }
-
 
         private void ClearFormFields()
         {
@@ -125,16 +95,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             phoneNumberText.Text = "";
             addressText.Text = "";
         }
-
-
-
-
-
-
-
-
-
-
 
         private bool validateText(string fieldText, string field)
         {
@@ -383,7 +343,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                         sc.Send(mm);
                         MessageBox.Show("Email has been sent.");
                         //int rowsAffected = _userManagement.InsertUser(users);
-                        string query= "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (@Id,@Username, @HashedPassword, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
+                        string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (@Id,@Username, @HashedPassword, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
                         int rowsAffected = _userManagement.add(users, query);
                         if (rowsAffected > 0)
                         {
@@ -413,56 +373,43 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         {
 
             {
-                string username = userNameText.Text;
+                Users users = new Users();
+                users.Username = userNameText.Text;
                 string password = passwordText.Text;
-                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-                Role selectedRole = (Role)roleComboBox.SelectedItem;
-                string name = nameText.Text;
-                string email = emailText.Text;
-                string phno = phoneNumberText.Text;
-                string address = addressText.Text;
-                if (username == "" && password == "" && name == "" && email == "" && phno == "" && address == "")
+                users.HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+                Role SelectedRole = (Role)roleComboBox.SelectedItem;
+                users.RoleId = SelectedRole.RoleId;
+                users.Name = nameText.Text;
+                users.Email = emailText.Text;
+                users.PhoneNumber = phoneNumberText.Text;
+                users.Address = addressText.Text;
+
+                if (users.Username == "" && password == "" && users.Name == "" && users.Email == "" && users.PhoneNumber == "" && users.Address == "")
                 {
                     MessageBox.Show("Please don't submit blank fields");
                     return;
                 }
-                else if (selectedRole == null)
+                else if (SelectedRole == null)
                 {
                     MessageBox.Show("Please select a role");
                     return;
                 }
 
-                using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+
+                string query = "UPDATE users SET role_id = @RoleId, name = @Name, email = @Email, phone_number = @PhoneNumber, address = @Address WHERE user_name = @Username;";
+
+
+                int rowsAffected = _userManagement.add(users, query);
+                if (rowsAffected > 0)
                 {
-                    int roleId = selectedRole.RoleId;
-                    connection.Open();
-
-                    string query = "UPDATE users SET role_id = @RoleId, name = @Name, email = @Email, phone_number = @PhoneNumber, address = @Address WHERE user_name = @Username;";
-
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Username", username);
-                        command.Parameters.AddWithValue("@RoleId", roleId);
-                        command.Parameters.AddWithValue("@Name", name);
-                        command.Parameters.AddWithValue("@Email", email);
-                        command.Parameters.AddWithValue("@PhoneNumber", phno);
-                        command.Parameters.AddWithValue("@Address", address);
-
-                        int rowsAffected = command.ExecuteNonQuery(); ;
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("User updated successfully.");
-                            GetUsersRecord();
-                            ClearFormFields();
-                            updateButton.Enabled = false;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error updating user.");
-                        }
-                    }
-
-                    connection.Close();
+                    MessageBox.Show("User updated successfully.");
+                    GetUsersRecord();
+                    ClearFormFields();
+                    updateButton.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Error updating user.");
                 }
             }
         }
@@ -473,18 +420,11 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             {
                 if (check == true)
                 {
-                    string username = userNameText.Text;
-                    using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
-                    {
-                        connection.Open();
+                    Users users = new Users();
+                    users.Username = userNameText.Text;
 
                         string query = "Delete from users where user_name=@Username";
-
-                        using (MySqlCommand command = new MySqlCommand(query, connection))
-                        {
-                            command.Parameters.AddWithValue("@Username", username);
-
-                            int rowsAffected = command.ExecuteNonQuery(); ;
+                            int rowsAffected = _userManagement.remove(users,query);
                             if (rowsAffected > 0)
                             {
                                 MessageBox.Show("User deleted successfully.");
@@ -497,10 +437,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                             {
                                 MessageBox.Show("Error deleting user.");
                             }
-                        }
-
-                        connection.Close();
-                    }
                 }
 
             }

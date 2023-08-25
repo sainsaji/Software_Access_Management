@@ -45,35 +45,5 @@ namespace File_Acess_Management.Data.Repository
                 }
             }
         }
-
-        public int InsertUser(Users user)
-        {
-            throw new NotImplementedException();
-        }
-
-        //public int InsertUser(Users user)
-        //{
-        //    using (MySqlConnection connection = _connectionProvider.GetConnection())
-        //    {
-        //            int roleId = user.SelectedRole.RoleId;  
-
-        //            string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (0,@Username, @Password, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
-
-        //            using (MySqlCommand command = new MySqlCommand(query, connection))
-        //            {
-        //                command.Parameters.AddWithValue("@Username", user.Username);
-        //                command.Parameters.AddWithValue("@Password", user.HashedPassword);
-        //                command.Parameters.AddWithValue("@RoleId", roleId);
-        //                command.Parameters.AddWithValue("@Name", user.Name);
-        //                command.Parameters.AddWithValue("@Email", user.Email);
-        //                command.Parameters.AddWithValue("@PhoneNumber", user.PhoneNumber);
-        //                command.Parameters.AddWithValue("@Address", user.Address);
-        //                command.Parameters.AddWithValue("@Assigned", false);
-
-        //                int rowsAffected = command.ExecuteNonQuery(); ;
-        //                return rowsAffected;
-        //            }
-        //    }
-        //}
     }
 }

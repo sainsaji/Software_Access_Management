@@ -9,7 +9,6 @@ namespace File_Acess_Management.Data.Repository.IRepository
 {
     public interface IUserManagementRepository:IMainRepository<Users>
     {
-        int InsertUser(Users user);
         bool CheckUser(string username);
     }
 }
