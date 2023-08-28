@@ -112,8 +112,10 @@
   <ItemGroup>
     <Compile Include="Data\Repository\IRepository\IMainRepository.cs" />
     <Compile Include="Data\Repository\IRepository\ISoftwareRepository.cs" />
+    <Compile Include="Data\Repository\IRepository\IUserManagerAssignmentRepository.cs" />
     <Compile Include="Data\Repository\MainRepository.cs" />
     <Compile Include="Data\Repository\SoftwareRepository.cs" />
+    <Compile Include="Data\Repository\UserManagerAssignmentRepository.cs" />
     <Compile Include="Forms\Admin\AdminUserControls\AdminManagerUserAssignmentUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -161,6 +163,7 @@
     <Compile Include="Forms\Manager\ManagerUserControls\ManagerUserListUserControl.Designer.cs">
       <DependentUpon>ManagerUserListUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\Software.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Forms\User\UserDashboardUserControls\UserRaiseRequestUserControl.cs">

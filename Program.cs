@@ -24,7 +24,8 @@ namespace File_Acess_Management
             services.AddSingleton<ICommandFactory, ConnectionHelper>();
             services.AddScoped<ISoftwareRepository, SoftwareRepository>();
             services.AddScoped<IUserManagementRepository, UserManagementRepository>();
-            
+            services.AddScoped<IUserManagerAssignmentRepository, UserManagerAssignmentRepository>();
+
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 

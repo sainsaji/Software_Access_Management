@@ -31,6 +31,8 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             ck = false;
         }
 
+        
+
         private void softwareListDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (softwareListDataGridView.SelectedRows.Count > 0)
@@ -53,8 +55,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void addButton_Click(object sender, EventArgs e)
         {
             {
-                Software softwares = new Software();
-                softwares.SoftName = softwareNametext.Text;
+                Software softwares = new Software(0, softwareNametext.Text);
                 if (ck == true)
                 {
                     MessageBox.Show("You can't add the same record agian");
@@ -91,9 +92,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             {
                 if (ck == true)
                 {
-                    Software softwares = new Software();
-                    softwares.Id = software_id;
-                    softwares.SoftName = softwareNametext.Text;
+                    Software softwares = new Software(software_id, softwareNametext.Text);
                     if (softwares.SoftName == "")
                     {
                         MessageBox.Show("Enter the software name");
@@ -121,8 +120,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             {
                 if (ck == true)
                 {
-                    Software softwares = new Software();
-                    softwares.Id = software_id;
+                    Software softwares = new Software(software_id,null);
                     if (software_id == 0)
                     {
                         MessageBox.Show("Some Error Occured");

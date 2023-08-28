@@ -10,6 +10,10 @@ namespace File_Acess_Management.Models
     {
         public int Id { get; set; }
         public string SoftName { get; set; }
+        public Software(int id, string softName) {
+            Id = id;
+            SoftName = softName;
+        }
 
     }
 }

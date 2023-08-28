@@ -302,7 +302,7 @@
             this.userRecordDataGridView.Name = "userRecordDataGridView";
             this.userRecordDataGridView.ReadOnly = true;
             this.userRecordDataGridView.RowHeadersWidth = 51;
-            this.userRecordDataGridView.Size = new System.Drawing.Size(759, 390);
+            this.userRecordDataGridView.Size = new System.Drawing.Size(770, 284);
             this.userRecordDataGridView.TabIndex = 16;
             this.userRecordDataGridView.SelectionChanged += new System.EventHandler(this.userRecordDataGridView_SelectionChanged_1);
             // 
@@ -310,7 +310,7 @@
             // 
             this.tickPicBox.Image = ((System.Drawing.Image)(resources.GetObject("tickPicBox.Image")));
             this.tickPicBox.Location = new System.Drawing.Point(334, 6);
-            this.tickPicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tickPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.tickPicBox.Name = "tickPicBox";
             this.tickPicBox.Size = new System.Drawing.Size(26, 23);
             this.tickPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -321,7 +321,7 @@
             // 
             this.passPicBox.Image = ((System.Drawing.Image)(resources.GetObject("passPicBox.Image")));
             this.passPicBox.Location = new System.Drawing.Point(334, 39);
-            this.passPicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.passPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.passPicBox.Name = "passPicBox";
             this.passPicBox.Size = new System.Drawing.Size(26, 23);
             this.passPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -332,7 +332,7 @@
             // 
             this.namePicBox.Image = ((System.Drawing.Image)(resources.GetObject("namePicBox.Image")));
             this.namePicBox.Location = new System.Drawing.Point(334, 110);
-            this.namePicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.namePicBox.Margin = new System.Windows.Forms.Padding(2);
             this.namePicBox.Name = "namePicBox";
             this.namePicBox.Size = new System.Drawing.Size(26, 23);
             this.namePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -343,7 +343,7 @@
             // 
             this.emailPicBox.Image = ((System.Drawing.Image)(resources.GetObject("emailPicBox.Image")));
             this.emailPicBox.Location = new System.Drawing.Point(736, 4);
-            this.emailPicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.emailPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.emailPicBox.Name = "emailPicBox";
             this.emailPicBox.Size = new System.Drawing.Size(26, 23);
             this.emailPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -354,7 +354,7 @@
             // 
             this.phonePicBox.Image = ((System.Drawing.Image)(resources.GetObject("phonePicBox.Image")));
             this.phonePicBox.Location = new System.Drawing.Point(736, 37);
-            this.phonePicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.phonePicBox.Margin = new System.Windows.Forms.Padding(2);
             this.phonePicBox.Name = "phonePicBox";
             this.phonePicBox.Size = new System.Drawing.Size(26, 23);
             this.phonePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -365,7 +365,7 @@
             // 
             this.addressPicBox.Image = ((System.Drawing.Image)(resources.GetObject("addressPicBox.Image")));
             this.addressPicBox.Location = new System.Drawing.Point(736, 73);
-            this.addressPicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addressPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.addressPicBox.Name = "addressPicBox";
             this.addressPicBox.Size = new System.Drawing.Size(26, 23);
             this.addressPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -388,7 +388,7 @@
             this.panel1.Controls.Add(this.addressLabel);
             this.panel1.Controls.Add(this.addressText);
             this.panel1.Location = new System.Drawing.Point(68, 18);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(887, 585);
             this.panel1.TabIndex = 39;
@@ -410,7 +410,7 @@
             this.Controls.Add(this.addUserButton);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminUserManagementUserControl";
             this.Size = new System.Drawing.Size(1018, 634);
             this.Load += new System.EventHandler(this.AdminUserManagementUserControl_Load);
