@@ -257,8 +257,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 
         private void userRecordDataGridView_SelectionChanged_1(object sender, EventArgs e)
         {
-            Console.WriteLine("Selection Change Trigger");
-
             {
                 // This event is triggered when the selection in DataGridView changes
                 if (userRecordDataGridView.SelectedRows.Count > 0)

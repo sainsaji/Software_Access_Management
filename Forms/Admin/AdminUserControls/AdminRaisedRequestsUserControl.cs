@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿    using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,16 +31,11 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             colInstall.Text = "Installaled";
             colInstall.Name = "Installation Status";
             adminRequestsDataGridView.Columns.Add(colInstall);
-        }
-
+        }   
         private void loadAdminRequests()
         {
-
             {
-
                 {
-
-
                     {
                         var table = new DataTable();
 

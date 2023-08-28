@@ -31,8 +31,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             ck = false;
         }
 
-        
-
         private void softwareListDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (softwareListDataGridView.SelectedRows.Count > 0)
