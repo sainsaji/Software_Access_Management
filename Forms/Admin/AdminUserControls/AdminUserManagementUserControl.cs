@@ -27,7 +27,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             InitializeComponent();
         }
 
-        private void AdminUserManagementUserControl_Load(object sender, EventArgs e)
+        public void AdminUserManagementUserControl_Load(object sender, EventArgs e)
         {
             deleteButton.Enabled = false;
             updateButton.Enabled = false;
@@ -40,7 +40,9 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             emailPicBox.Visible = false;
             phonePicBox.Visible = false;
             addressPicBox.Visible = false;
+
         }
+        
 
         private void GetUsersRecord()
         {
@@ -255,8 +257,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 
         private void userRecordDataGridView_SelectionChanged_1(object sender, EventArgs e)
         {
-            Console.WriteLine("Selection Change Trigger");
-
             {
                 // This event is triggered when the selection in DataGridView changes
                 if (userRecordDataGridView.SelectedRows.Count > 0)
@@ -290,25 +290,16 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 
         private void addUserButton_Click_1(object sender, EventArgs e)
         {
-
-            Users users = new Users();
-            users.Id = 0;
-            users.Username = userNameText.Text;
             string password = passwordText.Text;
-            users.HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            string HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
             Role SelectedRole = (Role)roleComboBox.SelectedItem;
-            users.RoleId = SelectedRole.RoleId;
-            users.Name = nameText.Text;
-            users.Email = emailText.Text;
-            users.PhoneNumber = phoneNumberText.Text;
-            users.Address = addressText.Text;
-            users.Assigned = "false";
-            bool check = false;
+            bool ck = false;
             Console.WriteLine(userNameText.Text);
+            
 
-            check = _userManagement.CheckUser(userNameText.Text);
+            ck = _userManagement.CheckUser(userNameText.Text);
 
-            if (users.Username == "" && password == "" && users.Name == "" && users.Email == "" && users.PhoneNumber == "" && users.Address == "")
+            if (userNameText.Text == "" && password == "" && nameText.Text == "" && emailText.Text == "" && phoneNumberText.Text == "" && addressText.Text == "")
             {
                 MessageBox.Show("Please don't submit blank fields");
                 return;
@@ -318,7 +309,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 MessageBox.Show("Please select a role");
                 return;
             }
-            else if (check == true)
+            else if (ck == true)
             {
                 MessageBox.Show("Select a unique username");
                 return;
@@ -326,6 +317,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 
             try
             {
+                Users users = new Users(0, userNameText.Text, HashedPassword, SelectedRole.RoleId, nameText.Text, emailText.Text, phoneNumberText.Text, addressText.Text, false);
                 using (MailMessage mm = new MailMessage())
                 {
                     using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
@@ -373,17 +365,10 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         {
 
             {
-                Users users = new Users();
-                users.Username = userNameText.Text;
                 string password = passwordText.Text;
-                users.HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+                string HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
                 Role SelectedRole = (Role)roleComboBox.SelectedItem;
-                users.RoleId = SelectedRole.RoleId;
-                users.Name = nameText.Text;
-                users.Email = emailText.Text;
-                users.PhoneNumber = phoneNumberText.Text;
-                users.Address = addressText.Text;
-
+                Users users = new Users(0, userNameText.Text, HashedPassword, SelectedRole.RoleId, nameText.Text, emailText.Text, phoneNumberText.Text, addressText.Text, false);
                 if (users.Username == "" && password == "" && users.Name == "" && users.Email == "" && users.PhoneNumber == "" && users.Address == "")
                 {
                     MessageBox.Show("Please don't submit blank fields");
@@ -394,11 +379,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                     MessageBox.Show("Please select a role");
                     return;
                 }
-
-
                 string query = "UPDATE users SET role_id = @RoleId, name = @Name, email = @Email, phone_number = @PhoneNumber, address = @Address WHERE user_name = @Username;";
-
-
                 int rowsAffected = _userManagement.add(users, query);
                 if (rowsAffected > 0)
                 {
@@ -420,23 +401,23 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             {
                 if (check == true)
                 {
-                    Users users = new Users();
+                    Users users = new Users(0,userNameText.Text,null,0,null,null,null,null,false);
                     users.Username = userNameText.Text;
 
-                        string query = "Delete from users where user_name=@Username";
-                            int rowsAffected = _userManagement.remove(users,query);
-                            if (rowsAffected > 0)
-                            {
-                                MessageBox.Show("User deleted successfully.");
-                                GetUsersRecord();
-                                ClearFormFields();
-                                check = false;
-                                deleteButton.Enabled = false;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Error deleting user.");
-                            }
+                    string query = "Delete from users where user_name=@Username";
+                    int rowsAffected = _userManagement.remove(users, query);
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("User deleted successfully.");
+                        GetUsersRecord();
+                        ClearFormFields();
+                        check = false;
+                        deleteButton.Enabled = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error deleting user.");
+                    }
                 }
 
             }

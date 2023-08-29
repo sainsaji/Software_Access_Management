@@ -22,7 +22,11 @@ namespace File_Acess_Management
             var services = new ServiceCollection();
             services.AddSingleton<IDatabaseConnectionProvider, ConnectionHelper>();
             services.AddSingleton<ICommandFactory, ConnectionHelper>();
+            services.AddScoped<ISoftwareRepository, SoftwareRepository>();
             services.AddScoped<IUserManagementRepository, UserManagementRepository>();
+            services.AddScoped<IUserManagerAssignmentRepository, UserManagerAssignmentRepository>();
+            services.AddScoped<IAdminRaisedRequest, AdminRaisedRequest>();
+
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 
