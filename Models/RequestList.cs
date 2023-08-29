@@ -1,6 +1,6 @@
 ﻿namespace File_Acess_Management
 {
-    internal class RequestList
+    public class RequestList
     {
         public int requestId { get; set; }
         public string appName { get; set; }

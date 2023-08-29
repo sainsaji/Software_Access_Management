@@ -110,6 +110,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Repository\AdminRaisedRequest.cs" />
+    <Compile Include="Data\Repository\IRepository\IAdminRaisedRequest.cs" />
     <Compile Include="Data\Repository\IRepository\IMainRepository.cs" />
     <Compile Include="Data\Repository\IRepository\ISoftwareRepository.cs" />
     <Compile Include="Data\Repository\IRepository\IUserManagerAssignmentRepository.cs" />

@@ -1,4 +1,5 @@
-﻿    using MySql.Data.MySqlClient;
+﻿using File_Acess_Management.Data.Repository.IRepository;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,8 +14,10 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 {
     public partial class AdminRaisedRequestsUserControl : UserControl
     {
-        public AdminRaisedRequestsUserControl()
+        IAdminRaisedRequest _adminRaisedRequest;
+        public AdminRaisedRequestsUserControl(IAdminRaisedRequest adminRaisedRequest)
         {
+            _adminRaisedRequest = adminRaisedRequest;
             InitializeComponent();
             setButtonAction();
             loadAdminRequests();
@@ -31,101 +34,43 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             colInstall.Text = "Installaled";
             colInstall.Name = "Installation Status";
             adminRequestsDataGridView.Columns.Add(colInstall);
-        }   
+        }
         private void loadAdminRequests()
         {
-            {
-                {
-                    {
-                        var table = new DataTable();
-
-                        var connection = ConnectionHelper.ConnectionString;
-
-                        using (var con = new MySqlConnection { ConnectionString = connection })
-                        {
-                            using (var command = new MySqlCommand { Connection = con })
-                            {
-
-                                if (con.State == ConnectionState.Open)
-                                {
-                                    con.Close();
-                                }
-
-                                con.Open();
-                                if (con.State == ConnectionState.Open)
-                                {
-                                    Console.WriteLine("DB Connection Established");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("DB Connection Failed");
-                                }
-
-
-                                try
-                                {
-
-                                    string selectQuery = "SELECT\r\n    u.user_name AS User_Name,\r\n    s.soft_name AS Software_Name,\r\n    um.user_name AS Manager_Name,\r\n    rt.approval_manager AS Manager_Approval,\r\n    rt.approval_admin AS Admin_Approval,\r\n    rt.request_id AS request_id\r\nFROM\r\n    users u\r\nJOIN\r\n    request_table rt ON u.id = rt.user_id\r\nJOIN\r\n    request_list_table rlt ON rt.request_list_id = rlt.req_id\r\nJOIN\r\n    software s ON rlt.software_id = s.soft_id\r\nJOIN\r\n    managerAssigned ma ON u.id = ma.users_id\r\nJOIN\r\n    users um ON ma.manager_id = um.id\r\nWHERE\r\n    rt.approval_manager = 'approved';\r\n";
-                                    using (MySqlCommand selectCommand = new MySqlCommand(selectQuery, con))
-                                    {
-
-
-                                        MySqlDataAdapter adapter = new MySqlDataAdapter(selectCommand);
-                                        DataSet dataSet = new DataSet();
-                                        adapter.Fill(dataSet);
-
-                                        BindingSource bindingSource = new BindingSource();
-                                        bindingSource.DataSource = dataSet.Tables[0];
-
-                                        adminRequestsDataGridView.DataSource = bindingSource;
-
-
-                                        adminRequestsDataGridView.Refresh();
-                                    }
-                                }
-                                catch (MySqlException ex)
-                                {
-                                    MessageBox.Show(ex.Message + " sql query error.");
-
-                                }
-
-                            }
-                        }
-
-                    }
-                }
-            }
+            string query = "SELECT\r\n    " +
+                "u.user_name AS User_Name,\r\n    " +
+                "s.soft_name AS Software_Name,\r\n    " +
+                "um.user_name AS Manager_Name,\r\n    " +
+                "rt.approval_manager AS Manager_Approval,\r\n    " +
+                "rt.approval_admin AS Admin_Approval,\r\n    " +
+                "rt.request_id AS request_id\r\nFROM\r\n    " +
+                "users u\r\nJOIN\r\n    " +
+                "request_table rt ON u.id = rt.user_id\r\nJOIN\r\n    " +
+                "request_list_table rlt ON rt.request_list_id = rlt.req_id\r\nJOIN\r\n    " +
+                "software s ON rlt.software_id = s.soft_id\r\nJOIN\r\n    " +
+                "managerAssigned ma ON u.id = ma.users_id\r\nJOIN\r\n    " +
+                "users um ON ma.manager_id = um.id\r\nWHERE\r\n    " +
+                "rt.approval_manager = 'approved';\r\n";
+            DataTable dt = _adminRaisedRequest.getAll(query);
+            adminRequestsDataGridView.DataSource = dt;
+            adminRequestsDataGridView.Refresh();
         }
+
 
 
         private void updateAdminRequestApproval(int requestId)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
-            {
-                connection.Open();
-                string updateQuery = "UPDATE request_table SET approval_admin = CASE " +
-                             "WHEN approval_admin = 'approved' THEN 'denied' " +
-                             "ELSE 'approved' END " +
-                             "WHERE request_id = @id";
-                try
-                {
-                    using (MySqlCommand command = new MySqlCommand(updateQuery, connection))
-                    {
-                        command.Parameters.AddWithValue("@id", requestId);
-                        int rowsAffected = command.ExecuteNonQuery();
-                        Console.WriteLine("Rows affected: " + rowsAffected);
-                        Console.WriteLine("Update Complete /n Refreshing ");
-                        loadAdminRequests();
-                        adminRequestsDataGridView.Refresh();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-
-            }
+            string query = "UPDATE request_table SET approval_admin = CASE " +
+                         "WHEN approval_admin = 'approved' THEN 'denied' " +
+                         "ELSE 'approved' END " +
+                         "WHERE request_id = @requestId";
+            RequestList request = new RequestList();
+            request.requestId = requestId;
+            int rowsAffected = _adminRaisedRequest.add(request, query);
+            loadAdminRequests();
+            adminRequestsDataGridView.Refresh();
         }
+
 
         private void adminRequestsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {

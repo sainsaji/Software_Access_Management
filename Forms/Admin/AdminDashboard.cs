@@ -22,17 +22,19 @@ namespace File_Acess_Management
         AdminUserManagementUserControl adminUserManagementUCl;
         AdminSoftwareManagementUserControl softwareUC;
         AdminManagerUserAssignmentUserControl managerUC;
+        AdminRaisedRequestsUserControl raisedRequestsUC;
         public AdminDashboard(ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider.GetRequiredService<IUserManagementRepository>());
             softwareUC = new AdminSoftwareManagementUserControl(_serviceProvider.GetRequiredService<ISoftwareRepository>());
             managerUC = new AdminManagerUserAssignmentUserControl(_serviceProvider.GetRequiredService<IUserManagerAssignmentRepository>());
+            raisedRequestsUC = new AdminRaisedRequestsUserControl(_serviceProvider.GetRequiredService<IAdminRaisedRequest>());
             InitializeComponent();
         }
         private Form currentForm;
         //AdminUserManagementUserControl adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider);
-        AdminRaisedRequestsUserControl raisedRequestsUC = new AdminRaisedRequestsUserControl();
+        
 
         
 

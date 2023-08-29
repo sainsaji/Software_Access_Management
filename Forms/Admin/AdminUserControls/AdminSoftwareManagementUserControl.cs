@@ -29,8 +29,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             GetSoftwareRecords();
             softwareListDataGridView.SelectionChanged += softwareListDataGridView_SelectionChanged;
             ck = false;
-        }
-
+        }                                                                                                                                      
         private void softwareListDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (softwareListDataGridView.SelectedRows.Count > 0)
