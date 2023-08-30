@@ -44,6 +44,7 @@ namespace File_Acess_Management.Data.Repository
             return rowsAffected;
         }
 
+
         public DataTable getAll(string query)
         {
             using (MySqlConnection connection = _connectionProvider.GetConnection())
@@ -51,6 +52,31 @@ namespace File_Acess_Management.Data.Repository
                 using (MySqlCommand command = _commandFactory.CreateCommand(query, connection))
                 {
                     DataTable dt = new DataTable();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                    return dt;
+                }
+            }
+
+        }
+
+        public DataTable get(T entity, string query)
+        {
+            Type dataType = typeof(T);
+            using (MySqlConnection connection = _connectionProvider.GetConnection())
+            {
+                using (MySqlCommand command = _commandFactory.CreateCommand(query, connection))
+                {
+                    DataTable dt = new DataTable();
+                    foreach (var property in dataType.GetProperties())
+                    {
+                        var propertyName = property.Name;
+                        var propertyValue = property.GetValue(entity);
+                        command.Parameters.AddWithValue($"@{propertyName}", propertyValue);
+
+                    }
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         dt.Load(reader);

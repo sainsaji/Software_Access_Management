@@ -20,11 +20,8 @@ namespace File_Acess_Management
         public int userId;
 
         private readonly User user;
-        UserRaiseRequestUserControl raiseRequestUserControl = new UserRaiseRequestUserControl();
-        UserRequestStatusUserControl userRequestStatusUserControl = new UserRequestStatusUserControl();
-
-
-
+        UserRaiseRequestUserControl raiseRequestUserControl;
+        UserRequestStatusUserControl userRequestStatusUserControl;
 
         private readonly ServiceProvider _serviceProvider;
         public UserDashboard(User user, ServiceProvider serviceProvider)
@@ -35,6 +32,8 @@ namespace File_Acess_Management
             this.userId = user.Id;
             userRequestStatusUserControl.Id = this.userId;
             raiseRequestUserControl.Id = this.userId;
+            raiseRequestUserControl = new UserRaiseRequestUserControl();
+            userRequestStatusUserControl = new UserRequestStatusUserControl();
         }
 
         private void AddUserControl(UserControl userControl)
@@ -52,14 +51,6 @@ namespace File_Acess_Management
             tabTitleLbl.Text = "";
 
         }
-
-
-
-
-
-
-
-
         private void requestLbl_Click(object sender, EventArgs e)
         {
             //requestClickAction();
@@ -68,15 +59,6 @@ namespace File_Acess_Management
 
 
         }
-
-
-
-
-
-
-
-
-
         private void requestPanel_Click(object sender, EventArgs e)
         {
             AddUserControl(raiseRequestUserControl);
@@ -90,13 +72,6 @@ namespace File_Acess_Management
             tabTitleLbl.Text = "Request Status";
 
         }
-
-
-
-
-
-
-
         private void statusPanel_Click(object sender, EventArgs e)
         {
             //statusClickAction();
@@ -104,37 +79,24 @@ namespace File_Acess_Management
             tabTitleLbl.Text = "Request Status";
 
         }
-
         private void reqIcoClick_Click(object sender, EventArgs e)
         {
             //statusClickAction();
             AddUserControl(userRequestStatusUserControl);
             tabTitleLbl.Text = "Request Status";
         }
-
-
-
-
-
-
-
-
         private void logout(object sender, MouseEventArgs e)
         {
             UserLogin logout = new UserLogin(_serviceProvider);
             logout.Show();
             this.Close();
         }
-
         private void logout(object sender, EventArgs e)
         {
             UserLogin logout = new UserLogin(_serviceProvider);
             logout.Show();
             this.Close();
         }
-
-
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             AddUserControl(raiseRequestUserControl);
