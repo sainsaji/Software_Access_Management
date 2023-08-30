@@ -14,5 +14,7 @@ namespace File_Acess_Management.Data.Repository.IRepository
         DataTable getAll(string query);
         int remove(T entity, string query);
 
+        DataTable get(T entity,string query);
+
     }
 }
