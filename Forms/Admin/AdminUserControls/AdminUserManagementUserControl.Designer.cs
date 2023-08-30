@@ -259,7 +259,7 @@
             this.userRecordDataGridView.Name = "userRecordDataGridView";
             this.userRecordDataGridView.ReadOnly = true;
             this.userRecordDataGridView.RowHeadersWidth = 51;
-            this.userRecordDataGridView.Size = new System.Drawing.Size(759, 390);
+            this.userRecordDataGridView.Size = new System.Drawing.Size(770, 284);
             this.userRecordDataGridView.TabIndex = 16;
             this.userRecordDataGridView.SelectionChanged += new System.EventHandler(this.userRecordDataGridView_SelectionChanged_1);
             // 

@@ -46,7 +46,9 @@ CREATE TABLE request_table (
     approval_manager VARCHAR(10),
     approval_admin VARCHAR(10),
     req_status VARCHAR(10),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    software_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (software_id) REFERENCES software(soft_id)
 );
 
 CREATE TABLE request_list_table (

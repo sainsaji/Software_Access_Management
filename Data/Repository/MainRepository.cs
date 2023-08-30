@@ -15,7 +15,6 @@ namespace File_Acess_Management.Data.Repository
 {
     public class MainRepository<T> : IMainRepository<T> where T : class
     {
-        IServiceProvider _serviceProvider;
         IDatabaseConnectionProvider _connectionProvider;
         ICommandFactory _commandFactory;
         public MainRepository(IDatabaseConnectionProvider connectionProvider, ICommandFactory commandFactory)
@@ -34,7 +33,6 @@ namespace File_Acess_Management.Data.Repository
                 {
                     foreach (var property in dataType.GetProperties())
                     {
-                        Console.WriteLine("I am innnnnnnnn");
                         var propertyName = property.Name;
                         var propertyValue = property.GetValue(entity);
                         command.Parameters.AddWithValue($"@{propertyName}", propertyValue);

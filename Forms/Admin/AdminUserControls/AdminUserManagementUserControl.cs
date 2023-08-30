@@ -122,7 +122,9 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             emailPicBox.Visible = false;
             phonePicBox.Visible = false;
             addressPicBox.Visible = false;
+
         }
+
 
         private void GetUsersRecord()
         {
@@ -213,93 +215,63 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 
         private void addUserButton_Click_1(object sender, EventArgs e)
         {
-
-            Users users = new Users();
-
-            users.Id = 0;
-            users.Username = userNameText.Text;
             string password = passwordText.Text;
-            users.HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            string HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
             Role SelectedRole = (Role)roleComboBox.SelectedItem;
-            try
-            {
-                users.RoleId = SelectedRole.RoleId;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally { users.RoleId = 0; }
-
-            users.Name = nameText.Text;
-            users.Email = emailText.Text;
-            users.PhoneNumber = phoneNumberText.Text;
-            users.Address = addressText.Text;
-            users.Assigned = "false";
-            bool check = false;
+            bool ck = false;
             Console.WriteLine(userNameText.Text);
 
-            check = _userManagement.CheckUser(userNameText.Text);
 
             if (SelectedRole == null)
             {
                 MessageBox.Show("Please select a role");
                 return;
             }
-            else if (check == true)
+            else if (ck == true)
             {
                 MessageBox.Show("Select a unique username");
                 return;
             }
 
-            if (emailText.Text != "")
+            try
             {
-                try
+                Users users = new Users(0, userNameText.Text, HashedPassword, SelectedRole.RoleId, nameText.Text, emailText.Text, phoneNumberText.Text, addressText.Text, false);
+                using (MailMessage mm = new MailMessage())
                 {
-                    using (MailMessage mm = new MailMessage())
+                    using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
                     {
-                        using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
+                        mm.From = new MailAddress("resumework2022@gmail.com");
+                        mm.To.Add(users.Email);
+                        mm.Subject = "Credentials to the App";
+                        mm.Body = "Hi There, \n" +
+                            "\nWelcome to Software Access management System\n" +
+                            "\n Username: " + users.Username +
+                            "\n Password: " + password;
+                        sc.Port = 587;
+                        sc.Credentials = new System.Net.NetworkCredential("resumework2022@gmail.com", "uqdbenfkuzuhvwfl");
+                        sc.EnableSsl = true;
+                        sc.Send(mm);
+                        MessageBox.Show("Email has been sent.");
+                        //int rowsAffected = _userManagement.InsertUser(users);
+                        string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (@Id,@Username, @HashedPassword, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
+                        int rowsAffected = _userManagement.add(users, query);
+                        if (rowsAffected > 0)
                         {
-                            mm.From = new MailAddress("resumework2022@gmail.com");
-                            mm.To.Add(users.Email);
-                            mm.Subject = "Credentials to the App";
-                            mm.Body = "Hi There, \n" +
-                                "\nWelcome to Software Access management System\n" +
-                                "\n Username: " + users.Username +
-                                "\n Password: " + password;
-                            sc.Port = 587;
-                            sc.Credentials = new System.Net.NetworkCredential("resumework2022@gmail.com", "uqdbenfkuzuhvwfl");
-                            sc.EnableSsl = true;
-                            sc.Send(mm);
-                            MessageBox.Show("Email has been sent.");
-                            //int rowsAffected = _userManagement.InsertUser(users);
+                            MessageBox.Show("User added successfully.");
+                            GetUsersRecord();
+                            ClearFormFields();
                         }
-                    }
+                        else
+                        {
+                            MessageBox.Show("Error adding user.");
+                        }
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("error in mail, enter correct email address" + ex);
-                }
-                try
-                {
-                    string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (@Id,@Username, @HashedPassword, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
-                    int rowsAffected = _userManagement.add(users, query);
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("User added successfully.");
-                        GetUsersRecord();
-                        ClearFormFields();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error adding user.");
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error in mail, enter correct email address" + ex);
             }
 
 
@@ -314,17 +286,10 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         {
 
             {
-                Users users = new Users();
-                users.Username = userNameText.Text;
                 string password = passwordText.Text;
-                users.HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+                string HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
                 Role SelectedRole = (Role)roleComboBox.SelectedItem;
-                users.RoleId = SelectedRole.RoleId;
-                users.Name = nameText.Text;
-                users.Email = emailText.Text;
-                users.PhoneNumber = phoneNumberText.Text;
-                users.Address = addressText.Text;
-
+                Users users = new Users(0, userNameText.Text, HashedPassword, SelectedRole.RoleId, nameText.Text, emailText.Text, phoneNumberText.Text, addressText.Text, false);
                 if (users.Username == "" && password == "" && users.Name == "" && users.Email == "" && users.PhoneNumber == "" && users.Address == "")
                 {
                     MessageBox.Show("Please don't submit blank fields");
@@ -335,11 +300,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                     MessageBox.Show("Please select a role");
                     return;
                 }
-
-
                 string query = "UPDATE users SET role_id = @RoleId, name = @Name, email = @Email, phone_number = @PhoneNumber, address = @Address WHERE user_name = @Username;";
-
-
                 int rowsAffected = _userManagement.add(users, query);
                 if (rowsAffected > 0)
                 {
@@ -361,7 +322,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             {
                 if (check == true)
                 {
-                    Users users = new Users();
+                    Users users = new Users(0, userNameText.Text, null, 0, null, null, null, null, false);
                     users.Username = userNameText.Text;
 
                     string query = "Delete from users where user_name=@Username";
