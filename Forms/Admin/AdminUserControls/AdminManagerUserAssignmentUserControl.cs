@@ -13,6 +13,8 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         bool ck = false;
         bool ck2 = false;
         IUserManagerAssignmentRepository _userManagerAssignment;
+        private ErrorProvider errorProvider = new ErrorProvider();
+
         public AdminManagerUserAssignmentUserControl(IUserManagerAssignmentRepository userManagerAssignment)
         {
             _userManagerAssignment = userManagerAssignment;
@@ -126,7 +128,16 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void assignManagerBtn_Click(object sender, EventArgs e)
         {
             {
+                errorProvider.SetError(selectManagerForNotAssigned, "");
                 manager selectedMan = (manager)selectManagerForNotAssigned.SelectedItem;
+                if (selectManager == null)
+                {
+                    errorProvider.SetError(selectManagerForNotAssigned, "Please Select a Manger");
+                }
+                else
+                {
+                    errorProvider.SetError(selectManagerForNotAssigned, "");
+                }
                 if (ck == true && selectedUserId != 0 && selectedMan != null)
                 {
                     Assignment assign = new Assignment(selectedMan.Id, selectedUserId);
@@ -152,7 +163,8 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 }
                 else
                 {
-                    MessageBox.Show("Error assigning user.");
+                    //MessageBox.Show("Error assigning user.");
+                    errorProvider.SetError(selectManagerForNotAssigned, "Please Select a User");
                 }
             }
 
@@ -161,6 +173,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void updateAssignedBtn_Click(object sender, EventArgs e)
         {
             {
+                errorProvider.SetError(selectManager, "");
                 manager selectedMan = (manager)selectManager.SelectedItem;
                 if (ck2 == true && selectedMan != null && selectedUserId2 != 0)
                 {
@@ -177,7 +190,8 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                     }
                     else
                     {
-                        MessageBox.Show("Error assigning user.");
+                        //MessageBox.Show("Error assigning user.");
+                        errorProvider.SetError(selectManager, "Please Select a User");
 
                     }
                 }
@@ -187,6 +201,8 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void AdminManagerUserAssignmentUserControl_Leave(object sender, EventArgs e)
         {
             Console.WriteLine("Assignment Form Left");
+            selectManager.Items.Clear();
+            selectManagerForNotAssigned.Items.Clear();
         }
 
         private void AdminManagerUserAssignmentUserControl_Enter(object sender, EventArgs e)

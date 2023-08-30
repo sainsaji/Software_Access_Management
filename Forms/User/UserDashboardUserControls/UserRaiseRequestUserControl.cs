@@ -150,7 +150,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
             {
                 MySqlConnection con = new MySqlConnection(ConnectionHelper.ConnectionString);
                 con.Open();
-                string selectQuery = "SELECT REQ_ID FROM request_list_table WHERE user_id = @id AND req_id = (SELECT MAX(req_id) FROM request_list_table)";
+                string selectQuery = "SELECT REQ_ID FROM request_list_table WHERE user_id = @id )";
                 if (con.State == ConnectionState.Open)
                 {
                     Console.WriteLine("DB Connection Established");
