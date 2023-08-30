@@ -109,47 +109,6 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
 
         }
 
-        private string FetchAppName(int userId, int requestId)
-        {
-            string appName = "ERR";
-            Console.WriteLine("Fetching App Name");
-            try
-            {
-                MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString);
-                connection.Open();
-                string selectQuery = "SELECT SOFT_NAME FROM SOFTWARE S INNER JOIN REQUEST_LIST_TABLE R ON S.SOFT_ID = R.SOFTWARE_ID   WHERE R.USER_ID = @id and R.REQ_ID = @requestID";
-                if (connection.State == ConnectionState.Open)
-                {
-                    Console.WriteLine("DB Connection Established");
-                    Console.WriteLine("Fetching RequestID:" + requestId);
-                    MySqlCommand MySqlCommand = new MySqlCommand(selectQuery, connection);
-                    MySqlCommand.Parameters.AddWithValue("@id", userId);
-                    MySqlCommand.Parameters.AddWithValue("@requestID", requestId);
-                    //Console.WriteLine("Getting types:" + requestId.GetType() + userId.GetType());
-                    using (MySqlDataReader reader = MySqlCommand.ExecuteReader())
-                    {
-
-                        if (reader.Read())
-                        {
-                            Console.WriteLine(String.Format("Fetching Request ID"));
-                            Console.WriteLine(String.Format("Request App:{0}", reader["SOFT_NAME"]));
-                            appName = reader["SOFT_NAME"].ToString();
-                        }
-                        else
-                        {
-                            Console.WriteLine(String.Format("Reader Failed"));
-                        }
-
-                    }
-                }
-                return appName;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error" + ex.ToString());
-                return appName;
-            }
-        }
 
         private string fetchManagerName(object id)
         {
