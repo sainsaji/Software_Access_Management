@@ -28,13 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminUserManagementUserControl));
-            this.addressErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.emailErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.nameErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.passErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.userNameErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.roleComboBox = new System.Windows.Forms.ComboBox();
             this.roleLabel = new System.Windows.Forms.Label();
             this.resetButton = new System.Windows.Forms.Button();
@@ -46,7 +40,6 @@
             this.nameText = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
             this.addUserButton = new System.Windows.Forms.Button();
-            this.phoneErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.updateButton = new System.Windows.Forms.Button();
             this.addressText = new System.Windows.Forms.TextBox();
             this.addressLabel = new System.Windows.Forms.Label();
@@ -62,12 +55,6 @@
             this.phonePicBox = new System.Windows.Forms.PictureBox();
             this.addressPicBox = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.addressErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emailErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nameErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.passErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userNameErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.phoneErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userRecordDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.passPicBox)).BeginInit();
@@ -77,26 +64,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.addressPicBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // addressErrorProvider
-            // 
-            this.addressErrorProvider.ContainerControl = this;
-            // 
-            // emailErrorProvider
-            // 
-            this.emailErrorProvider.ContainerControl = this;
-            // 
-            // nameErrorProvider
-            // 
-            this.nameErrorProvider.ContainerControl = this;
-            // 
-            // passErrorProvider
-            // 
-            this.passErrorProvider.ContainerControl = this;
-            // 
-            // userNameErrorProvider
-            // 
-            this.userNameErrorProvider.ContainerControl = this;
             // 
             // roleComboBox
             // 
@@ -149,7 +116,6 @@
             this.passwordText.Name = "passwordText";
             this.passwordText.Size = new System.Drawing.Size(177, 26);
             this.passwordText.TabIndex = 30;
-            this.passwordText.Leave += new System.EventHandler(this.passwordText_Leave);
             // 
             // userNameText
             // 
@@ -159,7 +125,6 @@
             this.userNameText.Name = "userNameText";
             this.userNameText.Size = new System.Drawing.Size(177, 26);
             this.userNameText.TabIndex = 28;
-            this.userNameText.Leave += new System.EventHandler(this.userNameText_Leave);
             // 
             // userNameLabel
             // 
@@ -189,7 +154,6 @@
             this.nameText.Name = "nameText";
             this.nameText.Size = new System.Drawing.Size(177, 26);
             this.nameText.TabIndex = 33;
-            this.nameText.Leave += new System.EventHandler(this.nameText_Leave_1);
             // 
             // nameLabel
             // 
@@ -213,10 +177,6 @@
             this.addUserButton.UseVisualStyleBackColor = true;
             this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click_1);
             // 
-            // phoneErrorProvider
-            // 
-            this.phoneErrorProvider.ContainerControl = this;
-            // 
             // updateButton
             // 
             this.updateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -237,7 +197,6 @@
             this.addressText.Name = "addressText";
             this.addressText.Size = new System.Drawing.Size(175, 26);
             this.addressText.TabIndex = 11;
-            this.addressText.Leave += new System.EventHandler(this.addressText_Leave);
             // 
             // addressLabel
             // 
@@ -257,7 +216,6 @@
             this.phoneNumberText.Name = "phoneNumberText";
             this.phoneNumberText.Size = new System.Drawing.Size(175, 26);
             this.phoneNumberText.TabIndex = 9;
-            this.phoneNumberText.Leave += new System.EventHandler(this.phoneNumberText_Leave);
             // 
             // phoneNumberLabel
             // 
@@ -277,7 +235,6 @@
             this.emailText.Name = "emailText";
             this.emailText.Size = new System.Drawing.Size(175, 26);
             this.emailText.TabIndex = 7;
-            this.emailText.Leave += new System.EventHandler(this.emailText_Leave);
             // 
             // emailLabel
             // 
@@ -310,7 +267,7 @@
             // 
             this.tickPicBox.Image = ((System.Drawing.Image)(resources.GetObject("tickPicBox.Image")));
             this.tickPicBox.Location = new System.Drawing.Point(334, 6);
-            this.tickPicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tickPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.tickPicBox.Name = "tickPicBox";
             this.tickPicBox.Size = new System.Drawing.Size(26, 23);
             this.tickPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -321,7 +278,7 @@
             // 
             this.passPicBox.Image = ((System.Drawing.Image)(resources.GetObject("passPicBox.Image")));
             this.passPicBox.Location = new System.Drawing.Point(334, 39);
-            this.passPicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.passPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.passPicBox.Name = "passPicBox";
             this.passPicBox.Size = new System.Drawing.Size(26, 23);
             this.passPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -332,7 +289,7 @@
             // 
             this.namePicBox.Image = ((System.Drawing.Image)(resources.GetObject("namePicBox.Image")));
             this.namePicBox.Location = new System.Drawing.Point(334, 110);
-            this.namePicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.namePicBox.Margin = new System.Windows.Forms.Padding(2);
             this.namePicBox.Name = "namePicBox";
             this.namePicBox.Size = new System.Drawing.Size(26, 23);
             this.namePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -343,7 +300,7 @@
             // 
             this.emailPicBox.Image = ((System.Drawing.Image)(resources.GetObject("emailPicBox.Image")));
             this.emailPicBox.Location = new System.Drawing.Point(736, 4);
-            this.emailPicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.emailPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.emailPicBox.Name = "emailPicBox";
             this.emailPicBox.Size = new System.Drawing.Size(26, 23);
             this.emailPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -354,7 +311,7 @@
             // 
             this.phonePicBox.Image = ((System.Drawing.Image)(resources.GetObject("phonePicBox.Image")));
             this.phonePicBox.Location = new System.Drawing.Point(736, 37);
-            this.phonePicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.phonePicBox.Margin = new System.Windows.Forms.Padding(2);
             this.phonePicBox.Name = "phonePicBox";
             this.phonePicBox.Size = new System.Drawing.Size(26, 23);
             this.phonePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -365,7 +322,7 @@
             // 
             this.addressPicBox.Image = ((System.Drawing.Image)(resources.GetObject("addressPicBox.Image")));
             this.addressPicBox.Location = new System.Drawing.Point(736, 73);
-            this.addressPicBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addressPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.addressPicBox.Name = "addressPicBox";
             this.addressPicBox.Size = new System.Drawing.Size(26, 23);
             this.addressPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -388,7 +345,7 @@
             this.panel1.Controls.Add(this.addressLabel);
             this.panel1.Controls.Add(this.addressText);
             this.panel1.Location = new System.Drawing.Point(68, 18);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(887, 585);
             this.panel1.TabIndex = 39;
@@ -410,16 +367,10 @@
             this.Controls.Add(this.addUserButton);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminUserManagementUserControl";
             this.Size = new System.Drawing.Size(1018, 634);
             this.Load += new System.EventHandler(this.AdminUserManagementUserControl_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.addressErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emailErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nameErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.passErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userNameErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.phoneErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userRecordDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickPicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.passPicBox)).EndInit();
@@ -435,8 +386,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ErrorProvider addressErrorProvider;
         private System.Windows.Forms.ComboBox roleComboBox;
         private System.Windows.Forms.Label roleLabel;
         private System.Windows.Forms.Button resetButton;
@@ -463,10 +412,5 @@
         private System.Windows.Forms.TextBox phoneNumberText;
         private System.Windows.Forms.Label addressLabel;
         private System.Windows.Forms.TextBox addressText;
-        private System.Windows.Forms.ErrorProvider emailErrorProvider;
-        private System.Windows.Forms.ErrorProvider nameErrorProvider;
-        private System.Windows.Forms.ErrorProvider passErrorProvider;
-        private System.Windows.Forms.ErrorProvider userNameErrorProvider;
-        private System.Windows.Forms.ErrorProvider phoneErrorProvider;
     }
 }

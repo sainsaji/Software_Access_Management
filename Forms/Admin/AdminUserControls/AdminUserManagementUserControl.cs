@@ -20,11 +20,70 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
     public partial class AdminUserManagementUserControl : UserControl
     {
         bool check = false;
+        private Regex emailRegex = new Regex(@"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$");
+        private Regex phoneRegex = new Regex(@"^\d{10}$");
+
         private readonly IUserManagementRepository _userManagement;
+        private ErrorProvider errorProvider = new ErrorProvider();
+
         public AdminUserManagementUserControl(IUserManagementRepository userManagementRepository)
         {
             _userManagement = userManagementRepository;
             InitializeComponent();
+            InitializeErrorProvider();
+            addUserButton.Enabled = false;
+        }
+
+        private void InitializeErrorProvider()
+        {
+            errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+
+        }
+
+        private bool ValidateField(Control control, PictureBox tickPictureBox, string errorMessage)
+        {
+            bool isValid = !string.IsNullOrWhiteSpace(control.Text);
+            SetError(control, isValid, errorMessage);
+            SetValidationIcon(tickPictureBox, isValid);
+            return isValid;
+        }
+
+        private bool ValidateRegexField(Control control, PictureBox tickPictureBox, Regex regex, string errorMessage, string requiredMessage)
+        {
+            bool isValid = !string.IsNullOrWhiteSpace(control.Text) && regex.IsMatch(control.Text);
+            string message = isValid ? "" : (string.IsNullOrWhiteSpace(control.Text) ? requiredMessage : errorMessage);
+            SetError(control, isValid, message);
+            SetValidationIcon(tickPictureBox, isValid);
+            return isValid;
+        }
+
+        private void ValidateFields()
+        {
+            bool isFormValid = ValidateField(userNameText, tickPicBox, "Username is required.") &&
+                               ValidateField(passwordText, passPicBox, "Password is required.") &&
+                               ValidateField(nameText, namePicBox, "Name is required.") &&
+                               ValidateRegexField(emailText, emailPicBox, emailRegex, "Invalid email address.", "Valid email address required.") &&
+                               ValidateRegexField(phoneNumberText, phonePicBox, phoneRegex, "Invalid phone number.", "10-digit number required.") &&
+                               ValidateField(addressText, addressPicBox, "Address is required.");
+
+            addUserButton.Enabled = isFormValid;
+        }
+        private void SetError(Control control, bool isValid, string errorMessage)
+        {
+            if (!isValid)
+                errorProvider.SetError(control, errorMessage);
+            else
+                errorProvider.SetError(control, ""); // Clear error message
+        }
+
+        private void SetValidationIcon(PictureBox tickPictureBox, bool isValid)
+        {
+            tickPictureBox.Visible = isValid;
+        }
+
+        private void Field_TextChanged(object sender, EventArgs e)
+        {
+            ValidateFields();
         }
 
         private void AdminUserManagementUserControl_Load(object sender, EventArgs e)
@@ -40,6 +99,12 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             emailPicBox.Visible = false;
             phonePicBox.Visible = false;
             addressPicBox.Visible = false;
+            userNameText.TextChanged += Field_TextChanged;
+            passwordText.TextChanged += Field_TextChanged;
+            nameText.TextChanged += Field_TextChanged;
+            phoneNumberText.TextChanged += Field_TextChanged;
+            emailText.TextChanged += Field_TextChanged;
+            addressText.TextChanged += Field_TextChanged;
         }
 
         private void GetUsersRecord()
@@ -70,6 +135,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 int roleId = Convert.ToInt32(row["role_id"]);
                 string roleName = row["role_name"].ToString();
                 roleComboBox.Items.Add(new Role(roleId, roleName));
+                roleComboBox.SelectedIndex = 0;
             }
         }
 
@@ -96,167 +162,12 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             addressText.Text = "";
         }
 
-        private bool validateText(string fieldText, string field)
-        {
-            string userNamePattern = @"^[a-zA-Z0-9_]{3,20}$";
-            string namePattern = @"^[a-zA-Z\s.]+$";
-            string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$";
-            string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-            string phonePattern = @"^\d{10}$";
 
-            bool isValid = false;
-
-            switch (field)
-            {
-                case "user_name":
-                    isValid = Regex.IsMatch(fieldText, userNamePattern);
-                    if (isValid)
-                    {
-                        // Perform duplication check
-                        using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
-                        {
-                            try
-                            {
-                                connection.Open();
-                                string query = "SELECT user_name FROM users WHERE user_name = @fieldvalue";
-                                using (MySqlCommand command = new MySqlCommand(query, connection))
-                                {
-                                    command.Parameters.AddWithValue("@fieldvalue", fieldText);
-
-                                    using (MySqlDataReader reader = command.ExecuteReader())
-                                    {
-                                        if (reader.Read())
-                                        {
-                                            Console.WriteLine("Already Exists in DB");
-                                            userNameErrorProvider.SetError(userNameText, "Already Exists in DB");
-                                            tickPicBox.Visible = false;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Username is available");
-                                            userNameErrorProvider.SetError(userNameText, "");
-                                            tickPicBox.Visible = true;
-                                        }
-                                    }
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("An error occurred: " + ex.Message);
-                            }
-                        }
-                    }
-                    break;
-
-                case "name":
-                    isValid = Regex.IsMatch(fieldText, namePattern);
-                    if (isValid)
-                    {
-                        namePicBox.Visible = true;
-                        nameErrorProvider.SetError(nameText, "");
-                    }
-                    else
-                    {
-                        namePicBox.Visible = false;
-                        nameErrorProvider.SetError(nameText, "Invalid Name");
-                    }
-                    break;
-
-                case "password":
-                    isValid = Regex.IsMatch(fieldText, passwordPattern);
-                    if (isValid)
-                    {
-                        passPicBox.Visible = true;
-                        passErrorProvider.SetError(passwordText, "");
-                    }
-                    else
-                    {
-                        passErrorProvider.SetError(passwordText, "Invalid Password");
-                        passPicBox.Visible = false;
-
-                    }
-                    break;
-
-                case "email":
-                    isValid = Regex.IsMatch(fieldText, emailPattern);
-                    if (isValid)
-                    {
-                        using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
-                        {
-                            try
-                            {
-                                connection.Open();
-                                string query = "SELECT email FROM users WHERE email = @fieldvalue";
-                                using (MySqlCommand command = new MySqlCommand(query, connection))
-                                {
-                                    command.Parameters.AddWithValue("@fieldvalue", fieldText);
-
-                                    using (MySqlDataReader reader = command.ExecuteReader())
-                                    {
-                                        if (reader.Read())
-                                        {
-                                            Console.WriteLine("Already Exists in DB");
-                                            emailErrorProvider.SetError(emailText, "Email Already Exists in DB");
-                                            emailPicBox.Visible = false;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Email is available");
-                                            emailErrorProvider.SetError(emailText, "");
-                                            emailPicBox.Visible = true;
-                                        }
-                                    }
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("An error occurred: " + ex.Message);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        emailErrorProvider.SetError(emailText, "Invalid Email");
-                    }
-                    break;
-
-                case "phone_number":
-                    isValid = Regex.IsMatch(fieldText, phonePattern);
-                    if (isValid)
-                    {
-                        phonePicBox.Visible = true;
-                        phoneErrorProvider.SetError(nameText, "");
-                    }
-                    else
-                    {
-                        phonePicBox.Visible = false;
-                        phoneErrorProvider.SetError(nameText, "Invalid Phone Number");
-                    }
-                    break;
-                case "address":
-                    isValid = Regex.IsMatch(fieldText, namePattern);
-                    if (isValid)
-                    {
-                        addressPicBox.Visible = true;
-                        addressErrorProvider.SetError(nameText, "");
-                    }
-                    else
-                    {
-                        addressPicBox.Visible = false;
-                        addressErrorProvider.SetError(nameText, "Invalid Address Given");
-                    }
-                    break;
-            }
-
-            return isValid;
-        }
 
 
 
         private void userRecordDataGridView_SelectionChanged_1(object sender, EventArgs e)
         {
-            Console.WriteLine("Selection Change Trigger");
-
             {
                 // This event is triggered when the selection in DataGridView changes
                 if (userRecordDataGridView.SelectedRows.Count > 0)
@@ -292,12 +203,22 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         {
 
             Users users = new Users();
+
             users.Id = 0;
             users.Username = userNameText.Text;
             string password = passwordText.Text;
             users.HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
             Role SelectedRole = (Role)roleComboBox.SelectedItem;
-            users.RoleId = SelectedRole.RoleId;
+            try
+            {
+                users.RoleId = SelectedRole.RoleId;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally { users.RoleId = 0; }
+
             users.Name = nameText.Text;
             users.Email = emailText.Text;
             users.PhoneNumber = phoneNumberText.Text;
@@ -311,6 +232,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             if (users.Username == "" && password == "" && users.Name == "" && users.Email == "" && users.PhoneNumber == "" && users.Address == "")
             {
                 MessageBox.Show("Please don't submit blank fields");
+
                 return;
             }
             else if (SelectedRole == null)
@@ -324,50 +246,56 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 return;
             }
 
-            try
+            if (emailText.Text != "")
             {
-                using (MailMessage mm = new MailMessage())
+                try
                 {
-                    using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
+                    using (MailMessage mm = new MailMessage())
                     {
-                        mm.From = new MailAddress("resumework2022@gmail.com");
-                        mm.To.Add(users.Email);
-                        mm.Subject = "Credentials to the App";
-                        mm.Body = "Hi There, \n" +
-                            "\nWelcome to Software Access management System\n" +
-                            "\n Username: " + users.Username +
-                            "\n Password: " + password;
-                        sc.Port = 587;
-                        sc.Credentials = new System.Net.NetworkCredential("resumework2022@gmail.com", "uqdbenfkuzuhvwfl");
-                        sc.EnableSsl = true;
-                        sc.Send(mm);
-                        MessageBox.Show("Email has been sent.");
-                        //int rowsAffected = _userManagement.InsertUser(users);
-                        string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (@Id,@Username, @HashedPassword, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
-                        int rowsAffected = _userManagement.add(users, query);
-                        if (rowsAffected > 0)
+                        using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
                         {
-                            MessageBox.Show("User added successfully.");
-                            GetUsersRecord();
-                            ClearFormFields();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error adding user.");
-                        }
+                            mm.From = new MailAddress("resumework2022@gmail.com");
+                            mm.To.Add(users.Email);
+                            mm.Subject = "Credentials to the App";
+                            mm.Body = "Hi There, \n" +
+                                "\nWelcome to Software Access management System\n" +
+                                "\n Username: " + users.Username +
+                                "\n Password: " + password;
+                            sc.Port = 587;
+                            sc.Credentials = new System.Net.NetworkCredential("resumework2022@gmail.com", "uqdbenfkuzuhvwfl");
+                            sc.EnableSsl = true;
+                            sc.Send(mm);
+                            MessageBox.Show("Email has been sent.");
+                            //int rowsAffected = _userManagement.InsertUser(users);
+                            string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (@Id,@Username, @HashedPassword, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
+                            int rowsAffected = _userManagement.add(users, query);
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("User added successfully.");
+                                GetUsersRecord();
+                                ClearFormFields();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error adding user.");
+                            }
 
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("error in mail, enter correct email address" + ex);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("error in mail, enter correct email address" + ex);
-            }
+
 
 
 
 
         }
+
+
 
         private void updateButton_Click_1(object sender, EventArgs e)
         {
@@ -423,20 +351,20 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                     Users users = new Users();
                     users.Username = userNameText.Text;
 
-                        string query = "Delete from users where user_name=@Username";
-                            int rowsAffected = _userManagement.remove(users,query);
-                            if (rowsAffected > 0)
-                            {
-                                MessageBox.Show("User deleted successfully.");
-                                GetUsersRecord();
-                                ClearFormFields();
-                                check = false;
-                                deleteButton.Enabled = false;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Error deleting user.");
-                            }
+                    string query = "Delete from users where user_name=@Username";
+                    int rowsAffected = _userManagement.remove(users, query);
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("User deleted successfully.");
+                        GetUsersRecord();
+                        ClearFormFields();
+                        check = false;
+                        deleteButton.Enabled = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error deleting user.");
+                    }
                 }
 
             }
@@ -444,50 +372,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 
         private void resetButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Reset Test");
             ClearFormFields();
-        }
-
-        private void userNameText_Leave(object sender, EventArgs e)
-        {
-            string field = "user_name";
-            bool valid = validateText(userNameText.Text, field);
-            Console.WriteLine("Username validity is: " + valid);
-        }
-
-        private void nameText_Leave_1(object sender, EventArgs e)
-        {
-            string field = "name";
-            bool valid = validateText(nameText.Text, field);
-            Console.WriteLine("Name validity is: " + valid);
-        }
-
-        private void passwordText_Leave(object sender, EventArgs e)
-        {
-            string field = "password";
-            bool valid = validateText(passwordText.Text, field);
-            Console.WriteLine(field + " validity is: " + valid);
-        }
-
-        private void emailText_Leave(object sender, EventArgs e)
-        {
-            string field = "email";
-            bool valid = validateText(emailText.Text, field);
-            Console.WriteLine(field + " validity is: " + valid);
-        }
-
-        private void phoneNumberText_Leave(object sender, EventArgs e)
-        {
-            string field = "phone_number";
-            bool valid = validateText(phoneNumberText.Text, field);
-            Console.WriteLine(field + " validity is: " + valid);
-        }
-
-        private void addressText_Leave(object sender, EventArgs e)
-        {
-            string field = "address";
-            bool valid = validateText(addressText.Text, field);
-            Console.WriteLine(field + " validity is: " + valid);
         }
     }
 }
