@@ -55,11 +55,15 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void addButton_Click(object sender, EventArgs e)
         {
             {
-                
-                
                 Software softwares = new Software(0, softwareNametext.Text);
-                string query1 = "Select from software where soft_name=@SoftName";
-                DataTable dt2 = _software.getAll(softwares,query1);
+                string query1 = "Select * from software where soft_name=@SoftName;";
+                DataTable dt2 = _software.get(softwares, query1);
+                if (dt2.Rows.Count > 0)
+                {
+                    ck = true;
+                }
+                else { ck = false; }
+
                 if (ck == true)
                 {
                     errorProvider.SetError(softwareNametext, "You can't add the same record again");
@@ -97,7 +101,16 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void updateButton_Click(object sender, EventArgs e)
         {
             {
-                if (ck == true)
+                Software softwares2 = new Software(0, softwareNametext.Text);
+                string query1 = "Select * from software where soft_name=@SoftName;";
+                DataTable dt2 = _software.get(softwares2, query1);
+                if (dt2.Rows.Count > 0)
+                {
+                    ck = true;
+                }
+                else { ck = false; }
+
+                if (ck == false)
                 {
                     Software softwares = new Software(software_id, softwareNametext.Text);
                     if (softwares.SoftName == "")
@@ -118,6 +131,10 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                         GetSoftwareRecords();
                         reset();
                     }
+                }
+                else
+                {
+                    errorProvider.SetError(softwareNametext, "Software Already Exist");
                 }
             }
         }
@@ -142,6 +159,10 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                         GetSoftwareRecords();
                         reset();
                     }
+                }
+                else
+                {
+                    errorProvider.SetError(softwareNametext, "Nothing Selected to Delete");
                 }
             }
         }

@@ -166,10 +166,13 @@
             this.Controls.Add(this.selectManager);
             this.Controls.Add(this.assignedManagerDataGridView);
             this.Controls.Add(this.userAssigned);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminManagerUserAssignmentUserControl";
             this.Size = new System.Drawing.Size(1357, 780);
             this.Load += new System.EventHandler(this.AdminManagerUserAssignmentUserControl_Load);
+            this.VisibleChanged += new System.EventHandler(this.AdminManagerUserAssignmentUserControl_VisibleChanged);
+            this.Enter += new System.EventHandler(this.AdminManagerUserAssignmentUserControl_Enter);
+            this.Leave += new System.EventHandler(this.AdminManagerUserAssignmentUserControl_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.notAssignedManagerDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignedManagerDataGridView)).EndInit();
             this.ResumeLayout(false);

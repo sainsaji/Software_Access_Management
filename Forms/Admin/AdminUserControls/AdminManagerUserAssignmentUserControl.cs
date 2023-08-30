@@ -184,6 +184,23 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             }
         }
 
+        private void AdminManagerUserAssignmentUserControl_Leave(object sender, EventArgs e)
+        {
+            Console.WriteLine("Assignment Form Left");
+        }
+
+        private void AdminManagerUserAssignmentUserControl_Enter(object sender, EventArgs e)
+        {
+            Console.WriteLine("Entered Form");
+        }
+
+        private void AdminManagerUserAssignmentUserControl_VisibleChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("Form Shown");
+            LoadNotAssignedUsers();
+            PopulateComboBox();
+        }
+
         private void deleteAssignedBtn_Click(object sender, EventArgs e)
         {
             {
