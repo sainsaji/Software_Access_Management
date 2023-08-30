@@ -2,6 +2,7 @@
 using File_Acess_Management.Models;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,8 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         bool ck;
         int software_id = 0;
         ISoftwareRepository _software;
+        private ErrorProvider errorProvider = new ErrorProvider();
+
         public AdminSoftwareManagementUserControl(ISoftwareRepository software)
         {
             _software = software;
@@ -29,7 +32,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             GetSoftwareRecords();
             softwareListDataGridView.SelectionChanged += softwareListDataGridView_SelectionChanged;
             ck = false;
-        }                                                                                                                                      
+        }
         private void softwareListDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (softwareListDataGridView.SelectedRows.Count > 0)
@@ -52,17 +55,23 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void addButton_Click(object sender, EventArgs e)
         {
             {
+                
+                
                 Software softwares = new Software(0, softwareNametext.Text);
+                string query1 = "Select from software where soft_name=@SoftName";
+                DataTable dt2 = _software.getAll(softwares,query1);
                 if (ck == true)
                 {
-                    MessageBox.Show("You can't add the same record agian");
+                    errorProvider.SetError(softwareNametext, "You can't add the same record again");
+
                 }
                 else if (softwares.SoftName == "")
                 {
-                    MessageBox.Show("Enter the software name");
+                    errorProvider.SetError(softwareNametext, "Enter a name");
                 }
                 else
                 {
+                    errorProvider.SetError(softwareNametext, "");
                     string query = "Insert into software values(0,@SoftName);";
                     int rowsEffected = _software.add(softwares, query);
                     if (rowsEffected > 0)
@@ -82,6 +91,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             software_id = 0;
             ck = false;
             addButton.Enabled = true;
+            errorProvider.SetError(softwareNametext, "");
         }
 
         private void updateButton_Click(object sender, EventArgs e)
@@ -92,12 +102,12 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                     Software softwares = new Software(software_id, softwareNametext.Text);
                     if (softwares.SoftName == "")
                     {
-                        MessageBox.Show("Enter the software name");
+                        errorProvider.SetError(softwareNametext, "Enter a software name");
                         return;
                     }
                     else if (software_id == 0)
                     {
-                        MessageBox.Show("Some Error Occured");
+                        errorProvider.SetError(softwareNametext, "Error Occured");
                         return;
                     }
                     string query = "Update software set soft_name=@SoftName where soft_id=@Id;";
@@ -117,10 +127,11 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             {
                 if (ck == true)
                 {
-                    Software softwares = new Software(software_id,null);
+                    Software softwares = new Software(software_id, null);
                     if (software_id == 0)
                     {
-                        MessageBox.Show("Some Error Occured");
+
+                        errorProvider.SetError(softwareNametext, "Some Error Occured");
                         return;
                     }
                     string query = "delete from software where soft_id=@Id;";

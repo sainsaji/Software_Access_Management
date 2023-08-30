@@ -18,7 +18,8 @@ namespace File_Acess_Management.Data.Repository
     {
         private readonly IDatabaseConnectionProvider _connectionProvider;
         private readonly ICommandFactory _commandFactory;
-        public UserManagementRepository(IDatabaseConnectionProvider connectionProvider, ICommandFactory commandFactory) :base(connectionProvider,commandFactory) { 
+        public UserManagementRepository(IDatabaseConnectionProvider connectionProvider, ICommandFactory commandFactory) : base(connectionProvider, commandFactory)
+        {
             _connectionProvider = connectionProvider;
             _commandFactory = commandFactory;
         }
