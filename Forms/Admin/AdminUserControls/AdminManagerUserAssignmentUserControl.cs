@@ -12,6 +12,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         int selectedUserId, selectedUserId2, selectedManagerId;
         bool ck = false;
         bool ck2 = false;
+        DataTable dt = new DataTable();
         IUserManagerAssignmentRepository _userManagerAssignment;
         private ErrorProvider errorProvider = new ErrorProvider();
 
@@ -73,7 +74,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 "INNER JOIN roles AS r ON u.role_id = r.role_id " +
                 "Inner join managerassigned as m ON u.id=m.users_id " +
                 "WHERE r.role_name = 'User' AND u.manager_assigned = true;";
-            DataTable dt = _userManagerAssignment.getAll(query);
+            dt = _userManagerAssignment.getAll(query);
             assignedManagerDataGridView.DataSource = dt;
             //studentRecordDataGridView.Columns["Password"].Visible = false;
             assignedManagerDataGridView.Columns["id"].Visible = false;
@@ -88,7 +89,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void PopulateComboBox()
         {
             string query = "SELECT u.id,u.name FROM users as u Inner join roles as r on u.role_id=r.role_id where r.role_name='Manager'";
-            DataTable dt = _userManagerAssignment.getAll(query);
+            dt = _userManagerAssignment.getAll(query);
             foreach (DataRow row in dt.Rows)
             {
                 int manId = Convert.ToInt32(row["id"]);
@@ -102,7 +103,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void LoadNotAssignedUsers()
         {
             string query = "SELECT u.id,u.user_name, r.role_name as role, u.name, u.email, u.phone_number, u.address FROM users AS u INNER JOIN roles AS r ON u.role_id = r.role_id WHERE r.role_name = 'User' AND u.manager_assigned = false;";
-            DataTable dt = _userManagerAssignment.getAll(query);
+            dt = _userManagerAssignment.getAll(query);
             notAssignedManagerDataGridView.DataSource = dt;
             //studentRecordDataGridView.Columns["Password"].Visible = false;
             notAssignedManagerDataGridView.Columns["id"].Visible = false;
@@ -213,6 +214,12 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void AdminManagerUserAssignmentUserControl_VisibleChanged(object sender, EventArgs e)
         {
             Console.WriteLine("Form Shown");
+
+            Console.WriteLine("Clearing DataTable");
+            dt.Clear();
+            selectManager.Items.Clear();
+            selectManagerForNotAssigned.Items.Clear();
+            Console.WriteLine("Loading Manager List");
             LoadNotAssignedUsers();
             PopulateComboBox();
         }
