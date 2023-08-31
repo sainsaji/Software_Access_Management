@@ -42,13 +42,11 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 "s.soft_name AS Software_Name,\r\n    " +
                 "um.user_name AS Manager_Name,\r\n    " +
                 "rt.approval_manager AS Manager_Approval,\r\n    " +
-                "rt.approval_admin AS Admin_Approval,\r\n    " +
-                "rt.request_id AS request_id\r\nFROM\r\n    " +
-                "users u\r\nJOIN\r\n    " +
-                "request_table rt ON u.id = rt.user_id\r\nJOIN\r\n    " +
-                "request_list_table rlt ON rt.request_list_id = rlt.req_id\r\nJOIN\r\n    " +
-                "software s ON rlt.software_id = s.soft_id\r\nJOIN\r\n    " +
-                "managerAssigned ma ON u.id = ma.users_id\r\nJOIN\r\n    " +
+                "rt.approval_admin AS Admin_Approval\r\nFROM\r\n    " +
+                "users u\r\nINNER JOIN\r\n    " +
+                "request_table rt ON u.id = rt.user_id\r\nINNER JOIN\r\n    " +
+                "software s ON rt.software_id = s.soft_id\r\nINNER JOIN\r\n    " +
+                "managerAssigned ma ON u.id = ma.users_id\r\nINNER JOIN\r\n    " +
                 "users um ON ma.manager_id = um.id\r\nWHERE\r\n    " +
                 "rt.approval_manager = 'approved';\r\n";
             DataTable dt = _adminRaisedRequest.getAll(query);
