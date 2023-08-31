@@ -12,7 +12,10 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         int selectedUserId, selectedUserId2, selectedManagerId;
         bool ck = false;
         bool ck2 = false;
+        DataTable dt = new DataTable();
         IUserManagerAssignmentRepository _userManagerAssignment;
+        private ErrorProvider errorProvider = new ErrorProvider();
+
         public AdminManagerUserAssignmentUserControl(IUserManagerAssignmentRepository userManagerAssignment)
         {
             _userManagerAssignment = userManagerAssignment;
@@ -71,7 +74,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 "INNER JOIN roles AS r ON u.role_id = r.role_id " +
                 "Inner join managerassigned as m ON u.id=m.users_id " +
                 "WHERE r.role_name = 'User' AND u.manager_assigned = true;";
-            DataTable dt = _userManagerAssignment.getAll(query);
+            dt = _userManagerAssignment.getAll(query);
             assignedManagerDataGridView.DataSource = dt;
             //studentRecordDataGridView.Columns["Password"].Visible = false;
             assignedManagerDataGridView.Columns["id"].Visible = false;
@@ -86,7 +89,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void PopulateComboBox()
         {
             string query = "SELECT u.id,u.name FROM users as u Inner join roles as r on u.role_id=r.role_id where r.role_name='Manager'";
-            DataTable dt = _userManagerAssignment.getAll(query);
+            dt = _userManagerAssignment.getAll(query);
             foreach (DataRow row in dt.Rows)
             {
                 int manId = Convert.ToInt32(row["id"]);
@@ -100,7 +103,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void LoadNotAssignedUsers()
         {
             string query = "SELECT u.id,u.user_name, r.role_name as role, u.name, u.email, u.phone_number, u.address FROM users AS u INNER JOIN roles AS r ON u.role_id = r.role_id WHERE r.role_name = 'User' AND u.manager_assigned = false;";
-            DataTable dt = _userManagerAssignment.getAll(query);
+            dt = _userManagerAssignment.getAll(query);
             notAssignedManagerDataGridView.DataSource = dt;
             //studentRecordDataGridView.Columns["Password"].Visible = false;
             notAssignedManagerDataGridView.Columns["id"].Visible = false;
@@ -123,22 +126,101 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             selectedManagerId = 0;
         }
 
-        private void assignManagerBtn_Click(object sender, EventArgs e)
+
+
+        private void AdminManagerUserAssignmentUserControl_Leave(object sender, EventArgs e)
         {
+            Console.WriteLine("Assignment Form Left");
+            selectManager.Items.Clear();
+            selectManagerForNotAssigned.Items.Clear();
+        }
+
+        private void AdminManagerUserAssignmentUserControl_Enter(object sender, EventArgs e)
+        {
+            Console.WriteLine("Entered Form");
+        }
+
+        private void AdminManagerUserAssignmentUserControl_VisibleChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("Form Shown");
+
+            Console.WriteLine("Clearing DataTable");
+            dt.Clear();
+            selectManager.Items.Clear();
+            selectManagerForNotAssigned.Items.Clear();
+            Console.WriteLine("Loading Manager List");
+            LoadNotAssignedUsers();
+            PopulateComboBox();
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void assignBtn_Click(object sender, EventArgs e)
+        {
+
             {
-                manager selectedMan = (manager)selectManagerForNotAssigned.SelectedItem;
-                if (ck == true && selectedUserId != 0 && selectedMan != null)
                 {
-                    Assignment assign = new Assignment(selectedMan.Id, selectedUserId);
-                    string query = "Insert into managerassigned values (0,@ManagerId,@UserId)";
-                    int rowsAffected = _userManagerAssignment.add(assign, query);
-                    if (rowsAffected > 0)
+                    errorProvider.SetError(selectManagerForNotAssigned, "");
+                    manager selectedMan = (manager)selectManagerForNotAssigned.SelectedItem;
+                    if (selectManager == null)
                     {
-                        string query2 = "update users set manager_assigned=true where id=@UserId";
-                        int rowsAffected2 = _userManagerAssignment.add(assign, query2);
-                        if (rowsAffected2 > 0)
+                        errorProvider.SetError(selectManagerForNotAssigned, "Please Select a Manger");
+                    }
+                    else
+                    {
+                        errorProvider.SetError(selectManagerForNotAssigned, "");
+                    }
+                    if (ck == true && selectedUserId != 0 && selectedMan != null)
+                    {
+                        Assignment assign = new Assignment(selectedMan.Id, selectedUserId);
+                        string query = "Insert into managerassigned values (0,@ManagerId,@UserId)";
+                        int rowsAffected = _userManagerAssignment.add(assign, query);
+                        if (rowsAffected > 0)
                         {
-                            MessageBox.Show("User assigned successfully.");
+                            string query2 = "update users set manager_assigned=true where id=@UserId";
+                            int rowsAffected2 = _userManagerAssignment.add(assign, query2);
+                            if (rowsAffected2 > 0)
+                            {
+                                MessageBox.Show("User assigned successfully.");
+                                ck = false;
+                                LoadNotAssignedUsers();
+                                GetAssignedUsersRecord();
+                                ResetAll();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error assigning user.");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Error assigning user.");
+                        errorProvider.SetError(selectManagerForNotAssigned, "Please Select a User");
+                    }
+                }
+
+            }
+        }
+
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+
+            {
+                {
+                    errorProvider.SetError(selectManager, "");
+                    manager selectedMan = (manager)selectManager.SelectedItem;
+                    if (ck2 == true && selectedMan != null && selectedUserId2 != 0)
+                    {
+                        Assignment assign = new Assignment(selectedMan.Id, selectedUserId2);
+                        string query = "update managerassigned set manager_id=@ManagerId where users_id=@UserId";
+                        int rowsAffected = _userManagerAssignment.add(assign, query);
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Successfully updated the manager.");
                             ck = false;
                             LoadNotAssignedUsers();
                             GetAssignedUsersRecord();
@@ -146,45 +228,16 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                         }
                         else
                         {
-                            MessageBox.Show("Error assigning user.");
+                            //MessageBox.Show("Error assigning user.");
+                            errorProvider.SetError(selectManager, "Please Select a User");
+
                         }
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Error assigning user.");
-                }
-            }
-
-        }
-
-        private void updateAssignedBtn_Click(object sender, EventArgs e)
-        {
-            {
-                manager selectedMan = (manager)selectManager.SelectedItem;
-                if (ck2 == true && selectedMan != null && selectedUserId2 != 0)
-                {
-                    Assignment assign = new Assignment(selectedMan.Id, selectedUserId2);
-                    string query = "update managerassigned set manager_id=@ManagerId where users_id=@UserId";
-                    int rowsAffected = _userManagerAssignment.add(assign, query);
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Successfully updated the manager.");
-                        ck = false;
-                        LoadNotAssignedUsers();
-                        GetAssignedUsersRecord();
-                        ResetAll();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error assigning user.");
-
-                    }
-                }
             }
         }
 
-        private void deleteAssignedBtn_Click(object sender, EventArgs e)
+        private void deleteBtn_Click(object sender, EventArgs e)
         {
             {
                 if (ck2 == true && selectedUserId2 != 0 && selectedManagerId != 0)
@@ -220,7 +273,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             }
         }
 
-        private void resetBtn_Click(object sender, EventArgs e)
+        private void rstBtn_Click(object sender, EventArgs e)
         {
             ResetAll();
         }

@@ -48,7 +48,6 @@ namespace File_Acess_Management
                 userIcon.Visible = false;
             }
         }
-
         private void loginButton_Click(object sender, EventArgs e)
         {
             string username = userNameText.Text;

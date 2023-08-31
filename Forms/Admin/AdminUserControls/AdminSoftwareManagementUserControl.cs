@@ -2,6 +2,7 @@
 using File_Acess_Management.Models;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,8 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         bool ck;
         int software_id = 0;
         ISoftwareRepository _software;
+        private ErrorProvider errorProvider = new ErrorProvider();
+
         public AdminSoftwareManagementUserControl(ISoftwareRepository software)
         {
             _software = software;
@@ -29,7 +32,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             GetSoftwareRecords();
             softwareListDataGridView.SelectionChanged += softwareListDataGridView_SelectionChanged;
             ck = false;
-        }                                                                                                                                      
+        }
         private void softwareListDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (softwareListDataGridView.SelectedRows.Count > 0)
@@ -38,7 +41,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 software_id = Convert.ToInt32(selectedRow.Cells["soft_id"].Value);
                 softwareNametext.Text = selectedRow.Cells["soft_name"].Value.ToString();
                 ck = true;
-                addButton.Enabled = false;
+                addBtn.Enabled = false;
             }
         }
         private void GetSoftwareRecords()
@@ -53,16 +56,26 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         {
             {
                 Software softwares = new Software(0, softwareNametext.Text);
+                string query1 = "Select * from software where soft_name=@SoftName;";
+                DataTable dt2 = _software.get(softwares, query1);
+                if (dt2.Rows.Count > 0)
+                {
+                    ck = true;
+                }
+                else { ck = false; }
+
                 if (ck == true)
                 {
-                    MessageBox.Show("You can't add the same record agian");
+                    errorProvider.SetError(softwareNametext, "You can't add the same record again");
+
                 }
                 else if (softwares.SoftName == "")
                 {
-                    MessageBox.Show("Enter the software name");
+                    errorProvider.SetError(softwareNametext, "Enter a name");
                 }
                 else
                 {
+                    errorProvider.SetError(softwareNametext, "");
                     string query = "Insert into software values(0,@SoftName);";
                     int rowsEffected = _software.add(softwares, query);
                     if (rowsEffected > 0)
@@ -81,23 +94,33 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             softwareListDataGridView.ClearSelection();
             software_id = 0;
             ck = false;
-            addButton.Enabled = true;
+            addBtn.Enabled = true;
+            errorProvider.SetError(softwareNametext, "");
         }
 
         private void updateButton_Click(object sender, EventArgs e)
         {
             {
-                if (ck == true)
+                Software softwares2 = new Software(0, softwareNametext.Text);
+                string query1 = "Select * from software where soft_name=@SoftName;";
+                DataTable dt2 = _software.get(softwares2, query1);
+                if (dt2.Rows.Count > 0)
+                {
+                    ck = true;
+                }
+                else { ck = false; }
+
+                if (ck == false)
                 {
                     Software softwares = new Software(software_id, softwareNametext.Text);
                     if (softwares.SoftName == "")
                     {
-                        MessageBox.Show("Enter the software name");
+                        errorProvider.SetError(softwareNametext, "Enter a software name");
                         return;
                     }
                     else if (software_id == 0)
                     {
-                        MessageBox.Show("Some Error Occured");
+                        errorProvider.SetError(softwareNametext, "Error Occured");
                         return;
                     }
                     string query = "Update software set soft_name=@SoftName where soft_id=@Id;";
@@ -109,6 +132,10 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                         reset();
                     }
                 }
+                else
+                {
+                    errorProvider.SetError(softwareNametext, "Software Already Exist");
+                }
             }
         }
 
@@ -117,10 +144,11 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             {
                 if (ck == true)
                 {
-                    Software softwares = new Software(software_id,null);
+                    Software softwares = new Software(software_id, null);
                     if (software_id == 0)
                     {
-                        MessageBox.Show("Some Error Occured");
+
+                        errorProvider.SetError(softwareNametext, "Some Error Occured");
                         return;
                     }
                     string query = "delete from software where soft_id=@Id;";
@@ -132,10 +160,124 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                         reset();
                     }
                 }
+                else
+                {
+                    errorProvider.SetError(softwareNametext, "Nothing Selected to Delete");
+                }
             }
         }
 
         private void resetButton_Click(object sender, EventArgs e)
+        {
+            reset();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            {
+                Software softwares = new Software(0, softwareNametext.Text);
+                string query1 = "Select * from software where soft_name=@SoftName;";
+                DataTable dt2 = _software.get(softwares, query1);
+                if (dt2.Rows.Count > 0)
+                {
+                    ck = true;
+                }
+                else { ck = false; }
+
+                if (ck == true)
+                {
+                    errorProvider.SetError(softwareNametext, "You can't add the same record again");
+
+                }
+                else if (softwares.SoftName == "")
+                {
+                    errorProvider.SetError(softwareNametext, "Enter a name");
+                }
+                else
+                {
+                    errorProvider.SetError(softwareNametext, "");
+                    string query = "Insert into software values(0,@SoftName);";
+                    int rowsEffected = _software.add(softwares, query);
+                    if (rowsEffected > 0)
+                    {
+                        MessageBox.Show("Software added successfully.");
+                        GetSoftwareRecords();
+                        reset();
+                    }
+                }
+            }
+        }
+
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+            {
+                Software softwares2 = new Software(0, softwareNametext.Text);
+                string query1 = "Select * from software where soft_name=@SoftName;";
+                DataTable dt2 = _software.get(softwares2, query1);
+                if (dt2.Rows.Count > 0)
+                {
+                    ck = true;
+                }
+                else { ck = false; }
+
+                if (ck == false)
+                {
+                    Software softwares = new Software(software_id, softwareNametext.Text);
+                    if (softwares.SoftName == "")
+                    {
+                        errorProvider.SetError(softwareNametext, "Enter a software name");
+                        return;
+                    }
+                    else if (software_id == 0)
+                    {
+                        errorProvider.SetError(softwareNametext, "Error Occured");
+                        return;
+                    }
+                    string query = "Update software set soft_name=@SoftName where soft_id=@Id;";
+                    int rowsEffected = _software.add(softwares, query);
+                    if (rowsEffected > 0)
+                    {
+                        MessageBox.Show("Software updated successfully.");
+                        GetSoftwareRecords();
+                        reset();
+                    }
+                }
+                else
+                {
+                    errorProvider.SetError(softwareNametext, "Software Already Exist");
+                }
+            }
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            {
+                if (ck == true)
+                {
+                    Software softwares = new Software(software_id, null);
+                    if (software_id == 0)
+                    {
+
+                        errorProvider.SetError(softwareNametext, "Some Error Occured");
+                        return;
+                    }
+                    string query = "delete from software where soft_id=@Id;";
+                    int rowsEffected = _software.remove(softwares, query);
+                    if (rowsEffected > 0)
+                    {
+                        MessageBox.Show("Software deleted successfully.");
+                        GetSoftwareRecords();
+                        reset();
+                    }
+                }
+                else
+                {
+                    errorProvider.SetError(softwareNametext, "Nothing Selected to Delete");
+                }
+            }
+        }
+
+        private void rstBtn_Click(object sender, EventArgs e)
         {
             reset();
         }
