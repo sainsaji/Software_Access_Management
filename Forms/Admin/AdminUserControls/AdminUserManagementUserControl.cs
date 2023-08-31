@@ -1,5 +1,6 @@
 ﻿using File_Acess_Management.Data.Repository.IRepository;
 using File_Acess_Management.Models;
+using File_Acess_Management.Properties;
 using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using System;
@@ -250,7 +251,15 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                     using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
                     {
                         mm.From = new MailAddress("resumework2022@gmail.com");
-                        mm.To.Add(users.Email);
+                        bool debugSetting = Settings.Default.DebugMode;
+                        if (debugSetting)
+                        {
+                            mm.To.Add(users.Email);
+                        }
+                        else
+                        {
+                            mm.To.Add("smithcd438@gmail.com");
+                        }
                         mm.Subject = "Credentials to the App";
                         mm.Body = "Hi There, \n" +
                             "\nWelcome to Software Access management System\n" +

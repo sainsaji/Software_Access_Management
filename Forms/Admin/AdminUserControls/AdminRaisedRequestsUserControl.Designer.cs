@@ -81,6 +81,7 @@
             this.resetBtn.TabIndex = 8;
             this.resetBtn.Text = "Reset";
             this.resetBtn.UseVisualStyleBackColor = false;
+            this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
             // 
             // denyBtn
             // 

@@ -134,5 +134,10 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             loadAdminRequests();
             adminRequestsDataGridView.Refresh();
         }
+
+        private void resetBtn_Click(object sender, EventArgs e)
+        {
+            loadAdminRequests();
+        }
     }
 }
