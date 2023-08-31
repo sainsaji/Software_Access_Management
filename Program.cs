@@ -25,6 +25,7 @@ namespace File_Acess_Management
             services.AddScoped<ISoftwareRepository, SoftwareRepository>();
             services.AddScoped<IUserManagementRepository, UserManagementRepository>();
             services.AddScoped<IUserManagerAssignmentRepository, UserManagerAssignmentRepository>();
+            services.AddScoped<IUserRaisedRequestRepository, UserRaisedRequestRepository>();
             services.AddScoped<IAdminRaisedRequest, AdminRaisedRequest>();
 
 
