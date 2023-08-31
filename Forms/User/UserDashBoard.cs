@@ -1,4 +1,5 @@
-﻿using File_Acess_Management.Forms.User.UserDashboardUserControls;
+﻿using File_Acess_Management.Data.Repository;
+using File_Acess_Management.Forms.User.UserDashboardUserControls;
 using File_Acess_Management.Models;
 using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
@@ -30,10 +31,8 @@ namespace File_Acess_Management
             InitializeComponent();
             this.user = user;
             this.userId = user.Id;
-            userRequestStatusUserControl.Id = this.userId;
-            raiseRequestUserControl.Id = this.userId;
-            raiseRequestUserControl = new UserRaiseRequestUserControl();
-            userRequestStatusUserControl = new UserRequestStatusUserControl();
+            raiseRequestUserControl = new UserRaiseRequestUserControl(this.userId, _serviceProvider.GetRequiredService<IUserRaisedRequestRepository>());
+            userRequestStatusUserControl = new UserRequestStatusUserControl(this.userId, _serviceProvider.GetRequiredService<IUserRaisedRequestRepository>());
         }
 
         private void AddUserControl(UserControl userControl)

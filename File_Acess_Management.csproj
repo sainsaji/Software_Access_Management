@@ -115,9 +115,11 @@
     <Compile Include="Data\Repository\IRepository\IMainRepository.cs" />
     <Compile Include="Data\Repository\IRepository\ISoftwareRepository.cs" />
     <Compile Include="Data\Repository\IRepository\IUserManagerAssignmentRepository.cs" />
+    <Compile Include="Data\Repository\IUserRaisedRequestRepository.cs" />
     <Compile Include="Data\Repository\MainRepository.cs" />
     <Compile Include="Data\Repository\SoftwareRepository.cs" />
     <Compile Include="Data\Repository\UserManagerAssignmentRepository.cs" />
+    <Compile Include="Data\Repository\UserRaisedRequestRepository.cs" />
     <Compile Include="Forms\Admin\AdminUserControls\AdminManagerUserAssignmentUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
