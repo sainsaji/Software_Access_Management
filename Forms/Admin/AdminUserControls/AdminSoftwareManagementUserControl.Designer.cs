@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminSoftwareManagementUserControl));
-            this.resetButton = new System.Windows.Forms.Button();
-            this.updateButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.addButton = new System.Windows.Forms.Button();
             this.softwareNametext = new System.Windows.Forms.TextBox();
             this.softwareNameLabel = new System.Windows.Forms.Label();
             this.softwareIdText = new System.Windows.Forms.TextBox();
@@ -46,46 +42,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.softwareListDataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // resetButton
-            // 
-            this.resetButton.Location = new System.Drawing.Point(393, 167);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(63, 35);
-            this.resetButton.TabIndex = 18;
-            this.resetButton.Text = "Reset";
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
-            // 
-            // updateButton
-            // 
-            this.updateButton.Location = new System.Drawing.Point(147, 167);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(63, 35);
-            this.updateButton.TabIndex = 17;
-            this.updateButton.Text = "Update";
-            this.updateButton.UseVisualStyleBackColor = true;
-            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.Location = new System.Drawing.Point(269, 167);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(63, 35);
-            this.deleteButton.TabIndex = 16;
-            this.deleteButton.Text = "Delete";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
-            // 
-            // addButton
-            // 
-            this.addButton.Location = new System.Drawing.Point(16, 167);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(63, 35);
-            this.addButton.TabIndex = 15;
-            this.addButton.Text = "Add";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // softwareNametext
             // 
@@ -127,7 +83,7 @@
             this.softwareListDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.softwareListDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.softwareListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.softwareListDataGridView.Location = new System.Drawing.Point(14, 208);
+            this.softwareListDataGridView.Location = new System.Drawing.Point(14, 141);
             this.softwareListDataGridView.MultiSelect = false;
             this.softwareListDataGridView.Name = "softwareListDataGridView";
             this.softwareListDataGridView.ReadOnly = true;
@@ -220,10 +176,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.resetButton);
-            this.Controls.Add(this.updateButton);
-            this.Controls.Add(this.deleteButton);
-            this.Controls.Add(this.addButton);
             this.Controls.Add(this.softwareNametext);
             this.Controls.Add(this.softwareNameLabel);
             this.Controls.Add(this.softwareIdText);
@@ -241,11 +193,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Button updateButton;
-        private System.Windows.Forms.Button deleteButton;
-        private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.TextBox softwareNametext;
         private System.Windows.Forms.Label softwareNameLabel;
         private System.Windows.Forms.TextBox softwareIdText;

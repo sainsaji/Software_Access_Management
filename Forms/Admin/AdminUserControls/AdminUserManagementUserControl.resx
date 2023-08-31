@@ -7258,7 +7258,7 @@
         SUVORK5CYII=
 </value>
   </data>
-  <data name="button5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="resetBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAXZJREFUOE+V
         k79Kw1AUxpM0bfonbbAlkOIWC0J3nSoBnXQsOjqInRTcBSEv4CCIWydxdfAFFCefoHtFn0BQ0KLxd5Jb
@@ -7270,7 +7270,7 @@
         3JJyAU37BcdoaOn2Kk0rAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="deleteBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAPdJREFUOE+N
         U8sKgzAQFOOpr1RFxJPg/1/E56m0tB9T8CPsTrJbaOojA4vLzM5Ekxgopd5U96qqdOCJOI41PPAi4EHc
@@ -7280,7 +7280,7 @@
         Pu1YlcjYf0MAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="updateBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAcxJREFUOE+l
         kzlLA1EUhSf7npDEyQIKihExpYWVEKzcsExlJdiIxEL8N1opIjaiglaCSrSwciusBNOIYmG0sdL4nXEG
@@ -7293,7 +7293,7 @@
         IVWc4bU9JJn9lE8o/PqUqXV+yrJ//UyOqQtb/8PvbBjfpuVtnU0IwVAAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="button3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="addBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAQxJREFUOE+l
         U1sKwjAQ3Ja+H370PhYvoBfxEv4KHsADiHgIj6P4ofgnSKXqTDA1DUEUF4Zkd2Y2IQ8xw/M8yfN8FATB
