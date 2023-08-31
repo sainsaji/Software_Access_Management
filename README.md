@@ -61,9 +61,37 @@ The project's database schema consists of several interconnected tables to manag
 - `software_id` (INT): Foreign key referencing the software table.
 - Foreign key relationships: `request_id` references `request_table(request_id)`, `software_id` references `software(soft_id)`.
 
-## Usage
+C# Application
+The C# application is developed to interact with the database and provide a user interface for managing software access and access requests. The application is structured into different forms and user controls to handle various tasks:
 
-This project's database schema serves as a foundation for managing software access within an organization. It allows for the management of user roles, software availability, user information, access requests, and their statuses. By interacting with this database, administrators can efficiently manage software access requests and permissions for various users.
+Admin Dashboard: Provides admin-related functionalities.
+
+User Management
+Software Management
+Manager-User Assignments
+Raised Requests
+Manager Dashboard: Provides manager-related functionalities.
+
+Incoming Requests
+User Information
+User Dashboard: Provides user-related functionalities.
+
+Raising Requests
+Request Status
+User Login: Allows users to log in to the application.
+
+Please note that the application references various libraries for cryptography, data handling, and networking. Make sure to include the required references and dependencies as mentioned in the provided XML configuration.
+
+Usage
+Database Setup: Before running the C# application, ensure that the database schema is set up correctly. You can use the SQL script provided in the earlier section to create the necessary tables.
+
+C# Application: To use the C# application, follow these steps:
+
+Open the solution in your preferred C# development environment.
+Make sure the required libraries and references are correctly configured.
+Build and run the application.
+Log in using appropriate user credentials.
+Interact with the Application: Depending on your user role (admin, manager, or user), you can use the application to manage software access, view requests, and perform other relevant tasks.
 
 ## Contributing
 
