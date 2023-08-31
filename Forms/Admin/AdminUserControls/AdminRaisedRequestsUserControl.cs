@@ -27,6 +27,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         private void loadAdminRequests()
         {
             string query = "SELECT\r\n    " +
+                "rt.request_id As Request_Id, " +
                 "u.user_name AS User_Name,\r\n    " +
                 "s.soft_name AS Software_Name,\r\n    " +
                 "um.user_name AS Manager_Name,\r\n    " +
@@ -63,11 +64,11 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 
         private void adminRequestsDataGridView_SelectionChanged(object sender, EventArgs e)
         {
+            Console.WriteLine("Selection Change Triggered");
             if (adminRequestsDataGridView.SelectedCells.Count > 0)
             {
                 int selectedRowIndex = adminRequestsDataGridView.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = adminRequestsDataGridView.Rows[selectedRowIndex];
-
                 object requestIdValue = selectedRow.Cells["request_id"].Value;
                 object requestState = selectedRow.Cells["Admin_Approval"].Value;
                 if (requestState != null)
