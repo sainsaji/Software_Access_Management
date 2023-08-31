@@ -1,5 +1,6 @@
 ﻿using File_Acess_Management.Data.Repository.IRepository;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,26 +16,14 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
     public partial class AdminRaisedRequestsUserControl : UserControl
     {
         IAdminRaisedRequest _adminRaisedRequest;
+        int selectedRequestId = -1;
         public AdminRaisedRequestsUserControl(IAdminRaisedRequest adminRaisedRequest)
         {
             _adminRaisedRequest = adminRaisedRequest;
             InitializeComponent();
-            setButtonAction();
             loadAdminRequests();
         }
-        private void setButtonAction()
-        {
-            DataGridViewButtonColumn col = new DataGridViewButtonColumn();
-            col.UseColumnTextForButtonValue = true;
-            col.Text = "Approve/Deny";
-            col.Name = "Action";
-            adminRequestsDataGridView.Columns.Add(col);
-            DataGridViewButtonColumn colInstall = new DataGridViewButtonColumn();
-            colInstall.UseColumnTextForButtonValue = true;
-            colInstall.Text = "Installaled";
-            colInstall.Name = "Installation Status";
-            adminRequestsDataGridView.Columns.Add(colInstall);
-        }
+
         private void loadAdminRequests()
         {
             string query = "SELECT\r\n    " +
@@ -58,11 +47,11 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 
 
 
-        private void updateAdminRequestApproval(int requestId)
+        private void acceptAdminRequestApproval(int requestId)
         {
             string query = "UPDATE request_table SET approval_admin = CASE " +
-                         "WHEN approval_admin = 'approved' THEN 'denied' " +
-                         "ELSE 'approved' END " +
+                         "WHEN approval_admin = 'denied' THEN 'accepted' " +
+                         "ELSE 'accepted' END " +
                          "WHERE request_id = @requestId";
             RequestList request = new RequestList();
             request.requestId = requestId;
@@ -72,43 +61,78 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         }
 
 
-        private void adminRequestsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+
+
+        private void adminRequestsDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-
+            if (adminRequestsDataGridView.SelectedCells.Count > 0)
             {
+                int selectedRowIndex = adminRequestsDataGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = adminRequestsDataGridView.Rows[selectedRowIndex];
 
+                object requestIdValue = selectedRow.Cells["request_id"].Value;
+                object requestState = selectedRow.Cells["Admin_Approval"].Value;
+                if (requestState != null)
                 {
-                    if (e.RowIndex >= 0 && e.ColumnIndex == adminRequestsDataGridView.Columns["Action"].Index)
+                    if (requestState.ToString() == "denied")
                     {
-                        Console.WriteLine("Action button clicked");
-                        DataGridViewRow row = adminRequestsDataGridView.Rows[e.RowIndex];
-
-                        object requestIdValue = row.Cells["request_id"].Value;
-
-                        try
-                        {
-                            if (requestIdValue != null)
-                            {
-                                // Print the request_id to the console
-                                Console.WriteLine("Clicked Approve for request_id: " + requestIdValue.ToString());
-
-                                // Update admin approval in the database
-                                int requestId = int.Parse(requestIdValue.ToString());
-                                updateAdminRequestApproval(requestId);
-                            }
-                            else
-                            {
-                                Console.WriteLine("Request ID value null");
-                            }
-
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
+                        denyBtn.Enabled = false;
+                        acceptBtn.Enabled = true;
+                    }
+                    else
+                    {
+                        denyBtn.Enabled = true;
+                        acceptBtn.Enabled = false;
                     }
                 }
+                else
+                {
+
+                }
+                if (requestIdValue != null)
+                {
+                    selectedRequestId = Convert.ToInt32(requestIdValue);
+                    Console.WriteLine("Selected Request ID: " + selectedRequestId);
+                }
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (selectedRequestId > 0)
+            {
+                acceptAdminRequestApproval(selectedRequestId);
+            }
+            else
+            {
+                Console.WriteLine("No Request Selected");
+            }
+
+        }
+
+        private void denyBtn_Click(object sender, EventArgs e)
+        {
+            if (selectedRequestId > 0)
+            {
+                denyAdminRequestApproval(selectedRequestId);
+            }
+            else
+            {
+                Console.WriteLine("No Request Selected");
+            }
+        }
+
+        private void denyAdminRequestApproval(int selectedRequestId)
+        {
+            string query = "UPDATE request_table SET approval_admin = CASE " +
+                         "WHEN approval_admin = 'accepted' THEN 'denied' " +
+                         "ELSE 'denied' END " +
+                         "WHERE request_id = @requestId";
+            RequestList request = new RequestList();
+            request.requestId = selectedRequestId;
+            int rowsAffected = _adminRaisedRequest.add(request, query);
+            loadAdminRequests();
+            adminRequestsDataGridView.Refresh();
         }
     }
 }
