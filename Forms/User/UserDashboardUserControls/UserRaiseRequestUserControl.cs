@@ -70,12 +70,25 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
             var table = new DataTable();
             try
             {
-                string selectQuery = "SELECT * FROM SOFTWARE";
-                DataTable dt = _userRaisedRequestRepository.getAll(selectQuery);
-                softwareChkdLstBx.DataSource = dt;
-                softwareChkdLstBx.DisplayMember = "soft_name";
-                softwareChkdLstBx.ValueMember = "soft_name";
-                softwareChkdLstBx.Refresh();
+                //string selectQuery = "SELECT * FROM SOFTWARE";
+                string excludeQuery = "SELECT s.*\r\nFROM software s\r\nLEFT JOIN REQUEST_TABLE r ON s.soft_id = r.software_id AND r.user_id = 12\r\nWHERE r.request_id IS NULL;\r\n";
+
+                try
+                {
+                    DataTable dt2 = _userRaisedRequestRepository.getAll(excludeQuery);
+                    foreach (DataRow row in dt2.Rows)
+                    {
+                        Console.WriteLine($"Name: {row["soft_name"]}");
+                    }
+                    softwareChkdLstBx.DataSource = dt2;
+                    softwareChkdLstBx.DisplayMember = "soft_name";
+                    softwareChkdLstBx.ValueMember = "soft_name";
+                    softwareChkdLstBx.Refresh();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+
+
+
             }
             catch (MySqlException ex)
             {
@@ -105,11 +118,12 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                     validIcoPicBox.Visible = true;
                     alertLabelErrorProvider.SetError(alertsLabel, "");
                     selectedSoftwareListBox.Items.Add(softwareName);
-
                 }
                 else
                 {
+                    validIcoPicBox.Visible = false;
                     alertsLabel.Text = "Selected Software already exists";
+                    alertLabelErrorProvider.SetError(alertsLabel, "Selected Software already exists");
                     Console.WriteLine("Already Exists in Selected List");
                 }
 
@@ -134,9 +148,18 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                             requestList.softId = softwareIdList.First();
                             string query = "insert into REQUEST_TABLE values(0,@userId,@manApproval,@admApproval,@status,@softId);";
                             int rowsAffectedReq = _userRaisedRequestRepository.add(requestList, query);
-                            alertsLabel.Text = "Software Request Sent";
-                            validIcoPicBox.Visible = true;
-                            softwareIdList.RemoveAt(0);
+                            if (rowsAffectedReq > 0)
+                            {
+                                alertsLabel.Text = "Software Request Sent";
+                                validIcoPicBox.Visible = true;
+                                softwareIdList.RemoveAt(0);
+                                clearCheckedListBox();
+                            }
+                            else
+                            {
+                                alertsLabel.Text = "Insert Failed";
+                            }
+
                         }
                     }
                     else
@@ -156,8 +179,18 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                     softwareIdList.Clear();
                     selectedSoftwareListBox.Items.Clear();
                     validIcoPicBox.Visible = false;
+                    loadSoftwareList();
                 }
 
+            }
+        }
+
+        private void clearCheckedListBox()
+        {
+            //clear chked list box
+            foreach (int index in softwareChkdLstBx.CheckedIndices)
+            {
+                softwareChkdLstBx.SetItemChecked(index, false);
             }
         }
 
@@ -178,10 +211,12 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
-            alertsLabel.Text = "Software List Removed";
+            alertsLabel.Text = softwareIdList.Count > 0 ? "Request Cancelled" : "Software List Removed";
+            alertLabelErrorProvider.SetError(alertsLabel, "");
             validIcoPicBox.Visible = false;
             selectedSoftwareListBox.Items.Clear();
             softwareIdList.Clear();
+            clearCheckedListBox();
         }
     }
 }
