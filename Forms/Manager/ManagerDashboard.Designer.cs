@@ -305,7 +305,7 @@
             this.requestGridView.RowTemplate.Height = 24;
             this.requestGridView.Size = new System.Drawing.Size(783, 465);
             this.requestGridView.TabIndex = 2;
-            this.requestGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.requestGridView_CellClick);
+            
             // 
             // userListBx
             // 

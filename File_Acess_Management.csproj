@@ -113,10 +113,12 @@
     <Compile Include="Data\Repository\AdminRaisedRequest.cs" />
     <Compile Include="Data\Repository\IRepository\IAdminRaisedRequest.cs" />
     <Compile Include="Data\Repository\IRepository\IMainRepository.cs" />
+    <Compile Include="Data\Repository\IRepository\IManagerSideRepository.cs" />
     <Compile Include="Data\Repository\IRepository\ISoftwareRepository.cs" />
     <Compile Include="Data\Repository\IRepository\IUserManagerAssignmentRepository.cs" />
-    <Compile Include="Data\Repository\IUserRaisedRequestRepository.cs" />
+    <Compile Include="Data\Repository\IRepository\IUserRaisedRequestRepository.cs" />
     <Compile Include="Data\Repository\MainRepository.cs" />
+    <Compile Include="Data\Repository\ManagerSideRepository.cs" />
     <Compile Include="Data\Repository\SoftwareRepository.cs" />
     <Compile Include="Data\Repository\UserManagerAssignmentRepository.cs" />
     <Compile Include="Data\Repository\UserRaisedRequestRepository.cs" />
