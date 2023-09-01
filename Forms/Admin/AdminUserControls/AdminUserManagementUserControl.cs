@@ -182,6 +182,8 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             emailText.Text = "";
             phoneNumberText.Text = "";
             addressText.Text = "";
+            setVisibilityFalse();
+            errorProvider.SetError(passwordText, "");
         }
 
 
@@ -258,7 +260,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                         }
                         else
                         {
-                            mm.To.Add("smithcd438@gmail.com");
+                            mm.To.Add(Settings.Default.DebugEmail);
                         }
                         mm.Subject = "Credentials to the App";
                         mm.Body = "Hi There, \n" +

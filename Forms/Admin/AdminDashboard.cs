@@ -23,6 +23,7 @@ namespace File_Acess_Management
         AdminSoftwareManagementUserControl softwareUC;
         AdminManagerUserAssignmentUserControl managerUC;
         AdminRaisedRequestsUserControl raisedRequestsUC;
+        AdminDebugConfigUserControls debugConfigUserControlsUC;
         public AdminDashboard(ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -30,13 +31,14 @@ namespace File_Acess_Management
             softwareUC = new AdminSoftwareManagementUserControl(_serviceProvider.GetRequiredService<ISoftwareRepository>());
             managerUC = new AdminManagerUserAssignmentUserControl(_serviceProvider.GetRequiredService<IUserManagerAssignmentRepository>());
             raisedRequestsUC = new AdminRaisedRequestsUserControl(_serviceProvider.GetRequiredService<IAdminRaisedRequest>());
+            debugConfigUserControlsUC = new AdminDebugConfigUserControls();
             InitializeComponent();
         }
         private Form currentForm;
         //AdminUserManagementUserControl adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider);
-        
 
-        
+
+
 
         private void AddUserControl(UserControl userControl)
         {
@@ -117,6 +119,16 @@ namespace File_Acess_Management
             UserLogin userLogin = new UserLogin(_serviceProvider);
             userLogin.Show();
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            IncomingRequestsButton.BackColor = Color.White;
+            userManagerBtn.BackColor = Color.White;
+            usersMngBtn.BackColor = Color.White;
+            softwareMngBtn.BackColor = Color.White;
+            debugBtn.BackColor = Color.Aqua;
+            AddUserControl(debugConfigUserControlsUC);
         }
     }
 }
