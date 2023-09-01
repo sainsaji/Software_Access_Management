@@ -27,6 +27,7 @@ namespace File_Acess_Management
             services.AddScoped<IUserManagerAssignmentRepository, UserManagerAssignmentRepository>();
             services.AddScoped<IUserRaisedRequestRepository, UserRaisedRequestRepository>();
             services.AddScoped<IAdminRaisedRequest, AdminRaisedRequest>();
+            services.AddScoped<IManagerSideRepository, ManagerSideRepository>();
 
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();
