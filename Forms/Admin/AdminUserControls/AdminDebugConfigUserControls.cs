@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using MySql.Data.MySqlClient;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using File_Acess_Management.Data.Repository.IRepository;
+using System.Data.SqlClient;
 
 namespace File_Acess_Management.Forms.Admin.AdminUserControls
 {
@@ -20,9 +23,11 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private string debugManagerPass;
         private string debugUser;
         private string debugUserPass;
+        IAdminRaisedRequest _adminRaisedRequest;
 
-        public AdminDebugConfigUserControls()
+        public AdminDebugConfigUserControls(IAdminRaisedRequest adminRaisedRequest)
         {
+            _adminRaisedRequest = adminRaisedRequest;
             InitializeComponent();
         }
 
@@ -42,6 +47,15 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             debugManagerPass = Settings.Default.DebugManagerPass;
             debugUser = Settings.Default.DebugUserID;
             debugUserPass = Settings.Default.DebugUserPass;
+            debugUserPass = Settings.Default.DebugUserPass;
+            DataTable dt = _adminRaisedRequest.getTables();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string tableName = row["TABLE_NAME"].ToString();
+                tableCheckedLstBx.Items.Add(tableName);
+            }
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -127,6 +141,29 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             userIdTxtBox.Text = "";
             userPassTxtBox.Text = "";
             updateLbl.Text = "";
+        }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            using (MySqlConnection connection = new MySqlConnection(Settings.Default.connection))
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand();
+                try
+                {
+
+                    foreach (string tableName in tableCheckedLstBx.CheckedItems)
+                    {
+                        // WARNING: Be cautious when executing DELETE queries
+                        string deleteQuery = $"DELETE FROM {tableName}";
+                        command.CommandText = deleteQuery;
+                        command.Connection = connection;
+                        command.ExecuteNonQuery();
+                    }
+                    updateLbl.Text = "Entries deleted successfully.";
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+            }
         }
     }
 }

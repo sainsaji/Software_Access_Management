@@ -145,7 +145,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             Console.WriteLine("Form Shown");
 
             Console.WriteLine("Clearing DataTable");
-            dt.Clear();
+
             selectManager.Items.Clear();
             selectManagerForNotAssigned.Items.Clear();
             Console.WriteLine("Loading Manager List");

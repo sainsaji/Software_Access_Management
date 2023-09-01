@@ -31,7 +31,7 @@ namespace File_Acess_Management
             softwareUC = new AdminSoftwareManagementUserControl(_serviceProvider.GetRequiredService<ISoftwareRepository>());
             managerUC = new AdminManagerUserAssignmentUserControl(_serviceProvider.GetRequiredService<IUserManagerAssignmentRepository>());
             raisedRequestsUC = new AdminRaisedRequestsUserControl(_serviceProvider.GetRequiredService<IAdminRaisedRequest>());
-            debugConfigUserControlsUC = new AdminDebugConfigUserControls();
+            debugConfigUserControlsUC = new AdminDebugConfigUserControls(_serviceProvider.GetRequiredService<IAdminRaisedRequest>());
             InitializeComponent();
         }
         private Form currentForm;
