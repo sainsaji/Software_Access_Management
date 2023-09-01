@@ -122,6 +122,12 @@
     <Compile Include="Data\Repository\SoftwareRepository.cs" />
     <Compile Include="Data\Repository\UserManagerAssignmentRepository.cs" />
     <Compile Include="Data\Repository\UserRaisedRequestRepository.cs" />
+    <Compile Include="Forms\Admin\AdminUserControls\AdminDebugConfigUserControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\AdminDebugConfigUserControls.Designer.cs">
+      <DependentUpon>AdminDebugConfigUserControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Admin\AdminUserControls\AdminManagerUserAssignmentUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -215,6 +221,9 @@
     <Compile Include="Forms\Shared\UserLogin.Designer.cs">
       <DependentUpon>UserLogin.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminDebugConfigUserControls.resx">
+      <DependentUpon>AdminDebugConfigUserControls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminManagerUserAssignmentUserControl.resx">
       <DependentUpon>AdminManagerUserAssignmentUserControl.cs</DependentUpon>
     </EmbeddedResource>

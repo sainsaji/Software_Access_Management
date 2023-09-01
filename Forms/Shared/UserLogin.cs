@@ -106,7 +106,9 @@ namespace File_Acess_Management
 
         private void adminIcon_Click(object sender, EventArgs e)
         {
-            (User user, string RoleName) = AuthManager.AuthenticateUser("A001", "Admin");
+            string adminId = Settings.Default.DebugAdminID;
+            string adminPass = Settings.Default.DebugAdminPass;
+            (User user, string RoleName) = AuthManager.AuthenticateUser(adminId, adminPass);
             AdminDashboard admin = new AdminDashboard(_serviceProvider);
             admin.Show();
             this.Hide();
@@ -114,7 +116,9 @@ namespace File_Acess_Management
 
         private void managerIcon_Click(object sender, EventArgs e)
         {
-            (User user, string RoleName) = AuthManager.AuthenticateUser("M002", "Manager@123");
+            string managerId = Settings.Default.DebugManagerID;
+            string managerPass = Settings.Default.DebugManagerPass;
+            (User user, string RoleName) = AuthManager.AuthenticateUser(managerId, managerPass);
             ManagerDashboard subManagers = new ManagerDashboard(user, _serviceProvider);
             subManagers.Show();
             this.Hide();
@@ -122,7 +126,9 @@ namespace File_Acess_Management
 
         private void userIcon_Click(object sender, EventArgs e)
         {
-            (User user, string RoleName) = AuthManager.AuthenticateUser("U002", "User@123");
+            string userId = Settings.Default.DebugUserID;
+            string userPass = Settings.Default.DebugUserPass;
+            (User user, string RoleName) = AuthManager.AuthenticateUser(userId, userPass);
             UserDashboard userDashBoard = new UserDashboard(user, _serviceProvider);
             userDashBoard.Show();
             this.Hide();

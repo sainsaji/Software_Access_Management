@@ -41,5 +41,89 @@ namespace File_Acess_Management.Properties {
                 return ((bool)(this["DebugMode"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DebugEmail {
+            get {
+                return ((string)(this["DebugEmail"]));
+            }
+            set {
+                this["DebugEmail"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("A001")]
+        public string DebugAdminID {
+            get {
+                return ((string)(this["DebugAdminID"]));
+            }
+            set {
+                this["DebugAdminID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Admin")]
+        public string DebugAdminPass {
+            get {
+                return ((string)(this["DebugAdminPass"]));
+            }
+            set {
+                this["DebugAdminPass"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("U002")]
+        public string DebugUserID {
+            get {
+                return ((string)(this["DebugUserID"]));
+            }
+            set {
+                this["DebugUserID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("User")]
+        public string DebugUserPass {
+            get {
+                return ((string)(this["DebugUserPass"]));
+            }
+            set {
+                this["DebugUserPass"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("M002")]
+        public string DebugManagerID {
+            get {
+                return ((string)(this["DebugManagerID"]));
+            }
+            set {
+                this["DebugManagerID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Manager")]
+        public string DebugManagerPass {
+            get {
+                return ((string)(this["DebugManagerPass"]));
+            }
+            set {
+                this["DebugManagerPass"] = value;
+            }
+        }
     }
 }

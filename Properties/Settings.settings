@@ -12,5 +12,26 @@
     <Setting Name="DebugMode" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="DebugEmail" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DebugAdminID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A001</Value>
+    </Setting>
+    <Setting Name="DebugAdminPass" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Admin</Value>
+    </Setting>
+    <Setting Name="DebugUserID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">U002</Value>
+    </Setting>
+    <Setting Name="DebugUserPass" Type="System.String" Scope="User">
+      <Value Profile="(Default)">User</Value>
+    </Setting>
+    <Setting Name="DebugManagerID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">M002</Value>
+    </Setting>
+    <Setting Name="DebugManagerPass" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Manager</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
