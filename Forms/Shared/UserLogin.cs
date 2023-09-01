@@ -106,7 +106,7 @@ namespace File_Acess_Management
 
         private void adminIcon_Click(object sender, EventArgs e)
         {
-            (User user, string RoleName) = AuthManager.AuthenticateUser("A01", "Admin");
+            (User user, string RoleName) = AuthManager.AuthenticateUser("A001", "Admin");
             AdminDashboard admin = new AdminDashboard(_serviceProvider);
             admin.Show();
             this.Hide();
@@ -114,7 +114,7 @@ namespace File_Acess_Management
 
         private void managerIcon_Click(object sender, EventArgs e)
         {
-            (User user, string RoleName) = AuthManager.AuthenticateUser("M002", "Manager");
+            (User user, string RoleName) = AuthManager.AuthenticateUser("M002", "Manager@123");
             ManagerDashboard subManagers = new ManagerDashboard(user, _serviceProvider);
             subManagers.Show();
             this.Hide();
@@ -122,7 +122,7 @@ namespace File_Acess_Management
 
         private void userIcon_Click(object sender, EventArgs e)
         {
-            (User user, string RoleName) = AuthManager.AuthenticateUser("U002", "User");
+            (User user, string RoleName) = AuthManager.AuthenticateUser("U002", "User@123");
             UserDashboard userDashBoard = new UserDashboard(user, _serviceProvider);
             userDashBoard.Show();
             this.Hide();

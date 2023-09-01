@@ -1,4 +1,5 @@
-﻿using File_Acess_Management.Models;
+﻿using File_Acess_Management.Data.Repository.IRepository;
+using File_Acess_Management.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -15,18 +16,13 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
     public partial class ManagerIncomingRequestUserControl : UserControl
     {
         private int _id;
+        IManagerSideRepository _managerSideRepository;
 
-        public int Id
+        public ManagerIncomingRequestUserControl(int Id, IManagerSideRepository managerSideRepository)
         {
-            get { return _id; }
-            set { _id = value; }
-        }
-
-        public ManagerIncomingRequestUserControl()
-        {
+            _id = Id;
+            _managerSideRepository = managerSideRepository;
             InitializeComponent();
-
-
         }
         private void setButtonAction()
         {
@@ -39,81 +35,49 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
 
         private void updateManagerRequestApproval(int id)
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
+            RequestList requesList = new RequestList();
+            requesList.requestId = id;
+            string updateQuery = "UPDATE request_table SET approval_manager = CASE " +
+                         "WHEN approval_manager = 'approved' THEN 'denied' " +
+                         "ELSE 'approved' END " +
+                         "WHERE request_id = @requestId";
+            int rowsAffected = _managerSideRepository.add(requesList, updateQuery);
+            if (rowsAffected > 0)
             {
-                connection.Open();
-                string updateQuery = "UPDATE request_table SET approval_manager = CASE " +
-                             "WHEN approval_manager = 'approved' THEN 'denied' " +
-                             "ELSE 'approved' END " +
-                             "WHERE request_id = @id";
-                using (MySqlCommand command = new MySqlCommand(updateQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@id", id);
-                    int rowsAffected = command.ExecuteNonQuery();
-                    Console.WriteLine("Rows affected: " + rowsAffected);
-                    Console.WriteLine("Update Complete /n Refreshing ");
-                    loadIncomingRequest(id);
-                    userRequestGridView.Refresh();
-                }
+                MessageBox.Show("Request updated successfully");
             }
+            loadIncomingRequest(_id);
+            userRequestGridView.Refresh();
+
+
         }
         private void loadIncomingRequest(int id)
         {
+            try
             {
-                {
+                RequestList requesList = new RequestList();
+                requesList.userId = id;
+                string selectQuery = "SELECT\r\n    " +
+                "rt.request_id As Request_Id, " +
+                "u.user_name AS User_Name,\r\n    " +
+                "s.soft_name AS Software_Name,\r\n    " +
+                "um.user_name AS Manager_Name,\r\n    " +
+                "rt.approval_manager AS Manager_Approval,\r\n    " +
+                "rt.approval_admin AS Admin_Approval\r\nFROM\r\n    " +
+                "users u\r\nINNER JOIN\r\n    " +
+                "request_table rt ON u.id = rt.user_id\r\nINNER JOIN\r\n    " +
+                "software s ON rt.software_id = s.soft_id\r\nINNER JOIN\r\n    " +
+                "managerAssigned ma ON u.id = ma.users_id\r\nINNER JOIN\r\n    " +
+                "users um ON ma.manager_id = um.id\r\nWHERE\r\n    " +
+                "ma.manager_id = @userId;\r\n";
+                DataTable dt = _managerSideRepository.get(requesList, selectQuery);
+                userRequestGridView.DataSource = dt;
+                userRequestGridView.Refresh();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message + " sql query error.");
 
-                    var connection = ConnectionHelper.ConnectionString;
-
-                    using (var con = new MySqlConnection { ConnectionString = connection })
-                    {
-                        using (var command = new MySqlCommand { Connection = con })
-                        {
-
-                            if (con.State == ConnectionState.Open)
-                            {
-                                con.Close();
-                            }
-
-                            con.Open();
-                            if (con.State == ConnectionState.Open)
-                            {
-                                Console.WriteLine("DB Connection Established");
-                            }
-                            else
-                            {
-                                Console.WriteLine("DB Connection Failed");
-                            }
-
-
-                            try
-                            {
-                                int managerId = id;
-                                Console.WriteLine("Fetching Requests from manager side of id:" + managerId + " Id:" + id);
-                                string selectQuery = "SELECT\r\n    u.user_name,\r\n    s.soft_name AS software_name,\r\n    rt.approval_manager, rt.request_id\r\nFROM\r\n    users u\r\nJOIN\r\n    managerAssigned ma ON u.id = ma.users_id\r\nJOIN\r\n    request_list_table rlt ON u.id = rlt.user_id\r\nJOIN\r\n    software s ON rlt.software_id = s.soft_id\r\nJOIN\r\n    request_table rt ON rlt.req_id = rt.request_list_id\r\nWHERE\r\n    ma.manager_id = @id;";
-                                using (MySqlCommand selectCommand = new MySqlCommand(selectQuery, con))
-                                {
-                                    selectCommand.Parameters.AddWithValue("@id", managerId);
-
-                                    MySqlDataAdapter adapter = new MySqlDataAdapter(selectCommand);
-                                    DataSet dataSet = new DataSet();
-                                    adapter.Fill(dataSet);
-
-                                    BindingSource bindingSource = new BindingSource();
-                                    bindingSource.DataSource = dataSet.Tables[0];
-                                    userRequestGridView.DataSource = bindingSource;
-                                    userRequestGridView.Refresh();
-                                }
-                            }
-                            catch (MySqlException ex)
-                            {
-                                MessageBox.Show(ex.Message + " sql query error.");
-
-                            }
-
-                        }
-                    }
-
-                }
             }
         }
 
@@ -135,7 +99,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
                         // Update manager approval in the database
                         int requestId = int.Parse(requestIdValue.ToString());
                         updateManagerRequestApproval(requestId);
-                        loadIncomingRequest(Id);
+                        loadIncomingRequest(_id);
                     }
 
                 }
@@ -148,15 +112,15 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
 
         private void ManagerIncomingRequestUserControl_Load(object sender, EventArgs e)
         {
-            if (Id != 0)
+            if (_id != 0)
             {
-                loadIncomingRequest(Id);
+                loadIncomingRequest(_id);
                 setButtonAction();
             }
             else
             {
-                Console.WriteLine("Invalid Manger ID:" + Id);
-                MessageBox.Show("Invalid Manger ID:" + Id);
+                Console.WriteLine("Invalid Manger ID:" + _id);
+                MessageBox.Show("Invalid Manger ID:" + _id);
             }
 
         }
