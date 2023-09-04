@@ -32,6 +32,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             {
                 DataGridViewRow selectedRow = softwareListDataGridView.SelectedRows[0];
                 software_id = Convert.ToInt32(selectedRow.Cells["soft_id"].Value);
+                softwareIdText.Text= Convert.ToString(software_id);
                 softwareNametext.Text = selectedRow.Cells["soft_name"].Value.ToString();
                 ck = true;
                 addBtn.Enabled = false;
