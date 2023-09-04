@@ -1,5 +1,6 @@
 ﻿using File_Acess_Management.Data.Repository.IRepository;
 using File_Acess_Management.Models;
+using File_Acess_Management.Properties;
 using MySql.Data.MySqlClient;
 using System;
 using System.Data;
@@ -174,6 +175,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             addressText.Text = "";
             setVisibilityFalse();
             errorProvider.SetError(passwordText, "");
+            errorProvider.SetError(roleComboBox, "");
         }
 
         private void userRecordDataGridView_SelectionChanged_1(object sender, EventArgs e)
@@ -223,6 +225,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 if (SelectedRole == null)
                 {
                     MessageBox.Show("Please select a role");
+                    errorProvider.SetError(roleComboBox, "Please Select a role");
                     return;
                 }
                 else if (ck == true)
@@ -239,7 +242,14 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                         using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
                         {
                             mm.From = new MailAddress("resumework2022@gmail.com");
-                            mm.To.Add(users.Email);
+                            if (Settings.Default.DebugMode)
+                            {
+                                mm.To.Add(Settings.Default.DebugEmail);
+                            }
+                            else
+                            {
+                                mm.To.Add(users.Email);
+                            }
                             mm.Subject = "Credentials to the App";
                             mm.Body = "Hi There, \n" +
                                 "\nWelcome to Software Access management System\n" +
@@ -339,6 +349,11 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         private void resetBtn_Click(object sender, EventArgs e)
         {
             ClearFormFields();
+        }
+
+        private void addressLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

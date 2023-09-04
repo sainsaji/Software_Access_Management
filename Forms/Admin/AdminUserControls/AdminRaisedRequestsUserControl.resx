@@ -120,14 +120,14 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="resetBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAF2SURBVDhPlZO/SsNQFMaTNG36J22wJZDiFgtCd50qAZ10LDo6iJ0U3AUhL+AgiFsncXXwBRQn
-        n6B7RZ9AUNCi8XeSW/vHQtMPPu6537nn5Jxzc7Vp6Lqu2bbdKZfL+0pKjyiK9Fwud2oYxsCyrI6S08H3
-        fcc0zWvMSEiiLmzn8/mgUqmsNBoNKz44C7VabTWTyTxhxsHjpCXhO1X1stnsZaFQWEMfAWGP4FfMf8Gz
-        SLJPEl01m02bvaZRYle+MjyQlrR7G7clUy+VSsesH9OH5iVmRiesCZj6JgF9zNjJ/lw0Du3CM2Zwj/97
-        6BfSeo91BMdxfA4+YkqCw0RNIJUWi8Vt/H/zwv6KneNwXdemvxuGe6SkCZBkh2QDTEnwk6hTCMPQ8DzP
-        VdsJBEFgEiilSwtSzWKQVqjwATPiOi8SdQHI1VHBM3ypVqvLSk4PhntA8BsPLlBSauj8L1skuGPA60qb
-        D3mhrVZrqV6vb/DVttyScgFN+wXHaGjp9ipNKwAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAXZJREFUOE+V
+        k79Kw1AUxpM0bfonbbAlkOIWC0J3nSoBnXQsOjqInRTcBSEv4CCIWydxdfAFFCefoHtFn0BQ0KLxd5Jb
+        +8dC0w8+7rnfuefknHNztWnouq7Ztt0pl8v7SkqPKIr0XC53ahjGwLKsjpLTwfd9xzTNa8xISKIubOfz
+        +aBSqaw0Gg0rPjgLtVptNZPJPGHGweOkJeE7VfWy2exloVBYQx8BYY/gV8x/wbNIsk8SXTWbTZu9plFi
+        V74yPJCWtHsbtyVTL5VKx6wf04fmJWZGJ6wJmPomAX3M2Mn+XDQO7cIzZnCP/3voF9J6j3UEx3F8Dj5i
+        SoLDRE0glRaLxW38f/PC/oqd43Bd16a/G4Z7pKQJkGSHZANMSfCTqFMIw9DwPM9V2wkEQWASKKVLC1LN
+        YpBWqPABM+I6LxJ1AcjVUcEzfKlWq8tKTg+Ge0DwGw8uUFJq6PwvWyS4Y8DrSpsPeaGtVmupXq9v8NW2
+        3JJyAU37BcdoaOn2Kk0rAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="denyBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

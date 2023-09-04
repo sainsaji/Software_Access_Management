@@ -179,9 +179,9 @@
             this.groupBox1.Controls.Add(this.softwareIdlabel);
             this.groupBox1.Controls.Add(this.softwareIdText);
             this.groupBox1.Controls.Add(this.softwareNameLabel);
-            this.groupBox1.Location = new System.Drawing.Point(29, 47);
+            this.groupBox1.Location = new System.Drawing.Point(15, 47);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(415, 100);
+            this.groupBox1.Size = new System.Drawing.Size(442, 100);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Software Information";
