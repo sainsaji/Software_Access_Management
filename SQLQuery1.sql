@@ -23,7 +23,7 @@ CREATE TABLE users (
 );
 
 
-
+insert into users values(0,"Admin","$2a$11$3f5r2mzl.QBV18gsdivNX.jgQgCaNI4VzGsUub/FTEKY5ehB9Dl1q",1,"Admin","admin@gmail.com",1234567898,"bangalore",false);
 
 CREATE TABLE softwareAssigned (
     softAssignedId INT PRIMARY KEY IDENTITY(1,1),
