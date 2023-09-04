@@ -9,7 +9,7 @@ CREATE TABLE software (
 );
 
 CREATE TABLE users (
-    id INT PRIMARY KEY IDENTITY(1,1),
+    id INT AUTO_INCREMENT,
     user_name VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role_id INT,
@@ -17,8 +17,11 @@ CREATE TABLE users (
     email VARCHAR(30),
     phone_number VARCHAR(30),
     address VARCHAR(30),
-    FOREIGN KEY (role_id) REFERENCES roles(role_id)
+    manager_assigned VARCHAR(7),
+    PRIMARY KEY (id,user_name),
+    FOREIGN KEY (role_id) REFERENCES roles(role_id) ON DELETE CASCADE
 );
+
 
 
 
@@ -26,30 +29,31 @@ CREATE TABLE softwareAssigned (
     softAssignedId INT PRIMARY KEY IDENTITY(1,1),
     user_id INT,
     soft_ids INT,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (soft_ids) REFERENCES software(soft_id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (soft_ids) REFERENCES software(soft_id) ON DELETE CASCADE
 );
 
 
 
 CREATE TABLE managerAssigned(
-    rel_id INT PRIMARY KEY IDENTITY(1,1),
+    rel_id INT PRIMARY KEY AUTO_INCREMENT,
     manager_id INT NOT NULL,
     users_id INT NOT NULL,
-    FOREIGN KEY (manager_id) REFERENCES users(id),
-    FOREIGN KEY (users_id) REFERENCES users(id)
+    FOREIGN KEY (manager_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE request_table (
-    request_id INT PRIMARY KEY IDENTITY(1,1),
+    request_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
     approval_manager VARCHAR(10),
     approval_admin VARCHAR(10),
     req_status VARCHAR(10),
     software_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (software_id) REFERENCES software(soft_id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (software_id) REFERENCES software(soft_id) ON DELETE CASCADE
 );
+
 
 CREATE TABLE request_list_table (
     req_id INT PRIMARY KEY IDENTITY(1,1),
