@@ -17,6 +17,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
     {
         private int _id;
         IManagerSideRepository _managerSideRepository;
+        object requestIdValue;
 
         public ManagerIncomingRequestUserControl(int Id, IManagerSideRepository managerSideRepository)
         {
@@ -38,7 +39,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             RequestList requesList = new RequestList();
             requesList.requestId = id;
             string updateQuery = "UPDATE request_table SET approval_manager = CASE " +
-                         "WHEN approval_manager = 'approved' THEN 'denied' " +
+                         "WHEN approval_manager = 'Pending' THEN 'denied' " +
                          "ELSE 'approved' END " +
                          "WHERE request_id = @requestId";
             int rowsAffected = _managerSideRepository.add(requesList, updateQuery);
@@ -87,7 +88,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             {
                 DataGridViewRow row = userRequestGridView.Rows[e.RowIndex];
 
-                object requestIdValue = row.Cells["request_id"].Value;
+                requestIdValue = row.Cells["request_id"].Value;
 
                 try
                 {
@@ -122,6 +123,16 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
                 Console.WriteLine("Invalid Manger ID:" + _id);
                 MessageBox.Show("Invalid Manger ID:" + _id);
             }
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            updateManagerRequestApproval(int.Parse(requestIdValue.ToString()));
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
 
         }
     }

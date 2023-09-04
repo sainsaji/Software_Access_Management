@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManagerIncomingRequestUserControl));
             this.userRequestGridView = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.userRequestGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -70,15 +70,6 @@
             this.panel1.Size = new System.Drawing.Size(672, 41);
             this.panel1.TabIndex = 4;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.userRequestGridView);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 41);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(672, 442);
-            this.panel2.TabIndex = 5;
-            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.LemonChiffon;
@@ -110,6 +101,7 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "Deny";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -126,6 +118,16 @@
             this.button3.TabIndex = 6;
             this.button3.Text = "Accept";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.userRequestGridView);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 41);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(672, 442);
+            this.panel2.TabIndex = 5;
             // 
             // ManagerIncomingRequestUserControl
             // 

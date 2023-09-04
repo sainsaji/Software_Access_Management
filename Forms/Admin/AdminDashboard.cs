@@ -31,7 +31,7 @@ namespace File_Acess_Management
             softwareUC = new AdminSoftwareManagementUserControl(_serviceProvider.GetRequiredService<ISoftwareRepository>());
             managerUC = new AdminManagerUserAssignmentUserControl(_serviceProvider.GetRequiredService<IUserManagerAssignmentRepository>());
             raisedRequestsUC = new AdminRaisedRequestsUserControl(_serviceProvider.GetRequiredService<IAdminRaisedRequest>());
-            debugConfigUserControlsUC = new AdminDebugConfigUserControls();
+            debugConfigUserControlsUC = new AdminDebugConfigUserControls(_serviceProvider.GetRequiredService<IAdminRaisedRequest>());
             InitializeComponent();
         }
         private Form currentForm;
@@ -54,6 +54,7 @@ namespace File_Acess_Management
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
+            debugBtn.BackColor = Color.White;
             AddUserControl(raisedRequestsUC);
 
         }
@@ -69,6 +70,7 @@ namespace File_Acess_Management
             currentForm.FormBorderStyle = FormBorderStyle.None;
             currentForm.Dock = DockStyle.Fill;
             AdminContentPanelManager.Controls.Add(currentForm);
+            debugBtn.BackColor = Color.White;
             currentForm.Show();
         }
 
@@ -78,6 +80,7 @@ namespace File_Acess_Management
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
+            debugBtn.BackColor = Color.White;
             tabTitleLbl.Text = "Incoming Requests";
             AddUserControl(raisedRequestsUC);
         }
@@ -89,6 +92,7 @@ namespace File_Acess_Management
             usersMngBtn.BackColor = Color.Aqua;
             softwareMngBtn.BackColor = Color.White;
             tabTitleLbl.Text = "User Management";
+            debugBtn.BackColor = Color.White;
             AddUserControl(adminUserManagementUCl);
 
         }
@@ -99,6 +103,7 @@ namespace File_Acess_Management
             userManagerBtn.BackColor = Color.Aqua;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
+            debugBtn.BackColor = Color.White;
             tabTitleLbl.Text = "Manager - User Assignment";
             AddUserControl(managerUC);
         }
@@ -109,6 +114,7 @@ namespace File_Acess_Management
             userManagerBtn.BackColor = Color.White;
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.Aqua;
+            debugBtn.BackColor = Color.White;
             tabTitleLbl.Text = "Software Management";
             AddUserControl(softwareUC);
         }
@@ -128,6 +134,7 @@ namespace File_Acess_Management
             usersMngBtn.BackColor = Color.White;
             softwareMngBtn.BackColor = Color.White;
             debugBtn.BackColor = Color.Aqua;
+            tabTitleLbl.Text = "Debug Settings";
             AddUserControl(debugConfigUserControlsUC);
         }
     }

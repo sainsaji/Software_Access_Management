@@ -145,6 +145,7 @@
             this.userListPanel.Name = "userListPanel";
             this.userListPanel.Size = new System.Drawing.Size(225, 62);
             this.userListPanel.TabIndex = 2;
+            this.userListPanel.Click += new System.EventHandler(this.userListPanel_Click);
             // 
             // reqStatusLbl
             // 
@@ -179,6 +180,7 @@
             this.incomingRequestPanel.Name = "incomingRequestPanel";
             this.incomingRequestPanel.Size = new System.Drawing.Size(225, 62);
             this.incomingRequestPanel.TabIndex = 1;
+            this.incomingRequestPanel.Click += new System.EventHandler(this.incomingRequestPanel_Click);
             // 
             // requestLbl
             // 
@@ -213,6 +215,7 @@
             this.managerInformationPanel.Name = "managerInformationPanel";
             this.managerInformationPanel.Size = new System.Drawing.Size(225, 62);
             this.managerInformationPanel.TabIndex = 0;
+            this.managerInformationPanel.Click += new System.EventHandler(this.managerInformationPanel_Click);
             // 
             // managerInfoLabel
             // 
@@ -305,7 +308,6 @@
             this.requestGridView.RowTemplate.Height = 24;
             this.requestGridView.Size = new System.Drawing.Size(783, 465);
             this.requestGridView.TabIndex = 2;
-            
             // 
             // userListBx
             // 

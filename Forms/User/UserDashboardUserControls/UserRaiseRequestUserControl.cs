@@ -67,15 +67,17 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
         }
         private void loadSoftwareList()
         {
-            var table = new DataTable();
+
             try
             {
                 //string selectQuery = "SELECT * FROM SOFTWARE";
-                string excludeQuery = "SELECT s.*\r\nFROM software s\r\nLEFT JOIN REQUEST_TABLE r ON s.soft_id = r.software_id AND r.user_id = 12\r\nWHERE r.request_id IS NULL;\r\n";
+                RequestList requestList = new RequestList();
+                requestList.userId = _id;
+                string excludeQuery = "SELECT s.*\r\nFROM software s\r\nLEFT JOIN REQUEST_TABLE r ON s.soft_id = r.software_id AND r.user_id = @userId\r\nWHERE r.request_id IS NULL;\r\n";
 
                 try
                 {
-                    DataTable dt2 = _userRaisedRequestRepository.getAll(excludeQuery);
+                    DataTable dt2 = _userRaisedRequestRepository.get(requestList, excludeQuery);
                     foreach (DataRow row in dt2.Rows)
                     {
                         Console.WriteLine($"Name: {row["soft_name"]}");
@@ -103,31 +105,42 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            foreach (var item in softwareChkdLstBx.CheckedItems)
+            if (softwareChkdLstBx.Items.Count == 0)
             {
-                var row = (item as DataRowView).Row;
-                string softwareName = row["soft_name"].ToString();
-
-                int softwareID = int.Parse(row["soft_id"].ToString());
-                Console.WriteLine("User Selected s/w ID: " + softwareID);
-                Console.WriteLine("User Selected s/w Name: " + softwareName);
-                softwareIdList.Add(softwareID);
-                if (!selectedSoftwareListBox.Items.Contains(softwareName))
-                {
-                    alertsLabel.Text = "Added Software";
-                    validIcoPicBox.Visible = true;
-                    alertLabelErrorProvider.SetError(alertsLabel, "");
-                    selectedSoftwareListBox.Items.Add(softwareName);
-                }
-                else
-                {
-                    validIcoPicBox.Visible = false;
-                    alertsLabel.Text = "Selected Software already exists";
-                    alertLabelErrorProvider.SetError(alertsLabel, "Selected Software already exists");
-                    Console.WriteLine("Already Exists in Selected List");
-                }
-
+                alertLabelErrorProvider.SetError(alertsLabel, "No Software available to Add");
+                alertsLabel.Text = "No Software available to Add";
             }
+            else
+            {
+                alertLabelErrorProvider.SetError(alertsLabel, "");
+                foreach (var item in softwareChkdLstBx.CheckedItems)
+                {
+                    var row = (item as DataRowView).Row;
+                    string softwareName = row["soft_name"].ToString();
+
+                    int softwareID = int.Parse(row["soft_id"].ToString());
+                    Console.WriteLine("User Selected s/w ID: " + softwareID);
+                    Console.WriteLine("User Selected s/w Name: " + softwareName);
+                    softwareIdList.Add(softwareID);
+                    if (!selectedSoftwareListBox.Items.Contains(softwareName))
+                    {
+                        alertsLabel.Text = "Added Software";
+                        validIcoPicBox.Visible = true;
+                        alertLabelErrorProvider.SetError(alertsLabel, "");
+                        selectedSoftwareListBox.Items.Add(softwareName);
+                    }
+                    else
+                    {
+                        validIcoPicBox.Visible = false;
+                        alertsLabel.Text = "Selected Software already exists";
+                        alertLabelErrorProvider.SetError(alertsLabel, "Selected Software already exists");
+                        Console.WriteLine("Already Exists in Selected List");
+                    }
+
+                }
+            }
+
+
         }
 
         private void proceedBtn_Click(object sender, EventArgs e)

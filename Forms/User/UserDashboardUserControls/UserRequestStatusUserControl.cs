@@ -34,7 +34,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                 string selectQuery = "select r.request_id, r.user_id, s.soft_name, r.approval_manager, r.approval_admin, r.req_status " +
                     "from request_table r " +
                     "Inner join software s on r.software_id=s.soft_id;";
-                dataGridView1.Rows.Clear();
+                
                 try
                 {
                     DataTable dt = _userRaisedRequestRepository.getAll(selectQuery);
@@ -56,13 +56,21 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
         private void UserRequestStatusUserControl_Load(object sender, EventArgs e)
         {
             loadRequestStatusData();
-
-
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void requestStatusPanel_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserRequestStatusUserControl_VisibleChanged(object sender, EventArgs e)
+        {
+            loadRequestStatusData();
         }
     }
 }
