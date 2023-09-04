@@ -11,8 +11,9 @@ namespace File_Acess_Management
     public partial class ManagerDashboard : Form
     {
         private User user;
+        private Users alluser;
         private ManagerUserListUserControl userListUC;
-        private ManagerInformationUserConrol managerInformationUserControl = new ManagerInformationUserConrol();
+        private ManagerInformationUserConrol managerInformationUserControl;
         private ManagerIncomingRequestUserControl managerIncomingRequestUserControl;
         private readonly ServiceProvider _serviceProvider;
 
@@ -20,6 +21,7 @@ namespace File_Acess_Management
         {
             this.user = user;
             _serviceProvider = serviceProvider;
+            managerInformationUserControl = new ManagerInformationUserConrol(this.user.Id, _serviceProvider.GetRequiredService<IManagerSideRepository>());
             managerIncomingRequestUserControl = new ManagerIncomingRequestUserControl(this.user.Id, _serviceProvider.GetRequiredService<IManagerSideRepository>());
             userListUC = new ManagerUserListUserControl(this.user.Id, _serviceProvider.GetRequiredService<IManagerSideRepository>());
             InitializeComponent();
