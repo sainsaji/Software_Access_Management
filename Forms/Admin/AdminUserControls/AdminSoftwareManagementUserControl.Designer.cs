@@ -39,13 +39,15 @@
             this.deleteBtn = new System.Windows.Forms.Button();
             this.updateBtn = new System.Windows.Forms.Button();
             this.addBtn = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.softwareListDataGridView)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // softwareNametext
             // 
-            this.softwareNametext.Location = new System.Drawing.Point(193, 99);
+            this.softwareNametext.Location = new System.Drawing.Point(159, 58);
             this.softwareNametext.Name = "softwareNametext";
             this.softwareNametext.Size = new System.Drawing.Size(243, 20);
             this.softwareNametext.TabIndex = 14;
@@ -53,7 +55,7 @@
             // softwareNameLabel
             // 
             this.softwareNameLabel.AutoSize = true;
-            this.softwareNameLabel.Location = new System.Drawing.Point(47, 102);
+            this.softwareNameLabel.Location = new System.Drawing.Point(13, 61);
             this.softwareNameLabel.Name = "softwareNameLabel";
             this.softwareNameLabel.Size = new System.Drawing.Size(80, 13);
             this.softwareNameLabel.TabIndex = 13;
@@ -62,7 +64,7 @@
             // softwareIdText
             // 
             this.softwareIdText.Enabled = false;
-            this.softwareIdText.Location = new System.Drawing.Point(193, 48);
+            this.softwareIdText.Location = new System.Drawing.Point(159, 23);
             this.softwareIdText.Name = "softwareIdText";
             this.softwareIdText.Size = new System.Drawing.Size(243, 20);
             this.softwareIdText.TabIndex = 12;
@@ -70,7 +72,7 @@
             // softwareIdlabel
             // 
             this.softwareIdlabel.AutoSize = true;
-            this.softwareIdlabel.Location = new System.Drawing.Point(47, 51);
+            this.softwareIdlabel.Location = new System.Drawing.Point(13, 26);
             this.softwareIdlabel.Name = "softwareIdlabel";
             this.softwareIdlabel.Size = new System.Drawing.Size(61, 13);
             this.softwareIdlabel.TabIndex = 11;
@@ -83,7 +85,7 @@
             this.softwareListDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.softwareListDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.softwareListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.softwareListDataGridView.Location = new System.Drawing.Point(14, 141);
+            this.softwareListDataGridView.Location = new System.Drawing.Point(15, 153);
             this.softwareListDataGridView.MultiSelect = false;
             this.softwareListDataGridView.Name = "softwareListDataGridView";
             this.softwareListDataGridView.ReadOnly = true;
@@ -171,15 +173,25 @@
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.button3_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.softwareNametext);
+            this.groupBox1.Controls.Add(this.softwareIdlabel);
+            this.groupBox1.Controls.Add(this.softwareIdText);
+            this.groupBox1.Controls.Add(this.softwareNameLabel);
+            this.groupBox1.Location = new System.Drawing.Point(29, 47);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(415, 100);
+            this.groupBox1.TabIndex = 23;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Software Information";
+            // 
             // AdminSoftwareManagementUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.softwareNametext);
-            this.Controls.Add(this.softwareNameLabel);
-            this.Controls.Add(this.softwareIdText);
-            this.Controls.Add(this.softwareIdlabel);
             this.Controls.Add(this.softwareListDataGridView);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminSoftwareManagementUserControl";
@@ -187,8 +199,9 @@
             this.Load += new System.EventHandler(this.AdminSoftwareManagementUserControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.softwareListDataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -203,5 +216,6 @@
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button rstBtn;
         private System.Windows.Forms.Button deleteBtn;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
