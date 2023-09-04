@@ -1,16 +1,11 @@
-﻿using File_Acess_Management.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using File_Acess_Management.Data.Repository.IRepository;
+using File_Acess_Management.Properties;
 using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using File_Acess_Management.Data.Repository.IRepository;
-using System.Data.SqlClient;
 
 namespace File_Acess_Management.Forms.Admin.AdminUserControls
 {
@@ -23,7 +18,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private string debugManagerPass;
         private string debugUser;
         private string debugUserPass;
-        IAdminRaisedRequest _adminRaisedRequest;
+        private IAdminRaisedRequest _adminRaisedRequest;
 
         public AdminDebugConfigUserControls(IAdminRaisedRequest adminRaisedRequest)
         {
@@ -33,7 +28,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
 
         private void DebugEmailLbl_Click(object sender, EventArgs e)
         {
-
         }
 
         private void AdminDebugConfigUserControls_Load(object sender, EventArgs e)
@@ -55,12 +49,10 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 string tableName = row["TABLE_NAME"].ToString();
                 tableCheckedLstBx.Items.Add(tableName);
             }
-
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
@@ -72,13 +64,11 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 Settings.Default.DebugEmail = emailTxtBox.Text;
             }
 
-
             if (!string.IsNullOrEmpty(adminIDTxtBox.Text))
             {
                 updateInfo.Append("DebugAdminID, ");
                 Settings.Default.DebugAdminID = adminIDTxtBox.Text;
             }
-
 
             if (!string.IsNullOrEmpty(adminPassTxtBox.Text))
             {
@@ -86,13 +76,11 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 Settings.Default.DebugAdminPass = adminPassTxtBox.Text;
             }
 
-
             if (!string.IsNullOrEmpty(managerTxtBox.Text))
             {
                 updateInfo.Append("DebugManagerID, ");
                 Settings.Default.DebugManagerID = managerTxtBox.Text;
             }
-
 
             if (!string.IsNullOrEmpty(managerPassTxtBox.Text))
             {
@@ -100,13 +88,11 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 Settings.Default.DebugManagerPass = managerPassTxtBox.Text;
             }
 
-
             if (!string.IsNullOrEmpty(userIdTxtBox.Text))
             {
                 updateInfo.Append("DebugUserID, ");
                 Settings.Default.DebugUserID = userIdTxtBox.Text;
             }
-
 
             if (!string.IsNullOrEmpty(userPassTxtBox.Text))
             {
@@ -126,7 +112,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 Console.WriteLine(noUpd);
                 updateLbl.Text = noUpd;
             }
-
 
             Settings.Default.Save();
         }
@@ -151,7 +136,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 MySqlCommand command = new MySqlCommand();
                 try
                 {
-
                     foreach (string tableName in tableCheckedLstBx.CheckedItems)
                     {
                         // WARNING: Be cautious when executing DELETE queries

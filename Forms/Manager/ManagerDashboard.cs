@@ -2,29 +2,20 @@
 using File_Acess_Management.Forms.Manager.ManagerUserControls;
 using File_Acess_Management.Models;
 using Microsoft.Extensions.DependencyInjection;
-using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Management;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Acess_Management
 {
-
     public partial class ManagerDashboard : Form
     {
-
-        User user;
-        ManagerUserListUserControl userListUC;
-        ManagerInformationUserConrol managerInformationUserControl = new ManagerInformationUserConrol();
-        ManagerIncomingRequestUserControl managerIncomingRequestUserControl;
+        private User user;
+        private ManagerUserListUserControl userListUC;
+        private ManagerInformationUserConrol managerInformationUserControl = new ManagerInformationUserConrol();
+        private ManagerIncomingRequestUserControl managerIncomingRequestUserControl;
         private readonly ServiceProvider _serviceProvider;
+
         public ManagerDashboard(User user, ServiceProvider serviceProvider)
         {
             this.user = user;
@@ -48,31 +39,11 @@ namespace File_Acess_Management
             userListBx.Visible = false;
             requestGridView.Visible = false;
             assignedLbl.Visible = false;
-
         }
 
         private void displayName_Click(object sender, EventArgs e)
         {
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         private void logOut(object sender, EventArgs e)
         {
@@ -80,10 +51,6 @@ namespace File_Acess_Management
             userLogin.Show();
             this.Close();
         }
-
-
-
-
 
         private void TabPanelClicked(Panel panel, UserControl userControl, string tabTitle)
         {

@@ -1,17 +1,12 @@
 ﻿using File_Acess_Management.Models;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace File_Acess_Management
 {
     public class AuthManager
     {
-        public static (User,string) AuthenticateUser(string username, string password)
+        public static (User, string) AuthenticateUser(string username, string password)
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
             {
@@ -31,18 +26,17 @@ namespace File_Acess_Management
                             Console.WriteLine(hashedPasswordFromDatabase);
                             User user = GetUserByUsername(username);
 
-                            if (user!=null && BCrypt.Net.BCrypt.Verify(password, hashedPasswordFromDatabase))
+                            if (user != null && BCrypt.Net.BCrypt.Verify(password, hashedPasswordFromDatabase))
                             {
                                 string RoleName = IsAuthorized(user.RoleId);
-                                return(user, RoleName);
-                               
+                                return (user, RoleName);
                             }
                         }
                     }
                 }
             }
 
-            return (null,null);
+            return (null, null);
         }
 
         private static User GetUserByUsername(string username)

@@ -1,15 +1,7 @@
-﻿using File_Acess_Management.Data.Repository;
-using File_Acess_Management.Data.Repository.IRepository;
-using File_Acess_Management.Models;
+﻿using File_Acess_Management.Data.Repository.IRepository;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Acess_Management.Forms.Manager.ManagerUserControls
@@ -17,7 +9,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
     public partial class ManagerUserListUserControl : UserControl
     {
         private int _id;
-        IManagerSideRepository _managerSideRepository;
+        private IManagerSideRepository _managerSideRepository;
 
         public ManagerUserListUserControl(int id, IManagerSideRepository managerSideRepository)
         {
@@ -28,7 +20,6 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
 
         private void ManagerUserListUserControl_Load(object sender, EventArgs e)
         {
-
             loadUserList(_id);
         }
 
@@ -53,5 +44,4 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             }
         }
     }
-
 }

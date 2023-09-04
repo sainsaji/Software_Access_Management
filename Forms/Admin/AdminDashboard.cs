@@ -1,17 +1,9 @@
-﻿using File_Acess_Management.Forms.Admin.AdminUserControls;
+﻿using File_Acess_Management.Data.Repository.IRepository;
+using File_Acess_Management.Forms.Admin.AdminUserControls;
 using File_Acess_Management.Forms.Admin.ManagerUserControls;
-using File_Acess_Management.Data;
-using File_Acess_Management.Data.Repository;
-using File_Acess_Management.Data.Repository.IRepository;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Acess_Management
@@ -19,11 +11,12 @@ namespace File_Acess_Management
     public partial class AdminDashboard : Form
     {
         public readonly ServiceProvider _serviceProvider;
-        AdminUserManagementUserControl adminUserManagementUCl;
-        AdminSoftwareManagementUserControl softwareUC;
-        AdminManagerUserAssignmentUserControl managerUC;
-        AdminRaisedRequestsUserControl raisedRequestsUC;
-        AdminDebugConfigUserControls debugConfigUserControlsUC;
+        private AdminUserManagementUserControl adminUserManagementUCl;
+        private AdminSoftwareManagementUserControl softwareUC;
+        private AdminManagerUserAssignmentUserControl managerUC;
+        private AdminRaisedRequestsUserControl raisedRequestsUC;
+        private AdminDebugConfigUserControls debugConfigUserControlsUC;
+
         public AdminDashboard(ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -34,11 +27,9 @@ namespace File_Acess_Management
             debugConfigUserControlsUC = new AdminDebugConfigUserControls(_serviceProvider.GetRequiredService<IAdminRaisedRequest>());
             InitializeComponent();
         }
+
         private Form currentForm;
         //AdminUserManagementUserControl adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider);
-
-
-
 
         private void AddUserControl(UserControl userControl)
         {
@@ -56,8 +47,8 @@ namespace File_Acess_Management
             softwareMngBtn.BackColor = Color.White;
             debugBtn.BackColor = Color.White;
             AddUserControl(raisedRequestsUC);
-
         }
+
         private void ShowForm(Form formToShow)
         {
             if (currentForm != null)
@@ -94,7 +85,6 @@ namespace File_Acess_Management
             tabTitleLbl.Text = "User Management";
             debugBtn.BackColor = Color.White;
             AddUserControl(adminUserManagementUCl);
-
         }
 
         private void userManagerBtn_Click(object sender, EventArgs e)
@@ -118,7 +108,6 @@ namespace File_Acess_Management
             tabTitleLbl.Text = "Software Management";
             AddUserControl(softwareUC);
         }
-
 
         private void logOutBtn_Click(object sender, EventArgs e)
         {

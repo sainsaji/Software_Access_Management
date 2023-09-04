@@ -1,15 +1,9 @@
 ﻿using File_Acess_Management.Data.Repository;
-using File_Acess_Management.Models;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Acess_Management.Forms.User.UserDashboardUserControls
@@ -17,8 +11,8 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
     public partial class UserRaiseRequestUserControl : UserControl
     {
         private int _id;
-        List<int> softwareIdList = new List<int>();
-        IUserRaisedRequestRepository _userRaisedRequestRepository;
+        private List<int> softwareIdList = new List<int>();
+        private IUserRaisedRequestRepository _userRaisedRequestRepository;
 
         public UserRaiseRequestUserControl(int id, IUserRaisedRequestRepository userRaisedRequestRepository)
         {
@@ -37,6 +31,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
             repManagerTxtBox.ReadOnly = true;
             loadSoftwareList();
         }
+
         private string GetData(string requiredData)
         {
             try
@@ -63,11 +58,10 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                 Console.WriteLine(ex.Message);
                 return "ERROR";
             }
-
         }
+
         private void loadSoftwareList()
         {
-
             try
             {
                 //string selectQuery = "SELECT * FROM SOFTWARE";
@@ -88,19 +82,15 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                     softwareChkdLstBx.Refresh();
                 }
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
-
-
-
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message + " sql query error.");
-
             }
         }
+
         private void selectedSoftwareListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -136,16 +126,12 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                         alertLabelErrorProvider.SetError(alertsLabel, "Selected Software already exists");
                         Console.WriteLine("Already Exists in Selected List");
                     }
-
                 }
             }
-
-
         }
 
         private void proceedBtn_Click(object sender, EventArgs e)
         {
-
             {
                 try
                 {
@@ -172,7 +158,6 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                             {
                                 alertsLabel.Text = "Insert Failed";
                             }
-
                         }
                     }
                     else
@@ -181,7 +166,6 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                         alertsLabel.Text = "No Items to Request";
                         alertLabelErrorProvider.SetError(alertsLabel, "No Items Selected to List");
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -194,7 +178,6 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                     validIcoPicBox.Visible = false;
                     loadSoftwareList();
                 }
-
             }
         }
 

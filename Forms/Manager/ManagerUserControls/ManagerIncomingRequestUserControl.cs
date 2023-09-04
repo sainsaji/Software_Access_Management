@@ -1,14 +1,7 @@
 ﻿using File_Acess_Management.Data.Repository.IRepository;
-using File_Acess_Management.Models;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Acess_Management.Forms.Manager.ManagerUserControls
@@ -16,8 +9,8 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
     public partial class ManagerIncomingRequestUserControl : UserControl
     {
         private int _id;
-        IManagerSideRepository _managerSideRepository;
-        object requestIdValue;
+        private IManagerSideRepository _managerSideRepository;
+        private object requestIdValue;
 
         public ManagerIncomingRequestUserControl(int Id, IManagerSideRepository managerSideRepository)
         {
@@ -25,6 +18,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             _managerSideRepository = managerSideRepository;
             InitializeComponent();
         }
+
         private void setButtonAction()
         {
             DataGridViewButtonColumn col = new DataGridViewButtonColumn();
@@ -49,9 +43,8 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             }
             loadIncomingRequest(_id);
             userRequestGridView.Refresh();
-
-
         }
+
         private void loadIncomingRequest(int id)
         {
             try
@@ -78,7 +71,6 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message + " sql query error.");
-
             }
         }
 
@@ -102,7 +94,6 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
                         updateManagerRequestApproval(requestId);
                         loadIncomingRequest(_id);
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -123,7 +114,6 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
                 Console.WriteLine("Invalid Manger ID:" + _id);
                 MessageBox.Show("Invalid Manger ID:" + _id);
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -133,7 +123,6 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
 
         private void button2_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

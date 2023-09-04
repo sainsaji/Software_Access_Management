@@ -3,7 +3,6 @@ using File_Acess_Management.Data.Repository;
 using File_Acess_Management.Data.Repository.IRepository;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace File_Acess_Management
@@ -14,7 +13,7 @@ namespace File_Acess_Management
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -28,7 +27,6 @@ namespace File_Acess_Management
             services.AddScoped<IUserRaisedRequestRepository, UserRaisedRequestRepository>();
             services.AddScoped<IAdminRaisedRequest, AdminRaisedRequest>();
             services.AddScoped<IManagerSideRepository, ManagerSideRepository>();
-
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 

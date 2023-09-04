@@ -1,27 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Net.Configuration;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BCrypt.Net;
-using File_Acess_Management.Models;
+﻿using File_Acess_Management.Models;
 using File_Acess_Management.Properties;
 using Microsoft.Extensions.DependencyInjection;
-using MySql.Data.MySqlClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System;
+using System.Windows.Forms;
 
 namespace File_Acess_Management
 {
     public partial class UserLogin : Form
     {
-
         private readonly ServiceProvider _serviceProvider;
+
         public UserLogin(ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -48,6 +36,7 @@ namespace File_Acess_Management
                 userIcon.Visible = false;
             }
         }
+
         private void loginButton_Click(object sender, EventArgs e)
         {
             string username = userNameText.Text;
@@ -65,7 +54,6 @@ namespace File_Acess_Management
                     ManagerDashboard subManagers = new ManagerDashboard(user, _serviceProvider);
                     subManagers.Show();
                     this.Hide();
-
                 }
                 else if (RoleName == "User")
                 {
@@ -86,22 +74,19 @@ namespace File_Acess_Management
                 {
                     MessageBox.Show("You do not have the required role to log in.");
                 }
-
-
             }
             else
             {
                 MessageBox.Show("Invalid username or password.");
             }
         }
+
         private void UserLogin_Load(object sender, EventArgs e)
         {
-
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void adminIcon_Click(object sender, EventArgs e)
@@ -135,4 +120,3 @@ namespace File_Acess_Management
         }
     }
 }
-

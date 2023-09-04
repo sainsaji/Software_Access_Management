@@ -1,24 +1,16 @@
 ﻿using File_Acess_Management.Data.Repository.IRepository;
 using File_Acess_Management.Models;
-using MySql.Data.MySqlClient;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Acess_Management.Forms.Admin.AdminUserControls
 {
     public partial class AdminSoftwareManagementUserControl : UserControl
     {
-        bool ck;
-        int software_id = 0;
-        ISoftwareRepository _software;
+        private bool ck;
+        private int software_id = 0;
+        private ISoftwareRepository _software;
         private ErrorProvider errorProvider = new ErrorProvider();
 
         public AdminSoftwareManagementUserControl(ISoftwareRepository software)
@@ -33,6 +25,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             softwareListDataGridView.SelectionChanged += softwareListDataGridView_SelectionChanged;
             ck = false;
         }
+
         private void softwareListDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (softwareListDataGridView.SelectedRows.Count > 0)
@@ -44,6 +37,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 addBtn.Enabled = false;
             }
         }
+
         private void GetSoftwareRecords()
         {
             string query = "SELECT * from software;";
@@ -52,6 +46,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             softwareListDataGridView.Columns["soft_id"].HeaderText = "Software Id";
             softwareListDataGridView.Columns["soft_name"].HeaderText = "Software Name";
         }
+
         private void addButton_Click(object sender, EventArgs e)
         {
             {
@@ -67,7 +62,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 if (ck == true)
                 {
                     errorProvider.SetError(softwareNametext, "You can't add the same record again");
-
                 }
                 else if (softwares.SoftName == "")
                 {
@@ -87,6 +81,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 }
             }
         }
+
         private void reset()
         {
             softwareIdText.Text = "";
@@ -147,7 +142,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                     Software softwares = new Software(software_id, null);
                     if (software_id == 0)
                     {
-
                         errorProvider.SetError(softwareNametext, "Some Error Occured");
                         return;
                     }
@@ -187,7 +181,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                 if (ck == true)
                 {
                     errorProvider.SetError(softwareNametext, "You can't add the same record again");
-
                 }
                 else if (softwares.SoftName == "")
                 {
@@ -257,7 +250,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                     Software softwares = new Software(software_id, null);
                     if (software_id == 0)
                     {
-
                         errorProvider.SetError(softwareNametext, "Some Error Occured");
                         return;
                     }

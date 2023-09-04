@@ -1,32 +1,24 @@
 ﻿using File_Acess_Management.Data.Repository.IRepository;
 using File_Acess_Management.Models;
-using File_Acess_Management.Properties;
-using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 {
     public partial class AdminUserManagementUserControl : UserControl
     {
-        bool check = false;
+        private bool check = false;
         private Regex emailRegex = new Regex(@"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$");
         private Regex phoneRegex = new Regex(@"^\d{10}$");
         private Regex userNamePattern = new Regex(@"^[a-zA-Z0-9_]{3,20}$");
         private Regex namePattern = new Regex(@"^[a-zA-Z\s.]+$");
         private Regex passwordPattern = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$");
-        int id = 0;
+        private int id = 0;
 
         private readonly IUserManagementRepository _userManagement;
         private ErrorProvider errorProvider = new ErrorProvider();
@@ -82,6 +74,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             //addUserButton.Enabled = isFormValid;
             addBtn.Enabled = isFormValid;
         }
+
         private void SetError(Control control, bool isValid, string errorMessage)
         {
             if (!isValid)
@@ -126,9 +119,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             emailPicBox.Visible = false;
             phonePicBox.Visible = false;
             addressPicBox.Visible = false;
-
         }
-
 
         private void GetUsersRecord()
         {
@@ -185,10 +176,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             errorProvider.SetError(passwordText, "");
         }
 
-
-
-
-
         private void userRecordDataGridView_SelectionChanged_1(object sender, EventArgs e)
         {
             {
@@ -224,28 +211,14 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
         private void button3_Click(object sender, EventArgs e)
         {
-
             {
                 string password = passwordText.Text;
                 string HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
                 Role SelectedRole = (Role)roleComboBox.SelectedItem;
                 bool ck = false;
                 Console.WriteLine(userNameText.Text);
-
 
                 if (SelectedRole == null)
                 {
@@ -290,7 +263,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                             {
                                 MessageBox.Show("Error adding user.");
                             }
-
                         }
                     }
                 }
@@ -298,19 +270,12 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 {
                     MessageBox.Show("error in mail, enter correct email address" + ex);
                 }
-
-
-
-
-
             }
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
-
             {
-
                 {
                     string password = passwordText.Text;
                     string HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
@@ -368,7 +333,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                         MessageBox.Show("Error deleting user.");
                     }
                 }
-
             }
         }
 

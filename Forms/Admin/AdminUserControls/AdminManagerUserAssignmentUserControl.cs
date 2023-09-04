@@ -9,11 +9,11 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
 {
     public partial class AdminManagerUserAssignmentUserControl : UserControl
     {
-        int selectedUserId, selectedUserId2, selectedManagerId;
-        bool ck = false;
-        bool ck2 = false;
-        DataTable dt = new DataTable();
-        IUserManagerAssignmentRepository _userManagerAssignment;
+        private int selectedUserId, selectedUserId2, selectedManagerId;
+        private bool ck = false;
+        private bool ck2 = false;
+        private DataTable dt = new DataTable();
+        private IUserManagerAssignmentRepository _userManagerAssignment;
         private ErrorProvider errorProvider = new ErrorProvider();
 
         public AdminManagerUserAssignmentUserControl(IUserManagerAssignmentRepository userManagerAssignment)
@@ -31,10 +31,8 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             assignedManagerDataGridView.SelectionChanged += assignedManagerDataGridView_SelectionChanged;
         }
 
-
         private void assignedManagerDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-
             {
                 if (assignedManagerDataGridView.SelectedRows.Count > 0)
                 {
@@ -55,7 +53,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
 
         private void notAssignedManagerDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-
             {
                 if (notAssignedManagerDataGridView.SelectedRows.Count > 0)
                 {
@@ -65,7 +62,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                     ck = true;
                 }
             }
-            
         }
 
         private void GetAssignedUsersRecord()
@@ -100,7 +96,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             }
         }
 
-
         private void LoadNotAssignedUsers()
         {
             string query = "SELECT u.id,u.user_name, r.role_name as role, u.name, u.email, u.phone_number, u.address FROM users AS u INNER JOIN roles AS r ON u.role_id = r.role_id WHERE r.role_name = 'User' AND u.manager_assigned = false;";
@@ -126,8 +121,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             selectedUserId2 = 0;
             selectedManagerId = 0;
         }
-
-
 
         private void AdminManagerUserAssignmentUserControl_Leave(object sender, EventArgs e)
         {
@@ -156,12 +149,10 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void assignBtn_Click(object sender, EventArgs e)
         {
-
             {
                 {
                     errorProvider.SetError(selectManagerForNotAssigned, "");
@@ -203,13 +194,11 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                         errorProvider.SetError(selectManagerForNotAssigned, "Please Select a User");
                     }
                 }
-
             }
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
-
             {
                 {
                     errorProvider.SetError(selectManager, "");
@@ -231,7 +220,6 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                         {
                             //MessageBox.Show("Error assigning user.");
                             errorProvider.SetError(selectManager, "Please Select a User");
-
                         }
                     }
                 }
@@ -262,14 +250,12 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                         else
                         {
                             MessageBox.Show("Error assigning user.");
-
                         }
                     }
                 }
                 else
                 {
                     MessageBox.Show("Error assigning user.");
-
                 }
             }
         }

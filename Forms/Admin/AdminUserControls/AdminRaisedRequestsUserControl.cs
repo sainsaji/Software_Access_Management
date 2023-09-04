@@ -1,22 +1,15 @@
 ﻿using File_Acess_Management.Data.Repository.IRepository;
-using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 {
     public partial class AdminRaisedRequestsUserControl : UserControl
     {
-        IAdminRaisedRequest _adminRaisedRequest;
-        int selectedRequestId = -1;
+        private IAdminRaisedRequest _adminRaisedRequest;
+        private int selectedRequestId = -1;
+
         public AdminRaisedRequestsUserControl(IAdminRaisedRequest adminRaisedRequest)
         {
             _adminRaisedRequest = adminRaisedRequest;
@@ -44,8 +37,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             adminRequestsDataGridView.Refresh();
         }
 
-
-
         private void acceptAdminRequestApproval(int requestId)
         {
             string query = "UPDATE request_table SET approval_admin = CASE " +
@@ -58,9 +49,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             loadAdminRequests();
             adminRequestsDataGridView.Refresh();
         }
-
-
-
 
         private void adminRequestsDataGridView_SelectionChanged(object sender, EventArgs e)
         {
@@ -86,7 +74,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 }
                 else
                 {
-
                 }
                 if (requestIdValue != null)
                 {
@@ -106,7 +93,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             {
                 Console.WriteLine("No Request Selected");
             }
-
         }
 
         private void denyBtn_Click(object sender, EventArgs e)
