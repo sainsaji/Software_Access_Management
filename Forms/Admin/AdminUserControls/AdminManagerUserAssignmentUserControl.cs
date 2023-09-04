@@ -65,6 +65,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                     ck = true;
                 }
             }
+            
         }
 
         private void GetAssignedUsersRecord()
@@ -150,6 +151,7 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             Console.WriteLine("Loading Manager List");
             LoadNotAssignedUsers();
             PopulateComboBox();
+            GetAssignedUsersRecord();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
