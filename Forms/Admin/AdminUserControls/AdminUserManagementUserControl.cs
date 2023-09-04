@@ -26,7 +26,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         private Regex userNamePattern = new Regex(@"^[a-zA-Z0-9_]{3,20}$");
         private Regex namePattern = new Regex(@"^[a-zA-Z\s.]+$");
         private Regex passwordPattern = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$");
-
+        int id = 0;
 
         private readonly IUserManagementRepository _userManagement;
         private ErrorProvider errorProvider = new ErrorProvider();
@@ -37,7 +37,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             InitializeComponent();
             InitializeErrorProvider();
             addBtn.Enabled = false;
-
         }
 
         private void InitializeErrorProvider()
@@ -137,7 +136,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             {
                 connection.Open();
 
-                string query = "SELECT u.user_name, r.role_name as role, u.name, u.email, u.phone_number, u.address FROM users AS u INNER JOIN roles AS r ON u.role_id = r.role_id WHERE r.role_name!='Admin';";
+                string query = "SELECT u.id, u.user_name, r.role_name as role, u.name, u.email, u.phone_number, u.address FROM users AS u INNER JOIN roles AS r ON u.role_id = r.role_id WHERE r.role_name!='Admin';";
                 DataTable dt = _userManagement.getAll(query);
                 userRecordDataGridView.DataSource = dt;
                 //studentRecordDataGridView.Columns["Password"].Visible = false;
@@ -205,6 +204,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                     DataGridViewRow selectedRow = userRecordDataGridView.SelectedRows[0];
 
                     // Assuming you have TextBox controls for updating data
+                    id = (int)selectedRow.Cells["id"].Value;
                     userNameText.Text = selectedRow.Cells["user_name"].Value.ToString();
                     emailText.Text = selectedRow.Cells["email"].Value.ToString();
                     nameText.Text = selectedRow.Cells["name"].Value.ToString();
@@ -223,6 +223,18 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 }
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void button3_Click(object sender, EventArgs e)
         {
