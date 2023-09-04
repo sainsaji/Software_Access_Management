@@ -167,8 +167,8 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         {
             //deleteButton.Enabled = false;
             //updateButton.Enabled = false;
-            deleteBtn.Enabled = false;
-            updateBtn.Enabled = false;
+            deleteBtn.Enabled = true;
+            updateBtn.Enabled = true;
 
             userNameText.Enabled = true;
             passwordText.Enabled = true;
@@ -199,10 +199,9 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                     check = true;
                     userNameText.Enabled = false;
                     passwordText.Enabled = false;
-                    //deleteButton.Enabled = true;
-                    //updateButton.Enabled = true;
-                    deleteBtn.Enabled = false;
-                    updateBtn.Enabled = false;
+
+                    deleteBtn.Enabled = true;
+                    updateBtn.Enabled = true;
                     DataGridViewRow selectedRow = userRecordDataGridView.SelectedRows[0];
 
                     // Assuming you have TextBox controls for updating data
@@ -223,152 +222,6 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                     }
                 }
             }
-        }
-
-        private void addUserButton_Click_1(object sender, EventArgs e)
-        {
-            string password = passwordText.Text;
-            string HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-            Role SelectedRole = (Role)roleComboBox.SelectedItem;
-            bool ck = false;
-            Console.WriteLine(userNameText.Text);
-
-
-            if (SelectedRole == null)
-            {
-                MessageBox.Show("Please select a role");
-                return;
-            }
-            else if (ck == true)
-            {
-                MessageBox.Show("Select a unique username");
-                return;
-            }
-
-            try
-            {
-                Users users = new Users(0, userNameText.Text, HashedPassword, SelectedRole.RoleId, nameText.Text, emailText.Text, phoneNumberText.Text, addressText.Text, false);
-                using (MailMessage mm = new MailMessage())
-                {
-                    using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
-                    {
-                        mm.From = new MailAddress("resumework2022@gmail.com");
-                        bool debugSetting = Settings.Default.DebugMode;
-                        if (debugSetting)
-                        {
-                            mm.To.Add(users.Email);
-                        }
-                        else
-                        {
-                            mm.To.Add(Settings.Default.DebugEmail);
-                        }
-                        mm.Subject = "Credentials to the App";
-                        mm.Body = "Hi There, \n" +
-                            "\nWelcome to Software Access management System\n" +
-                            "\n Username: " + users.Username +
-                            "\n Password: " + password;
-                        sc.Port = 587;
-                        sc.Credentials = new System.Net.NetworkCredential("resumework2022@gmail.com", "uqdbenfkuzuhvwfl");
-                        sc.EnableSsl = true;
-                        sc.Send(mm);
-                        MessageBox.Show("Email has been sent.");
-                        //int rowsAffected = _userManagement.InsertUser(users);
-                        string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (@Id,@Username, @HashedPassword, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
-                        int rowsAffected = _userManagement.add(users, query);
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("User added successfully.");
-                            GetUsersRecord();
-                            ClearFormFields();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error adding user.");
-                        }
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("error in mail, enter correct email address" + ex);
-            }
-
-
-
-
-
-        }
-
-
-
-        private void updateButton_Click_1(object sender, EventArgs e)
-        {
-
-            {
-                string password = passwordText.Text;
-                string HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-                Role SelectedRole = (Role)roleComboBox.SelectedItem;
-                Users users = new Users(0, userNameText.Text, HashedPassword, SelectedRole.RoleId, nameText.Text, emailText.Text, phoneNumberText.Text, addressText.Text, false);
-                if (users.Username == "" && password == "" && users.Name == "" && users.Email == "" && users.PhoneNumber == "" && users.Address == "")
-                {
-                    MessageBox.Show("Please don't submit blank fields");
-                    return;
-                }
-                else if (SelectedRole == null)
-                {
-                    MessageBox.Show("Please select a role");
-                    return;
-                }
-                string query = "UPDATE users SET role_id = @RoleId, name = @Name, email = @Email, phone_number = @PhoneNumber, address = @Address WHERE user_name = @Username;";
-                int rowsAffected = _userManagement.add(users, query);
-                if (rowsAffected > 0)
-                {
-                    MessageBox.Show("User updated successfully.");
-                    GetUsersRecord();
-                    ClearFormFields();
-                    //updateButton.Enabled = false;
-                    updateBtn.Enabled = false;
-                }
-                else
-                {
-                    MessageBox.Show("Error updating user.");
-                }
-            }
-        }
-
-        private void deleteButton_Click_1(object sender, EventArgs e)
-        {
-
-            {
-                if (check == true)
-                {
-                    Users users = new Users(0, userNameText.Text, null, 0, null, null, null, null, false);
-                    users.Username = userNameText.Text;
-
-                    string query = "Delete from users where user_name=@Username";
-                    int rowsAffected = _userManagement.remove(users, query);
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("User deleted successfully.");
-                        GetUsersRecord();
-                        ClearFormFields();
-                        check = false;
-                        deleteButton.Enabled = false;
-                        deleteBtn.Enabled = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error deleting user.");
-                    }
-                }
-
-            }
-        }
-
-        private void resetButton_Click(object sender, EventArgs e)
-        {
-            ClearFormFields();
         }
 
         private void button3_Click(object sender, EventArgs e)

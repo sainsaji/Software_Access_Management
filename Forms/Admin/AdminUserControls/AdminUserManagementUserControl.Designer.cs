@@ -31,16 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminUserManagementUserControl));
             this.roleComboBox = new System.Windows.Forms.ComboBox();
             this.roleLabel = new System.Windows.Forms.Label();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
             this.passwordText = new System.Windows.Forms.TextBox();
             this.userNameText = new System.Windows.Forms.TextBox();
             this.userNameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.nameText = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
-            this.addUserButton = new System.Windows.Forms.Button();
-            this.updateButton = new System.Windows.Forms.Button();
             this.addressText = new System.Windows.Forms.TextBox();
             this.addressLabel = new System.Windows.Forms.Label();
             this.phoneNumberText = new System.Windows.Forms.TextBox();
@@ -89,30 +85,6 @@
             this.roleLabel.Size = new System.Drawing.Size(88, 20);
             this.roleLabel.TabIndex = 37;
             this.roleLabel.Text = "Role Name";
-            // 
-            // resetButton
-            // 
-            this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetButton.Location = new System.Drawing.Point(495, 185);
-            this.resetButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(96, 37);
-            this.resetButton.TabIndex = 36;
-            this.resetButton.Text = "Reset";
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteButton.Location = new System.Drawing.Point(362, 185);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(96, 37);
-            this.deleteButton.TabIndex = 35;
-            this.deleteButton.Text = "Delete";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click_1);
             // 
             // passwordText
             // 
@@ -170,30 +142,6 @@
             this.nameLabel.Size = new System.Drawing.Size(51, 20);
             this.nameLabel.TabIndex = 32;
             this.nameLabel.Text = "Name";
-            // 
-            // addUserButton
-            // 
-            this.addUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addUserButton.Location = new System.Drawing.Point(91, 185);
-            this.addUserButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.addUserButton.Name = "addUserButton";
-            this.addUserButton.Size = new System.Drawing.Size(96, 37);
-            this.addUserButton.TabIndex = 31;
-            this.addUserButton.Text = "Add User";
-            this.addUserButton.UseVisualStyleBackColor = true;
-            this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click_1);
-            // 
-            // updateButton
-            // 
-            this.updateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateButton.Location = new System.Drawing.Point(221, 185);
-            this.updateButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(96, 37);
-            this.updateButton.TabIndex = 34;
-            this.updateButton.Text = "Update";
-            this.updateButton.UseVisualStyleBackColor = true;
-            this.updateButton.Click += new System.EventHandler(this.updateButton_Click_1);
             // 
             // addressText
             // 
@@ -443,16 +391,12 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.roleComboBox);
             this.Controls.Add(this.roleLabel);
-            this.Controls.Add(this.resetButton);
-            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.passwordText);
             this.Controls.Add(this.userNameText);
             this.Controls.Add(this.userNameLabel);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.nameText);
             this.Controls.Add(this.nameLabel);
-            this.Controls.Add(this.addUserButton);
-            this.Controls.Add(this.updateButton);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminUserManagementUserControl";
@@ -476,16 +420,12 @@
         #endregion
         private System.Windows.Forms.ComboBox roleComboBox;
         private System.Windows.Forms.Label roleLabel;
-        private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.TextBox passwordText;
         private System.Windows.Forms.TextBox userNameText;
         private System.Windows.Forms.Label userNameLabel;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.TextBox nameText;
         private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.Button addUserButton;
-        private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox addressPicBox;
         private System.Windows.Forms.PictureBox phonePicBox;
