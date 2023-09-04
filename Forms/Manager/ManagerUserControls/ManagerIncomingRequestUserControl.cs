@@ -1,5 +1,7 @@
-﻿using File_Acess_Management.Data.Repository.IRepository;
+﻿using File_Acess_Management.Data.Repository;
+using File_Acess_Management.Data.Repository.IRepository;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -10,7 +12,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
     {
         private int _id;
         private IManagerSideRepository _managerSideRepository;
-        private object requestIdValue;
+        private int selectedRequestId = -1;
 
         public ManagerIncomingRequestUserControl(int Id, IManagerSideRepository managerSideRepository)
         {
@@ -74,33 +76,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             }
         }
 
-        private void userRequestGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex == userRequestGridView.Columns["Action"].Index)
-            {
-                DataGridViewRow row = userRequestGridView.Rows[e.RowIndex];
 
-                requestIdValue = row.Cells["request_id"].Value;
-
-                try
-                {
-                    if (requestIdValue != null)
-                    {
-                        // Print the request_id to the console
-                        Console.WriteLine("Clicked Approve for request_id: " + requestIdValue.ToString());
-
-                        // Update manager approval in the database
-                        int requestId = int.Parse(requestIdValue.ToString());
-                        updateManagerRequestApproval(requestId);
-                        loadIncomingRequest(_id);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-        }
 
         private void ManagerIncomingRequestUserControl_Load(object sender, EventArgs e)
         {
@@ -116,13 +92,80 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+
+
+        private void actionManagerApproval(int requestId, string btn)
         {
-            updateManagerRequestApproval(int.Parse(requestIdValue.ToString()));
+            RequestList request = new RequestList();
+            request.requestId = requestId;
+            request.manApproval = btn;
+            Console.WriteLine("Received Request ID:" + requestId);
+            string query = "UPDATE request_table SET approval_manager = @manApproval WHERE request_id = @requestId";
+
+            int rowsaffected = _managerSideRepository.add(request, query);
+            if (rowsaffected > 0)
+            {
+                MessageBox.Show("updated successfully");
+            }
+            else
+            {
+                MessageBox.Show("Error occured");
+            }
+            loadIncomingRequest(_id);
+            userRequestGridView.Refresh();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void acceptBtn_Click(object sender, EventArgs e)
         {
+            actionManagerApproval(selectedRequestId, "approved");
+        }
+
+        private void userRequestGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("Selection Change Triggered");
+            if (userRequestGridView.SelectedCells.Count > 0)
+            {
+                int selectedRowIndex = userRequestGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = userRequestGridView.Rows[selectedRowIndex];
+                object requestIdValue = selectedRow.Cells["request_id"].Value;
+                object requestState = selectedRow.Cells["Manager_Approval"].Value;
+                if (requestState != null)
+                {
+                    if (requestState.ToString() == "denied")
+                    {
+                        denyBtn.Enabled = false;
+                        acceptBtn.Enabled = true;
+                    }
+                    else if (requestState.ToString() == "approved")
+                    {
+                        denyBtn.Enabled = true;
+                        acceptBtn.Enabled = false;
+                    }
+                    else
+                    {
+                        denyBtn.Enabled = true;
+                        acceptBtn.Enabled = true;
+                    }
+                }
+                else
+                {
+                }
+                if (requestIdValue != null)
+                {
+                    selectedRequestId = Convert.ToInt32(requestIdValue);
+                    Console.WriteLine("Selected Request ID: " + selectedRequestId);
+                }
+            }
+        }
+
+        private void denyBtn_Click(object sender, EventArgs e)
+        {
+            actionManagerApproval(selectedRequestId, "denied");
+        }
+
+        private void panel1_VisibleChanged(object sender, EventArgs e)
+        {
+            loadIncomingRequest(_id);
         }
     }
 }
