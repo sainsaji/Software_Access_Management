@@ -70,11 +70,12 @@
             // roleComboBox
             // 
             this.roleComboBox.FormattingEnabled = true;
+            this.roleComboBox.ItemHeight = 13;
             this.roleComboBox.Location = new System.Drawing.Point(221, 115);
             this.roleComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.roleComboBox.Name = "roleComboBox";
             this.roleComboBox.Size = new System.Drawing.Size(177, 21);
-            this.roleComboBox.TabIndex = 38;
+            this.roleComboBox.TabIndex = 9;
             // 
             // roleLabel
             // 
@@ -93,7 +94,7 @@
             this.passwordText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.passwordText.Name = "passwordText";
             this.passwordText.Size = new System.Drawing.Size(177, 26);
-            this.passwordText.TabIndex = 30;
+            this.passwordText.TabIndex = 7;
             // 
             // userNameText
             // 
@@ -102,7 +103,7 @@
             this.userNameText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userNameText.Name = "userNameText";
             this.userNameText.Size = new System.Drawing.Size(177, 26);
-            this.userNameText.TabIndex = 28;
+            this.userNameText.TabIndex = 6;
             // 
             // userNameLabel
             // 
@@ -131,7 +132,7 @@
             this.nameText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.nameText.Name = "nameText";
             this.nameText.Size = new System.Drawing.Size(177, 26);
-            this.nameText.TabIndex = 33;
+            this.nameText.TabIndex = 10;
             // 
             // nameLabel
             // 
@@ -150,7 +151,7 @@
             this.addressText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addressText.Name = "addressText";
             this.addressText.Size = new System.Drawing.Size(175, 26);
-            this.addressText.TabIndex = 11;
+            this.addressText.TabIndex = 13;
             // 
             // addressLabel
             // 
@@ -169,7 +170,7 @@
             this.phoneNumberText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.phoneNumberText.Name = "phoneNumberText";
             this.phoneNumberText.Size = new System.Drawing.Size(175, 26);
-            this.phoneNumberText.TabIndex = 9;
+            this.phoneNumberText.TabIndex = 12;
             // 
             // phoneNumberLabel
             // 
@@ -188,7 +189,7 @@
             this.emailText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.emailText.Name = "emailText";
             this.emailText.Size = new System.Drawing.Size(175, 26);
-            this.emailText.TabIndex = 7;
+            this.emailText.TabIndex = 11;
             // 
             // emailLabel
             // 
@@ -215,6 +216,7 @@
             this.userRecordDataGridView.RowHeadersWidth = 51;
             this.userRecordDataGridView.Size = new System.Drawing.Size(770, 195);
             this.userRecordDataGridView.TabIndex = 16;
+            this.userRecordDataGridView.TabStop = false;
             this.userRecordDataGridView.SelectionChanged += new System.EventHandler(this.userRecordDataGridView_SelectionChanged_1);
             // 
             // tickPicBox
@@ -322,13 +324,13 @@
             this.resetBtn.Cursor = System.Windows.Forms.Cursors.Cross;
             this.resetBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.resetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.resetBtn.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resetBtn.Image = ((System.Drawing.Image)(resources.GetObject("resetBtn.Image")));
             this.resetBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.resetBtn.Location = new System.Drawing.Point(399, 0);
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(133, 41);
-            this.resetBtn.TabIndex = 10;
+            this.resetBtn.TabIndex = 17;
             this.resetBtn.Text = "Reset";
             this.resetBtn.UseVisualStyleBackColor = false;
             this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
@@ -339,13 +341,13 @@
             this.deleteBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.deleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.deleteBtn.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteBtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteBtn.Image")));
             this.deleteBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.deleteBtn.Location = new System.Drawing.Point(266, 0);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(133, 41);
-            this.deleteBtn.TabIndex = 9;
+            this.deleteBtn.TabIndex = 16;
             this.deleteBtn.Text = "Delete";
             this.deleteBtn.UseVisualStyleBackColor = false;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
@@ -356,13 +358,13 @@
             this.updateBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.updateBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.updateBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.updateBtn.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updateBtn.Image = ((System.Drawing.Image)(resources.GetObject("updateBtn.Image")));
             this.updateBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.updateBtn.Location = new System.Drawing.Point(133, 0);
             this.updateBtn.Name = "updateBtn";
             this.updateBtn.Size = new System.Drawing.Size(133, 41);
-            this.updateBtn.TabIndex = 7;
+            this.updateBtn.TabIndex = 15;
             this.updateBtn.Text = "Update";
             this.updateBtn.UseVisualStyleBackColor = false;
             this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
@@ -373,13 +375,13 @@
             this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addBtn.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.Image = ((System.Drawing.Image)(resources.GetObject("addBtn.Image")));
             this.addBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.addBtn.Location = new System.Drawing.Point(0, 0);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(133, 41);
-            this.addBtn.TabIndex = 6;
+            this.addBtn.TabIndex = 14;
             this.addBtn.Text = "Add";
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.button3_Click);
