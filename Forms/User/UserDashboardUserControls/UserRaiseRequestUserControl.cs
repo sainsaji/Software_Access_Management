@@ -67,15 +67,17 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
         }
         private void loadSoftwareList()
         {
-            var table = new DataTable();
+
             try
             {
                 //string selectQuery = "SELECT * FROM SOFTWARE";
-                string excludeQuery = "SELECT s.*\r\nFROM software s\r\nLEFT JOIN REQUEST_TABLE r ON s.soft_id = r.software_id AND r.user_id = 12\r\nWHERE r.request_id IS NULL;\r\n";
+                RequestList requestList = new RequestList();
+                requestList.userId = _id;
+                string excludeQuery = "SELECT s.*\r\nFROM software s\r\nLEFT JOIN REQUEST_TABLE r ON s.soft_id = r.software_id AND r.user_id = @userId\r\nWHERE r.request_id IS NULL;\r\n";
 
                 try
                 {
-                    DataTable dt2 = _userRaisedRequestRepository.getAll(excludeQuery);
+                    DataTable dt2 = _userRaisedRequestRepository.get(requestList, excludeQuery);
                     foreach (DataRow row in dt2.Rows)
                     {
                         Console.WriteLine($"Name: {row["soft_name"]}");
