@@ -26,10 +26,10 @@ namespace File_Acess_Management
         ManagerIncomingRequestUserControl managerIncomingRequestUserControl;
         private readonly ServiceProvider _serviceProvider;
         public ManagerDashboard(User user, ServiceProvider serviceProvider)
-        { 
+        {
             this.user = user;
             _serviceProvider = serviceProvider;
-            managerIncomingRequestUserControl = new ManagerIncomingRequestUserControl(this.user.Id,_serviceProvider.GetRequiredService<IManagerSideRepository>());
+            managerIncomingRequestUserControl = new ManagerIncomingRequestUserControl(this.user.Id, _serviceProvider.GetRequiredService<IManagerSideRepository>());
             userListUC = new ManagerUserListUserControl(this.user.Id, _serviceProvider.GetRequiredService<IManagerSideRepository>());
             InitializeComponent();
         }
@@ -60,15 +60,15 @@ namespace File_Acess_Management
 
 
 
-        
-
-        
-
-        
 
 
 
-        
+
+
+
+
+
+
 
 
 
@@ -125,5 +125,19 @@ namespace File_Acess_Management
             TabPanelClicked(userListPanel, userListUC, "User List");
         }
 
+        private void managerInformationPanel_Click(object sender, EventArgs e)
+        {
+            TabPanelClicked(managerInformationPanel, managerInformationUserControl, "Manager Information");
+        }
+
+        private void incomingRequestPanel_Click(object sender, EventArgs e)
+        {
+            TabPanelClicked(incomingRequestPanel, managerIncomingRequestUserControl, "Request List");
+        }
+
+        private void userListPanel_Click(object sender, EventArgs e)
+        {
+            TabPanelClicked(userListPanel, userListUC, "User List");
+        }
     }
 }
