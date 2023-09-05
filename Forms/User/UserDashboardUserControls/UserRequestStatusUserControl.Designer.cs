@@ -102,9 +102,9 @@
             this.button1.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(271, 5);
+            this.button1.Location = new System.Drawing.Point(406, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 38);
+            this.button1.Size = new System.Drawing.Size(192, 38);
             this.button1.TabIndex = 8;
             this.button1.Text = "Show Credentials";
             this.button1.UseVisualStyleBackColor = false;
@@ -118,9 +118,9 @@
             this.button2.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(138, 5);
+            this.button2.Location = new System.Drawing.Point(216, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(133, 38);
+            this.button2.Size = new System.Drawing.Size(190, 38);
             this.button2.TabIndex = 7;
             this.button2.Text = "Edit Request";
             this.button2.UseVisualStyleBackColor = false;
@@ -136,7 +136,7 @@
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.Location = new System.Drawing.Point(5, 5);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(133, 38);
+            this.button3.Size = new System.Drawing.Size(211, 38);
             this.button3.TabIndex = 6;
             this.button3.Text = "Withdraw Request";
             this.button3.UseVisualStyleBackColor = false;
@@ -144,8 +144,7 @@
             // 
             // UserRequestStatusUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.Controls.Add(this.requestStatusPanel);
             this.Name = "UserRequestStatusUserControl";
             this.Size = new System.Drawing.Size(846, 571);
