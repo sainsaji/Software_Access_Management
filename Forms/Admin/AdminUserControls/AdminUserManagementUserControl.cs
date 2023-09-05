@@ -219,7 +219,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 string HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
                 Role SelectedRole = (Role)roleComboBox.SelectedItem;
                 bool ck = false;
-                Console.WriteLine(userNameText.Text);
+                Console.WriteLine(emailText.Text);
 
                 if (SelectedRole == null)
                 {
@@ -236,6 +236,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 try
                 {
                     Users users = new Users(0, userNameText.Text, HashedPassword, SelectedRole.RoleId, nameText.Text, emailText.Text, phoneNumberText.Text, addressText.Text, false);
+                    Console.WriteLine(users.Email);
                     using (MailMessage mm = new MailMessage())
                     {
                         using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))

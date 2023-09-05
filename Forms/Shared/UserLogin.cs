@@ -43,7 +43,7 @@ namespace File_Acess_Management
             string password = userPasswordText.Text;
             //Console.WriteLine(username);
             //Console.WriteLine(password);
-            (User user, string RoleName) = AuthManager.AuthenticateUser(username, password);
+            (Users user, string RoleName) = AuthManager.AuthenticateUser(username, password);
             if (user != null)
             {
                 //Console.WriteLine(user.RoleId);
@@ -93,7 +93,7 @@ namespace File_Acess_Management
         {
             string adminId = Settings.Default.DebugAdminID;
             string adminPass = Settings.Default.DebugAdminPass;
-            (User user, string RoleName) = AuthManager.AuthenticateUser(adminId, adminPass);
+            (Users user, string RoleName) = AuthManager.AuthenticateUser(adminId, adminPass);
             AdminDashboard admin = new AdminDashboard(_serviceProvider);
             admin.Show();
             this.Hide();
@@ -103,7 +103,7 @@ namespace File_Acess_Management
         {
             string managerId = Settings.Default.DebugManagerID;
             string managerPass = Settings.Default.DebugManagerPass;
-            (User user, string RoleName) = AuthManager.AuthenticateUser(managerId, managerPass);
+            (Users user, string RoleName) = AuthManager.AuthenticateUser(managerId, managerPass);
             ManagerDashboard subManagers = new ManagerDashboard(user, _serviceProvider);
             subManagers.Show();
             this.Hide();
@@ -113,7 +113,7 @@ namespace File_Acess_Management
         {
             string userId = Settings.Default.DebugUserID;
             string userPass = Settings.Default.DebugUserPass;
-            (User user, string RoleName) = AuthManager.AuthenticateUser(userId, userPass);
+            (Users user, string RoleName) = AuthManager.AuthenticateUser(userId, userPass);
             UserDashboard userDashBoard = new UserDashboard(user, _serviceProvider);
             userDashBoard.Show();
             this.Hide();
