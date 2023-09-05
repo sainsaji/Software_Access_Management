@@ -41,6 +41,8 @@
             this.updateBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.assignBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.notAssignedManagerDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignedManagerDataGridView)).BeginInit();
             this.panel1.SuspendLayout();
@@ -50,7 +52,7 @@
             // selectManagerForNotAssigned
             // 
             this.selectManagerForNotAssigned.FormattingEnabled = true;
-            this.selectManagerForNotAssigned.Location = new System.Drawing.Point(8, 329);
+            this.selectManagerForNotAssigned.Location = new System.Drawing.Point(101, 334);
             this.selectManagerForNotAssigned.Name = "selectManagerForNotAssigned";
             this.selectManagerForNotAssigned.Size = new System.Drawing.Size(250, 21);
             this.selectManagerForNotAssigned.TabIndex = 16;
@@ -85,7 +87,7 @@
             // selectManager
             // 
             this.selectManager.FormattingEnabled = true;
-            this.selectManager.Location = new System.Drawing.Point(8, 79);
+            this.selectManager.Location = new System.Drawing.Point(101, 78);
             this.selectManager.Name = "selectManager";
             this.selectManager.Size = new System.Drawing.Size(250, 21);
             this.selectManager.TabIndex = 13;
@@ -122,9 +124,9 @@
             this.panel1.Controls.Add(this.rstBtn);
             this.panel1.Controls.Add(this.deleteBtn);
             this.panel1.Controls.Add(this.updateBtn);
-            this.panel1.Location = new System.Drawing.Point(0, 31);
+            this.panel1.Location = new System.Drawing.Point(9, 31);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1357, 41);
+            this.panel1.Size = new System.Drawing.Size(691, 41);
             this.panel1.TabIndex = 21;
             // 
             // rstBtn
@@ -181,9 +183,9 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.assignBtn);
-            this.panel2.Location = new System.Drawing.Point(0, 282);
+            this.panel2.Location = new System.Drawing.Point(9, 282);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(672, 41);
+            this.panel2.Size = new System.Drawing.Size(691, 41);
             this.panel2.TabIndex = 22;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -204,10 +206,30 @@
             this.assignBtn.UseVisualStyleBackColor = false;
             this.assignBtn.Click += new System.EventHandler(this.assignBtn_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 81);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 13);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Select Manager";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 337);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 13);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "Select Manager";
+            // 
             // AdminManagerUserAssignmentUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.selectManagerForNotAssigned);
@@ -245,5 +267,7 @@
         private System.Windows.Forms.Button updateBtn;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button assignBtn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

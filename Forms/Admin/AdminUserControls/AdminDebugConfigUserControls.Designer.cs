@@ -138,7 +138,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 38);
+            this.label1.Location = new System.Drawing.Point(61, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 2;
@@ -146,7 +146,7 @@
             // 
             // emailTxtBox
             // 
-            this.emailTxtBox.Location = new System.Drawing.Point(69, 34);
+            this.emailTxtBox.Location = new System.Drawing.Point(122, 31);
             this.emailTxtBox.Name = "emailTxtBox";
             this.emailTxtBox.Size = new System.Drawing.Size(243, 20);
             this.emailTxtBox.TabIndex = 3;
@@ -172,7 +172,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 60);
+            this.label3.Location = new System.Drawing.Point(43, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 5;
@@ -254,7 +254,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 60);
+            this.label7.Location = new System.Drawing.Point(42, 60);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(66, 13);
             this.label7.TabIndex = 5;
@@ -321,7 +321,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 60);
+            this.label11.Location = new System.Drawing.Point(60, 60);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(46, 13);
             this.label11.TabIndex = 5;
@@ -330,7 +330,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(8, 114);
+            this.label12.Location = new System.Drawing.Point(25, 111);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(81, 13);
             this.label12.TabIndex = 8;
@@ -368,6 +368,7 @@
             // 
             this.updateLbl.AutoSize = true;
             this.updateLbl.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateLbl.ForeColor = System.Drawing.Color.Red;
             this.updateLbl.Location = new System.Drawing.Point(555, 464);
             this.updateLbl.Name = "updateLbl";
             this.updateLbl.Size = new System.Drawing.Size(146, 28);
@@ -407,7 +408,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(8, 34);
+            this.label14.Location = new System.Drawing.Point(39, 34);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(67, 13);
             this.label14.TabIndex = 10;

@@ -32,6 +32,8 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             InitializeComponent();
             InitializeErrorProvider();
             addBtn.Enabled = false;
+            passwordText.PasswordChar = '*';
+            generateLbl.Text = "";
         }
 
         private void InitializeErrorProvider()
@@ -174,9 +176,14 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             emailText.Text = "";
             phoneNumberText.Text = "";
             addressText.Text = "";
+            generateLbl.Text = "";
             setVisibilityFalse();
             errorProvider.SetError(passwordText, "");
             errorProvider.SetError(roleComboBox, "");
+            errorProvider.SetError(nameText, "");
+            errorProvider.SetError(emailText, "");
+            errorProvider.SetError(phoneNumberText, "");
+            errorProvider.SetError(addressText, "");
         }
 
         private void userRecordDataGridView_SelectionChanged_1(object sender, EventArgs e)
@@ -214,7 +221,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
             {
                 string password = passwordText.Text;
@@ -234,15 +241,28 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                     MessageBox.Show("Select a unique username");
                     return;
                 }
-
+                Users users = new Users(0, userNameText.Text, HashedPassword, SelectedRole.RoleId, nameText.Text, emailText.Text, phoneNumberText.Text, addressText.Text, false);
+               
                 try
-                {
-                    Users users = new Users(0, userNameText.Text, HashedPassword, SelectedRole.RoleId, nameText.Text, emailText.Text, phoneNumberText.Text, addressText.Text, false);
+                { 
                     Console.WriteLine(users.Email);
                     using (MailMessage mm = new MailMessage())
                     {
                         using (SmtpClient sc = new SmtpClient("smtp.gmail.com"))
                         {
+                            string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (@Id,@Username, @HashedPassword, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
+                            int rowsAffected = _userManagement.add(users, query);
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("User added successfully.");
+                                GetUsersRecord();
+                                ClearFormFields();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error adding user.");
+                            }
+
                             mm.From = new MailAddress("resumework2022@gmail.com");
                             if (Settings.Default.DebugMode)
                             {
@@ -260,27 +280,18 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                             sc.Port = 587;
                             sc.Credentials = new System.Net.NetworkCredential("resumework2022@gmail.com", "uqdbenfkuzuhvwfl");
                             sc.EnableSsl = true;
-                            sc.Send(mm);
+                            await sc.SendMailAsync(mm);
                             MessageBox.Show("Email has been sent.");
                             //int rowsAffected = _userManagement.InsertUser(users);
-                            string query = "INSERT INTO users (id, user_name, password, role_id, name, email, phone_number, address, manager_assigned) VALUES (@Id,@Username, @HashedPassword, @RoleId, @Name, @Email, @PhoneNumber, @Address, @Assigned)";
-                            int rowsAffected = _userManagement.add(users, query);
-                            if (rowsAffected > 0)
-                            {
-                                MessageBox.Show("User added successfully.");
-                                GetUsersRecord();
-                                ClearFormFields();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Error adding user.");
-                            }
+
                         }
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("error in mail, enter correct email address" + ex);
+                    string query = "delete from users where user_name=@Username";
+                    int rowsAffected = _userManagement.remove(users, query);
                 }
             }
         }
@@ -372,6 +383,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         {
             string generatedPass = generateStrongPass();
             passwordText.Text = generatedPass;
+            generateLbl.Text = "Password Generated";
         }
 
         private string generateStrongPass()

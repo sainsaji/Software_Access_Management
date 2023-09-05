@@ -52,14 +52,15 @@
             this.addressPicBox = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.resetBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.updateBtn = new System.Windows.Forms.Button();
             this.addBtn = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.generateLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.userRecordDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.passPicBox)).BeginInit();
@@ -302,6 +303,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.generateLbl);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.addressPicBox);
             this.groupBox1.Controls.Add(this.nameText);
@@ -330,6 +332,16 @@
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User Information";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(214, 64);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "AutoGen";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -411,16 +423,6 @@
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(214, 67);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 39;
-            this.button1.Text = "AutoGen";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(1003, 356);
@@ -429,6 +431,16 @@
             this.button2.TabIndex = 41;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // generateLbl
+            // 
+            this.generateLbl.AutoSize = true;
+            this.generateLbl.BackColor = System.Drawing.Color.Transparent;
+            this.generateLbl.Location = new System.Drawing.Point(114, 91);
+            this.generateLbl.Name = "generateLbl";
+            this.generateLbl.Size = new System.Drawing.Size(119, 16);
+            this.generateLbl.TabIndex = 40;
+            this.generateLbl.Text = "Password Gen Info";
             // 
             // AdminUserManagementUserControl
             // 
@@ -488,5 +500,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label generateLbl;
     }
 }

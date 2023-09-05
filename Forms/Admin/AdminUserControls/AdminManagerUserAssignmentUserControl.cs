@@ -226,6 +226,11 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             }
         }
 
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             {
