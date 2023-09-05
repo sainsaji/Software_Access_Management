@@ -45,14 +45,14 @@
             this.adminRequestsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.adminRequestsDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.adminRequestsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.adminRequestsDataGridView.Location = new System.Drawing.Point(0, 62);
+            this.adminRequestsDataGridView.Location = new System.Drawing.Point(22, 46);
             this.adminRequestsDataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.adminRequestsDataGridView.MultiSelect = false;
             this.adminRequestsDataGridView.Name = "adminRequestsDataGridView";
             this.adminRequestsDataGridView.ReadOnly = true;
             this.adminRequestsDataGridView.RowHeadersWidth = 51;
             this.adminRequestsDataGridView.RowTemplate.Height = 24;
-            this.adminRequestsDataGridView.Size = new System.Drawing.Size(1018, 572);
+            this.adminRequestsDataGridView.Size = new System.Drawing.Size(672, 572);
             this.adminRequestsDataGridView.TabIndex = 3;
             this.adminRequestsDataGridView.SelectionChanged += new System.EventHandler(this.adminRequestsDataGridView_SelectionChanged);
             // 
@@ -63,7 +63,7 @@
             this.panel1.Controls.Add(this.acceptBtn);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(672, 41);
+            this.panel1.Size = new System.Drawing.Size(694, 41);
             this.panel1.TabIndex = 5;
             // 
             // resetBtn
