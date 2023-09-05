@@ -36,10 +36,10 @@
             this.softwareMngBtn = new System.Windows.Forms.Button();
             this.logOutBtn = new System.Windows.Forms.Button();
             this.navigationPanel = new System.Windows.Forms.Panel();
+            this.debugBtn = new System.Windows.Forms.Button();
             this.logoPicBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabTitleLbl = new System.Windows.Forms.Label();
-            this.debugBtn = new System.Windows.Forms.Button();
             this.navigationPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).BeginInit();
             this.panel2.SuspendLayout();
@@ -107,7 +107,7 @@
             this.logOutBtn.Location = new System.Drawing.Point(0, 780);
             this.logOutBtn.Name = "logOutBtn";
             this.logOutBtn.Size = new System.Drawing.Size(189, 53);
-            this.logOutBtn.TabIndex = 4;
+            this.logOutBtn.TabIndex = 5;
             this.logOutBtn.Text = "Logout";
             this.logOutBtn.UseVisualStyleBackColor = false;
             this.logOutBtn.Click += new System.EventHandler(this.logOutBtn_Click);
@@ -127,6 +127,18 @@
             this.navigationPanel.Name = "navigationPanel";
             this.navigationPanel.Size = new System.Drawing.Size(189, 833);
             this.navigationPanel.TabIndex = 0;
+            // 
+            // debugBtn
+            // 
+            this.debugBtn.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.debugBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.debugBtn.Location = new System.Drawing.Point(0, 212);
+            this.debugBtn.Name = "debugBtn";
+            this.debugBtn.Size = new System.Drawing.Size(189, 53);
+            this.debugBtn.TabIndex = 4;
+            this.debugBtn.Text = "Debug Config";
+            this.debugBtn.UseVisualStyleBackColor = false;
+            this.debugBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // logoPicBox
             // 
@@ -160,18 +172,6 @@
             this.tabTitleLbl.Size = new System.Drawing.Size(148, 25);
             this.tabTitleLbl.TabIndex = 0;
             this.tabTitleLbl.Text = "Tab Title Here";
-            // 
-            // debugBtn
-            // 
-            this.debugBtn.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.debugBtn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.debugBtn.Location = new System.Drawing.Point(0, 212);
-            this.debugBtn.Name = "debugBtn";
-            this.debugBtn.Size = new System.Drawing.Size(189, 53);
-            this.debugBtn.TabIndex = 6;
-            this.debugBtn.Text = "Debug Config";
-            this.debugBtn.UseVisualStyleBackColor = false;
-            this.debugBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // AdminDashboard
             // 
