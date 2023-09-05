@@ -328,6 +328,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 
                     string query = "Delete from users where user_name=@Username";
                     int rowsAffected = _userManagement.remove(users, query);
+
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("User deleted successfully.");
@@ -339,7 +340,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                     }
                     else
                     {
-                        MessageBox.Show("Error deleting user.");
+                        MessageBox.Show("No User Selected.");
                     }
                 }
             }
