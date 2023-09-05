@@ -65,14 +65,13 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 
         private void ValidateFields()
         {
-            bool isFormValid = ValidateRegexField(userNameText, tickPicBox, userNamePattern, "Invalid User Name", "Username is required.") &&
-                               ValidateRegexField(passwordText, passPicBox, passwordPattern, "Invalid Pattern", "Password is required.") &&
-                               ValidateRegexField(nameText, namePicBox, namePattern, "Invalid Name", "Name is required.") &&
-                               ValidateRegexField(emailText, emailPicBox, emailRegex, "Invalid email address.", "Valid email address required.") &&
-                               ValidateRegexField(phoneNumberText, phonePicBox, phoneRegex, "Invalid phone number.", "10-digit number required.") &&
-                               ValidateRegexField(addressText, addressPicBox, namePattern, "Invalid Address", "Address is required.");
-
-            //addUserButton.Enabled = isFormValid;
+            bool isUserNameValid = ValidateRegexField(userNameText, tickPicBox, userNamePattern, "Invalid User Name", "Username is required.");
+            bool isPassValid = ValidateRegexField(passwordText, passPicBox, passwordPattern, "Invalid Pattern", "Password is required.");
+            bool isNameValid = ValidateRegexField(nameText, namePicBox, namePattern, "Invalid Name", "Name is required.");
+            bool isEmailValid = ValidateRegexField(emailText, emailPicBox, emailRegex, "Invalid email address.", "Valid email address required.");
+            bool isPhoneValid = ValidateRegexField(phoneNumberText, phonePicBox, phoneRegex, "Invalid phone number.", "10-digit number required.");
+            bool isAddressValid = ValidateRegexField(addressText, addressPicBox, namePattern, "Invalid Address", "Address is required.");
+            bool isFormValid = isUserNameValid && isPassValid && isNameValid && isEmailValid && isPhoneValid && isAddressValid;
             addBtn.Enabled = isFormValid;
         }
 
