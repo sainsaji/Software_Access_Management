@@ -145,7 +145,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                             requestList.admApproval = "Pending";
                             requestList.status = "Pending";
                             requestList.softId = softwareIdList.First();
-                            string query = "insert into REQUEST_TABLE values(0,@userId,@manApproval,@admApproval,@status,@softId);";
+                            string query = "insert into REQUEST_TABLE values(0,@userId,@manApproval,@admApproval,@status,@softId,'no remark','no remark','no remark');";
                             int rowsAffectedReq = _userRaisedRequestRepository.add(requestList, query);
                             if (rowsAffectedReq > 0)
                             {
