@@ -30,22 +30,6 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             userRequestGridView.Columns.Add(col);
         }
 
-        private void updateManagerRequestApproval(int id)
-        {
-            RequestList requesList = new RequestList();
-            requesList.requestId = id;
-            string updateQuery = "UPDATE request_table SET approval_manager = CASE " +
-                         "WHEN approval_manager = 'Pending' THEN 'denied' " +
-                         "ELSE 'approved' END " +
-                         "WHERE request_id = @requestId";
-            int rowsAffected = _managerSideRepository.add(requesList, updateQuery);
-            if (rowsAffected > 0)
-            {
-                MessageBox.Show("Request updated successfully");
-            }
-            loadIncomingRequest(_id);
-            userRequestGridView.Refresh();
-        }
 
         private void loadIncomingRequest(int id)
         {

@@ -25,14 +25,17 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
             var table = new DataTable();
             try
             {
+                RequestList requestList = new RequestList();
+                requestList.userId = _id;
                 Console.WriteLine("Fetching Previous Requests");
                 string selectQuery = "select r.request_id, r.user_id, s.soft_name, r.approval_manager, r.approval_admin, r.req_status " +
                     "from request_table r " +
-                    "Inner join software s on r.software_id=s.soft_id;";
+                    "Inner join software s on r.software_id=s.soft_id " +
+                    "where r.user_id=@userId;";
 
                 try
                 {
-                    DataTable dt = _userRaisedRequestRepository.getAll(selectQuery);
+                    DataTable dt = _userRaisedRequestRepository.get(requestList, selectQuery);
                     dataGridView1.DataSource = dt;
                 }
                 catch (Exception ex)
