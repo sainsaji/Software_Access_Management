@@ -12,13 +12,13 @@ namespace File_Acess_Management
     {
         public int userId;
 
-        private readonly User user;
+        private readonly Users user;
         private UserRaiseRequestUserControl raiseRequestUserControl;
         private UserRequestStatusUserControl userRequestStatusUserControl;
 
         private readonly ServiceProvider _serviceProvider;
 
-        public UserDashboard(User user, ServiceProvider serviceProvider)
+        public UserDashboard(Users user, ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             InitializeComponent();

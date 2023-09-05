@@ -10,14 +10,13 @@ namespace File_Acess_Management
 {
     public partial class ManagerDashboard : Form
     {
-        private User user;
-        private Users alluser;
+        private Users user;
         private ManagerUserListUserControl userListUC;
         private ManagerInformationUserConrol managerInformationUserControl;
         private ManagerIncomingRequestUserControl managerIncomingRequestUserControl;
         private readonly ServiceProvider _serviceProvider;
 
-        public ManagerDashboard(User user, ServiceProvider serviceProvider)
+        public ManagerDashboard(Users user, ServiceProvider serviceProvider)
         {
             this.user = user;
             _serviceProvider = serviceProvider;

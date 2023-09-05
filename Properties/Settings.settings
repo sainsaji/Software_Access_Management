@@ -13,7 +13,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="DebugEmail" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">smithcd438@gmail.com</Value>
     </Setting>
     <Setting Name="DebugAdminID" Type="System.String" Scope="User">
       <Value Profile="(Default)">A001</Value>

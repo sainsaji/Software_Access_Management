@@ -44,7 +44,7 @@ namespace File_Acess_Management.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("smithcd438@gmail.com")]
         public string DebugEmail {
             get {
                 return ((string)(this["DebugEmail"]));

@@ -6,7 +6,7 @@ namespace File_Acess_Management
 {
     public class AuthManager
     {
-        public static (User, string) AuthenticateUser(string username, string password)
+        public static (Users, string) AuthenticateUser(string username, string password)
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
             {
@@ -24,7 +24,7 @@ namespace File_Acess_Management
                         {
                             string hashedPasswordFromDatabase = reader["password"].ToString();
                             Console.WriteLine(hashedPasswordFromDatabase);
-                            User user = GetUserByUsername(username);
+                            Users user = GetUserByUsername(username);
 
                             if (user != null && BCrypt.Net.BCrypt.Verify(password, hashedPasswordFromDatabase))
                             {
@@ -39,7 +39,7 @@ namespace File_Acess_Management
             return (null, null);
         }
 
-        private static User GetUserByUsername(string username)
+        private static Users GetUserByUsername(string username)
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionHelper.ConnectionString))
             {
@@ -55,12 +55,8 @@ namespace File_Acess_Management
                     {
                         if (reader.Read())
                         {
-                            return new User
-                            {
-                                Id = Convert.ToInt32(reader["id"]),
-                                Username = reader["user_name"].ToString(),
-                                RoleId = Convert.ToInt32(reader["role_id"])
-                            };
+                            return new Users(Convert.ToInt32(reader["id"]), reader["user_name"].ToString(), null, Convert.ToInt32(reader["role_id"]), null, null, null, null,false);
+                            
                         }
                     }
                 }

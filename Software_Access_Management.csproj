@@ -215,7 +215,6 @@
     </Compile>
     <Compile Include="Models\manager.cs" />
     <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\RequestList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
