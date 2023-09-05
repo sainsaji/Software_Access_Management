@@ -229,6 +229,7 @@
             // 
             // panelContentManager
             // 
+            this.panelContentManager.AutoSize = true;
             this.panelContentManager.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panelContentManager.Location = new System.Drawing.Point(3, 66);
             this.panelContentManager.Name = "panelContentManager";
@@ -259,6 +260,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);

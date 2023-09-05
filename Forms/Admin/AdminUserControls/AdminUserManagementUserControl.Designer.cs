@@ -51,14 +51,15 @@
             this.phonePicBox = new System.Windows.Forms.PictureBox();
             this.addressPicBox = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.resetBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.updateBtn = new System.Windows.Forms.Button();
             this.addBtn = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.userRecordDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.passPicBox)).BeginInit();
@@ -67,8 +68,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.phonePicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressPicBox)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // roleComboBox
@@ -96,7 +97,7 @@
             this.passwordText.Location = new System.Drawing.Point(115, 66);
             this.passwordText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.passwordText.Name = "passwordText";
-            this.passwordText.Size = new System.Drawing.Size(177, 26);
+            this.passwordText.Size = new System.Drawing.Size(93, 26);
             this.passwordText.TabIndex = 7;
             // 
             // userNameText
@@ -150,7 +151,7 @@
             // addressText
             // 
             this.addressText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addressText.Location = new System.Drawing.Point(474, 110);
+            this.addressText.Location = new System.Drawing.Point(531, 110);
             this.addressText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addressText.Name = "addressText";
             this.addressText.Size = new System.Drawing.Size(175, 26);
@@ -160,7 +161,7 @@
             // 
             this.addressLabel.AutoSize = true;
             this.addressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addressLabel.Location = new System.Drawing.Point(357, 114);
+            this.addressLabel.Location = new System.Drawing.Point(414, 114);
             this.addressLabel.Name = "addressLabel";
             this.addressLabel.Size = new System.Drawing.Size(68, 20);
             this.addressLabel.TabIndex = 10;
@@ -170,7 +171,7 @@
             // phoneNumberText
             // 
             this.phoneNumberText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.phoneNumberText.Location = new System.Drawing.Point(474, 69);
+            this.phoneNumberText.Location = new System.Drawing.Point(531, 69);
             this.phoneNumberText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.phoneNumberText.Name = "phoneNumberText";
             this.phoneNumberText.Size = new System.Drawing.Size(175, 26);
@@ -180,7 +181,7 @@
             // 
             this.phoneNumberLabel.AutoSize = true;
             this.phoneNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.phoneNumberLabel.Location = new System.Drawing.Point(357, 72);
+            this.phoneNumberLabel.Location = new System.Drawing.Point(414, 72);
             this.phoneNumberLabel.Name = "phoneNumberLabel";
             this.phoneNumberLabel.Size = new System.Drawing.Size(115, 20);
             this.phoneNumberLabel.TabIndex = 8;
@@ -189,7 +190,7 @@
             // emailText
             // 
             this.emailText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailText.Location = new System.Drawing.Point(474, 29);
+            this.emailText.Location = new System.Drawing.Point(531, 29);
             this.emailText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.emailText.Name = "emailText";
             this.emailText.Size = new System.Drawing.Size(175, 26);
@@ -199,7 +200,7 @@
             // 
             this.emailLabel.AutoSize = true;
             this.emailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailLabel.Location = new System.Drawing.Point(357, 29);
+            this.emailLabel.Location = new System.Drawing.Point(414, 29);
             this.emailLabel.Name = "emailLabel";
             this.emailLabel.Size = new System.Drawing.Size(48, 20);
             this.emailLabel.TabIndex = 6;
@@ -218,7 +219,7 @@
             this.userRecordDataGridView.Name = "userRecordDataGridView";
             this.userRecordDataGridView.ReadOnly = true;
             this.userRecordDataGridView.RowHeadersWidth = 51;
-            this.userRecordDataGridView.Size = new System.Drawing.Size(728, 195);
+            this.userRecordDataGridView.Size = new System.Drawing.Size(825, 195);
             this.userRecordDataGridView.TabIndex = 16;
             this.userRecordDataGridView.TabStop = false;
             this.userRecordDataGridView.SelectionChanged += new System.EventHandler(this.userRecordDataGridView_SelectionChanged_1);
@@ -259,7 +260,7 @@
             // emailPicBox
             // 
             this.emailPicBox.Image = ((System.Drawing.Image)(resources.GetObject("emailPicBox.Image")));
-            this.emailPicBox.Location = new System.Drawing.Point(654, 29);
+            this.emailPicBox.Location = new System.Drawing.Point(711, 29);
             this.emailPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.emailPicBox.Name = "emailPicBox";
             this.emailPicBox.Size = new System.Drawing.Size(17, 20);
@@ -270,7 +271,7 @@
             // phonePicBox
             // 
             this.phonePicBox.Image = ((System.Drawing.Image)(resources.GetObject("phonePicBox.Image")));
-            this.phonePicBox.Location = new System.Drawing.Point(654, 69);
+            this.phonePicBox.Location = new System.Drawing.Point(711, 69);
             this.phonePicBox.Margin = new System.Windows.Forms.Padding(2);
             this.phonePicBox.Name = "phonePicBox";
             this.phonePicBox.Size = new System.Drawing.Size(17, 20);
@@ -281,7 +282,7 @@
             // addressPicBox
             // 
             this.addressPicBox.Image = ((System.Drawing.Image)(resources.GetObject("addressPicBox.Image")));
-            this.addressPicBox.Location = new System.Drawing.Point(654, 113);
+            this.addressPicBox.Location = new System.Drawing.Point(711, 113);
             this.addressPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.addressPicBox.Name = "addressPicBox";
             this.addressPicBox.Size = new System.Drawing.Size(17, 20);
@@ -293,11 +294,42 @@
             // 
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.userRecordDataGridView);
-            this.panel1.Location = new System.Drawing.Point(68, 40);
+            this.panel1.Location = new System.Drawing.Point(55, 40);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(887, 419);
             this.panel1.TabIndex = 39;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.addressPicBox);
+            this.groupBox1.Controls.Add(this.nameText);
+            this.groupBox1.Controls.Add(this.addressText);
+            this.groupBox1.Controls.Add(this.addressLabel);
+            this.groupBox1.Controls.Add(this.phonePicBox);
+            this.groupBox1.Controls.Add(this.roleComboBox);
+            this.groupBox1.Controls.Add(this.phoneNumberText);
+            this.groupBox1.Controls.Add(this.phoneNumberLabel);
+            this.groupBox1.Controls.Add(this.emailPicBox);
+            this.groupBox1.Controls.Add(this.nameLabel);
+            this.groupBox1.Controls.Add(this.emailText);
+            this.groupBox1.Controls.Add(this.emailLabel);
+            this.groupBox1.Controls.Add(this.namePicBox);
+            this.groupBox1.Controls.Add(this.userNameLabel);
+            this.groupBox1.Controls.Add(this.roleLabel);
+            this.groupBox1.Controls.Add(this.userNameText);
+            this.groupBox1.Controls.Add(this.passwordText);
+            this.groupBox1.Controls.Add(this.tickPicBox);
+            this.groupBox1.Controls.Add(this.passPicBox);
+            this.groupBox1.Controls.Add(this.passwordLabel);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(3, 7);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(825, 198);
+            this.groupBox1.TabIndex = 23;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "User Information";
             // 
             // panel2
             // 
@@ -379,48 +411,30 @@
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.button3_Click);
             // 
-            // groupBox1
+            // button1
             // 
-            this.groupBox1.Controls.Add(this.addressPicBox);
-            this.groupBox1.Controls.Add(this.nameText);
-            this.groupBox1.Controls.Add(this.addressText);
-            this.groupBox1.Controls.Add(this.addressLabel);
-            this.groupBox1.Controls.Add(this.phonePicBox);
-            this.groupBox1.Controls.Add(this.roleComboBox);
-            this.groupBox1.Controls.Add(this.phoneNumberText);
-            this.groupBox1.Controls.Add(this.phoneNumberLabel);
-            this.groupBox1.Controls.Add(this.emailPicBox);
-            this.groupBox1.Controls.Add(this.nameLabel);
-            this.groupBox1.Controls.Add(this.emailText);
-            this.groupBox1.Controls.Add(this.emailLabel);
-            this.groupBox1.Controls.Add(this.namePicBox);
-            this.groupBox1.Controls.Add(this.userNameLabel);
-            this.groupBox1.Controls.Add(this.roleLabel);
-            this.groupBox1.Controls.Add(this.userNameText);
-            this.groupBox1.Controls.Add(this.passwordText);
-            this.groupBox1.Controls.Add(this.tickPicBox);
-            this.groupBox1.Controls.Add(this.passPicBox);
-            this.groupBox1.Controls.Add(this.passwordLabel);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(3, 7);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(728, 198);
-            this.groupBox1.TabIndex = 23;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "User Information";
+            this.button1.Location = new System.Drawing.Point(214, 67);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "AutoGen";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // progressBar1
+            // button2
             // 
-            this.progressBar1.Location = new System.Drawing.Point(71, 465);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(120, 23);
-            this.progressBar1.TabIndex = 41;
+            this.button2.Location = new System.Drawing.Point(1003, 356);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(8, 8);
+            this.button2.TabIndex = 41;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // AdminUserManagementUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -435,9 +449,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.phonePicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressPicBox)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -472,6 +486,7 @@
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

@@ -6,6 +6,8 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -290,6 +292,11 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                     string password = passwordText.Text;
                     string HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
                     Role SelectedRole = (Role)roleComboBox.SelectedItem;
+                    if (password == "" || SelectedRole == null)
+                    {
+                        MessageBox.Show("Please select a user to update");
+                        return;
+                    }
                     Users users = new Users(0, userNameText.Text, HashedPassword, SelectedRole.RoleId, nameText.Text, emailText.Text, phoneNumberText.Text, addressText.Text, false);
                     if (users.Username == "" && password == "" && users.Name == "" && users.Email == "" && users.PhoneNumber == "" && users.Address == "")
                     {
@@ -341,8 +348,12 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                     }
                     else
                     {
-                        MessageBox.Show("No User Selected.");
+                        MessageBox.Show("Error Updating User.");
                     }
+                }
+                else
+                {
+                    MessageBox.Show("No User Selected.");
                 }
             }
         }
@@ -355,6 +366,54 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         private void addressLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string generatedPass = generateStrongPass();
+            passwordText.Text = generatedPass;
+        }
+
+        private string generateStrongPass()
+        {
+            // Define character sets for each password requirement
+            string lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+            string uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string digitChars = "0123456789";
+            string specialChars = "!@#$%^&*()_+-=[]{}|;:'\"<>,.?/";
+
+            // Combine all character sets
+            string allChars = lowercaseChars + uppercaseChars + digitChars + specialChars;
+
+            // Create a secure random number generator
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                StringBuilder password = new StringBuilder();
+
+                // Add at least one character from each required set
+                password.Append(GetRandomCharacter(lowercaseChars, rng));
+                password.Append(GetRandomCharacter(uppercaseChars, rng));
+                password.Append(GetRandomCharacter(digitChars, rng));
+                password.Append(GetRandomCharacter(specialChars, rng));
+
+                // Add random characters to meet the length requirement
+                int requiredLength = 8;
+                while (password.Length < requiredLength)
+                {
+                    password.Append(GetRandomCharacter(allChars, rng));
+                }
+
+                return password.ToString();
+            }
+
+        }
+
+        static char GetRandomCharacter(string characterSet, RNGCryptoServiceProvider rng)
+        {
+            byte[] randomBytes = new byte[1];
+            rng.GetBytes(randomBytes);
+            int index = randomBytes[0] % characterSet.Length;
+            return characterSet[index];
         }
     }
 }

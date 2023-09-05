@@ -12,9 +12,12 @@ namespace File_Acess_Management
 
         public UserLogin(ServiceProvider serviceProvider)
         {
+
             _serviceProvider = serviceProvider;
             InitializeComponent();
             checkDebug();
+            DoubleBuffered = true;
+
         }
 
         private void checkDebug()
