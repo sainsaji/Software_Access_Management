@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserRequestStatusUserControl));
             this.requestStatusPanel = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -45,7 +44,6 @@
             // 
             this.requestStatusPanel.BackColor = System.Drawing.Color.White;
             this.requestStatusPanel.Controls.Add(this.dataGridView1);
-            this.requestStatusPanel.Controls.Add(this.panel2);
             this.requestStatusPanel.Controls.Add(this.panel1);
             this.requestStatusPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.requestStatusPanel.Location = new System.Drawing.Point(0, 0);
@@ -53,13 +51,6 @@
             this.requestStatusPanel.Size = new System.Drawing.Size(846, 571);
             this.requestStatusPanel.TabIndex = 15;
             this.requestStatusPanel.Leave += new System.EventHandler(this.requestStatusPanel_Leave);
-            // 
-            // panel2
-            // 
-            this.panel2.Location = new System.Drawing.Point(5, 85);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(838, 229);
-            this.panel2.TabIndex = 3;
             // 
             // dataGridView1
             // 
@@ -73,7 +64,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(846, 229);
+            this.dataGridView1.Size = new System.Drawing.Size(840, 519);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -163,6 +154,5 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Panel panel2;
     }
 }
