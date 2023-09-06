@@ -181,35 +181,33 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
 
         private void userRecordDataGridView_SelectionChanged_1(object sender, EventArgs e)
         {
+            // This event is triggered when the selection in DataGridView changes
+            if (userRecordDataGridView.SelectedRows.Count > 0)
             {
-                // This event is triggered when the selection in DataGridView changes
-                if (userRecordDataGridView.SelectedRows.Count > 0)
+                check = true;
+                userNameText.Enabled = false;
+                passwordText.Enabled = false;
+
+                deleteBtn.Enabled = true;
+                updateBtn.Enabled = true;
+                DataGridViewRow selectedRow = userRecordDataGridView.SelectedRows[0];
+
+                // Assuming you have TextBox controls for updating data
+                id = (int)selectedRow.Cells["id"].Value;
+                userNameText.Text = selectedRow.Cells["user_name"].Value.ToString();
+                emailText.Text = selectedRow.Cells["email"].Value.ToString();
+                nameText.Text = selectedRow.Cells["name"].Value.ToString();
+                phoneNumberText.Text = selectedRow.Cells["phone_number"].Value.ToString();
+                addressText.Text = selectedRow.Cells["address"].Value.ToString();
+
+                // Set the selected role in the ComboBox
+                string role_name = selectedRow.Cells["role"].Value.ToString();
+                // using linq expression here especially FirstOrDefault
+                // FirstOrDefault(...) finds the first item that matches the specified condition. In this case, it's looking for an item with a RoleId equal to the roleId variable.
+                Role roleItem = roleComboBox.Items.OfType<Role>().FirstOrDefault(item => item.RoleName == role_name);
+                if (roleItem != null)
                 {
-                    check = true;
-                    userNameText.Enabled = false;
-                    passwordText.Enabled = false;
-
-                    deleteBtn.Enabled = true;
-                    updateBtn.Enabled = true;
-                    DataGridViewRow selectedRow = userRecordDataGridView.SelectedRows[0];
-
-                    // Assuming you have TextBox controls for updating data
-                    id = (int)selectedRow.Cells["id"].Value;
-                    userNameText.Text = selectedRow.Cells["user_name"].Value.ToString();
-                    emailText.Text = selectedRow.Cells["email"].Value.ToString();
-                    nameText.Text = selectedRow.Cells["name"].Value.ToString();
-                    phoneNumberText.Text = selectedRow.Cells["phone_number"].Value.ToString();
-                    addressText.Text = selectedRow.Cells["address"].Value.ToString();
-
-                    // Set the selected role in the ComboBox
-                    string role_name = selectedRow.Cells["role"].Value.ToString();
-                    // using linq expression here especially FirstOrDefault
-                    // FirstOrDefault(...) finds the first item that matches the specified condition. In this case, it's looking for an item with a RoleId equal to the roleId variable.
-                    Role roleItem = roleComboBox.Items.OfType<Role>().FirstOrDefault(item => item.RoleName == role_name);
-                    if (roleItem != null)
-                    {
-                        roleComboBox.SelectedItem = roleItem;
-                    }
+                    roleComboBox.SelectedItem = roleItem;
                 }
             }
         }
