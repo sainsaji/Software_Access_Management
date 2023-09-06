@@ -1,9 +1,12 @@
 ﻿using File_Acess_Management.Data.Repository;
+using File_Acess_Management.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace File_Acess_Management.Forms.User.UserDashboardUserControls
 {
@@ -12,7 +15,9 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
         private int _id;
         private IUserRaisedRequestRepository _userRaisedRequestRepository;
         private List<RequestList> requestList = new List<RequestList>();
-
+        int req_Id = 0;
+        bool ck = false;
+        
         public UserRequestStatusUserControl(int id, IUserRaisedRequestRepository userRaisedRequestRepository)
         {
             _id = id;
@@ -28,7 +33,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                 RequestList requestList = new RequestList();
                 requestList.userId = _id;
                 Console.WriteLine("Fetching Previous Requests");
-                string selectQuery = "select r.request_id, r.user_id, s.soft_name, r.approval_manager, r.approval_admin, r.req_status " +
+                string selectQuery = "select r.request_id, s.soft_name, r.approval_manager, r.approval_admin, r.req_status " +
                     "from request_table r " +
                     "Inner join software s on r.software_id=s.soft_id " +
                     "where r.user_id=@userId;";
@@ -51,7 +56,19 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
 
         private void UserRequestStatusUserControl_Load(object sender, EventArgs e)
         {
+            dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
             loadRequestStatusData();
+        }
+
+        private void DataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
+                ck = true;
+                 req_Id= (int)selectedRow.Cells["request_id"].Value;
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -68,6 +85,27 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
         }
 
         private void button3_Click(object sender, EventArgs e)
+        {
+            if (ck = true)
+            {
+                ck = false;
+                RequestList request = new RequestList();
+                request.requestId = req_Id;
+                string query = "Delete from request_table where request_id=@requestId";
+                int rowsAffected = _userRaisedRequestRepository.remove(request,query);
+                if (rowsAffected > 0)
+                {
+                    loadRequestStatusData();
+                    MessageBox.Show("request withdrawn successfully");
+                }
+                else
+                {
+                    MessageBox.Show("Error occured, try agian later");
+                }
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

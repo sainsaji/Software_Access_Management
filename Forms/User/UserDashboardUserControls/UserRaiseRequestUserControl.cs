@@ -214,5 +214,10 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
             softwareIdList.Clear();
             clearCheckedListBox();
         }
+
+        private void UserRaiseRequestUserControl_VisibleChanged(object sender, EventArgs e)
+        {
+            loadSoftwareList();
+        }
     }
 }
