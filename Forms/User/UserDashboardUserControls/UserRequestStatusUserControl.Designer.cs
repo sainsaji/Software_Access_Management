@@ -69,6 +69,14 @@
             this.requestStatusPanel.Size = new System.Drawing.Size(846, 571);
             this.requestStatusPanel.TabIndex = 15;
             this.requestStatusPanel.Leave += new System.EventHandler(this.requestStatusPanel_Leave);
+            
+            // 
+            // userRemarkTextBox
+            // 
+            this.userRemarkTextBox.Location = new System.Drawing.Point(5, 348);
+            this.userRemarkTextBox.Name = "userRemarkTextBox";
+            this.userRemarkTextBox.Size = new System.Drawing.Size(260, 20);
+            this.userRemarkTextBox.TabIndex = 3;
             // 
             // dataGridView1
             // 
@@ -132,6 +140,7 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "Edit Request";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -244,6 +253,7 @@
             this.VisibleChanged += new System.EventHandler(this.UserRequestStatusUserControl_VisibleChanged);
             this.requestStatusPanel.ResumeLayout(false);
             this.requestStatusPanel.PerformLayout();
+            
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

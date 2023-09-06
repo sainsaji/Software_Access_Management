@@ -76,12 +76,12 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
             if (ck == true)
             {
                 RequestList requestList = new RequestList();
-                requestList.requestId= req_Id;
+                requestList.requestId = req_Id;
                 string query = "select user_remark,manager_remark,admin_remark from request_table where request_id=@requestId";
                 DataTable dt = _userRaisedRequestRepository.get(requestList, query);
                 userCurrentRemarkTxt.Text = dt.Rows[0]["user_remark"].ToString();
-                managerRemarkTxt.Text= dt.Rows[0]["manager_remark"].ToString();
-                AdminRemarkTxt.Text= dt.Rows[0]["admin_remark"].ToString();
+                managerRemarkTxt.Text = dt.Rows[0]["manager_remark"].ToString();
+                AdminRemarkTxt.Text = dt.Rows[0]["admin_remark"].ToString();
             }
 
         }
@@ -122,6 +122,37 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (ck == true)
+            {
+                if (userRemarkTextBox.Text == "")
+                {
+                    MessageBox.Show("please enter the remark to update");
+                }
+                else
+                {
+                    RequestList request = new RequestList();
+                    request.requestId = req_Id;
+                    request.userRemark = userRemarkTextBox.Text;
+                    string query = "update request_table set user_remark=@userRemark where request_id=@requestId";
+                    int RowsAffected = _userRaisedRequestRepository.add(request, query);
+                    if (RowsAffected > 0)
+                    {
+                        MessageBox.Show("Updated successfully");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error while updating");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("please select a request to edit");
+            }
         }
     }
 }
