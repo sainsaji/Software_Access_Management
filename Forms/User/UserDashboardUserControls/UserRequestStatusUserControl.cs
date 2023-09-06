@@ -17,7 +17,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
         private List<RequestList> requestList = new List<RequestList>();
         int req_Id = 0;
         bool ck = false;
-        
+
         public UserRequestStatusUserControl(int id, IUserRaisedRequestRepository userRaisedRequestRepository)
         {
             _id = id;
@@ -67,10 +67,24 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
 
                 ck = true;
-                 req_Id= (int)selectedRow.Cells["request_id"].Value;
+                req_Id = (int)selectedRow.Cells["request_id"].Value;
+                displayRemark();
             }
         }
+        private void displayRemark()
+        {
+            if (ck == true)
+            {
+                RequestList requestList = new RequestList();
+                requestList.requestId = req_Id;
+                string query = "select user_remark,manager_remark,admin_remark from request_table where request_id=@requestId";
+                DataTable dt = _userRaisedRequestRepository.get(requestList, query);
+                userCurrentRemarkTxt.Text = dt.Rows[0]["user_remark"].ToString();
+                managerRemarkTxt.Text = dt.Rows[0]["manager_remark"].ToString();
+                AdminRemarkTxt.Text = dt.Rows[0]["admin_remark"].ToString();
+            }
 
+        }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }
@@ -92,7 +106,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                 RequestList request = new RequestList();
                 request.requestId = req_Id;
                 string query = "Delete from request_table where request_id=@requestId";
-                int rowsAffected = _userRaisedRequestRepository.remove(request,query);
+                int rowsAffected = _userRaisedRequestRepository.remove(request, query);
                 if (rowsAffected > 0)
                 {
                     loadRequestStatusData();
@@ -122,8 +136,17 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                 {
                     RequestList request = new RequestList();
                     request.requestId = req_Id;
-                    request.userRemark= userRemarkTextBox.Text;
+                    request.userRemark = userRemarkTextBox.Text;
                     string query = "update request_table set user_remark=@userRemark where request_id=@requestId";
+                    int RowsAffected = _userRaisedRequestRepository.add(request, query);
+                    if (RowsAffected > 0)
+                    {
+                        MessageBox.Show("Updated successfully");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error while updating");
+                    }
                 }
             }
             else
