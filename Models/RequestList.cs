@@ -8,5 +8,8 @@
         public string admApproval { get; set; }
         public string status { get; set; }
         public int softId { get; set; }
+        public string userRemark { get; set; }
+        public string managerRemark { get; set; }
+        public string adminRemark { get; set; }
     }
 }

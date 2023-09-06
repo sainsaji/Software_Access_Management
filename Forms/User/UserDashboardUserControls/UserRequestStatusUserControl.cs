@@ -86,7 +86,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (ck = true)
+            if (ck == true)
             {
                 ck = false;
                 RequestList request = new RequestList();
@@ -108,6 +108,28 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (ck == true)
+            {
+                if (userRemarkTextBox.Text == "")
+                {
+                    MessageBox.Show("please enter the remark to update");
+                }
+                else
+                {
+                    RequestList request = new RequestList();
+                    request.requestId = req_Id;
+                    request.userRemark= userRemarkTextBox.Text;
+                    string query = "update request_table set user_remark=@userRemark where request_id=@requestId";
+                }
+            }
+            else
+            {
+                MessageBox.Show("please select a request to edit");
+            }
         }
     }
 }
