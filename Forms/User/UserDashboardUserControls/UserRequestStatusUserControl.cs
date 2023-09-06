@@ -69,6 +69,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
 
                 ck = true;
                 req_Id = (int)selectedRow.Cells["request_id"].Value;
+                userRemarkTextBox.Text = "";
                 displayRemark();
             }
         }
