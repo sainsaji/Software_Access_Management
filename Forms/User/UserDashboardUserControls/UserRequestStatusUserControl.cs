@@ -23,6 +23,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
             _id = id;
             _userRaisedRequestRepository = userRaisedRequestRepository;
             InitializeComponent();
+            remarksPannel.Visible = false;
         }
 
         private void loadRequestStatusData()
@@ -82,7 +83,8 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                 userCurrentRemarkTxt.Text = dt.Rows[0]["user_remark"].ToString();
                 managerRemarkTxt.Text = dt.Rows[0]["manager_remark"].ToString();
                 AdminRemarkTxt.Text = dt.Rows[0]["admin_remark"].ToString();
-            }
+                remarksPannel.Visible = true;
+            }   
 
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -96,6 +98,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
         private void UserRequestStatusUserControl_VisibleChanged(object sender, EventArgs e)
         {
             loadRequestStatusData();
+            remarksPannel.Visible = false;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -141,6 +144,8 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                     int RowsAffected = _userRaisedRequestRepository.add(request, query);
                     if (RowsAffected > 0)
                     {
+                        displayRemark();
+                        ck = false;
                         MessageBox.Show("Updated successfully");
                     }
                     else
