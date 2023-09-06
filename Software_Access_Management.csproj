@@ -200,6 +200,12 @@
     <Compile Include="Forms\Manager\ManagerUserControls\ManagerUserListUserControl.Designer.cs">
       <DependentUpon>ManagerUserListUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Shared\UserRaisedRequesRemarkControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Shared\UserRaisedRequesRemarkControl.Designer.cs">
+      <DependentUpon>UserRaisedRequesRemarkControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\Software.cs" />
     <Compile Include="Models\Users.cs" />
@@ -271,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Manager\ManagerUserControls\ManagerUserListUserControl.resx">
       <DependentUpon>ManagerUserListUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Shared\UserRaisedRequesRemarkControl.resx">
+      <DependentUpon>UserRaisedRequesRemarkControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\User\UserDashboardUserControls\UserRaiseRequestUserControl.resx">
       <DependentUpon>UserRaiseRequestUserControl.cs</DependentUpon>
