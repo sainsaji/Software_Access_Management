@@ -32,6 +32,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
                 RequestList requesList = new RequestList();
                 requesList.userId = _id;
                 string selectQuery = "SELECT\r\n    " +
+                "rt.raised_time as Requested_Time, " +
                 "rt.request_id As Request_Id, " +
                 "u.user_name AS User_Name,\r\n    " +
                 "s.soft_name AS Software_Name,\r\n    " +
@@ -57,7 +58,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
         {
             userRequestGridView.SelectionChanged += UserRequestGridView_SelectionChanged;
             loadIncomingRequest();
-            
+
         }
 
         private void UserRequestGridView_SelectionChanged(object sender, EventArgs e)
@@ -70,7 +71,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
                 req_Id = (int)selectedRow.Cells["request_id"].Value;
                 managerRemarkTextBox.Text = "";
                 displayRemark();
-                string requestState= selectedRow.Cells["Manager_Approval"].Value.ToString();
+                string requestState = selectedRow.Cells["Manager_Approval"].Value.ToString();
                 if (requestState != null)
                 {
                     if (requestState.ToString() == "denied")
@@ -113,7 +114,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             }
 
         }
-        
+
 
 
 
@@ -143,7 +144,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             actionManagerApproval(selectedRequestId, "approved");
         }
 
-        
+
 
         private void denyBtn_Click(object sender, EventArgs e)
         {

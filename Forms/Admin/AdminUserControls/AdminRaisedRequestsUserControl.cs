@@ -25,6 +25,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         private void loadAdminRequests()
         {
             string query = "SELECT\r\n    " +
+                "rt.raised_time as Requested_Time, " +
                 "rt.request_id As Request_Id, " +
                 "u.user_name AS User_Name,\r\n    " +
                 "s.soft_name AS Software_Name,\r\n    " +
@@ -68,7 +69,7 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 string requestState = selectedRow.Cells["Admin_Approval"].Value.ToString();
                 if (requestState != null)
                 {
-                    if (requestState.ToString() == "pending")
+                    if (requestState.ToString() == "Pending")
                     {
                         denyBtn.Enabled = true;
                         acceptBtn.Enabled = true;

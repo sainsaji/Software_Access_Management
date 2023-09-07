@@ -34,7 +34,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                 RequestList requestList = new RequestList();
                 requestList.userId = _id;
                 Console.WriteLine("Fetching Previous Requests");
-                string selectQuery = "select r.raised_time as Requested_Time, r.request_id, s.soft_name, r.approval_manager, r.approval_admin, r.req_status " +
+                string selectQuery = "select r.raised_time as Requested_Time, r.request_id, s.soft_name, r.approval_manager, r.approval_admin " +
                     "from request_table r " +
                     "Inner join software s on r.software_id=s.soft_id " +
                     "where r.user_id=@userId;";
