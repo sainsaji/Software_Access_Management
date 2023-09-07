@@ -1,4 +1,6 @@
-﻿using File_Acess_Management.Data.Repository.IRepository;
+﻿using File_Acess_Management.Data.Repository;
+using File_Acess_Management.Data.Repository.IRepository;
+using Org.BouncyCastle.Ocsp;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -9,17 +11,21 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
     {
         private IAdminRaisedRequest _adminRaisedRequest;
         private int selectedRequestId = -1;
+        int req_Id = 0;
+        bool ck = false;
 
         public AdminRaisedRequestsUserControl(IAdminRaisedRequest adminRaisedRequest)
         {
             _adminRaisedRequest = adminRaisedRequest;
             InitializeComponent();
             loadAdminRequests();
+            remarksPannel.Visible = false;
         }
 
         private void loadAdminRequests()
         {
             string query = "SELECT\r\n    " +
+                "rt.raised_time as Requested_Time, " +
                 "rt.request_id As Request_Id, " +
                 "u.user_name AS User_Name,\r\n    " +
                 "s.soft_name AS Software_Name,\r\n    " +
@@ -53,15 +59,22 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         private void adminRequestsDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             Console.WriteLine("Selection Change Triggered");
-            if (adminRequestsDataGridView.SelectedCells.Count > 0)
+            if (adminRequestsDataGridView.SelectedRows.Count > 0)
             {
-                int selectedRowIndex = adminRequestsDataGridView.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = adminRequestsDataGridView.Rows[selectedRowIndex];
-                object requestIdValue = selectedRow.Cells["request_id"].Value;
-                object requestState = selectedRow.Cells["Admin_Approval"].Value;
+                DataGridViewRow selectedRow = adminRequestsDataGridView.SelectedRows[0];
+                ck = true;
+                req_Id = (int)selectedRow.Cells["request_id"].Value;
+                adminRemarkTextBox.Text = "";
+                displayRemark();
+                string requestState = selectedRow.Cells["Admin_Approval"].Value.ToString();
                 if (requestState != null)
                 {
-                    if (requestState.ToString() == "denied")
+                    if (requestState.ToString() == "Pending")
+                    {
+                        denyBtn.Enabled = true;
+                        acceptBtn.Enabled = true;
+                    }
+                    else if (requestState.ToString() == "denied")
                     {
                         denyBtn.Enabled = false;
                         acceptBtn.Enabled = true;
@@ -75,12 +88,29 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 else
                 {
                 }
-                if (requestIdValue != null)
+                if (req_Id != 0)
                 {
-                    selectedRequestId = Convert.ToInt32(requestIdValue);
+                    selectedRequestId = Convert.ToInt32(req_Id);
                     Console.WriteLine("Selected Request ID: " + selectedRequestId);
                 }
             }
+        }
+
+
+        private void displayRemark()
+        {
+            if (ck == true)
+            {
+                RequestList requestList = new RequestList();
+                requestList.requestId = req_Id;
+                string query = "select user_remark,manager_remark,admin_remark from request_table where request_id=@requestId";
+                DataTable dt = _adminRaisedRequest.get(requestList, query);
+                adminCurrentRemarkTxt.Text = dt.Rows[0]["admin_remark"].ToString();
+                userRemarkTxt.Text = dt.Rows[0]["user_remark"].ToString();
+                ManagerRemarkTxt.Text = dt.Rows[0]["manager_remark"].ToString();
+                remarksPannel.Visible = true;
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -123,6 +153,39 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
         private void resetBtn_Click(object sender, EventArgs e)
         {
             loadAdminRequests();
+        }
+
+        private void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            if (ck == true)
+            {
+                if (adminRemarkTextBox.Text == "")
+                {
+                    MessageBox.Show("please enter the remark to update");
+                }
+                else
+                {
+                    RequestList request = new RequestList();
+                    request.requestId = req_Id;
+                    request.adminRemark = adminRemarkTextBox.Text;
+                    string query = "update request_table set admin_remark=@adminRemark where request_id=@requestId";
+                    int RowsAffected = _adminRaisedRequest.add(request, query);
+                    if (RowsAffected > 0)
+                    {
+                        displayRemark();
+
+                        MessageBox.Show("Updated successfully");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error while updating");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("please select a request to edit");
+            }
         }
     }
 }
