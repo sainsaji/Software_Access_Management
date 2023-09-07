@@ -145,7 +145,8 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                             requestList.admApproval = "Pending";
                             requestList.status = "Pending";
                             requestList.softId = softwareIdList.First();
-                            string query = "insert into REQUEST_TABLE values(0,@userId,@manApproval,@admApproval,@status,@softId,'no remark','no remark','no remark');";
+                            requestList.dateTime = DateTime.Now;
+                            string query = "insert into REQUEST_TABLE values(0,@userId,@manApproval,@admApproval,@status,@softId,'no remark','no remark','no remark',@dateTime);";
                             int rowsAffectedReq = _userRaisedRequestRepository.add(requestList, query);
                             if (rowsAffectedReq > 0)
                             {
@@ -213,6 +214,11 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
             selectedSoftwareListBox.Items.Clear();
             softwareIdList.Clear();
             clearCheckedListBox();
+        }
+
+        private void UserRaiseRequestUserControl_VisibleChanged(object sender, EventArgs e)
+        {
+            loadSoftwareList();
         }
     }
 }

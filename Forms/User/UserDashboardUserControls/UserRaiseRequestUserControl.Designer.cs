@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserRaiseRequestUserControl));
             this.requestRightPanel = new System.Windows.Forms.Panel();
+            this.validIcoPicBox = new System.Windows.Forms.PictureBox();
             this.alertsLabel = new System.Windows.Forms.Label();
             this.addBtn = new System.Windows.Forms.Button();
             this.softwareChkdLstBx = new System.Windows.Forms.CheckedListBox();
@@ -45,11 +46,10 @@
             this.nameTxtBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.alertLabelErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.validIcoPicBox = new System.Windows.Forms.PictureBox();
             this.requestRightPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.validIcoPicBox)).BeginInit();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.alertLabelErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.validIcoPicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // requestRightPanel
@@ -67,11 +67,21 @@
             this.requestRightPanel.Controls.Add(this.nameTxtBox);
             this.requestRightPanel.Controls.Add(this.label1);
             this.requestRightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.requestRightPanel.Font = new System.Drawing.Font("Poppins", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.requestRightPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.requestRightPanel.Location = new System.Drawing.Point(0, 0);
             this.requestRightPanel.Name = "requestRightPanel";
             this.requestRightPanel.Size = new System.Drawing.Size(846, 571);
             this.requestRightPanel.TabIndex = 3;
+            // 
+            // validIcoPicBox
+            // 
+            this.validIcoPicBox.Image = ((System.Drawing.Image)(resources.GetObject("validIcoPicBox.Image")));
+            this.validIcoPicBox.Location = new System.Drawing.Point(236, 246);
+            this.validIcoPicBox.Name = "validIcoPicBox";
+            this.validIcoPicBox.Size = new System.Drawing.Size(31, 15);
+            this.validIcoPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.validIcoPicBox.TabIndex = 17;
+            this.validIcoPicBox.TabStop = false;
             // 
             // alertsLabel
             // 
@@ -98,16 +108,15 @@
             this.softwareChkdLstBx.FormattingEnabled = true;
             this.softwareChkdLstBx.Location = new System.Drawing.Point(16, 174);
             this.softwareChkdLstBx.Name = "softwareChkdLstBx";
-            this.softwareChkdLstBx.Size = new System.Drawing.Size(173, 61);
+            this.softwareChkdLstBx.Size = new System.Drawing.Size(173, 49);
             this.softwareChkdLstBx.TabIndex = 15;
             // 
             // selectedSoftwareListBox
             // 
             this.selectedSoftwareListBox.FormattingEnabled = true;
-            this.selectedSoftwareListBox.ItemHeight = 19;
             this.selectedSoftwareListBox.Location = new System.Drawing.Point(207, 49);
             this.selectedSoftwareListBox.Name = "selectedSoftwareListBox";
-            this.selectedSoftwareListBox.Size = new System.Drawing.Size(228, 194);
+            this.selectedSoftwareListBox.Size = new System.Drawing.Size(228, 186);
             this.selectedSoftwareListBox.TabIndex = 13;
             this.selectedSoftwareListBox.SelectedIndexChanged += new System.EventHandler(this.selectedSoftwareListBox_SelectedIndexChanged);
             // 
@@ -166,7 +175,7 @@
             // 
             this.repManagerTxtBox.Location = new System.Drawing.Point(16, 108);
             this.repManagerTxtBox.Name = "repManagerTxtBox";
-            this.repManagerTxtBox.Size = new System.Drawing.Size(173, 24);
+            this.repManagerTxtBox.Size = new System.Drawing.Size(173, 20);
             this.repManagerTxtBox.TabIndex = 4;
             // 
             // label3
@@ -183,7 +192,7 @@
             // 
             this.nameTxtBox.Location = new System.Drawing.Point(16, 49);
             this.nameTxtBox.Name = "nameTxtBox";
-            this.nameTxtBox.Size = new System.Drawing.Size(173, 24);
+            this.nameTxtBox.Size = new System.Drawing.Size(173, 20);
             this.nameTxtBox.TabIndex = 0;
             // 
             // label1
@@ -200,16 +209,6 @@
             // 
             this.alertLabelErrorProvider.ContainerControl = this;
             // 
-            // validIcoPicBox
-            // 
-            this.validIcoPicBox.Image = ((System.Drawing.Image)(resources.GetObject("validIcoPicBox.Image")));
-            this.validIcoPicBox.Location = new System.Drawing.Point(236, 246);
-            this.validIcoPicBox.Name = "validIcoPicBox";
-            this.validIcoPicBox.Size = new System.Drawing.Size(31, 15);
-            this.validIcoPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.validIcoPicBox.TabIndex = 17;
-            this.validIcoPicBox.TabStop = false;
-            // 
             // UserRaiseRequestUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -218,11 +217,12 @@
             this.Name = "UserRaiseRequestUserControl";
             this.Size = new System.Drawing.Size(846, 571);
             this.Load += new System.EventHandler(this.UserRaiseRequestUserControl_Load);
+            this.VisibleChanged += new System.EventHandler(this.UserRaiseRequestUserControl_VisibleChanged);
             this.requestRightPanel.ResumeLayout(false);
             this.requestRightPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.validIcoPicBox)).EndInit();
             this.panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.alertLabelErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.validIcoPicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
