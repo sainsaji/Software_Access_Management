@@ -62,9 +62,12 @@
     <Reference Include="DevExpress.Data.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Drawing.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v23.1.Core, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Sparkline.v23.1.Core, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraEditors.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v23.1, Version=23.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="Google.Protobuf, Version=3.21.9.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>packages\Google.Protobuf.3.21.9\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -165,23 +168,23 @@
     <Compile Include="Forms\Admin\AdminUserControls\AdminRaisedRequestsUserControl.Designer.cs">
       <DependentUpon>AdminRaisedRequestsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Admin\AdminUserControls\AdminSoftwareManagementUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Admin\AdminUserControls\AdminSoftwareManagementUserControl.Designer.cs">
-      <DependentUpon>AdminSoftwareManagementUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Admin\AdminUserControls\AdminUserManagementUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Admin\AdminUserControls\AdminUserManagementUserControl.Designer.cs">
-      <DependentUpon>AdminUserManagementUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Data\Connection\ConnectionHelper.cs" />
     <Compile Include="Data\Connection\ICommandFactory.cs" />
     <Compile Include="Data\Connection\IDatabaseConnectionProvider.cs" />
     <Compile Include="Data\Repository\IRepository\IUserManagementRepository.cs" />
     <Compile Include="Data\Repository\UserManagementRepository.cs" />
+    <Compile Include="Forms\Admin\AdminUserControls\SoftwareManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\SoftwareManager.Designer.cs">
+      <DependentUpon>SoftwareManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\UserManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminUserControls\UserManager.Designer.cs">
+      <DependentUpon>UserManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Manager\ManagerUserControls\ManagerIncomingRequestUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -254,14 +257,15 @@
     <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminRaisedRequestsUserControl.resx">
       <DependentUpon>AdminRaisedRequestsUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminSoftwareManagementUserControl.resx">
-      <DependentUpon>AdminSoftwareManagementUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Admin\AdminUserControls\AdminUserManagementUserControl.resx">
-      <DependentUpon>AdminUserManagementUserControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminUserControls\SoftwareManager.resx">
+      <DependentUpon>SoftwareManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminUserControls\UserManager.resx">
+      <DependentUpon>UserManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Manager\ManagerUserControls\ManagerIncomingRequestUserControl.resx">
       <DependentUpon>ManagerIncomingRequestUserControl.cs</DependentUpon>
