@@ -89,7 +89,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
                         acceptBtn.Enabled = true;
                     }
                 }
-                if (req_Id != null)
+                if (req_Id != 0)
                 {
                     selectedRequestId = Convert.ToInt32(req_Id);
                     Console.WriteLine("Selected Request ID: " + selectedRequestId);
