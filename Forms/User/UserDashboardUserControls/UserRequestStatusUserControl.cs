@@ -63,6 +63,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+            Console.WriteLine("got trigggggrrreeeddd");
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
@@ -98,6 +99,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
 
         private void UserRequestStatusUserControl_VisibleChanged(object sender, EventArgs e)
         {
+            
             loadRequestStatusData();
             remarksPannel.Visible = false;
         }
@@ -146,7 +148,7 @@ namespace File_Acess_Management.Forms.User.UserDashboardUserControls
                     if (RowsAffected > 0)
                     {
                         displayRemark();
-                        ck = false;
+                        
                         MessageBox.Show("Updated successfully");
                     }
                     else
