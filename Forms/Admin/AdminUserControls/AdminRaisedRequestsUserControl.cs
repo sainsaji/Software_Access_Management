@@ -65,10 +65,15 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 req_Id = (int)selectedRow.Cells["request_id"].Value;
                 adminRemarkTextBox.Text = "";
                 displayRemark();
-                string requestState = selectedRow.Cells["Manager_Approval"].Value.ToString();
+                string requestState = selectedRow.Cells["Admin_Approval"].Value.ToString();
                 if (requestState != null)
                 {
-                    if (requestState.ToString() == "denied")
+                    if (requestState.ToString() == "pending")
+                    {
+                        denyBtn.Enabled = true;
+                        acceptBtn.Enabled = true;
+                    }
+                    else if (requestState.ToString() == "denied")
                     {
                         denyBtn.Enabled = false;
                         acceptBtn.Enabled = true;
