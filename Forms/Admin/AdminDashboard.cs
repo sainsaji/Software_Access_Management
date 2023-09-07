@@ -11,28 +11,41 @@ namespace File_Acess_Management
     public partial class AdminDashboard : Form
     {
         public readonly ServiceProvider _serviceProvider;
-        private AdminUserManagementUserControl adminUserManagementUCl;
-        private AdminSoftwareManagementUserControl softwareUC;
+        //private AdminUserManagementUserControl adminUserManagementUCl;
+        private UserManager userManager;
+        //private AdminSoftwareManagementUserControl softwareUC;
         private AdminManagerUserAssignmentUserControl managerUC;
         private AdminRaisedRequestsUserControl raisedRequestsUC;
         private AdminDebugConfigUserControls debugConfigUserControlsUC;
+        private SoftwareManager softwareManagerUC;
+        private Form currentForm;
 
         public AdminDashboard(ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider.GetRequiredService<IUserManagementRepository>());
-            softwareUC = new AdminSoftwareManagementUserControl(_serviceProvider.GetRequiredService<ISoftwareRepository>());
+            userManager = new UserManager(_serviceProvider.GetRequiredService<IUserManagementRepository>());
+            //softwareUC = new AdminSoftwareManagementUserControl(_serviceProvider.GetRequiredService<ISoftwareRepository>());
+            softwareManagerUC = new SoftwareManager(_serviceProvider.GetRequiredService<ISoftwareRepository>());
             managerUC = new AdminManagerUserAssignmentUserControl(_serviceProvider.GetRequiredService<IUserManagerAssignmentRepository>());
             raisedRequestsUC = new AdminRaisedRequestsUserControl(_serviceProvider.GetRequiredService<IAdminRaisedRequest>());
             debugConfigUserControlsUC = new AdminDebugConfigUserControls(_serviceProvider.GetRequiredService<IAdminRaisedRequest>());
             InitializeComponent();
         }
 
-        private Form currentForm;
+
         //AdminUserManagementUserControl adminUserManagementUCl = new AdminUserManagementUserControl(_serviceProvider);
+        private void DisposeCurrentControl()
+        {
+            if (currentForm != null)
+            {
+                currentForm.Dispose();
+                currentForm = null;
+            }
+        }
 
         private void AddUserControl(UserControl userControl)
         {
+            DisposeCurrentControl();
             userControl.Dock = DockStyle.Fill;
             AdminContentPanelManager.Controls.Clear();
             AdminContentPanelManager.Controls.Add(userControl);
@@ -49,21 +62,6 @@ namespace File_Acess_Management
             AddUserControl(raisedRequestsUC);
         }
 
-        private void ShowForm(Form formToShow)
-        {
-            if (currentForm != null)
-            {
-                currentForm.Hide(); // Hide the currently displayed form
-            }
-
-            currentForm = formToShow;
-            currentForm.TopLevel = false;
-            currentForm.FormBorderStyle = FormBorderStyle.None;
-            currentForm.Dock = DockStyle.Fill;
-            AdminContentPanelManager.Controls.Add(currentForm);
-            debugBtn.BackColor = Color.White;
-            currentForm.Show();
-        }
 
         private void DashboardBtn_Click(object sender, EventArgs e)
         {
@@ -84,7 +82,7 @@ namespace File_Acess_Management
             softwareMngBtn.BackColor = Color.White;
             tabTitleLbl.Text = "User Management";
             debugBtn.BackColor = Color.White;
-            AddUserControl(adminUserManagementUCl);
+            AddUserControl(userManager);
         }
 
         private void userManagerBtn_Click(object sender, EventArgs e)
@@ -106,11 +104,13 @@ namespace File_Acess_Management
             softwareMngBtn.BackColor = Color.Aqua;
             debugBtn.BackColor = Color.White;
             tabTitleLbl.Text = "Software Management";
-            AddUserControl(softwareUC);
+            //AddUserControl(softwareUC);
+            AddUserControl(softwareManagerUC);
         }
 
         private void logOutBtn_Click(object sender, EventArgs e)
         {
+            this.Dispose();
             UserLogin userLogin = new UserLogin(_serviceProvider);
             userLogin.Show();
             this.Close();

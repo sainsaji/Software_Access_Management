@@ -85,7 +85,7 @@
             this.softwareListDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.softwareListDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.softwareListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.softwareListDataGridView.Location = new System.Drawing.Point(15, 153);
+            this.softwareListDataGridView.Location = new System.Drawing.Point(15, 186);
             this.softwareListDataGridView.MultiSelect = false;
             this.softwareListDataGridView.Name = "softwareListDataGridView";
             this.softwareListDataGridView.ReadOnly = true;
@@ -179,7 +179,7 @@
             this.groupBox1.Controls.Add(this.softwareIdlabel);
             this.groupBox1.Controls.Add(this.softwareIdText);
             this.groupBox1.Controls.Add(this.softwareNameLabel);
-            this.groupBox1.Location = new System.Drawing.Point(15, 47);
+            this.groupBox1.Location = new System.Drawing.Point(15, 80);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(442, 100);
             this.groupBox1.TabIndex = 23;
@@ -188,8 +188,7 @@
             // 
             // AdminSoftwareManagementUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.softwareListDataGridView);
