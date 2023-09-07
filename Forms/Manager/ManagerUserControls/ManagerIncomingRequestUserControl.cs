@@ -13,30 +13,24 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
         private int _id;
         private IManagerSideRepository _managerSideRepository;
         private int selectedRequestId = -1;
+        int req_Id = 0;
+        bool ck = false;
 
         public ManagerIncomingRequestUserControl(int Id, IManagerSideRepository managerSideRepository)
         {
             _id = Id;
             _managerSideRepository = managerSideRepository;
             InitializeComponent();
+            remarksPannel.Visible = false;
+
         }
 
-        private void setButtonAction()
-        {
-            DataGridViewButtonColumn col = new DataGridViewButtonColumn();
-            col.UseColumnTextForButtonValue = true;
-            col.Text = "Approve/Deny";
-            col.Name = "Action";
-            userRequestGridView.Columns.Add(col);
-        }
-
-
-        private void loadIncomingRequest(int id)
+        private void loadIncomingRequest()
         {
             try
             {
                 RequestList requesList = new RequestList();
-                requesList.userId = id;
+                requesList.userId = _id;
                 string selectQuery = "SELECT\r\n    " +
                 "rt.request_id As Request_Id, " +
                 "u.user_name AS User_Name,\r\n    " +
@@ -52,29 +46,74 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
                 "ma.manager_id = @userId;\r\n";
                 DataTable dt = _managerSideRepository.get(requesList, selectQuery);
                 userRequestGridView.DataSource = dt;
-                userRequestGridView.Refresh();
+                //userRequestGridView.Refresh();
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message + " sql query error.");
             }
         }
-
-
-
         private void ManagerIncomingRequestUserControl_Load(object sender, EventArgs e)
         {
-            if (_id != 0)
-            {
-                loadIncomingRequest(_id);
-                setButtonAction();
-            }
-            else
-            {
-                Console.WriteLine("Invalid Manger ID:" + _id);
-                MessageBox.Show("Invalid Manger ID:" + _id);
-            }
+            userRequestGridView.SelectionChanged += UserRequestGridView_SelectionChanged;
+            loadIncomingRequest();
+            
         }
+
+        private void UserRequestGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            if (userRequestGridView.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = userRequestGridView.SelectedRows[0];
+
+                ck = true;
+                req_Id = (int)selectedRow.Cells["request_id"].Value;
+                managerRemarkTextBox.Text = "";
+                displayRemark();
+                string requestState= selectedRow.Cells["Manager_Approval"].Value.ToString();
+                if (requestState != null)
+                {
+                    if (requestState.ToString() == "denied")
+                    {
+                        denyBtn.Enabled = false;
+                        acceptBtn.Enabled = true;
+                    }
+                    else if (requestState.ToString() == "approved")
+                    {
+                        denyBtn.Enabled = true;
+                        acceptBtn.Enabled = false;
+                    }
+                    else
+                    {
+                        denyBtn.Enabled = true;
+                        acceptBtn.Enabled = true;
+                    }
+                }
+                if (req_Id != null)
+                {
+                    selectedRequestId = Convert.ToInt32(req_Id);
+                    Console.WriteLine("Selected Request ID: " + selectedRequestId);
+                }
+            }
+            Console.WriteLine("Selection Change Triggered");
+        }
+
+        private void displayRemark()
+        {
+            if (ck == true)
+            {
+                RequestList requestList = new RequestList();
+                requestList.requestId = req_Id;
+                string query = "select user_remark,manager_remark,admin_remark from request_table where request_id=@requestId";
+                DataTable dt = _managerSideRepository.get(requestList, query);
+                managerCurrentRemarkTxt.Text = dt.Rows[0]["manager_remark"].ToString();
+                userRemarkTxt.Text = dt.Rows[0]["user_remark"].ToString();
+                AdminRemarkTxt.Text = dt.Rows[0]["admin_remark"].ToString();
+                remarksPannel.Visible = true;
+            }
+
+        }
+        
 
 
 
@@ -95,7 +134,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             {
                 MessageBox.Show("Error occured");
             }
-            loadIncomingRequest(_id);
+            loadIncomingRequest();
             userRequestGridView.Refresh();
         }
 
@@ -104,43 +143,7 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
             actionManagerApproval(selectedRequestId, "approved");
         }
 
-        private void userRequestGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            Console.WriteLine("Selection Change Triggered");
-            if (userRequestGridView.SelectedCells.Count > 0)
-            {
-                int selectedRowIndex = userRequestGridView.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = userRequestGridView.Rows[selectedRowIndex];
-                object requestIdValue = selectedRow.Cells["request_id"].Value;
-                object requestState = selectedRow.Cells["Manager_Approval"].Value;
-                if (requestState != null)
-                {
-                    if (requestState.ToString() == "denied")
-                    {
-                        denyBtn.Enabled = false;
-                        acceptBtn.Enabled = true;
-                    }
-                    else if (requestState.ToString() == "approved")
-                    {
-                        denyBtn.Enabled = true;
-                        acceptBtn.Enabled = false;
-                    }
-                    else
-                    {
-                        denyBtn.Enabled = true;
-                        acceptBtn.Enabled = true;
-                    }
-                }
-                else
-                {
-                }
-                if (requestIdValue != null)
-                {
-                    selectedRequestId = Convert.ToInt32(requestIdValue);
-                    Console.WriteLine("Selected Request ID: " + selectedRequestId);
-                }
-            }
-        }
+        
 
         private void denyBtn_Click(object sender, EventArgs e)
         {
@@ -149,7 +152,41 @@ namespace File_Acess_Management.Forms.Manager.ManagerUserControls
 
         private void panel1_VisibleChanged(object sender, EventArgs e)
         {
-            loadIncomingRequest(_id);
+            loadIncomingRequest();
+            remarksPannel.Visible = false;
+        }
+
+        private void EditBtn_Click(object sender, EventArgs e)
+        {
+            if (ck == true)
+            {
+                if (managerRemarkTextBox.Text == "")
+                {
+                    MessageBox.Show("please enter the remark to update");
+                }
+                else
+                {
+                    RequestList request = new RequestList();
+                    request.requestId = req_Id;
+                    request.managerRemark = managerRemarkTextBox.Text;
+                    string query = "update request_table set manager_remark=@managerRemark where request_id=@requestId";
+                    int RowsAffected = _managerSideRepository.add(request, query);
+                    if (RowsAffected > 0)
+                    {
+                        displayRemark();
+
+                        MessageBox.Show("Updated successfully");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error while updating");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("please select a request to edit");
+            }
         }
     }
 }
