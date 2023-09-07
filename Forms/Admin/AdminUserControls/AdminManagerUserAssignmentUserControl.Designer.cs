@@ -52,7 +52,7 @@
             // selectManagerForNotAssigned
             // 
             this.selectManagerForNotAssigned.FormattingEnabled = true;
-            this.selectManagerForNotAssigned.Location = new System.Drawing.Point(101, 334);
+            this.selectManagerForNotAssigned.Location = new System.Drawing.Point(142, 463);
             this.selectManagerForNotAssigned.Name = "selectManagerForNotAssigned";
             this.selectManagerForNotAssigned.Size = new System.Drawing.Size(250, 21);
             this.selectManagerForNotAssigned.TabIndex = 16;
@@ -64,12 +64,12 @@
             this.notAssignedManagerDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.notAssignedManagerDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.notAssignedManagerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.notAssignedManagerDataGridView.Location = new System.Drawing.Point(8, 366);
+            this.notAssignedManagerDataGridView.Location = new System.Drawing.Point(16, 495);
             this.notAssignedManagerDataGridView.MultiSelect = false;
             this.notAssignedManagerDataGridView.Name = "notAssignedManagerDataGridView";
             this.notAssignedManagerDataGridView.ReadOnly = true;
             this.notAssignedManagerDataGridView.RowHeadersWidth = 51;
-            this.notAssignedManagerDataGridView.Size = new System.Drawing.Size(692, 150);
+            this.notAssignedManagerDataGridView.Size = new System.Drawing.Size(1338, 269);
             this.notAssignedManagerDataGridView.TabIndex = 15;
             this.notAssignedManagerDataGridView.SelectionChanged += new System.EventHandler(this.notAssignedManagerDataGridView_SelectionChanged);
             // 
@@ -77,7 +77,7 @@
             // 
             this.notAssignedManagers.AutoSize = true;
             this.notAssignedManagers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notAssignedManagers.Location = new System.Drawing.Point(4, 255);
+            this.notAssignedManagers.Location = new System.Drawing.Point(13, 365);
             this.notAssignedManagers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.notAssignedManagers.Name = "notAssignedManagers";
             this.notAssignedManagers.Size = new System.Drawing.Size(176, 24);
@@ -87,7 +87,7 @@
             // selectManager
             // 
             this.selectManager.FormattingEnabled = true;
-            this.selectManager.Location = new System.Drawing.Point(101, 78);
+            this.selectManager.Location = new System.Drawing.Point(142, 83);
             this.selectManager.Name = "selectManager";
             this.selectManager.Size = new System.Drawing.Size(250, 21);
             this.selectManager.TabIndex = 13;
@@ -99,12 +99,12 @@
             this.assignedManagerDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.assignedManagerDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.assignedManagerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.assignedManagerDataGridView.Location = new System.Drawing.Point(8, 109);
+            this.assignedManagerDataGridView.Location = new System.Drawing.Point(9, 117);
             this.assignedManagerDataGridView.MultiSelect = false;
             this.assignedManagerDataGridView.Name = "assignedManagerDataGridView";
             this.assignedManagerDataGridView.ReadOnly = true;
             this.assignedManagerDataGridView.RowHeadersWidth = 51;
-            this.assignedManagerDataGridView.Size = new System.Drawing.Size(692, 140);
+            this.assignedManagerDataGridView.Size = new System.Drawing.Size(1345, 245);
             this.assignedManagerDataGridView.TabIndex = 12;
             this.assignedManagerDataGridView.SelectionChanged += new System.EventHandler(this.assignedManagerDataGridView_SelectionChanged);
             // 
@@ -126,7 +126,7 @@
             this.panel1.Controls.Add(this.updateBtn);
             this.panel1.Location = new System.Drawing.Point(9, 31);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(691, 41);
+            this.panel1.Size = new System.Drawing.Size(1348, 41);
             this.panel1.TabIndex = 21;
             // 
             // rstBtn
@@ -135,7 +135,7 @@
             this.rstBtn.Cursor = System.Windows.Forms.Cursors.Cross;
             this.rstBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.rstBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.rstBtn.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rstBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rstBtn.Image = ((System.Drawing.Image)(resources.GetObject("rstBtn.Image")));
             this.rstBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.rstBtn.Location = new System.Drawing.Point(266, 0);
@@ -152,7 +152,7 @@
             this.deleteBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.deleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.deleteBtn.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteBtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteBtn.Image")));
             this.deleteBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.deleteBtn.Location = new System.Drawing.Point(133, 0);
@@ -169,7 +169,7 @@
             this.updateBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.updateBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.updateBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.updateBtn.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updateBtn.Image = ((System.Drawing.Image)(resources.GetObject("updateBtn.Image")));
             this.updateBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.updateBtn.Location = new System.Drawing.Point(0, 0);
@@ -183,7 +183,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.assignBtn);
-            this.panel2.Location = new System.Drawing.Point(9, 282);
+            this.panel2.Location = new System.Drawing.Point(17, 401);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(691, 41);
             this.panel2.TabIndex = 22;
@@ -195,7 +195,7 @@
             this.assignBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.assignBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.assignBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.assignBtn.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.assignBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.assignBtn.Image = ((System.Drawing.Image)(resources.GetObject("assignBtn.Image")));
             this.assignBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.assignBtn.Location = new System.Drawing.Point(0, 0);
@@ -209,7 +209,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 81);
+            this.label1.Location = new System.Drawing.Point(6, 86);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 13);
             this.label1.TabIndex = 23;
@@ -218,7 +218,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 337);
+            this.label2.Location = new System.Drawing.Point(6, 466);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 13);
             this.label2.TabIndex = 24;
@@ -226,8 +226,7 @@
             // 
             // AdminManagerUserAssignmentUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel2);

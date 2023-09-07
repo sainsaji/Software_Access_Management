@@ -649,6 +649,7 @@
             // 
             this.userGrid.GridControl = this.userGridControl;
             this.userGrid.Name = "userGrid";
+            this.userGrid.OptionsBehavior.ReadOnly = true;
             this.userGrid.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.userGrid_FocusedRowChanged);
             // 
             // UserManager

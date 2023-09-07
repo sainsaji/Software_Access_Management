@@ -57,14 +57,14 @@
             this.userRequestGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.userRequestGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.userRequestGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.userRequestGridView.Location = new System.Drawing.Point(0, 46);
+            this.userRequestGridView.Location = new System.Drawing.Point(3, 46);
             this.userRequestGridView.Margin = new System.Windows.Forms.Padding(2);
             this.userRequestGridView.MultiSelect = false;
             this.userRequestGridView.Name = "userRequestGridView";
             this.userRequestGridView.ReadOnly = true;
             this.userRequestGridView.RowHeadersWidth = 51;
             this.userRequestGridView.RowTemplate.Height = 24;
-            this.userRequestGridView.Size = new System.Drawing.Size(894, 243);
+            this.userRequestGridView.Size = new System.Drawing.Size(884, 243);
             this.userRequestGridView.TabIndex = 3;
             // 
             // panel1

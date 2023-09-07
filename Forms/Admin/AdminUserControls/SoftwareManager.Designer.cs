@@ -414,6 +414,7 @@
             // 
             this.SoftwareGrid.GridControl = this.SoftwareGridControl;
             this.SoftwareGrid.Name = "SoftwareGrid";
+            this.SoftwareGrid.OptionsBehavior.ReadOnly = true;
             this.SoftwareGrid.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridView1_SelectionChanged);
             // 
             // barButtonItem5
