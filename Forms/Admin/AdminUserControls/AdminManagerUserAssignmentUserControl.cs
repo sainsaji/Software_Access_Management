@@ -1,5 +1,6 @@
 ﻿using File_Acess_Management.Data.Repository.IRepository;
 using File_Acess_Management.Models;
+using Org.BouncyCastle.Ocsp;
 using System;
 using System.Data;
 using System.Linq;
@@ -27,21 +28,29 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             GetAssignedUsersRecord();
             LoadNotAssignedUsers();
             PopulateComboBox();
-            notAssignedManagerDataGridView.SelectionChanged += notAssignedManagerDataGridView_SelectionChanged;
-            assignedManagerDataGridView.SelectionChanged += assignedManagerDataGridView_SelectionChanged;
+            gridView2.SelectionChanged += notAssignedManagerDataGridView_SelectionChanged;
+            
+            gridView1.SelectionChanged += GridView1_SelectionChanged;
+
+            gridView1.OptionsSelection.MultiSelect = true;
+            gridView2.OptionsSelection.MultiSelect = true;
+
         }
 
-        private void assignedManagerDataGridView_SelectionChanged(object sender, EventArgs e)
+        private void GridView1_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
         {
+            if (gridView1.SelectedRowsCount > 0)
             {
-                if (assignedManagerDataGridView.SelectedRows.Count > 0)
+                int[] selectedRows = gridView1.GetSelectedRows();
+                if (selectedRows.Length > 0)
                 {
-                    DataGridViewRow selectedRow = assignedManagerDataGridView.SelectedRows[0];
+                    int selectedRowHandle = selectedRows[0];
+
                     // Assuming you have TextBox controls for updating data
-                    selectedUserId2 = Convert.ToInt32(selectedRow.Cells["id"].Value);
-                    selectedManagerId = Convert.ToInt32(selectedRow.Cells["manager_id"].Value);
-                    string manName = selectedRow.Cells["manager_name"].Value.ToString();
-                    manager Item = selectManager.Items.OfType<manager>().FirstOrDefault(item => item.Name == manName);
+                    selectedUserId2 = (int)gridView1.GetRowCellValue(selectedRowHandle, "id");
+                    selectedManagerId = (int)gridView1.GetRowCellValue(selectedRowHandle, "manager_id");
+                    string manName = gridView1.GetRowCellValue(selectedRowHandle, "manager_name").ToString();
+                    manager Item = selectManager.Properties.Items.OfType<manager>().FirstOrDefault(item => item.Name == manName);
                     if (Item != null)
                     {
                         selectManager.SelectedItem = Item;
@@ -51,14 +60,17 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             }
         }
 
+       
+
         private void notAssignedManagerDataGridView_SelectionChanged(object sender, EventArgs e)
         {
+            if (gridView2.SelectedRowsCount > 0)
             {
-                if (notAssignedManagerDataGridView.SelectedRows.Count > 0)
+                int[] selectedRows = gridView2.GetSelectedRows();
+                if (selectedRows.Length > 0)
                 {
-                    DataGridViewRow selectedRow = notAssignedManagerDataGridView.SelectedRows[0];
-                    // Assuming you have TextBox controls for updating data
-                    selectedUserId = Convert.ToInt32(selectedRow.Cells["id"].Value);
+                    int selectedRowHandle = selectedRows[0];
+                    selectedUserId = (int)gridView2.GetRowCellValue(selectedRowHandle, "id");
                     ck = true;
                 }
             }
@@ -74,13 +86,13 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             dt = _userManagerAssignment.getAll(query);
             assignedManagerDataGridView.DataSource = dt;
             //studentRecordDataGridView.Columns["Password"].Visible = false;
-            assignedManagerDataGridView.Columns["id"].Visible = false;
-            assignedManagerDataGridView.Columns["user_name"].HeaderText = "User Name";
-            assignedManagerDataGridView.Columns["role"].HeaderText = "Role";
-            assignedManagerDataGridView.Columns["name"].HeaderText = "Full Name";
-            assignedManagerDataGridView.Columns["email"].HeaderText = "Email";
-            assignedManagerDataGridView.Columns["phone_number"].HeaderText = "Phone Number";
-            assignedManagerDataGridView.Columns["address"].HeaderText = "Address";
+            gridView1.Columns["id"].Visible = false;
+            gridView1.Columns["user_name"].Caption = "User Name";
+            gridView1.Columns["role"].Caption = "Role";
+            gridView1.Columns["name"].Caption = "Full Name";
+            gridView1.Columns["email"].Caption = "Email";
+            gridView1.Columns["phone_number"].Caption = "Phone Number";
+            gridView1.Columns["address"].Caption = "Address";
         }
 
         private void PopulateComboBox()
@@ -91,8 +103,8 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             {
                 int manId = Convert.ToInt32(row["id"]);
                 string manName = row["name"].ToString();
-                selectManagerForNotAssigned.Items.Add(new manager(manId, manName));
-                selectManager.Items.Add(new manager(manId, manName));
+                selectManagerForNotAssigned.Properties.Items.Add(new manager(manId, manName));
+                selectManager.Properties.Items.Add(new manager(manId, manName));
             }
         }
 
@@ -102,20 +114,20 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             dt = _userManagerAssignment.getAll(query);
             notAssignedManagerDataGridView.DataSource = dt;
             //studentRecordDataGridView.Columns["Password"].Visible = false;
-            notAssignedManagerDataGridView.Columns["id"].Visible = false;
-            notAssignedManagerDataGridView.Columns["user_name"].HeaderText = "User Name";
-            notAssignedManagerDataGridView.Columns["role"].HeaderText = "Role";
-            notAssignedManagerDataGridView.Columns["name"].HeaderText = "Full Name";
-            notAssignedManagerDataGridView.Columns["email"].HeaderText = "Email";
-            notAssignedManagerDataGridView.Columns["phone_number"].HeaderText = "Phone Number";
-            notAssignedManagerDataGridView.Columns["address"].HeaderText = "Address";
+            gridView2.Columns["id"].Visible = false;
+            gridView2.Columns["user_name"].Caption = "User Name";
+            gridView2.Columns["role"].Caption = "Role";
+            gridView2.Columns["name"].Caption = "Full Name";
+            gridView2.Columns["email"].Caption = "Email";
+            gridView2.Columns["phone_number"].Caption = "Phone Number";
+            gridView2.Columns["address"].Caption = "Address";
         }
 
         private void ResetAll()
         {
-            notAssignedManagerDataGridView.ClearSelection();
+            gridView2.ClearSelection();
             selectManagerForNotAssigned.SelectedIndex = -1;
-            assignedManagerDataGridView.ClearSelection();
+            gridView1.ClearSelection();
             selectManager.SelectedIndex = -1;
             selectedUserId = 0;
             selectedUserId2 = 0;
@@ -125,8 +137,8 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
         private void AdminManagerUserAssignmentUserControl_Leave(object sender, EventArgs e)
         {
             Console.WriteLine("Assignment Form Left");
-            selectManager.Items.Clear();
-            selectManagerForNotAssigned.Items.Clear();
+            selectManager.Properties.Items.Clear();
+            selectManagerForNotAssigned.Properties.Items.Clear();
         }
 
         private void AdminManagerUserAssignmentUserControl_Enter(object sender, EventArgs e)
@@ -139,8 +151,8 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             Console.WriteLine("Form Shown");
 
             Console.WriteLine("Clearing DataTable");
-            selectManager.Items.Clear();
-            selectManagerForNotAssigned.Items.Clear();
+            selectManager.Properties.Items.Clear();
+            selectManagerForNotAssigned.Properties.Items.Clear();
             Console.WriteLine("Loading Manager List");
             LoadNotAssignedUsers();
             PopulateComboBox();
@@ -226,6 +238,10 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
             }
         }
 
+        private void assignedManagerDataGridView_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
@@ -250,13 +266,13 @@ namespace File_Acess_Management.Forms.Admin.AdminUserControls
                         }
                         else
                         {
-                            MessageBox.Show("Error assigning user.");
+                            MessageBox.Show("Error removing user.");
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Error assigning user.");
+                    MessageBox.Show("Error removing user.");
                 }
             }
         }

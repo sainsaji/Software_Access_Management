@@ -1,4 +1,5 @@
-﻿using File_Acess_Management.Data.Repository;
+﻿using DevExpress.XtraGrid.Views.Base;
+using File_Acess_Management.Data.Repository;
 using File_Acess_Management.Data.Repository.IRepository;
 using Org.BouncyCastle.Ocsp;
 using System;
@@ -19,7 +20,51 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             _adminRaisedRequest = adminRaisedRequest;
             InitializeComponent();
             loadAdminRequests();
-            remarksPannel.Visible = false;
+            Remarks.Visible = false;
+        }
+        private void AdminRaisedRequestsUserControl_Load(object sender, EventArgs e)
+        {
+            userGrid.FocusedRowChanged += userGrid_FocusedRowChanged;
+        }
+
+        private void userGrid_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            Console.WriteLine("Selection Change Triggered");
+            if (e.FocusedRowHandle >= 0)
+            {
+                
+                ck = true;
+                req_Id= (int)userGrid.GetRowCellValue(e.FocusedRowHandle, "Request_Id");
+                adminRemarkTextBox.Text = "";
+                displayRemark();
+                string requestState = userGrid.GetRowCellValue(e.FocusedRowHandle, "Admin_Approval").ToString();
+                if (requestState != null)
+                {
+                    if (requestState.ToString() == "Pending")
+                    {
+                        denyBtn1.Enabled = true;
+                        acceptBtn.Enabled = true;
+                    }
+                    else if (requestState.ToString() == "denied")
+                    {
+                        denyBtn1.Enabled = false;
+                        acceptBtn.Enabled = true;
+                    }
+                    else
+                    {
+                        denyBtn1.Enabled = true;
+                        acceptBtn.Enabled = false;
+                    }
+                }
+                else
+                {
+                }
+                if (req_Id != 0)
+                {
+                    selectedRequestId = Convert.ToInt32(req_Id);
+                    Console.WriteLine("Selected Request ID: " + selectedRequestId);
+                }
+            }
         }
 
         private void loadAdminRequests()
@@ -39,8 +84,8 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 "users um ON ma.manager_id = um.id\r\nWHERE\r\n    " +
                 "rt.approval_manager = 'approved';\r\n";
             DataTable dt = _adminRaisedRequest.getAll(query);
-            adminRequestsDataGridView.DataSource = dt;
-            adminRequestsDataGridView.Refresh();
+            userGridControl.DataSource = dt;
+            userGridControl.Refresh();
         }
 
         private void acceptAdminRequestApproval(int requestId)
@@ -53,48 +98,11 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             request.requestId = requestId;
             int rowsAffected = _adminRaisedRequest.add(request, query);
             loadAdminRequests();
-            adminRequestsDataGridView.Refresh();
+            userGridControl.Refresh();
         }
 
-        private void adminRequestsDataGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            Console.WriteLine("Selection Change Triggered");
-            if (adminRequestsDataGridView.SelectedRows.Count > 0)
-            {
-                DataGridViewRow selectedRow = adminRequestsDataGridView.SelectedRows[0];
-                ck = true;
-                req_Id = (int)selectedRow.Cells["request_id"].Value;
-                adminRemarkTextBox.Text = "";
-                displayRemark();
-                string requestState = selectedRow.Cells["Admin_Approval"].Value.ToString();
-                if (requestState != null)
-                {
-                    if (requestState.ToString() == "Pending")
-                    {
-                        denyBtn.Enabled = true;
-                        acceptBtn.Enabled = true;
-                    }
-                    else if (requestState.ToString() == "denied")
-                    {
-                        denyBtn.Enabled = false;
-                        acceptBtn.Enabled = true;
-                    }
-                    else
-                    {
-                        denyBtn.Enabled = true;
-                        acceptBtn.Enabled = false;
-                    }
-                }
-                else
-                {
-                }
-                if (req_Id != 0)
-                {
-                    selectedRequestId = Convert.ToInt32(req_Id);
-                    Console.WriteLine("Selected Request ID: " + selectedRequestId);
-                }
-            }
-        }
+
+        
 
 
         private void displayRemark()
@@ -108,34 +116,14 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
                 adminCurrentRemarkTxt.Text = dt.Rows[0]["admin_remark"].ToString();
                 userRemarkTxt.Text = dt.Rows[0]["user_remark"].ToString();
                 ManagerRemarkTxt.Text = dt.Rows[0]["manager_remark"].ToString();
-                remarksPannel.Visible = true;
+                Remarks.Visible = true;
             }
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (selectedRequestId > 0)
-            {
-                acceptAdminRequestApproval(selectedRequestId);
-            }
-            else
-            {
-                Console.WriteLine("No Request Selected");
-            }
-        }
+       
 
-        private void denyBtn_Click(object sender, EventArgs e)
-        {
-            if (selectedRequestId > 0)
-            {
-                denyAdminRequestApproval(selectedRequestId);
-            }
-            else
-            {
-                Console.WriteLine("No Request Selected");
-            }
-        }
+        
 
         private void denyAdminRequestApproval(int selectedRequestId)
         {
@@ -147,15 +135,13 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             request.requestId = selectedRequestId;
             int rowsAffected = _adminRaisedRequest.add(request, query);
             loadAdminRequests();
-            adminRequestsDataGridView.Refresh();
+            userGridControl.Refresh();
         }
 
-        private void resetBtn_Click(object sender, EventArgs e)
-        {
-            loadAdminRequests();
-        }
+        
 
-        private void UpdateBtn_Click(object sender, EventArgs e)
+
+        private void UpdateBtn_Click_1(object sender, EventArgs e)
         {
             if (ck == true)
             {
@@ -186,6 +172,35 @@ namespace File_Acess_Management.Forms.Admin.ManagerUserControls
             {
                 MessageBox.Show("please select a request to edit");
             }
+        }
+
+        private void acceptBtn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (selectedRequestId > 0)
+            {
+                acceptAdminRequestApproval(selectedRequestId);
+            }
+            else
+            {
+                Console.WriteLine("No Request Selected");
+            }
+        }
+
+        private void denyBtn1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (selectedRequestId > 0)
+            {
+                denyAdminRequestApproval(selectedRequestId);
+            }
+            else
+            {
+                Console.WriteLine("No Request Selected");
+            }
+        }
+
+        private void resetBtn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            loadAdminRequests();
         }
     }
 }
